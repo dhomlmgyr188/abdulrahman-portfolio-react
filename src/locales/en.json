@@ -1,0 +1,11 @@
+{
+    "logo": {
+        "me": "Abdulrahman"
+    },
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "contact": "Contact"
+    }
+}
