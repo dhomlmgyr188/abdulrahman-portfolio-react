@@ -75,6 +75,29 @@ const GlobalStyles = createGlobalStyle`
         cursor: pointer;
     }
 
+    // Heading
+
+
+    h1{
+        font-size: var(--size-3xl)
+    }
+    h2{
+        font-size: var(--size-xl)
+    }
+    h3{
+        font-size: var(--size-lg)
+    }
+    h4{
+        font-size: var(--size-lg)
+    }
+    h5{
+        font-size: var(--size-ml)
+    }
+    h6{
+        font-size: var(--size-md)
+    }
+  
+
     a {
         color: inherit;
         text-decoration: none;

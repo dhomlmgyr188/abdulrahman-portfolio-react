@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import Container from "../../common/Container";
+import Container from "../PageContainer";
 import Logo from "./Logo";
 import Navigation from "./Navigation";
 import Settings from "./Settings";
@@ -9,6 +9,7 @@ const HeaderContainer = styled.header`
   position: fixed;
   display: flex;
   align-items: center;
+  z-index: 999;
   top: 0;
   right: 0;
   left: 0;

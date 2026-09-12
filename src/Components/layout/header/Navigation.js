@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import Button from "../../common/Button";
+import Button from "../../ui/Button/Button";
 
 const NavbarContainer = styled.nav`
   display: flex;

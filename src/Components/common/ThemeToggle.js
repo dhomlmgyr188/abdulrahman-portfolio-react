@@ -1,4 +1,4 @@
-import {IconButton} from "./Button";
+import {IconButton} from "../ui/Button/Button";
 import { useTheme } from "../../context/ThemeContext";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa";

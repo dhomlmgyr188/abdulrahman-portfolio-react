@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {IconButton} from "./Button";
+import {IconButton} from "../ui/Button/Button";
 
 
 const LangToggle = () => {

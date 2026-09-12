@@ -11,6 +11,10 @@
   --color-secondary-light: #00fa92;
   --color-secondary-dark: #00572e;
 
+  --color-ternary: #a83500;
+  --color-ternary-light: #fa4f00;
+  --color-ternary-dark: #571c00;
+
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray: #888888;
@@ -97,9 +101,9 @@
 ========================= */
 
 [data-theme="dark"] {
-  --color-background: #111111;
-  --color-background-secondary: #1c1c1c;
-  --color-background-ternary: #2a2a2a;
+  --color-background: #2a2a2a;
+  --color-background-secondary: #202020;
+  --color-background-ternary: #1d1d1d;
 
   --color-text: #ffffff;
   --color-text-light: #aaaaaa;

@@ -7,5 +7,69 @@
         "about": "About",
         "projects": "Projects",
         "contact": "Contact"
+    },
+    "hero": {
+        "availability_status": "Available for work and freelance projects",
+        "name": "Abdulrahman Nasser Al-Mughyir",
+        "job_titles": [
+            "IT Support",
+            "Full-Stack Web Developer",
+            "Application Support",
+            "Technical Support Specialist",
+            "IT Systems Technician",
+            "Administrative Assistant",
+            "Data Entry Specialist"
+        ],
+        "introduction": "A recent graduate from Taibah University with an Intermediate Diploma in Full-Stack Web Development. Skilled in developing web interfaces and websites using technologies such as React, JavaScript, HTML, and CSS, with experience in working with computer systems, applications, data, and reports. Seeking to join a work environment where I can apply my skills in web development, IT support, application support, or technical support while continuing to learn, grow, and contribute value to the organization.",
+        "tech_stack": [
+            "React",
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "Git",
+            "SQL",
+            "REST API",
+            "Microsoft 365"
+        ],
+        "image": {
+            "alt": "Abdulrahman Photo",
+            "link": "./images/me.png"
+        },
+        "statistic": {
+            "projects": "Projects Completed",
+            "technologies": "Technologies Used",
+            "years": "Years in Web Development"
+        },
+        "buttons": {
+            "contact": "Contact Me",
+            "my_resume": {
+                "text": "My Resume",
+                "link": "./docs/cv.pdf"
+            }
+        }
+    },
+    "services": {
+        "title": "What I Offer",
+        "description": "I provide a range of technical services that help individuals and organizations develop their digital presence and improve their use of systems and applications.",
+        "items": [
+            {
+                "id": "1",
+                "icon": "web",
+                "title": "Web Development",
+                "description": "Developing responsive and user-friendly websites and web interfaces using modern web technologies."
+            },
+            {
+                "id": "2",
+                "icon": "technology",
+                "title": "IT Support",
+                "description": "Assisting with computers, systems, and software, and resolving basic technical issues."
+            },
+            {
+                "id": "3",
+                "icon": "applications",
+                "title": "Application Support",
+                "description": "Helping users work with applications and systems, troubleshooting issues, and following up on technical problems."
+            }
+        ]
     }
 }
