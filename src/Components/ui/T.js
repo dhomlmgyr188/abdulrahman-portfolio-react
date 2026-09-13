@@ -1,4 +1,16 @@
 import styled from "styled-components";
+
+export const LinkU = styled.a`
+  color: var(--color-link);
+  border-bottom: 1px solid var(--color-link);
+  padding-bottom: var(--space-xs);
+  transition: var(--transition-fast);
+
+  &:hover{
+    opacity: 0.85;
+  }
+`
+
 export const PTitle = styled.h1`
     color: var(--color-primary);
 `
@@ -29,7 +41,6 @@ export const Tech = styled.span`
   border: 1px solid var(--color-border);
   color: var(--color-text);
   border-radius: var(--radius-lg);
-  cursor: pointer;
 `;
 
 export const Clearfix = styled.div`

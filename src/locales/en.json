@@ -71,5 +71,73 @@
                 "description": "Helping users work with applications and systems, troubleshooting issues, and following up on technical problems."
             }
         ]
+    },
+    "featuredProjects": {
+        "header": {
+            "title": "Featured Projects",
+            "desc": "A selection of my latest projects that showcase my skills in web development, user interface design, and the use of modern technologies.",
+            "view_all": "View All Projects .."
+        },
+        "items": [
+            {
+                "id": "React-To-Do-List",
+                "date": "2026/08/30",
+                "project_img": [
+                    "images/react1.png"
+                ],
+                "title": "User Notes App",
+                "desc": [
+                    {
+                        "type": "text",
+                        "value": "A React application for saving user notes in LocalStorage with CRUD Operations, "
+                    },
+                    {
+                        "type": "link",
+                        "text": "JavaScript Application Development Course",
+                        "href": "https://academy.hsoub.com/learn/javascript-application-development/"
+                    },
+                    {
+                        "type": "text",
+                        "value": " - Hsoub Academy"
+                    }
+                ],
+                "tech_stack": [
+                    "React",
+                    "React Hooks",
+                    "JavaScript",
+                    "CRUD",
+                    "LocalStorage"
+                ],
+                "view_project": "Project Details",
+                "demo": {
+                    "text": "Live Preview",
+                    "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
+                }
+            },
+            {
+                "id": "Portfolio_v1",
+                "date": "2026/05/24",
+                "project_img": [
+                    "images/anaalmughyir1.png"
+                ],
+                "title": "Personal Website (Previous Version)",
+                "desc": [
+                    {
+                        "type": "text",
+                        "value": "A multi-page personal website developed to showcase my work and services. It is responsive across all devices, with a clean design and an easy-to-use user experience."
+                    }
+                ],
+                "tech_stack": [
+                    "HTML",
+                    "CSS",
+                    "Vanilla JS"
+                ],
+                "view_project": "Project Details",
+                "demo": {
+                    "text": "Live Preview",
+                    "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
+                }
+            }
+        ]
     }
 }

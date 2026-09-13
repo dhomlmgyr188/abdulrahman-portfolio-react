@@ -56,22 +56,19 @@
                 "id": "1",
                 "icon": "web",
                 "title": "تطوير مواقع الويب",
-                "description": "تطوير مواقع وواجهات ويب متجاوبة وسهلة الاستخدام باستخدام تقنيات الويب الحديثة.",
-                "img": "./images/me.png"
+                "description": "تطوير مواقع وواجهات ويب متجاوبة وسهلة الاستخدام باستخدام تقنيات الويب الحديثة."
             },
             {
                 "id": "2",
                 "icon": "technology",
                 "title": "دعم تقنية المعلومات",
-                "description": "المساعدة في التعامل مع أجهزة الحاسب والأنظمة والبرامج وحل المشكلات التقنية الأساسية.",
-                "img": "./images/me.png"
+                "description": "المساعدة في التعامل مع أجهزة الحاسب والأنظمة والبرامج وحل المشكلات التقنية الأساسية."
             },
             {
                 "id": "3",
                 "icon": "applications",
                 "title": "دعم التطبيقات",
-                "description": "مساعدة المستخدمين في التعامل مع التطبيقات والأنظمة، ومعالجة المشكلات ومتابعة الأعطال.",
-                "img": "./images/me.png"
+                "description": "مساعدة المستخدمين في التعامل مع التطبيقات والأنظمة، ومعالجة المشكلات ومتابعة الأعطال."
             }
         ]
     },
@@ -79,27 +76,66 @@
         "header": {
             "title": "أبرز المشاريع",
             "desc": "مجموعة مختارة من أبرز المشاريع التي طورتها، والتي تعكس مهاراتي في تطوير الويب وتصميم واجهات المستخدم وتوظيف التقنيات الحديثة.",
-            "view_all": "شاهد جميع المشاريع "
+            "view_all": "شاهد جميع المشاريع .. "
         },
         "items": [
             {
                 "id": "React-To-Do-List",
+                "date": "2026/08/30",
                 "project_img": [
-                    "images/react1.png",
-                    "images/react2.png",
-                    "images/react3.png"
+                    "images/react1.png"
                 ],
                 "title": "تطبيق حفظ ملاحظات المستخدم",
-                "desc": "تطوير تطبيق React بهدف حفظ ملاحظات المستخدم مع مدرب أكاديمية حسوب ومن مزاياه أن يتم حفظ الملاحظات في الذاكرة المحلية LocalStorage",
+                "desc": [
+                    {
+                        "type": "text",
+                        "value": "حفظ ملاحظات المستخدم في الذاكرة المحلية LocalStorage بإستخدام React مع CRUD Operations, "
+                    },
+                    {
+                        "type": "link",
+                        "text": "دورة تطوير التطبيقات بإستخدام لغة JavaScript",
+                        "href": "https://academy.hsoub.com/learn/javascript-application-development/"
+                    },
+                    {
+                        "type": "text",
+                        "value": " - أكاديمية حسوب"
+                    }
+                ],
                 "tech_stack": [
                     "React",
+                    "React Hooks",
                     "JavaScript",
-                    "HTML"
+                    "CRUD",
+                    "LocalStorage"
                 ],
                 "view_project": "تفاصيل المشروع",
                 "demo": {
-                    "text": "شاهد المشروع",
+                    "text": "معاينة حية",
                     "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
+                }
+            },
+            {
+                "id": "Portfolio_v1",
+                "date": "2026/05/24",
+                "project_img": [
+                    "images/anaalmughyir1.png"
+                ],
+                "title": "موقع شخصي (نسخة سابقة)",
+                "desc": [
+                    {
+                        "type": "text",
+                        "value": "تم تطويره بهدف عرض أعمالي والعروض التي أقدمها متعدد الصفحات، متجاوب مع جميع الأجهزة، بتصميم جميل وتجربة مستخدم سهلة. "
+                    }
+                ],
+                "tech_stack": [
+                    "HTML",
+                    "CSS",
+                    "Vanila JS"
+                ],
+                "view_project": "تفاصيل المشروع",
+                "demo": {
+                    "text": "معاينة حية",
+                    "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
                 }
             }
         ]

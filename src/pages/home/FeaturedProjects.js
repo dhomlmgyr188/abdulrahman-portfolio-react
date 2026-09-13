@@ -1,8 +1,5 @@
 import styled from "styled-components";
 import Container from "../../Components/layout/PageContainer";
-import {
-  SectionHeader,
-} from "./Elementor";
 import { useTranslation } from "react-i18next";
 import Button from "../../Components/ui/Button/Button";
 import { Link } from "react-router-dom";
@@ -17,8 +14,10 @@ const FeaturedProjectsSection = styled.section`
   background-color: var(--color-background);
 `;
 
-const FeturedHeader = styled(SectionHeader)`
-    text-align: right;
+const SectionHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 `;
 
 const FeaturedProjectsContainer = styled(Container)`
@@ -33,15 +32,15 @@ const FeaturedProjects = () => {
   return (
     <FeaturedProjectsSection>
       <FeaturedProjectsContainer>
-        <FeturedHeader>
+        <SectionHeader>
           <Clearfix>
             <STitle>{t("featuredProjects.header.title")}</STitle>
             <Button as={Link} to="/projects">
               {t("featuredProjects.header.view_all")}
             </Button>
           </Clearfix>
-          <LightDesc style={{maxWidth: "650px"}}>{t("featuredProjects.header.desc")}</LightDesc>
-        </FeturedHeader>
+          <LightDesc>{t("featuredProjects.header.desc")}</LightDesc>
+        </SectionHeader>
         <ProjectGrid />
       </FeaturedProjectsContainer>
     </FeaturedProjectsSection>

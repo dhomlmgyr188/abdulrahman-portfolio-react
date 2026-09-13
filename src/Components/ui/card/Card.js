@@ -5,10 +5,10 @@ export const Card = styled.article`
   flex-direction: column;
   padding: var(--space-lg);
   gap: var(--space-md);
-  cursor: pointer;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   transition: var(--transition-fast);
+
   &:hover {
     box-shadow: var(--shadow-md);
   }

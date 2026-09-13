@@ -12,7 +12,7 @@ const HeroSection = styled.section`
   padding: var(--space-3xl) 0;
   display: flex;
   align-items: center;
-  box-shadow: var(--shadow-sm);
+  background: var(--color-background);
 `;
 
 const HeroContainer = styled(Container)`

@@ -9,9 +9,7 @@ const ProjGrid = styled(CardsGrid)`
 `;
 
 const ProjectItem = styled(CardsGrid)`
-  grid-template-columns: 1.5fr 1fr;
-  gap: var(--space-xl);
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const ProjectGrid = () => {
@@ -27,11 +25,14 @@ const ProjectGrid = () => {
         <ProjectItem key={project.id}>
           <ProjectCard
             title={project.title}
+            date={project.date}
             description={project.desc}
             value1={project.view_project}
             toLink={`/projects/${project.id}`}
             value2={project.demo.text}
             toHref={project.demo.link}
+            techStack={project.tech_stack}
+            from={project.desc}
           />
 
           <ProjectGallery images={project.project_img} />

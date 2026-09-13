@@ -1,98 +1,101 @@
 :root {
-  /* =========================
+   /* =========================
      Colors
   ========================= */
 
-  --color-primary: #0065A8;
-  --color-primary-light: #0096FA;
-  --color-primary-dark: #003457;
+   --color-primary: #0065A8;
+   --color-primary-light: #0096FA;
+   --color-primary-dark: #003457;
+   
+   --color-secondary: #00a862;
+   --color-secondary-light: #00fa92;
+   --color-secondary-dark: #00572e;
 
-  --color-secondary: #00a862;
-  --color-secondary-light: #00fa92;
-  --color-secondary-dark: #00572e;
+   --color-ternary: #a83500;
+   --color-ternary-light: #fa4f00;
+   --color-ternary-dark: #571c00;
 
-  --color-ternary: #a83500;
-  --color-ternary-light: #fa4f00;
-  --color-ternary-dark: #571c00;
+   --color-white: #ffffff;
+   --color-black: #000000;
+   --color-gray: #888888;
 
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-gray: #888888;
-  --color-text: #1a1a1a;
-  --color-text-light: #666666;
+   --color-text: #1a1a1a;
+   --color-text-light: #666666;
 
-  --color-yellow: #f3dc08;
-  --color-blue: #0852f3;
+   --color-link: #1f87cc;
 
-  --color-background: #ffffff;
-  --color-background-secondary: #f5f5f5;
-  --color-background-ternary: #c2c2c2;
+   --color-yellow: #f3dc08;
+   --color-blue: #0852f3;
 
-  --color-border: #dddddd;
+   --color-background: #ffffff;
+   --color-background-secondary: #fafafa;
+   --color-background-ternary: #c2c2c2;
+
+   --color-border: #dddddd;
 
 
-  /* =========================
+   /* =========================
      Font Sizes
   ========================= */
 
-  --size-xs: 0.75rem;
-  --size-sm: 0.875rem;
-  --size-md: 1rem;
-  --size-ml: 1.125rem;
-  --size-lg: 1.25rem;
-  --size-xl: 1.5rem;
-  --size-2xl: 2rem;
-  --size-3xl: 2.5rem;
-  --size-4xl: 3rem;
+   --size-xs: 0.75rem;
+   --size-sm: 0.875rem;
+   --size-md: 1rem;
+   --size-ml: 1.125rem;
+   --size-lg: 1.25rem;
+   --size-xl: 1.5rem;
+   --size-2xl: 2rem;
+   --size-3xl: 2.5rem;
+   --size-4xl: 3rem;
 
 
-  /* =========================
+   /* =========================
      Spacing
   ========================= */
 
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
+   --space-xs: 0.25rem;
+   --space-sm: 0.5rem;
+   --space-md: 1rem;
+   --space-lg: 1.5rem;
+   --space-xl: 2rem;
+   --space-2xl: 3rem;
+   --space-3xl: 4rem;
 
 
-  /* =========================
+   /* =========================
      Border Radius
   ========================= */
 
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-full: 999px;
+   --radius-sm: 0.25rem;
+   --radius-md: 0.5rem;
+   --radius-lg: 1rem;
+   --radius-xl: 1.5rem;
+   --radius-full: 999px;
 
 
-  /* =========================
+   /* =========================
      Shadows
   ========================= */
 
-  --shadow-sm: 0 2px 5px rgb(0 0 0 / 10%);
-  --shadow-md: 0 4px 10px rgb(0 0 0 / 15%);
-  --shadow-lg: 0 10px 30px rgb(0 0 0 / 15%);
+   --shadow-sm: 0 2px 5px rgb(0 0 0 / 10%);
+   --shadow-md: 0 4px 10px rgb(0 0 0 / 15%);
+   --shadow-lg: 0 10px 30px rgb(0 0 0 / 15%);
 
 
-  /* =========================
+   /* =========================
      Layout
   ========================= */
 
-  --container-width: 1200px;
-  --header-height: 70px;
+   --container-width: 1200px;
+   --header-height: 70px;
 
 
-  /* =========================
+   /* =========================
      Transition
   ========================= */
 
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
+   --transition-fast: 0.2s ease;
+   --transition-normal: 0.3s ease;
 }
 
 
@@ -101,12 +104,19 @@
 ========================= */
 
 [data-theme="dark"] {
-  --color-background: #2a2a2a;
-  --color-background-secondary: #202020;
-  --color-background-ternary: #1d1d1d;
+   --color-background: #2a2a2a;
+   --color-background-secondary: #202020;
+   --color-background-ternary: #1d1d1d;
 
-  --color-text: #ffffff;
-  --color-text-light: #aaaaaa;
+   --color-primary: #0096FA;
+   --color-primary-dark: #0065A8;
+   --color-ternary: #fa4f00;
+   --color-ternary-dark: #a83500;
+   --color-secondary: #00fa92;
+   --color-secondary-dark: #00a862;
 
-  --color-border: #333333;
+   --color-text: #ffffff;
+   --color-text-light: #aaaaaa;
+
+   --color-border: #414141;
 }
