@@ -28,7 +28,7 @@ const ServicesCard = ({ icon: Icon, title, description }) => {
   const {t} = useTranslation();
 
   return (
-    <ServCard>
+    <ServCard style={{textAlign: "center"}}>
       <IconWrapper>
         <Icon />
       </IconWrapper>
@@ -37,7 +37,7 @@ const ServicesCard = ({ icon: Icon, title, description }) => {
 
       <Desc>{description}</Desc>
       <ServiceButton $variant="secondary" as={Link} to="/contact">
-        {t("hero.buttons.contact")}
+        {t("buttons.contact")}
       </ServiceButton>
     </ServCard>
   );

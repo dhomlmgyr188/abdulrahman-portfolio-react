@@ -1,6 +1,8 @@
-import Header from "./Components/layout/header/Header";
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
+
+import Header from "./Components/layout/header/Header";
+import Footer from "./Components/layout/footer/Footer.js";
 
 import About from "./pages/About";
 import Home from "./pages/home/Home.js";
@@ -24,6 +26,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Main>
+
+      <Footer />
     </>
   );
 }

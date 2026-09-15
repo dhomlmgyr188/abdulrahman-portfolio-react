@@ -1,13 +1,4 @@
 {
-    "logo": {
-        "me": "Abdulrahman"
-    },
-    "nav": {
-        "home": "Home",
-        "about": "About",
-        "projects": "Projects",
-        "contact": "Contact"
-    },
     "hero": {
         "availability_status": "Available for work and freelance projects",
         "name": "Abdulrahman Nasser Al-Mughyir",
@@ -31,21 +22,11 @@
             "REST API",
             "Microsoft 365"
         ],
-        "image": {
-            "alt": "Abdulrahman Photo",
-            "link": "./images/me.png"
-        },
+        "profileAlt": "Abdulrahman Photo",
         "statistic": {
             "projects": "Projects Completed",
             "technologies": "Technologies Used",
             "years": "Years in Web Development"
-        },
-        "buttons": {
-            "contact": "Contact Me",
-            "my_resume": {
-                "text": "My Resume",
-                "link": "./docs/cv.pdf"
-            }
         }
     },
     "services": {
@@ -76,14 +57,14 @@
         "header": {
             "title": "Featured Projects",
             "desc": "A selection of my latest projects that showcase my skills in web development, user interface design, and the use of modern technologies.",
-            "view_all": "View All Projects .."
+            "view_projects": "All Projects"
         },
         "items": [
             {
                 "id": "React-To-Do-List",
                 "date": "2026/08/30",
                 "project_img": [
-                    "images/react1.png"
+                    "react1"
                 ],
                 "title": "User Notes App",
                 "desc": [
@@ -108,17 +89,13 @@
                     "CRUD",
                     "LocalStorage"
                 ],
-                "view_project": "Project Details",
-                "demo": {
-                    "text": "Live Preview",
-                    "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
-                }
+                "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
             },
             {
                 "id": "Portfolio_v1",
                 "date": "2026/05/24",
                 "project_img": [
-                    "images/anaalmughyir1.png"
+                    "anaalmughyir1"
                 ],
                 "title": "Personal Website (Previous Version)",
                 "desc": [
@@ -132,12 +109,9 @@
                     "CSS",
                     "Vanilla JS"
                 ],
-                "view_project": "Project Details",
-                "demo": {
-                    "text": "Live Preview",
-                    "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
-                }
+                "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
             }
         ]
-    }
+    },
+    "cta": "Looking for a developer or need a website for your project?"
 }

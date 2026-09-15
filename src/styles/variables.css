@@ -6,21 +6,21 @@
    --color-primary: #0065A8;
    --color-primary-light: #0096FA;
    --color-primary-dark: #003457;
-   
+
    --color-secondary: #00a862;
    --color-secondary-light: #00fa92;
    --color-secondary-dark: #00572e;
 
-   --color-ternary: #a83500;
-   --color-ternary-light: #fa4f00;
-   --color-ternary-dark: #571c00;
+   --color-tertiary: #a83500;
+   --color-tertiary-light: #fa4f00;
+   --color-tertiary-dark: #571c00;
 
    --color-white: #ffffff;
    --color-black: #000000;
    --color-gray: #888888;
 
    --color-text: #1a1a1a;
-   --color-text-light: #666666;
+   --color-text-light: #535353;
 
    --color-link: #1f87cc;
 
@@ -29,9 +29,16 @@
 
    --color-background: #ffffff;
    --color-background-secondary: #fafafa;
-   --color-background-ternary: #c2c2c2;
+   --color-background-tertiary: #ececec;
 
-   --color-border: #dddddd;
+   --pattern-background-color: #fafafa;
+   --pattern-background-image:
+      radial-gradient(#00a862 0.1px, transparent 0.9px),
+      radial-gradient(#00a862 0.1px, #fafafa 0.3px);
+   --pattern-background-size: 24px 24px;
+   --pattern-background-position: 0 0, 2px 2px;
+
+   --color-border: #cccccc;
 
 
    /* =========================
@@ -106,12 +113,21 @@
 [data-theme="dark"] {
    --color-background: #2a2a2a;
    --color-background-secondary: #202020;
-   --color-background-ternary: #1d1d1d;
+   --color-background-tertiary: #1d1d1d;
+   --color-background-breadcrumb: #0096fab9;
 
+   --pattern-background-color: #2a2a2a;
+   --pattern-background-image:
+      radial-gradient(#00a862 0.1px, transparent 0.9px),
+      radial-gradient(#00a862 0.1px, #2a2a2a 0.3px);
+   --pattern-background-size: 24px 24px;
+   --pattern-background-position: 0 0, 2px 2px;
+
+   --color-text-light: #919191;
    --color-primary: #0096FA;
    --color-primary-dark: #0065A8;
-   --color-ternary: #fa4f00;
-   --color-ternary-dark: #a83500;
+   --color-tertiary: #fa4f00;
+   --color-tertiary-dark: #a83500;
    --color-secondary: #00fa92;
    --color-secondary-dark: #00a862;
 

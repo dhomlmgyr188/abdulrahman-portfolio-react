@@ -6,7 +6,9 @@ import Button from "../../Components/ui/Button/Button";
 import { Link } from "react-router-dom";
 import Statistics, { Statistic, AnimatedNumber } from "./Statistics";
 import { TechStack, Tech, PTitle, Desc } from "../../Components/ui/T";
-import { Actions } from "../../Components/ui/Button/Acttions";
+import { Actions } from "../../Components/ui/Button/Button";
+import abdulrahmanPhoto from "../../assets/images/me.png"
+const myCV = `${process.env.PUBLIC_URL}/docs/cv.pdf`
 
 const HeroSection = styled.section`
   padding: var(--space-3xl) 0;
@@ -20,6 +22,10 @@ const HeroContainer = styled(Container)`
   align-items: center;
   justify-content: space-between;
   gap: var(--space-xl);
+
+    @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const HeroContent = styled(Container)`
@@ -49,7 +55,7 @@ const HeroImage = styled.img`
 const JobTitleComponent = () => {
   const { t } = useTranslation();
 
-  const jobTitles = t("hero.job_titles", {
+  const jobTitles = t("home:hero.job_titles", {
     returnObjects: true,
   });
 
@@ -69,7 +75,7 @@ const JobTitleComponent = () => {
 const Hero = () => {
   const { t } = useTranslation();
 
-  const techStack = t("hero.tech_stack", {
+  const techStack = t("home:hero.tech_stack", {
     returnObjects: true,
   });
 
@@ -78,14 +84,14 @@ const Hero = () => {
       <HeroContainer>
         <HeroContent>
           <span style={{ color: "var(--color-secondary)" }}>
-            {t("hero.availability_status")}
+            {t("home:hero.availability_status")}
           </span>
 
-          <PTitle>{t("hero.name")}</PTitle>
+          <PTitle>{t("home:hero.name")}</PTitle>
 
           <JobTitleComponent />
 
-          <Desc style={{maxWidth: "650px"}}>{t("hero.introduction")}</Desc>
+          <Desc style={{ maxWidth: "650px" }}>{t("home:hero.introduction")}</Desc>
 
           <TechStack>
             {techStack.map((tech) => (
@@ -95,37 +101,37 @@ const Hero = () => {
 
           <Actions>
             <Button as={Link} to="/contact">
-              {t("hero.buttons.contact")}
+              {t("buttons.contact")}
             </Button>
 
             <Button
               as="a"
               $variant="secondary"
-              href={t("hero.buttons.my_resume.link")}
+              href={myCV}
               rel="noopener noreferrer"
             >
-              {t("hero.buttons.my_resume.text")}
+              {t("buttons.cv")}
             </Button>
           </Actions>
         </HeroContent>
 
         <HeroFigure>
           <Statistics>
-            <HeroImage src={t("hero.image.link")} alt={t("hero.image.alt")} />
+            <HeroImage src={abdulrahmanPhoto} alt={t("home:hero.profileAlt")} />
 
             <Statistic className="top">
               <AnimatedNumber value={5} />
-              <span>{t("hero.statistic.projects")}</span>
+              <span>{t("home:hero.statistic.projects")}</span>
             </Statistic>
 
             <Statistic className="left">
               <AnimatedNumber value={2} />
-              <span>{t("hero.statistic.years")}</span>
+              <span>{t("home:hero.statistic.years")}</span>
             </Statistic>
 
             <Statistic className="right">
               <AnimatedNumber value={10} />
-              <span>{t("hero.statistic.technologies")}</span>
+              <span>{t("home:hero.statistic.technologies")}</span>
             </Statistic>
           </Statistics>
         </HeroFigure>

@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import {IconButton} from "../ui/Button/Button";
-
+import sa from "../../assets/icons/flag-for-flag-saudi-arabia-svgrepo-com.svg";
+import uusa from "../../assets/icons/usa-svgrepo-com.svg";
 
 const LangToggle = () => {
   const { i18n } = useTranslation();
@@ -13,7 +14,7 @@ const LangToggle = () => {
 
   return (
     <IconButton onClick={toggleLanguage}>
-      <span className={`fi fi-${isArabic ? "us" : "sa"}`}></span>
+      <img src={isArabic ? uusa : sa} alt={isArabic ? "English" : "العربية"} />
     </IconButton>
   );
 };

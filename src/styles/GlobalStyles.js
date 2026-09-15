@@ -1,9 +1,13 @@
 import { createGlobalStyle } from "styled-components";
+import SaudiaBold from "../assets/fonts/saudia-sans-bold.otf";
+import SaudiaRegular from "../assets/fonts/saudia-sans-regular.otf";
+import BarlowBold from "../assets/fonts/Barlow-Bold.ttf";
+import BarlowMedium from "../assets/fonts/Barlow-Medium.ttf";
 
 const GlobalStyles = createGlobalStyle`
    @font-face {
     font-family: "saudia-sans";
-    src: url("/fonts/saudia-sans-regular.otf") format("opentype");
+    src: url(${SaudiaRegular}) format("opentype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -11,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
 
    @font-face {
     font-family: "saudia-sans";
-    src: url("/fonts/saudia-sans-bold.otf") format("opentype");
+    src: url(${SaudiaBold}) format("opentype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -19,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
 
    @font-face {
     font-family: "Barlow";
-    src: url("/fonts/Barlow-Medium.ttf") format("truetype");
+    src: url(${BarlowMedium}) format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -27,7 +31,7 @@ const GlobalStyles = createGlobalStyle`
 
    @font-face {
     font-family: "Barlow";
-    src: url("/fonts/Barlow-Bold.ttf") format("truetype");
+    src: url(${BarlowBold}) format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;

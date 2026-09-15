@@ -14,7 +14,7 @@ const HeaderContainer = styled.header`
   right: 0;
   left: 0;
   min-height: var(--header-height);
-  background-color: var(--color-background-ternary);
+  background-color: var(--color-background-tertiary);
 `;
 
 const HeaderContent = styled(Container)`
@@ -35,7 +35,7 @@ function Header() {
     <HeaderContainer>
       <HeaderContent>
         <Logo />
-
+        
         <Navigation activeLink={activeLink} />
 
         <Settings />

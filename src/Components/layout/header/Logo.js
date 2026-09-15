@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 
 const LogoContainer = styled.div`
   white-space: nowrap;
@@ -17,9 +17,7 @@ function Logo() {
 
   return (
     <LogoContainer>
-      <HashLink smooth to="/#home">
-        {t("logo.me")}
-      </HashLink>
+      <Link to="/">{t("logo.me")}</Link>
     </LogoContainer>
   );
 }

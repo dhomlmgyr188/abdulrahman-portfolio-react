@@ -1,13 +1,4 @@
 {
-    "logo": {
-        "me": "عبدالرحمن"
-    },
-    "nav": {
-        "home": "الرئيسية",
-        "about": "عني",
-        "projects": "مشاريعي",
-        "contact": "تواصل"
-    },
     "hero": {
         "availability_status": "متاح للعمل والتعاون في المشاريع كمستقل",
         "name": "عبدالرحمن ناصر المغير",
@@ -36,17 +27,7 @@
             "technologies": "تقنيات مستخدمة",
             "years": "سنوات في تطوير الويب"
         },
-        "image": {
-            "alt": "Abdulrahman Photo",
-            "link": "./images/me.png"
-        },
-        "buttons": {
-            "contact": "تواصل معي",
-            "my_resume": {
-                "text": "سيرتي الذاتية",
-                "link": "./docs/cv.pdf"
-            }
-        }
+        "profileAlt": "صورة عبدالرحمن"
     },
     "services": {
         "title": "ماذا أقدم؟",
@@ -76,14 +57,14 @@
         "header": {
             "title": "أبرز المشاريع",
             "desc": "مجموعة مختارة من أبرز المشاريع التي طورتها، والتي تعكس مهاراتي في تطوير الويب وتصميم واجهات المستخدم وتوظيف التقنيات الحديثة.",
-            "view_all": "شاهد جميع المشاريع .. "
+            "view_projects": "جميع المشاريع"
         },
         "items": [
             {
                 "id": "React-To-Do-List",
                 "date": "2026/08/30",
                 "project_img": [
-                    "images/react1.png"
+                    "react1"
                 ],
                 "title": "تطبيق حفظ ملاحظات المستخدم",
                 "desc": [
@@ -108,17 +89,13 @@
                     "CRUD",
                     "LocalStorage"
                 ],
-                "view_project": "تفاصيل المشروع",
-                "demo": {
-                    "text": "معاينة حية",
-                    "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
-                }
+                "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
             },
             {
                 "id": "Portfolio_v1",
                 "date": "2026/05/24",
                 "project_img": [
-                    "images/anaalmughyir1.png"
+                    "anaalmughyir1"
                 ],
                 "title": "موقع شخصي (نسخة سابقة)",
                 "desc": [
@@ -132,12 +109,9 @@
                     "CSS",
                     "Vanila JS"
                 ],
-                "view_project": "تفاصيل المشروع",
-                "demo": {
-                    "text": "معاينة حية",
-                    "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
-                }
+                "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
             }
         ]
-    }
+    },
+    "cta": "هل تبحث عن مطوّر أم تحتاج إلى موقع إلكتروني لمشروعك؟"
 }

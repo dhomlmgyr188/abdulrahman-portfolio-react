@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Card = styled.article`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: var(--space-lg);
   gap: var(--space-md);
   border: 1px solid var(--color-border);

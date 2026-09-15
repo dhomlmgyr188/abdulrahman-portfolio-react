@@ -1,36 +1,46 @@
+
 import styled from "styled-components";
 
+export const Actions = styled.div`
+  display: flex;
+  gap: var(--space-md);
+`;
+
 const Button = styled.button`
+  --button-bg: var(--color-primary);
+  --button-color: var(--color-white);
+  --button-border: transparent;
+
+  ${({ $variant }) =>
+    $variant === "secondary" &&
+    `
+      --button-bg: transparent;
+      --button-color: var(--color-primary);
+      --button-border: var(--color-primary);
+    `}
+
+  ${({ $variant }) =>
+    $variant === "tertiary" &&
+    `
+      --button-bg: var(--color-tertiary);
+    `}
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-sm) var(--space-lg);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--button-border);
   border-radius: var(--radius-md);
-
-  background-color: ${({ $variant }) =>
-    $variant === "secondary"
-      ? "transparent"
-      : "var(--color-primary)"};
-
-  color: ${({ $variant }) =>
-    $variant === "secondary"
-      ? "var(--color-primary)"
-      : "var(--color-white)"};
-
-  border-color: ${({ $variant }) =>
-    $variant === "secondary"
-      ? "var(--color-primary)"
-      : "transparent"};
-
+  background-color: var(--button-bg);
+  color: var(--button-color);
   transition: var(--transition-fast);
 
-  &.active {
+   &.active {
     font-weight: 700;
     background-color: ${({ $variant }) =>
-      $variant === "secondary"
-        ? "var(--color-primary)"
-        : "var(--color-secondary)"};
+    $variant === "secondary"
+      ? "var(--color-primary)"
+      : "var(--color-secondary)"};
   }
 
   &:hover {
@@ -41,6 +51,11 @@ const Button = styled.button`
 export const IconButton = styled(Button)`
   padding: var(--space-sm);
   background-color: var(--color-gray);
+
+  img{
+  width: var(--size-lg);
+  height: var(--size-lg);
+  }
 `;
 
 export default Button;

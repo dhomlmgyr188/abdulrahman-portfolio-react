@@ -3,7 +3,7 @@ import Button from "../ui/Button/Button";
 import { Link } from "react-router-dom";
 import { Card } from "../ui/card/Card";
 import { TTitle, Desc, Clearfix, LightDesc, TechStack, Tech, LinkU } from "../ui/T";
-import { Actions } from "../ui/Button/Acttions";
+import { Actions } from "../ui/Button/Button";
 
 const ProjectButton = styled(Button)`
   width: fit-content;
@@ -11,9 +11,14 @@ const ProjectButton = styled(Button)`
 `;
 const ProjCard = styled(Card)`
   background-color: var(--color-background-secondary);
+  align-items: flex-start;
   
   &:hover {
     box-shadow: none;
+  }
+
+  @media (max-width: 768px) {
+    order: 2;
   }
 `
 

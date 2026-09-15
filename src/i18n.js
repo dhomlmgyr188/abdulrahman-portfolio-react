@@ -1,8 +1,18 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import ar from "./locales/ar.json";
-import en from "./locales/en.json";
+
+import arCommon from "./locales/ar/common.json";
+import arHome from "./locales/ar/home.json";
+import arAbout from "./locales/ar/about.json";
+import arProjects from "./locales/ar/projects.json";
+import arContact from "./locales/ar/contact.json";
+
+import enCommon from "./locales/en/common.json";
+import enHome from "./locales/en/home.json";
+import enAbout from "./locales/en/about.json";
+import enProjects from "./locales/en/projects.json";
+import enContact from "./locales/en/contact.json";
 
 i18n
   .use(LanguageDetector)
@@ -10,18 +20,37 @@ i18n
   .init({
     resources: {
       ar: {
-        translation: ar,
+        common: arCommon,
+        home: arHome,
+        about: arAbout,
+        projects: arProjects,
+        contact: arContact
       },
+
       en: {
-        translation: en,
-      },
+        common: enCommon,
+        home: enHome,
+        about: enAbout,
+        projects: enProjects,
+        contact: enContact
+      }
     },
+
+    ns: [
+      "common",
+      "home",
+      "about",
+      "projects",
+      "contact"
+    ],
+
+    defaultNS: "common",
 
     fallbackLng: "ar",
 
     interpolation: {
-      escapeValue: false,
-    },
+      escapeValue: false
+    }
   });
 
 const setDirection = (lng) => {

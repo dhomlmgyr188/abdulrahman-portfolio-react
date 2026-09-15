@@ -3,7 +3,7 @@ import Container from "../../Components/layout/PageContainer";
 import { useTranslation } from "react-i18next";
 import Button from "../../Components/ui/Button/Button";
 import { Link } from "react-router-dom";
-import { Clearfix, STitle, LightDesc } from "../../Components/ui/T";
+import { SectionSTitle, SectionLightDesc, SectionHeader, Clearfix } from "../../Components/ui/T";
 import ProjectGrid from "../../Components/projects/ProjectsGrid";
 
 const FeaturedProjectsSection = styled.section`
@@ -12,12 +12,6 @@ const FeaturedProjectsSection = styled.section`
   align-items: center;
   padding: var(--space-3xl) 0;
   background-color: var(--color-background);
-`;
-
-const SectionHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
 `;
 
 const FeaturedProjectsContainer = styled(Container)`
@@ -34,12 +28,12 @@ const FeaturedProjects = () => {
       <FeaturedProjectsContainer>
         <SectionHeader>
           <Clearfix>
-            <STitle>{t("featuredProjects.header.title")}</STitle>
+            <SectionSTitle value="home:featuredProjects.header.title" />
             <Button as={Link} to="/projects">
-              {t("featuredProjects.header.view_all")}
+              {t("home:featuredProjects.header.view_projects")}
             </Button>
           </Clearfix>
-          <LightDesc>{t("featuredProjects.header.desc")}</LightDesc>
+          <SectionLightDesc value="home:featuredProjects.header.desc" />
         </SectionHeader>
         <ProjectGrid />
       </FeaturedProjectsContainer>

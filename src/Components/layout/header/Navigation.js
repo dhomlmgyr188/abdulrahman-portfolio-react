@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import Button from "../../ui/Button/Button";
 
 const NavbarContainer = styled.nav`
@@ -17,22 +16,22 @@ function Navigation({ activeLink }) {
     {
       id: "home",
       label: "nav.home",
-      isPageRoute: false,
+      to: "/",
     },
     {
       id: "about",
       label: "nav.about",
-      isPageRoute: true,
+      to: "/about",
     },
     {
       id: "projects",
       label: "nav.projects",
-      isPageRoute: true,
+      to: "/projects",
     },
     {
       id: "contact",
       label: "nav.contact",
-      isPageRoute: true,
+      to: "/contact",
     },
   ];
 
@@ -41,31 +40,18 @@ function Navigation({ activeLink }) {
       {links.map((link) => {
         const classNames = activeLink === link.id ? "active" : "";
 
-        if (link.isPageRoute) {
-          return (
-            <Button
-              as={Link}
-              to={`/${link.id}`}
-              $variant="primary"
-              key={link.id}
-              className={classNames}
-            >
-              {t(link.label)}
-            </Button>
-          );
-        }
-
         return (
           <Button
-            as={HashLink}
-            smooth
-            to={`/#${link.id}`}
+            as={Link}
+            to={link.to}
+            $variant="primary"
             key={link.id}
             className={classNames}
           >
             {t(link.label)}
           </Button>
         );
+
       })}
     </NavbarContainer>
   );

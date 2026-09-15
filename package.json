@@ -2,8 +2,8 @@
   "name": "abdulrahman_portfolio_react",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-react",
   "dependencies": {
-    "flag-icons": "^7.5.0",
     "i18next": "^26.4.2",
     "i18next-browser-languagedetector": "^8.2.1",
     "react": "^19.3.0",
@@ -19,7 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -37,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

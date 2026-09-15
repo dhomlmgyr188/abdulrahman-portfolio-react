@@ -10,7 +10,10 @@ const ImgWrapper = styled.div`
   transition: var(--transition-fast);
   overflow: hidden;
   border: 1px dotted var(--color-gray);
-
+  
+  @media (max-width: 768px) {
+    order: 1;
+  }
 `
 const ImgStyle = styled.img`
   height: 100%;

@@ -12,7 +12,7 @@ const icons = {
 const ServicesGrid = () => {
   const { t } = useTranslation();
 
-  const services = t("services.items", {
+  const services = t("home:services.items", {
     returnObjects: true,
   });
 
