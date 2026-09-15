@@ -1,13 +1,22 @@
 {
   "files": {
     "main.css": "/abdulrahman-portfolio-react/static/css/main.9fb611ba.css",
-    "main.js": "/abdulrahman-portfolio-react/static/js/main.f63315cf.js",
+    "main.js": "/abdulrahman-portfolio-react/static/js/main.b3d436b3.js",
+    "static/media/me.png": "/abdulrahman-portfolio-react/static/media/me.49f543d4d0d2f0ee02bc.png",
+    "static/media/saudia-sans-bold.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-bold.aeaeb29bd75393fdabfc.otf",
+    "static/media/saudia-sans-regular.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-regular.9af8db836ec4b5272370.otf",
+    "static/media/anaalmughyir1.png": "/abdulrahman-portfolio-react/static/media/anaalmughyir1.068f79c3a22321ddb8b5.png",
+    "static/media/Barlow-Bold.ttf": "/abdulrahman-portfolio-react/static/media/Barlow-Bold.0cb1ab864072bf9e0991.ttf",
+    "static/media/Barlow-Medium.ttf": "/abdulrahman-portfolio-react/static/media/Barlow-Medium.d4afdc134fc10b739bab.ttf",
+    "static/media/react1.png": "/abdulrahman-portfolio-react/static/media/react1.e3bd6953a72d9511b7db.png",
+    "static/media/flag-for-flag-saudi-arabia-svgrepo-com.svg": "/abdulrahman-portfolio-react/static/media/flag-for-flag-saudi-arabia-svgrepo-com.a778e6076273e68979a4d6d98069c904.svg",
+    "static/media/usa-svgrepo-com.svg": "/abdulrahman-portfolio-react/static/media/usa-svgrepo-com.5114479175e6ec9686bd65f08a3b4d49.svg",
     "index.html": "/abdulrahman-portfolio-react/index.html",
     "main.9fb611ba.css.map": "/abdulrahman-portfolio-react/static/css/main.9fb611ba.css.map",
-    "main.f63315cf.js.map": "/abdulrahman-portfolio-react/static/js/main.f63315cf.js.map"
+    "main.b3d436b3.js.map": "/abdulrahman-portfolio-react/static/js/main.b3d436b3.js.map"
   },
   "entrypoints": [
     "static/css/main.9fb611ba.css",
-    "static/js/main.f63315cf.js"
+    "static/js/main.b3d436b3.js"
   ]
 }
