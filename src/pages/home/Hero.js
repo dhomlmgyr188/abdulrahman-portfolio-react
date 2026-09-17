@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import Statistics, { Statistic, AnimatedNumber } from "./Statistics";
 import { TechStack, Tech, PTitle, Desc } from "../../Components/ui/T";
 import { Actions } from "../../Components/ui/Button/Button";
-import abdulrahmanPhoto from "../../assets/images/me.png"
-const myCV = `${process.env.PUBLIC_URL}/docs/cv.pdf`
+import abdulrahmanPhoto from "../../assets/images/me.png";
+import TechIcon from "./TechIcon";
+const myCV = `${process.env.PUBLIC_URL}/docs/cv.pdf`;
 
 const HeroSection = styled.section`
   padding: var(--space-3xl) 0;
@@ -23,7 +24,7 @@ const HeroContainer = styled(Container)`
   justify-content: space-between;
   gap: var(--space-xl);
 
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     flex-direction: column-reverse;
   }
 `;
@@ -34,6 +35,11 @@ const HeroContent = styled(Container)`
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-md);
+
+  @media (max-width: 768px) {
+    text-align: center;
+    align-items: center;
+  }
 `;
 
 const HeroFigure = styled.figure`
@@ -50,6 +56,12 @@ const HeroImage = styled.img`
   border: 1px solid var(--color-border);
   background-color: var(--color-background-secondary);
   box-shadow: var(--shadow-sm);
+
+
+  @media (max-width: 768px) {
+    max-width: 200px;
+    border-radius: 50%;
+  }
 `;
 
 const JobTitleComponent = () => {
@@ -95,7 +107,10 @@ const Hero = () => {
 
           <TechStack>
             {techStack.map((tech) => (
-              <Tech key={tech}>{tech}</Tech>
+              <Tech key={tech.text}>
+                <TechIcon name={tech.icon} />
+                {tech.text}
+              </Tech>
             ))}
           </TechStack>
 

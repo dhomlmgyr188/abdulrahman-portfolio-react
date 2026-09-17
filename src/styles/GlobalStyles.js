@@ -81,7 +81,6 @@ const GlobalStyles = createGlobalStyle`
 
     // Heading
 
-
     h1{
         font-size: var(--size-3xl)
     }
@@ -100,7 +99,15 @@ const GlobalStyles = createGlobalStyle`
     h6{
         font-size: var(--size-md)
     }
-  
+
+   @media (max-width: 768px) {
+        h1{font-size: var(--size-xl);}
+        h2{font-size: var(--size-lg);}
+        h3{font-size: var(--size-md);}
+        h4{font-size: var(--size-md);}
+        h5{font-size: var(--size-ml);}
+        h6{font-size: var(--size-sm);}
+    }
 
     a {
         color: inherit;

@@ -13,14 +13,38 @@
         ],
         "introduction": "A recent graduate from Taibah University with an Intermediate Diploma in Full-Stack Web Development. Skilled in developing web interfaces and websites using technologies such as React, JavaScript, HTML, and CSS, with experience in working with computer systems, applications, data, and reports. Seeking to join a work environment where I can apply my skills in web development, IT support, application support, or technical support while continuing to learn, grow, and contribute value to the organization.",
         "tech_stack": [
-            "React",
-            "JavaScript",
-            "HTML",
-            "CSS",
-            "Git",
-            "SQL",
-            "REST API",
-            "Microsoft 365"
+            {
+                "text": "React",
+                "icon": "React"
+            },
+            {
+                "text": "JavaScript",
+                "icon": "JavaScript"
+            },
+            {
+                "text": "HTML",
+                "icon": "HTML"
+            },
+            {
+                "text": "CSS",
+                "icon": "CSS"
+            },
+            {
+                "text": "Git",
+                "icon": "Git"
+            },
+            {
+                "text": "SQL",
+                "icon": "SQL"
+            },
+            {
+                "text": "REST API",
+                "icon": "REST API"
+            },
+            {
+                "text": "Microsoft 365",
+                "icon": "Microsoft 365"
+            }
         ],
         "profileAlt": "Abdulrahman Photo",
         "statistic": {

@@ -27,6 +27,15 @@
    --color-yellow: #f3dc08;
    --color-blue: #0852f3;
 
+   --color-react: #f3dc08;
+   --color-js: #f3dc08;
+   --color-html: #f3dc08;
+   --color-css: #f3dc08;
+   --color-git: #f3dc08;
+   --color-sql: #f3dc08;
+   --color-rest_api: #f3dc08;
+   --color-ms365: #f3dc08;
+
    --color-background: #ffffff;
    --color-background-secondary: #fafafa;
    --color-background-tertiary: #ececec;
@@ -78,6 +87,7 @@
    --radius-lg: 1rem;
    --radius-xl: 1.5rem;
    --radius-full: 999px;
+
 
 
    /* =========================

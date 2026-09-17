@@ -21,15 +21,13 @@ const HeaderContent = styled(Container)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 `;
 
 function Header() {
   const location = useLocation();
 
-  const activeLink =
-    location.pathname === "/"
-      ? "home"
-      : location.pathname.replace("/", "");
+  const activeLink = location.pathname === "/" ? "home" : location.pathname.replace("/", "");
 
   return (
     <HeaderContainer>

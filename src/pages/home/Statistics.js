@@ -19,29 +19,57 @@ const Statistic = styled.div`
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
 
+  @media (max-width: 768px) {
+    padding: var(--space-sm);
+    justify-content: center;
+  }
+
   strong {
     color: var(--color-primary);
     font-size: var(--size-xl);
+
+    @media (max-width: 768px) {
+      font-size: var(--size-lg);
+    }
   }
 
   span {
     font-size: var(--size-sm);
-    white-space: nowrap;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: var(--size-xs);
+    }
   }
 
   &.top {
     top: -40px;
     right: 15%;
+
+    @media (max-width: 768px) {
+      top: -60px;
+      right: 10%;
+    }
   }
 
   &.left {
     left: -40px;
     bottom: 20%;
+
+    @media (max-width: 768px) {
+      left: -65px;
+      bottom: -10%;
+    }
   }
 
   &.right {
     right: -10px;
     bottom: 5%;
+
+    @media (max-width: 768px) {
+      right: -75px;
+      bottom: 15%;
+    }
   }
 `;
 

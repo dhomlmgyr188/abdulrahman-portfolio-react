@@ -3,9 +3,7 @@ import { useTranslation } from "react-i18next";
 
 export const LinkU = styled.a`
   color: var(--color-link);
-  border-bottom: 1px solid var(--color-link);
-  padding-bottom: var(--space-xs);
-  transition: var(--transition-fast);
+  transition: var(--transition-normal);
 
   &:hover{
     opacity: 0.85;
@@ -78,14 +76,21 @@ export const TechStack = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const Tech = styled.span`
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   padding: var(--space-xs) var(--space-sm);
   font-size: var(--size-sm);
   border: 1px solid var(--color-border);
   color: var(--color-text);
-  border-radius: var(--radius-lg);
 `;
 
 export const Clearfix = styled.div`

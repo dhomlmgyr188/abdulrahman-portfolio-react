@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import Button from "../../ui/Button/Button";
+import { NavLink } from "../../ui/Button/Button";
 
 const NavbarContainer = styled.nav`
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-lg);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 function Navigation({ activeLink }) {
@@ -41,15 +45,14 @@ function Navigation({ activeLink }) {
         const classNames = activeLink === link.id ? "active" : "";
 
         return (
-          <Button
+          <NavLink
             as={Link}
             to={link.to}
-            $variant="primary"
             key={link.id}
             className={classNames}
           >
             {t(link.label)}
-          </Button>
+          </NavLink>
         );
 
       })}

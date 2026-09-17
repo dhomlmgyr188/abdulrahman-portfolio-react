@@ -1,6 +1,6 @@
 
 import styled from "styled-components";
-
+import { LinkU } from "../T"
 export const Actions = styled.div`
   display: flex;
   gap: var(--space-md);
@@ -48,13 +48,23 @@ const Button = styled.button`
   }
 `;
 
+export const NavLink = styled(LinkU)`
+  --navLink-color-active: var(--color-secondary);
+  padding: var(--space-xs) var(--space-sm); 
+
+  &.active {
+    font-weight: 700;
+    color: var(--navLink-color-active);
+  }
+`
+
 export const IconButton = styled(Button)`
   padding: var(--space-sm);
   background-color: var(--color-gray);
 
   img{
-  width: var(--size-lg);
-  height: var(--size-lg);
+    width: var(--size-lg);
+    height: var(--size-lg);
   }
 `;
 

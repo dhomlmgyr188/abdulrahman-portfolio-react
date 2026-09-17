@@ -13,14 +13,38 @@
         ],
         "introduction": "خريج حديث من جامعة طيبة بدبلوم متوسط في تطوير الويب المتكامل، ومتخصص في تطوير واجهات ومواقع الويب باستخدام تقنيات مثل React وJavaScript وHTML وCSS، إلى جانب خبرة في التعامل مع أنظمة الحاسب والتطبيقات والبيانات والتقارير. أسعى للانضمام إلى بيئة عمل تتيح لي توظيف مهاراتي في تطوير الويب، دعم تقنية المعلومات، دعم التطبيقات أو الدعم الفني، مع الاستمرار في التعلم والتطور وتقديم قيمة مضافة للمنشأة والمساهمة في نجاحها.",
         "tech_stack": [
-            "React",
-            "JavaScript",
-            "HTML",
-            "CSS",
-            "Git",
-            "SQL",
-            "REST API",
-            "Microsoft 365"
+            {
+                "text": "React",
+                "icon": "React"
+            },
+            {
+                "text": "JavaScript",
+                "icon": "JavaScript"
+            },
+            {
+                "text": "HTML",
+                "icon": "HTML"
+            },
+            {
+                "text": "CSS",
+                "icon": "CSS"
+            },
+            {
+                "text": "Git",
+                "icon": "Git"
+            },
+            {
+                "text": "SQL",
+                "icon": "SQL"
+            },
+            {
+                "text": "REST API",
+                "icon": "REST API"
+            },
+            {
+                "text": "Microsoft 365",
+                "icon": "Microsoft 365"
+            }
         ],
         "statistic": {
             "projects": "مشاريع منجزة",
