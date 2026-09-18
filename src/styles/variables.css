@@ -14,6 +14,10 @@
    --color-tertiary: #a83500;
    --color-tertiary-light: #fa4f00;
    --color-tertiary-dark: #571c00;
+   
+   --color-danger: #a83500;
+   
+   --color-background-rgba: rgba(0, 0, 0, 0.75);
 
    --color-white: #ffffff;
    --color-black: #000000;
@@ -22,7 +26,7 @@
    --color-text: #1a1a1a;
    --color-text-light: #535353;
 
-   --color-link: #1f87cc;
+   --color-link: #0065A8;
 
    --color-yellow: #f3dc08;
    --color-blue: #0852f3;
@@ -144,5 +148,7 @@
    --color-text: #ffffff;
    --color-text-light: #aaaaaa;
 
-   --color-border: #414141;
+   --color-link: #0099ff;
+
+   --color-border: #555555;
 }

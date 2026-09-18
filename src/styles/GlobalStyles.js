@@ -119,6 +119,24 @@ const GlobalStyles = createGlobalStyle`
         list-style: none;
     }
 
+    table{
+        width: 100%;
+        min-width: 768px;
+        border-collapse: collapse;
+        text-align: center;
+        border-spacing: 0px;
+        table-layout: fixed;
+    }
+
+    th,td{
+        border: 1px solid var(--color-border);
+        padding: var(--space-sm);
+        word-break: break-word;
+    }
+
+    th{ background-color: var(--color-background-tertiary); }
+    td{ background-color: var(--color-background); }
+
 `;
 
 export default GlobalStyles;
