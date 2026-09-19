@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/abdulrahman-portfolio-react/static/css/main.7463783e.css",
-    "main.js": "/abdulrahman-portfolio-react/static/js/main.85d5b213.js",
+    "main.css": "/abdulrahman-portfolio-react/static/css/main.ccd7c394.css",
+    "main.js": "/abdulrahman-portfolio-react/static/js/main.04dd3ce5.js",
     "static/media/me.png": "/abdulrahman-portfolio-react/static/media/me.49f543d4d0d2f0ee02bc.png",
     "static/media/saudia-sans-bold.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-bold.aeaeb29bd75393fdabfc.otf",
     "static/media/saudia-sans-regular.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-regular.9af8db836ec4b5272370.otf",
@@ -12,11 +12,11 @@
     "static/media/flag-for-flag-saudi-arabia-svgrepo-com.svg": "/abdulrahman-portfolio-react/static/media/flag-for-flag-saudi-arabia-svgrepo-com.a778e6076273e68979a4d6d98069c904.svg",
     "static/media/usa-svgrepo-com.svg": "/abdulrahman-portfolio-react/static/media/usa-svgrepo-com.942af6ae7a0d59ed8a189864ffce9e91.svg",
     "index.html": "/abdulrahman-portfolio-react/index.html",
-    "main.7463783e.css.map": "/abdulrahman-portfolio-react/static/css/main.7463783e.css.map",
-    "main.85d5b213.js.map": "/abdulrahman-portfolio-react/static/js/main.85d5b213.js.map"
+    "main.ccd7c394.css.map": "/abdulrahman-portfolio-react/static/css/main.ccd7c394.css.map",
+    "main.04dd3ce5.js.map": "/abdulrahman-portfolio-react/static/js/main.04dd3ce5.js.map"
   },
   "entrypoints": [
-    "static/css/main.7463783e.css",
-    "static/js/main.85d5b213.js"
+    "static/css/main.ccd7c394.css",
+    "static/js/main.04dd3ce5.js"
   ]
 }
