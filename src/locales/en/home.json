@@ -137,5 +137,54 @@
             }
         ]
     },
+    "footer": {
+        "quickLinks": {
+            "title": "Quick Links"
+        },
+        "socialMedia": {
+            "title": "Social Media",
+            "social": [
+                {
+                    "id": "linkedin",
+                    "href": "https://linkedin.com/in/dhomlmgyr"
+                },
+                {
+                    "id": "github",
+                    "href": "https://github.com/dhomlmgyr188"
+                },
+                {
+                    "id": "Whatsapp",
+                    "href": "https://wa.me/+966541590819"
+                },
+                {
+                    "id": "email",
+                    "href": "mailto:dhomlmgyr@gmail.com"
+                },
+                {
+                    "id": "instgram",
+                    "href": "https://www.instagram.com/dhomlmgyr"
+                },
+                {
+                    "id": "snapchat",
+                    "href": "https://www.snapchat.com/t/0jbJpmvk"
+                }
+            ]
+        },
+        "contactInfo": {
+            "title": "Contact Information",
+            "location": {
+                "value": "Saudi Arabia - Medina - Al-Aridh Dist."
+            },
+            "email": {
+                "title": "Email",
+                "value": "dhomlmgyr@gmail.com"
+            },
+            "tel": {
+                "title": "Phone Number",
+                "value": "+966541590819"
+            }
+        },
+        "copyright": "Developed by Abdulrahman Al-Mughair. All rights reserved."
+    },
     "cta": "Looking for a developer or need a website for your project?"
 }

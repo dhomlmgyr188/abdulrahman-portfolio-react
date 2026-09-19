@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 import { NavLink } from "../../ui/Button/Button";
 
 const NavbarContainer = styled.nav`
@@ -20,7 +20,7 @@ function Navigation({ activeLink }) {
     {
       id: "home",
       label: "nav.home",
-      to: "/",
+      to: "/#home",
     },
     {
       id: "about",
@@ -48,6 +48,7 @@ function Navigation({ activeLink }) {
           <NavLink
             as={Link}
             to={link.to}
+            smooth
             key={link.id}
             className={classNames}
           >

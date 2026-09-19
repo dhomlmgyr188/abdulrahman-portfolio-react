@@ -102,3 +102,45 @@ export const Clearfix = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 `;
+
+
+export const TableWrapper = styled.div`
+  @media(max-width: 768px) {
+    position: relative;
+    width: 100%;  
+      
+      &::before{
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: var(--size-lg);
+        height: 100%;
+        background: linear-gradient(to left, var(--color-background-tertiary) , transparent);
+      }
+
+      &::after{
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: var(--size-lg);
+        height: 100%;
+        background: linear-gradient(to right, var(--color-background-tertiary) , transparent);
+      }
+  }
+`
+
+export const TableContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; // السحب باللمس على الهواتف
+
+  /* اخفاء شريط التمرير */
+    // Chrome, Safari, Opera
+      &::-webkit-scrollbar{ 
+        display:none;
+      }
+      scrollbar-width: none; // Firefox 
+      -ms-overflow-style: none;  //IE و Edge
+`

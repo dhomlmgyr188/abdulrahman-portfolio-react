@@ -137,5 +137,54 @@
             }
         ]
     },
+    "footer": {
+        "quickLinks": {
+            "title": "روابط سريعة"
+        },
+        "socialMedia": {
+            "title": "التواصل الإجتماعي",
+            "social": [
+                {
+                    "id": "linkedin",
+                    "href": "https://linkedin.com/in/dhomlmgyr"
+                },
+                {
+                    "id": "github",
+                    "href": "https://github.com/dhomlmgyr188"
+                },
+                {
+                    "id": "Whatsapp",
+                    "href": "https://wa.me/+966541590819"
+                },
+                {
+                    "id": "email",
+                    "href": "mailto:dhomlmgyr@gmail.com"
+                },
+                {
+                    "id": "instgram",
+                    "href": "https://www.instagram.com/dhomlmgyr"
+                },
+                {
+                    "id": "snapchat",
+                    "href": "https://www.snapchat.com/t/0jbJpmvk"
+                }
+            ]
+        },
+        "contactInfo": {
+            "title": "معلومات الإتصال",
+            "location": {
+                "value": "المملكة العربية السعودية - المدينة المنورة - حي العريض"
+            },
+            "email": {
+                "title": "البريد الإلكتروني",
+                "value": "dhomlmgyr@gmail.com"
+            },
+            "tel": {
+                "title": "رقم الإتصال",
+                "value": "966541590819+"
+            }
+        },
+        "copyright": "المطور عبدالرحمن المغير. جميع الحقوق محفوظة."
+    },
     "cta": "هل تبحث عن مطوّر أم تحتاج إلى موقع إلكتروني لمشروعك؟"
 }

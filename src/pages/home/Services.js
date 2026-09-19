@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import Container from "../../Components/layout/PageContainer";
+import { Section } from "../../Components/layout/PageContainer";
 import ServicesGrid from "../../Components/services/ServiceGrid";
 import { SectionSTitle, SectionLightDesc, SectionHeader } from "../../Components/ui/T";
 
-const ServicesSection = styled.section`
+const ServicesSection = styled(Section)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--space-3xl) 0;
   background-color: var(--color-background-secondary);
 `;
 

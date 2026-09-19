@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Container from "../../Components/layout/PageContainer";
+import { Section } from "../../Components/layout/PageContainer";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import Button from "../../Components/ui/Button/Button";
@@ -11,8 +12,7 @@ import abdulrahmanPhoto from "../../assets/images/me.png";
 import TechIcon from "./TechIcon";
 const myCV = `${process.env.PUBLIC_URL}/docs/cv.pdf`;
 
-const HeroSection = styled.section`
-  padding: var(--space-3xl) 0;
+const HeroSection = styled(Section)`
   display: flex;
   align-items: center;
   background: var(--color-background);
@@ -92,7 +92,7 @@ const Hero = () => {
   });
 
   return (
-    <HeroSection>
+    <HeroSection id="home">
       <HeroContainer>
         <HeroContent>
           <span style={{ color: "var(--color-secondary)" }}>

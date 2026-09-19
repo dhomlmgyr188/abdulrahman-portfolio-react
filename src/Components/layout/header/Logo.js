@@ -1,14 +1,19 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 const LogoContainer = styled.div`
   white-space: nowrap;
 
-  a {
+  .logo {
     font-size: var(--size-xl);
     font-weight: 700;
     color: var(--color-primary);
+    transition: var(--transition-normal);
+
+    &:hover {
+      opacity: 0.85;
+    }
   }
 `;
 
@@ -17,7 +22,9 @@ function Logo() {
 
   return (
     <LogoContainer>
-      <Link to="/">{t("logo.me")}</Link>
+      <HashLink to="/#home" smooth className="logo">
+        {t("logo.me")}
+      </HashLink>
     </LogoContainer>
   );
 }

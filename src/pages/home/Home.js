@@ -2,7 +2,7 @@ import Hero from "./Hero";
 import Services from "./Services";
 import Statistics from "./Statistics"
 import FeaturedProjects from "./FeaturedProjects";
-import UsersTable from "./UsersTable";
+import CTA from "./CallToAction"
 
 const Home = () => {
   return (
@@ -11,7 +11,7 @@ const Home = () => {
       <Statistics />
       <Services />
       <FeaturedProjects />
-      <UsersTable />
+      <CTA />
     </>
   );
 };
