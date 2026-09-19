@@ -1,7 +1,7 @@
 {
     "hero": {
         "availability_status": "Available for work and freelance projects",
-        "name": "Abdulrahman Nasser Al-Mughyir",
+        "name": "Abdulrahman Al-Mughyir",
         "job_titles": [
             "IT Support",
             "Full-Stack Web Developer",
@@ -11,7 +11,7 @@
             "Administrative Assistant",
             "Data Entry Specialist"
         ],
-        "introduction": "A recent graduate from Taibah University with an Intermediate Diploma in Full-Stack Web Development. Skilled in developing web interfaces and websites using technologies such as React, JavaScript, HTML, and CSS, with experience in working with computer systems, applications, data, and reports. Seeking to join a work environment where I can apply my skills in web development, IT support, application support, or technical support while continuing to learn, grow, and contribute value to the organization.",
+        "introduction": "Recent Full-Stack Web Development graduate from Taibah University, skilled in React, JavaScript, HTML, and CSS, with knowledge of computer systems and applications. Seeking an opportunity to apply my technical skills in web development or technical support while continuing to grow professionally.",
         "tech_stack": [
             {
                 "text": "React",

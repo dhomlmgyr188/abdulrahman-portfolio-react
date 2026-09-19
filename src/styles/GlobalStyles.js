@@ -82,10 +82,10 @@ const GlobalStyles = createGlobalStyle`
     // Heading
 
     h1{
-        font-size: var(--size-3xl)
+        font-size: var(--size-4xl)
     }
     h2{
-        font-size: var(--size-xl)
+        font-size: var(--size-3xl)
     }
     h3{
         font-size: var(--size-lg)
@@ -101,11 +101,11 @@ const GlobalStyles = createGlobalStyle`
     }
 
    @media (max-width: 768px) {
-        h1{font-size: var(--size-xl);}
-        h2{font-size: var(--size-lg);}
-        h3{font-size: var(--size-md);}
-        h4{font-size: var(--size-md);}
-        h5{font-size: var(--size-ml);}
+        h1{font-size: var(--size-2xl);}
+        h2{font-size: var(--size-xl);}
+        h3{font-size: var(--size-lg);}
+        h4{font-size: var(--size-ml);}
+        h5{font-size: var(--size-md);}
         h6{font-size: var(--size-sm);}
     }
 

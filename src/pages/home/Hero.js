@@ -18,23 +18,22 @@ const HeroSection = styled(Section)`
   background: var(--color-background);
 `;
 
-const HeroContainer = styled(Container)`
+const HeroContent = styled(Container)`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-xl);
-
   @media (max-width: 768px) {
     flex-direction: column-reverse;
   }
 `;
 
-const HeroContent = styled(Container)`
+const HeroText = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 
   @media (max-width: 768px) {
     text-align: center;
@@ -50,13 +49,12 @@ const HeroFigure = styled.figure`
 
 const HeroImage = styled.img`
   width: 100%;
-  max-width: 300px;
+  max-width: 250px;
   aspect-ratio: 1;
   object-fit: cover;
   border: 1px solid var(--color-border);
   background-color: var(--color-background-secondary);
   box-shadow: var(--shadow-sm);
-
 
   @media (max-width: 768px) {
     max-width: 200px;
@@ -91,10 +89,37 @@ const Hero = () => {
     returnObjects: true,
   });
 
+  const iconBgMap = {
+    React: {
+      bgColor: "var(--color-shadow-react)",
+    },
+    JavaScript: {
+      bgColor: "var(--color-shadow-js)",
+    },
+    HTML: {
+      bgColor: "var(--color-shadow-html)",
+    },
+    CSS: {
+      bgColor: "var(--color-shadow-css)",
+    },
+    Git: {
+      bgColor: "var(--color-shadow-git)",
+    },
+    SQL: {
+      bgColor: "var(--color-shadow-sql)",
+    },
+    "REST API": {
+      bgColor: "var(--color-shadow-rest_api)",
+    },
+    "Microsoft 365": {
+      bgColor: "var(--color-shadow-ms365)",
+    }
+  };
+
   return (
     <HeroSection id="home">
-      <HeroContainer>
-        <HeroContent>
+      <HeroContent>
+        <HeroText>
           <span style={{ color: "var(--color-secondary)" }}>
             {t("home:hero.availability_status")}
           </span>
@@ -106,12 +131,14 @@ const Hero = () => {
           <Desc style={{ maxWidth: "650px" }}>{t("home:hero.introduction")}</Desc>
 
           <TechStack>
-            {techStack.map((tech) => (
-              <Tech key={tech.text}>
+            {techStack.map((tech) => {
+              const bgIcon = iconBgMap[tech.icon];
+
+              return <Tech key={tech.text} style={{ boxShadow: `inset -2px -1px 3px 2px ${bgIcon.bgColor}` }}>
                 <TechIcon name={tech.icon} />
                 {tech.text}
               </Tech>
-            ))}
+            })}
           </TechStack>
 
           <Actions>
@@ -128,7 +155,7 @@ const Hero = () => {
               {t("buttons.cv")}
             </Button>
           </Actions>
-        </HeroContent>
+        </HeroText>
 
         <HeroFigure>
           <Statistics>
@@ -150,7 +177,7 @@ const Hero = () => {
             </Statistic>
           </Statistics>
         </HeroFigure>
-      </HeroContainer>
+      </HeroContent>
     </HeroSection>
   );
 };

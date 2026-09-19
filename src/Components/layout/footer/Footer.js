@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Container from "../PageContainer";
-import { Desc, LightDesc, LinkU, TTitle } from "../../ui/T";
+import { LightDesc, LinkU, TTitle } from "../../ui/T";
 import { HashLink as Link } from "react-router-hash-link";
 import {
   FaWhatsapp,
@@ -10,6 +10,9 @@ import {
   FaInstagram,
   FaSnapchat,
 } from "react-icons/fa";
+import { MdOutlineMailOutline } from "react-icons/md";
+import { CiLocationOn } from "react-icons/ci";
+import { BsTelephone } from "react-icons/bs";
 import { SiGmail } from "react-icons/si";
 
 const FooterContainer = styled.footer`
@@ -83,15 +86,34 @@ const SocialContainer = styled.div`
 
 const SocialLink = styled.a`
   width: max-content;
-  margin: auto;
 
   & svg {
-    width: var(--space-2xl);
-    height: var(--space-2xl);
+    width: var(--space-xl);
+    height: var(--space-xl);
   }
 `;
 
-const ContactContainer = styled.div``;
+const ContactTextIcon = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-sm);
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+
+    & svg{
+      width: var(--space-ml);
+      height: var(--space-ml);
+    }
+`
+const ContactContainer = styled.div`
+display: flex;
+flex-direction: column;
+gap: var(--space-sm)
+`;
+
 const iconMap = {
   linkedin: {
     icon: <FaLinkedin />,
@@ -186,17 +208,18 @@ const Footer = () => {
           <FooterArticle>
             <FooterTitle>{t("home:footer.contactInfo.title")}</FooterTitle>
             <ContactContainer>
-              <Desc>
-                <strong>{t("home:footer.contactInfo.email.title")}:</strong>
+              <ContactTextIcon>
+                <MdOutlineMailOutline style={{ color: "var(--color-email)" }} />
                 {t("home:footer.contactInfo.email.value")}
-              </Desc>
-              <Desc>
-                <strong>{t("home:footer.contactInfo.tel.title")}:</strong>
+              </ContactTextIcon>
+              <ContactTextIcon>
+                <BsTelephone style={{ color: "var(--color-whatsapp)" }} />
                 {t("home:footer.contactInfo.tel.value")}
-              </Desc>
-              <Desc>
+              </ContactTextIcon>
+              <ContactTextIcon>
+                <CiLocationOn style={{ color: "var(--color-black)" }} />
                 {t("home:footer.contactInfo.location.value")}
-              </Desc>
+              </ContactTextIcon>
             </ContactContainer>
           </FooterArticle>
         </FooterConent>

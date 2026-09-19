@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 export const Section = styled.section`
-  padding: var(--space-3xl) 0;
+  padding: var(--space-4xl) 0;
 `
 
 export default Container;

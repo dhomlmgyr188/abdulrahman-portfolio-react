@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-
 export const LinkU = styled.a`
   color: var(--color-link);
   transition: var(--transition-normal);
@@ -75,7 +74,7 @@ export const PageHeaderContainer = styled.div`
 export const TechStack = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-md);
 
   @media (max-width: 768px) {
     justify-content: center;

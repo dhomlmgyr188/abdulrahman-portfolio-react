@@ -32,13 +32,22 @@
    --color-blue: #0852f3;
 
    --color-react: #58C4DC;
-   --color-js: #F6DB1F;
+   --color-js: #cfb822;
    --color-html: #E44D26;
    --color-css: #204CE6;
    --color-git: #F05033;
-   --color-sql: #3E6E93;
-   --color-rest_api: #A7CEFF;
+   --color-sql: #2a5575;
+   --color-rest_api: #85a6ce;
    --color-ms365: #D03902;
+
+   --color-shadow-react: #58c4dc9f;
+   --color-shadow-js: #cfb8229f;
+   --color-shadow-html: #E44D269f;
+   --color-shadow-css: #204CE69f;
+   --color-shadow-git: #F050339f;
+   --color-shadow-sql: #2a55759f;
+   --color-shadow-rest_api: #85a6ce9f;
+   --color-shadow-ms365: #d039029f;
 
    --color-linkedin: #0077B5;
    --color-github: #2A2B2F;
@@ -87,6 +96,7 @@
    --space-xl: 2rem;
    --space-2xl: 3rem;
    --space-3xl: 4rem;
+   --space-4xl: 5rem;
 
 
    /* =========================

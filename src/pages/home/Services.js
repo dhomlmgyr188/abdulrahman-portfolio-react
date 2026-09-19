@@ -11,7 +11,7 @@ const ServicesSection = styled(Section)`
   background-color: var(--color-background-secondary);
 `;
 
-const ServicesContainer = styled(Container)`
+const ServicesContent = styled(Container)`
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
@@ -21,13 +21,13 @@ const Services = () => {
 
   return (
     <ServicesSection>
-      <ServicesContainer>
+      <ServicesContent className="animate__animated animate__slideInUp animate__fast">
         <SectionHeader style={{textAlign: "center"}}>
           <SectionSTitle value="home:services.title" />
           <SectionLightDesc value="home:services.description" />
         </SectionHeader>
         <ServicesGrid />
-      </ServicesContainer>
+      </ServicesContent>
     </ServicesSection>
   );
 };
