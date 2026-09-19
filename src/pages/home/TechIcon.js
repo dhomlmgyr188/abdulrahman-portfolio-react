@@ -51,7 +51,7 @@ const TechIcon = ({ name }) => {
 
     const Icon = tech.icon;
 
-    return <Icon style={{ color: tech.color }} />;
+    return <Icon style={{ color: tech.color, width: "var(--size-ml)", height: "var(--size-ml)" }} />;
 };
 
 export default TechIcon;

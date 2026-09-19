@@ -89,8 +89,10 @@ export const Tech = styled.span`
   gap: var(--space-sm);
   padding: var(--space-xs) var(--space-sm);
   font-size: var(--size-sm);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background-secondary);
   border: 1px solid var(--color-border);
-  color: var(--color-text);
+  cursor: default;
 `;
 
 export const Clearfix = styled.div`
