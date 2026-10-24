@@ -1,0 +1,189 @@
+{
+    "hero": {
+        "availability_status": "متاح للعمل والتعاون في المشاريع كمستقل",
+        "name": "عبدالرحمن المغير",
+        "job_titles": [
+            "دعم تقنية المعلومات",
+            "مطور مواقع ويب متكامل",
+            "دعم تطبيقات",
+            "أخصائي دعم فني",
+            "فني نظم حاسب آلي",
+            "مساعد إداري",
+            "مدخل بيانات"
+        ],
+        "introduction": "خريج حديث في تطوير الويب المتكامل من جامعة طيبة، أمتلك مهارات في React وJavaScript وHTML وCSS، مع معرفة بأنظمة الحاسب والتطبيقات. أبحث عن فرصة أساهم فيها بمهاراتي في تطوير الويب أو الدعم التقني، مع الاستمرار في التعلم والتطور المهني.",
+        "tech_stack": [
+            {
+                "text": "React",
+                "icon": "React"
+            },
+            {
+                "text": "JavaScript",
+                "icon": "JavaScript"
+            },
+            {
+                "text": "HTML5",
+                "icon": "HTML"
+            },
+            {
+                "text": "CSS3",
+                "icon": "CSS"
+            },
+            {
+                "text": "Git",
+                "icon": "Git"
+            },
+            {
+                "text": "SQL",
+                "icon": "SQL"
+            },
+            {
+                "text": "Microsoft 365",
+                "icon": "Microsoft 365"
+            }
+        ],
+        "statistic": {
+            "projects": "مشاريع منجزة",
+            "technologies": "تقنيات مستخدمة",
+            "years": "سنوات في تطوير الويب"
+        },
+        "profileAlt": "صورة عبدالرحمن"
+    },
+    "services": {
+        "title": "ماذا أقدم؟",
+        "description": "أقدم مجموعة من الخدمات التقنية التي تساعد الأفراد والمنشآت في تطوير حضورهم الرقمي وتحسين إستخدام الأنظمة والتطبيقات.",
+        "items": [
+            {
+                "id": "1",
+                "icon": "web",
+                "title": "تطوير مواقع الويب",
+                "description": "تطوير مواقع وواجهات ويب متجاوبة وسهلة الاستخدام باستخدام تقنيات الويب الحديثة."
+            },
+            {
+                "id": "2",
+                "icon": "technology",
+                "title": "دعم تقنية المعلومات",
+                "description": "المساعدة في التعامل مع أجهزة الحاسب والأنظمة والبرامج وحل المشكلات التقنية الأساسية."
+            },
+            {
+                "id": "3",
+                "icon": "applications",
+                "title": "دعم التطبيقات",
+                "description": "مساعدة المستخدمين في التعامل مع التطبيقات والأنظمة، ومعالجة المشكلات ومتابعة الأعطال."
+            }
+        ]
+    },
+    "featuredProjects": {
+        "header": {
+            "title": "أبرز المشاريع",
+            "desc": "مجموعة مختارة من أبرز المشاريع التي طورتها، والتي تعكس مهاراتي في تطوير الويب وتصميم واجهات المستخدم وتوظيف التقنيات الحديثة.",
+            "view_projects": "جميع المشاريع"
+        },
+        "items": [
+            {
+                "id": "React-To-Do-List",
+                "date": "2026/08/30",
+                "project_img": [
+                    "react1"
+                ],
+                "title": "تطبيق حفظ ملاحظات المستخدم",
+                "desc": [
+                    {
+                        "type": "text",
+                        "value": "حفظ ملاحظات المستخدم في الذاكرة المحلية LocalStorage بإستخدام React مع CRUD Operations, "
+                    },
+                    {
+                        "type": "link",
+                        "text": "دورة تطوير التطبيقات بإستخدام لغة JavaScript",
+                        "href": "https://academy.hsoub.com/learn/javascript-application-development/"
+                    },
+                    {
+                        "type": "text",
+                        "value": " - أكاديمية حسوب"
+                    }
+                ],
+                "tech_stack": [
+                    "React",
+                    "React Hooks",
+                    "JavaScript",
+                    "CRUD",
+                    "LocalStorage"
+                ],
+                "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
+            },
+            {
+                "id": "Portfolio_v1",
+                "date": "2026/05/24",
+                "project_img": [
+                    "anaalmughyir1"
+                ],
+                "title": "موقع شخصي (نسخة سابقة)",
+                "desc": [
+                    {
+                        "type": "text",
+                        "value": "تم تطويره بهدف عرض أعمالي والعروض التي أقدمها متعدد الصفحات، متجاوب مع جميع الأجهزة، بتصميم جميل وتجربة مستخدم سهلة. "
+                    }
+                ],
+                "tech_stack": [
+                    "HTML",
+                    "CSS",
+                    "Vanila JS"
+                ],
+                "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
+            }
+        ]
+    },
+    "footer": {
+        "quickLinks": {
+            "title": "روابط سريعة"
+        },
+        "socialMedia": {
+            "title": "التواصل الإجتماعي",
+            "social": [
+                {
+                    "id": "linkedin",
+                    "href": "https://linkedin.com/in/dhomlmgyr"
+                },
+                {
+                    "id": "github",
+                    "href": "https://github.com/dhomlmgyr188"
+                },
+                {
+                    "id": "Whatsapp",
+                    "href": "https://wa.me/+966541590819"
+                },
+                {
+                    "id": "email",
+                    "href": "mailto:dhomlmgyr@gmail.com"
+                },
+                {
+                    "id": "instgram",
+                    "href": "https://www.instagram.com/dhomlmgyr"
+                },
+                {
+                    "id": "snapchat",
+                    "href": "https://www.snapchat.com/t/0jbJpmvk"
+                }
+            ]
+        },
+        "contactInfo": {
+            "title": "معلومات الإتصال",
+            "location": {
+                "value": "المدينة المنورة، المملكة العربية السعودية"
+            },
+            "email": {
+                "title": "البريد الإلكتروني",
+                "value": "dhomlmgyr@gmail.com"
+            },
+            "tel": {
+                "title": "رقم الإتصال",
+                "value": "966541590819+"
+            }
+        },
+        "copyright": "المطور عبدالرحمن المغير. جميع الحقوق محفوظة."
+    },
+    "callToAction": {
+        "title": "لنجعل فكرتك القادمة واقعًا",
+        "paragraph": "سواء كنت تبحث عن تطوير موقع ويب، أو تحتاج إلى مساعدة تقنية، يسعدني التعرف على احتياجك ومناقشة كيفية التعاون معك."
+    }
+}
