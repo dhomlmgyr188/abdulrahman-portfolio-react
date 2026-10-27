@@ -24,7 +24,7 @@ i18n
         home: arHome,
         about: arAbout,
         projects: arProjects,
-        contact: arContact
+        contact: arContact,
       },
 
       en: {
@@ -32,30 +32,27 @@ i18n
         home: enHome,
         about: enAbout,
         projects: enProjects,
-        contact: enContact
-      }
+        contact: enContact,
+      },
     },
 
-    ns: [
-      "common",
-      "home",
-      "about",
-      "projects",
-      "contact"
-    ],
+    ns: ["common", "home", "about", "projects", "contact"],
 
     defaultNS: "common",
 
     fallbackLng: "ar",
 
     interpolation: {
-      escapeValue: false
-    }
+      escapeValue: false,
+    },
   });
 
 const setDirection = (lng) => {
-  document.documentElement.dir = lng.startsWith("ar") ? "rtl" : "ltr";
-  document.documentElement.lang = lng.startsWith("ar") ? "ar" : "en";
+  const language = String(lng || "ar");
+
+  document.documentElement.dir = language.startsWith("ar") ? "rtl" : "ltr";
+
+  document.documentElement.lang = language.startsWith("ar") ? "ar" : "en";
 };
 
 i18n.on("languageChanged", setDirection);

@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
 import {
   FiHome,
   FiChevronLeft,
@@ -11,8 +12,7 @@ import {
 import Container from "../layout/PageContainer";
 
 /* =========================================
-   BREADCRUMB
-   No separate background
+   BREADCRUMB STYLES
 ========================================= */
 
 const BCPageContainer = styled.nav`
@@ -138,21 +138,51 @@ const CurrentPage = styled.span`
 `;
 
 /* =========================================
-   COMPONENT
+   BREADCRUMB COMPONENT
 ========================================= */
 
-const BreadCrumb = ({ value }) => {
-  const { t, i18n } = useTranslation();
+const BreadCrumb = ({ value = "" }) => {
+  const { t, i18n } = useTranslation([
+    "common",
+    "home",
+    "about",
+    "projects",
+    "contact",
+  ]);
 
-  const isArabic = (
+  const language =
     i18n.resolvedLanguage ||
     i18n.language ||
-    "ar"
-  ).startsWith("ar");
+    "ar";
+
+  const isArabic = language.startsWith("ar");
 
   const SeparatorIcon = isArabic
     ? FiChevronLeft
     : FiChevronRight;
+
+  const namespaces = [
+    "home",
+    "about",
+    "projects",
+    "contact",
+  ];
+
+  const pageNamespace = namespaces.includes(value)
+    ? value
+    : null;
+
+  const fallbackTitle = t(`nav.${value}`, {
+    ns: "common",
+    defaultValue: value,
+  });
+
+  const currentPageTitle = pageNamespace
+    ? t("pageTitle", {
+        ns: pageNamespace,
+        defaultValue: fallbackTitle,
+      })
+    : fallbackTitle;
 
   return (
     <BCPageContainer
@@ -168,7 +198,15 @@ const BreadCrumb = ({ value }) => {
           <BCItem>
             <BCLink to="/">
               <FiHome aria-hidden="true" />
-              <span>{t("nav.home")}</span>
+
+              <span>
+                {t("nav.home", {
+                  ns: "common",
+                  defaultValue: isArabic
+                    ? "الرئيسية"
+                    : "Home",
+                })}
+              </span>
             </BCLink>
           </BCItem>
 
@@ -178,9 +216,7 @@ const BreadCrumb = ({ value }) => {
 
           <BCItem aria-current="page">
             <CurrentPage>
-              {t(`nav.${value}`, {
-                defaultValue: value || "",
-              })}
+              {currentPageTitle}
             </CurrentPage>
           </BCItem>
         </BCContainer>
