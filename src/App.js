@@ -1,8 +1,10 @@
+
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./Components/layout/header/Header";
 import Footer from "./Components/layout/footer/Footer.js";
+import ScrollToTop from "./Components/common/ScrollToTop";
 
 import About from "./pages/About";
 import Home from "./pages/home/Home.js";
@@ -16,6 +18,8 @@ const Main = styled.main`
 function App() {
   return (
     <>
+      <ScrollToTop />
+
       <Header />
 
       <Main>

@@ -1,4 +1,276 @@
+
 {
-  "pageTitle": "Get to Know Me Better",
-  "pageDesc": "Learn more about me, Abdulrahman Nasser Al-Mughair, including my experience, education, certifications, technical skills, and professional background."
+  "pageTitle": "About Me",
+  "pageDesc": "Explore my education, professional experience, certifications, skills, and volunteer activities.",
+  "content": {
+    "intro": {
+      "title": "A Little About Me",
+      "paragraph1": "I am Abdulrahman Nasser Al-Mughyir, an Intermediate Diploma graduate in Full-Stack Web Development from the Applied College at Taibah University in Madinah. I combine web development knowledge with practical experience in digital systems, data organization, operations, and administrative work.",
+      "paragraph2": "My professional experience includes hotel reception, sales, and point-of-sale operations, alongside independent and academic web projects. I value technology, accuracy, information organization, and problem-solving, and I aim to contribute to a productive professional environment while continuing to develop my skills."
+    },
+    "infoTitle": "At a Glance",
+    "profile": [
+      {
+        "label": "Location",
+        "value": "Madinah, Saudi Arabia"
+      },
+      {
+        "label": "Qualification",
+        "value": "Intermediate Diploma"
+      },
+      {
+        "label": "Specialization",
+        "value": "Full-Stack Web Development"
+      },
+      {
+        "label": "Languages",
+        "value": "Arabic and English"
+      },
+      {
+        "label": "Availability",
+        "value": "Open to employment opportunities and freelance projects"
+      }
+    ],
+    "education": {
+      "title": "Education",
+      "description": "My academic qualifications, institutions, specializations, graduation dates, and grades.",
+      "gradeLabel": "Grade / GPA",
+      "items": [
+        {
+          "degree": "Intermediate Diploma in Full-Stack Web Development",
+          "school": "Applied College, Taibah University — Madinah",
+          "field": "Major: Full-Stack Web Development | General Assessment: Good",
+          "date": "2026/01/11",
+          "grade": "3.60 / 5",
+          "document": "/documents/education/diploma.pdf"
+        },
+        {
+          "degree": "General Secondary School Certificate",
+          "school": "Abi Sufyan bin Harb Secondary School — Madinah",
+          "field": "Track: Natural Sciences | General Grade: Very Good+",
+          "date": "2022/07/30",
+          "grade": "85.39 / 100",
+          "document": "/documents/education/secondary-school.pdf"
+        }
+      ]
+    },
+    "experience": {
+      "title": "Professional Experience",
+      "description": "Four professional roles that strengthened my operational, administrative, sales, and digital systems skills.",
+      "items": [
+        {
+          "role": "Hotel Receptionist",
+          "company": "Manazil Al-Rahma Hotel — Full-time",
+          "date": "2025/07/12 – Present",
+          "description": "Manage daily operations related to reservations, group check-ins, and check-outs at a 160-room hotel. Prepare reservation schedules using Excel, issue and archive vouchers, create Word documents, and monitor service quality and health compliance."
+        },
+        {
+          "role": "Telecom SIM Sales Representative",
+          "company": "Sahabah Al-Madinah Telecom Foundation — Zain Project",
+          "date": "2025/04/16 – 2025/05/16",
+          "description": "Marketed and activated SIM cards for visitors using digital systems and fingerprint readers, entered customer data, and recorded payments. Achieved the full monthly sales target in 24 days, reaching up to 40 activations per day during peak periods."
+        },
+        {
+          "role": "Food and Beverage Attendant (Cashier)",
+          "company": "Al-Tahlia Fast Food Restaurant",
+          "date": "2024/01/27 – 2024/04/21",
+          "description": "Processed customer orders through point-of-sale systems and delivery applications, handled payments, reconciled revenues, coordinated with the team, and monitored order preparation quality.",
+          "document": "/documents/experience/altahlia-cashier.pdf"
+        },
+        {
+          "role": "Cashier",
+          "company": "Frawlaty Juices",
+          "date": "2022/05/16 – 2022/08/01",
+          "description": "Managed customer orders, issued invoices, processed cash and electronic payments, coordinated delivery application orders with the team, and reconciled daily revenues.",
+          "document": "/documents/experience/frawlaty-cashier.pdf"
+        }
+      ]
+    },
+    "certificates": {
+      "title": "Courses and Certifications",
+      "description": "Training certificates in web development, cloud computing, cybersecurity, human resources, and professional skills.",
+      "items": [
+        {
+          "name": "Essential Skills in Human Resources Management",
+          "provider": "Mustaqbaluna Training Institute",
+          "date": "1448/04/24 AH",
+          "hours": "40 training hours — 10 days",
+          "document": "/documents/courses/hr-management-basics.pdf"
+        },
+        {
+          "name": "Introduction to Cybersecurity",
+          "provider": "Mustaqbaluna Training Institute",
+          "date": "1448/04/22 AH",
+          "hours": "50 training hours — 10 days",
+          "document": "/documents/courses/cybersecurity-introduction.pdf"
+        },
+        {
+          "name": "AWS Certified Cloud Practitioner Learning Path Completion",
+          "provider": "Saudi Digital Academy — Ministry of Communications and Information Technology",
+          "date": "2026/08/19",
+          "note": "Completion of the AWS cloud fundamentals learning path; not an official AWS certification exam pass.",
+          "document": "/documents/courses/aws-cloud-practitioner.pdf"
+        },
+        {
+          "name": "Soft Skills and Communication",
+          "provider": "Human Resources Development Fund (HADAF)",
+          "date": "2026/05/05",
+          "hours": "1 training hour",
+          "document": "/documents/courses/soft-skills-communication.png"
+        },
+        {
+          "name": "Front-End Web Development",
+          "provider": "Hsoub Academy",
+          "date": "2026/03/27",
+          "document": "/documents/courses/hsoub-frontend.pdf"
+        },
+        {
+          "name": "Introduction to Human Resources Development Fund Programs",
+          "provider": "Human Resources Development Fund (HADAF)",
+          "date": "2023/07/05",
+          "document": "/documents/courses/hr-fund-programs.pdf"
+        },
+        {
+          "name": "Tolerance, Coexistence, and National Unity",
+          "provider": "King Abdulaziz Center for National Dialogue — Najran Branch",
+          "date": "2023/05/14",
+          "document": "/documents/courses/tolerance-coexistence.pdf"
+        },
+        {
+          "name": "Psychological Resilience",
+          "provider": "Ibn Baz Association for Family Development",
+          "date": "2023/03/23",
+          "document": "/documents/courses/psychological-resilience.pdf"
+        },
+        {
+          "name": "Work Ethics",
+          "provider": "Taqat Center",
+          "date": "2022/09/13",
+          "document": "/documents/courses/work-ethics.pdf"
+        },
+        {
+          "name": "Customer Service",
+          "provider": "Taqat Center",
+          "date": "2022/09/08",
+          "document": "/documents/courses/customer-service.pdf"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Skills",
+      "description": "Technical, office, and professional skills developed through education, projects, and practical experience.",
+      "groups": [
+        {
+          "title": "Front-End Web Development",
+          "items": [
+            "HTML5",
+            "CSS3",
+            "JavaScript",
+            "React.js",
+            "TypeScript",
+            "Sass",
+            "Bootstrap",
+            "Tailwind CSS",
+            "Handlebars"
+          ]
+        },
+        {
+          "title": "Back-End and Databases",
+          "items": [
+            "Node.js",
+            "Express.js",
+            "PHP",
+            "MySQL",
+            "MongoDB",
+            "XAMPP",
+            "REST API"
+          ]
+        },
+        {
+          "title": "Development Tools and Platforms",
+          "items": [
+            "Git",
+            "GitHub",
+            "Vite.js",
+            "Webpack.js",
+            "WordPress",
+            "CMS"
+          ]
+        },
+        {
+          "title": "Design and Digital Tools",
+          "items": [
+            "Figma",
+            "Adobe Photoshop",
+            "Canva",
+            "Content Management Systems",
+            "Digital Platforms"
+          ]
+        },
+        {
+          "title": "Office and Administrative Skills",
+          "items": [
+            "Microsoft Word",
+            "Microsoft Excel",
+            "Microsoft PowerPoint",
+            "Microsoft Office",
+            "Data Entry",
+            "Report Preparation",
+            "Document Organization and Archiving",
+            "Point-of-Sale Systems"
+          ]
+        },
+        {
+          "title": "Professional and Interpersonal Skills",
+          "items": [
+            "Time Management",
+            "Effective Communication",
+            "Teamwork",
+            "Problem Solving",
+            "Attention to Detail",
+            "Multitasking",
+            "Adaptability Under Pressure",
+            "Responsibility"
+          ]
+        }
+      ]
+    },
+    "volunteering": {
+      "title": "Volunteer Activities",
+      "description": "Community, technical, and scouting participation, alongside a documented record of volunteer hours.",
+      "summary": {
+        "label": "Total Documented Volunteer Hours",
+        "value": "189 Hours",
+        "description": "Total hours recorded on the Saudi National Volunteer Platform, between December 2022 and June 2023.",
+        "document": "/documents/volunteering/volunteering-189-hours.pdf"
+      },
+      "items": [
+        {
+          "name": "Rusul Al-Salam Camp for Scouting and Technical Excellence 2023",
+          "provider": "Technical College in Madinah — Najran",
+          "date": "2023/05/14 – 2023/05/18",
+          "description": "Participated in the scouting and technical camp and its related activities and programs.",
+          "document": "/documents/volunteering/rusul-alsalam-camp.pdf"
+        },
+        {
+          "name": "Technical Aoun Initiative at the Prophet's Mosque",
+          "provider": "General Administration of Technical and Vocational Training — Madinah",
+          "date": "2023/03/26 – 2023/04/06",
+          "description": "Participated in the technical support initiative and assisted visitors at the Prophet's Mosque.",
+          "document": "/documents/volunteering/technical-aoun.pdf"
+        },
+        {
+          "name": "Dialogue Competitions in Madinah Education",
+          "provider": "King Abdulaziz Center for National Dialogue — Madinah Education Department",
+          "date": "2021/10/24 – 2021/11/04",
+          "description": "Participated in dialogue competitions and activities focused on communication and discussion skills.",
+          "document": "/documents/volunteering/dialogue-competition.pdf"
+        }
+      ]
+    },
+    "goal": {
+      "title": "Career Aspirations",
+      "description": "I am seeking a stable and sustainable professional opportunity in web development, IT support, or digital and administrative operations, where I can apply my technical knowledge and practical experience, contribute to productivity, and continue my professional development."
+    }
+  }
 }

@@ -8,7 +8,6 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Statistics />
       <Services />
       <FeaturedProjects />
       <CTA />
