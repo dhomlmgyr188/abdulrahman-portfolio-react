@@ -1,3 +1,4 @@
+
 {
   "pageTitle": "عني",
   "pageDesc": "تعرف على مؤهلاتي العلمية وخبراتي المهنية وشهاداتي ومهاراتي ومشاركاتي التطوعية.",
@@ -42,7 +43,7 @@
           "date": "2026-01-11",
           "grade": "3.60 / 5",
           "documentType": "diploma",
-          "document": "/documents/education/diploma.pdf"
+          "document": "/documents/education/diploma.png"
         },
         {
           "degree": "شهادة الثانوية العامة",
@@ -51,7 +52,7 @@
           "date": "2022-07-30",
           "grade": "85.39 / 100",
           "documentType": "graduation",
-          "document": "/documents/education/secondary-school.pdf"
+          "document": "/documents/education/secondary-school.png"
         }
       ]
     },
@@ -83,7 +84,7 @@
           "endDate": "2024-04-21",
           "description": "استقبال الطلبات ومعالجتها عبر نظام نقاط البيع وتطبيقات التوصيل، وتحصيل المدفوعات ومطابقة الإيرادات، والتنسيق مع فريق العمل ومتابعة جودة تجهيز الطلبات.",
           "documentType": "experience",
-          "document": "/documents/experience/altahlia-cashier.pdf"
+          "document": "/documents/experience/altahlia-cashier.png"
         },
         {
           "role": "موظف صندوق محاسبة (كاشير)",
@@ -93,7 +94,7 @@
           "endDate": "2022-08-01",
           "description": "إدارة طلبات العملاء وإصدار الفواتير وتحصيل المدفوعات النقدية والإلكترونية، ومتابعة طلبات تطبيقات التوصيل والتنسيق مع فريق العمل، وإجراء مطابقة الإيرادات اليومية.",
           "documentType": "experience",
-          "document": "/documents/experience/frawlaty-cashier.pdf"
+          "document": "/documents/experience/frawlaty-cashier.png"
         }
       ]
     },
@@ -107,7 +108,7 @@
           "date": "2026-10-05",
           "hours": "40 ساعة تدريبية — 10 أيام",
           "documentType": "certificate",
-          "document": "/documents/courses/hr-management-basics.pdf"
+          "document": "/documents/courses/hr-management-basics.png"
         },
         {
           "name": "مقدمة في الأمن السيبراني",
@@ -115,7 +116,7 @@
           "date": "2026-10-03",
           "hours": "50 ساعة تدريبية — 10 أيام",
           "documentType": "certificate",
-          "document": "/documents/courses/cybersecurity-introduction.pdf"
+          "document": "/documents/courses/cybersecurity-introduction.png"
         },
         {
           "name": "المهارات الناعمة وفن الاتصال",
@@ -130,42 +131,42 @@
           "provider": "أكاديمية حسوب",
           "date": "2026-03-27",
           "documentType": "completion",
-          "document": "/documents/courses/hsoub-frontend.pdf"
+          "document": "/documents/courses/hsoub-frontend.png"
         },
         {
           "name": "التعريف ببرامج صندوق تنمية الموارد البشرية",
           "provider": "صندوق تنمية الموارد البشرية (هدف)",
           "date": "2023-07-05",
           "documentType": "certificate",
-          "document": "/documents/courses/hr-fund-programs.pdf"
+          "document": "/documents/courses/hr-fund-programs.png"
         },
         {
           "name": "التسامح والتعايش واللحمة الوطنية",
           "provider": "مركز الملك عبدالعزيز للحوار الوطني — فرع نجران",
           "date": "2023-05-14",
           "documentType": "certificate",
-          "document": "/documents/courses/tolerance-coexistence.pdf"
+          "document": "/documents/courses/tolerance-coexistence.png"
         },
         {
           "name": "المرونة النفسية",
           "provider": "جمعية ابن باز للتنمية الأسرية",
           "date": "2023-03-23",
           "documentType": "certificate",
-          "document": "/documents/courses/psychological-resilience.pdf"
+          "document": "/documents/courses/psychological-resilience.png"
         },
         {
           "name": "أخلاقيات العمل",
           "provider": "مركز طاقات",
           "date": "2022-09-13",
           "documentType": "certificate",
-          "document": "/documents/courses/work-ethics.pdf"
+          "document": "/documents/courses/work-ethics.png"
         },
         {
           "name": "خدمة العملاء",
           "provider": "مركز طاقات",
           "date": "2022-09-08",
           "documentType": "certificate",
-          "document": "/documents/courses/customer-service.pdf"
+          "document": "/documents/courses/customer-service.png"
         }
       ]
     },
@@ -467,7 +468,7 @@
         "endDate": "2023-06-05",
         "description": "إجمالي 189 ساعة تطوعية موثقة عبر 14 فرصة تطوعية مكتملة في المنصة الوطنية للعمل التطوعي، خلال الفترة من 17/12/2022 إلى 05/06/2023.",
         "documentType": "volunteering",
-        "document": "/documents/volunteering/volunteering-189-hours.pdf"
+        "document": "/documents/volunteering/volunteering-189-hours.png"
       },
       "items": [
         {
@@ -477,7 +478,7 @@
           "endDate": "2023-05-18",
           "description": "المشاركة في المعسكر الكشفي والتقني وأنشطته وبرامجه.",
           "documentType": "participation",
-          "document": "/documents/volunteering/rusul-alsalam-camp.PDF"
+          "document": "/documents/volunteering/rusul-alsalam-camp.png"
         },
         {
           "name": "مبادرة عون التقني بالمسجد النبوي الشريف",
@@ -486,7 +487,7 @@
           "endDate": "2023-04-06",
           "description": "المشاركة في المبادرة التقنية وخدمة زوار المسجد النبوي الشريف.",
           "documentType": "appreciation",
-          "document": "/documents/volunteering/technical-aoun.pdf"
+          "document": "/documents/volunteering/technical-aoun.png"
         },
         {
           "name": "المباريات الحوارية على مستوى تعليم المدينة المنورة",
@@ -495,7 +496,7 @@
           "endDate": "2021-11-04",
           "description": "المشاركة في الأنشطة والمسابقات الحوارية وتنمية مهارات التواصل والحوار.",
           "documentType": "appreciation",
-          "document": "/documents/volunteering/dialogue-competition.pdf"
+          "document": "/documents/volunteering/dialogue-competition.png"
         }
       ]
     },

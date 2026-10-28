@@ -1,11 +1,12 @@
+
 {
   "pageTitle": "About Me",
-  "pageDesc": "Learn about my education, professional experience, certificates, skills, and volunteer activities.",
+  "pageDesc": "Explore my education, professional experience, certifications, skills, and volunteer activities.",
   "content": {
     "intro": {
       "title": "About Me",
-      "paragraph1": "I am Abdulrahman Nasser Al-Mughyir, a graduate of the Intermediate Diploma in Full-Stack Web Development from the Applied College at Taibah University in Medina. I combine knowledge of web development with practical experience in digital systems, data organization, and operational and administrative tasks.",
-      "paragraph2": "I have gained practical experience in hotel reception, sales, and point-of-sale operations, alongside developing independent and academic web projects. I am interested in technology, accuracy, information organization, and problem-solving, and I aim to continue developing my skills and contributing to a productive professional environment."
+      "paragraph1": "I am Abdulrahman Nasser Al-Mughyir, a graduate with an Intermediate Diploma in Full-Stack Web Development from the Applied College at Taibah University in Medina, Saudi Arabia. I combine knowledge of web development with practical experience in digital systems, data organization, and operational and administrative tasks.",
+      "paragraph2": "I have gained practical experience in hotel reception, sales, and point-of-sale operations, alongside developing independent and academic web projects. I am interested in technology, accuracy, information organization, and problem-solving. I aim to continuously develop my skills and contribute to a productive professional environment."
     },
     "infoTitle": "Quick Information",
     "profile": [
@@ -27,12 +28,12 @@
       },
       {
         "label": "Professional Status",
-        "value": "Available for employment and freelance projects"
+        "value": "Available for job opportunities and freelance projects"
       }
     ],
     "education": {
-      "title": "Education",
-      "description": "My academic qualifications, institutions, specializations, graduation dates, and grades.",
+      "title": "My Educational Journey",
+      "description": "My academic qualifications, educational institutions, specializations, graduation dates, and grades.",
       "gradeLabel": "GPA",
       "items": [
         {
@@ -42,30 +43,30 @@
           "date": "2026-01-11",
           "grade": "3.60 / 5",
           "documentType": "diploma",
-          "document": "/documents/education/diploma.pdf"
+          "document": "/documents/education/diploma.png"
         },
         {
-          "degree": "General Secondary School Certificate",
+          "degree": "General Secondary Education Certificate",
           "school": "Abi Sufyan bin Harb Secondary School — Medina",
-          "field": "Track: Natural Sciences | Grade: Very Good (High)",
+          "field": "Track: Natural Sciences | Grade: Very Good",
           "date": "2022-07-30",
           "grade": "85.39 / 100",
           "documentType": "graduation",
-          "document": "/documents/education/secondary-school.pdf"
+          "document": "/documents/education/secondary-school.png"
         }
       ]
     },
     "experience": {
       "title": "Professional Experience",
-      "description": "Four professional experiences that helped me develop skills in operations, administration, sales, and digital systems.",
+      "description": "Four professional roles that helped me develop my skills in operations, administration, sales, and digital systems.",
       "items": [
         {
           "role": "Hotel Receptionist",
-          "company": "Manazil Al-Rahma Hotel — Abraj Al-Sa'adah Company",
+          "company": "Manazil Al-Rahmah Hotel — Abraj Al-Saadah Company",
           "employmentType": "full-time",
           "startDate": "2025-07-12",
           "endDate": "Present",
-          "description": "Manage daily reservations, guest and group check-ins and check-outs at a 160-room hotel. Prepare reservation schedules using Excel, issue and archive receipts, prepare Word documents, and monitor service quality and health compliance."
+          "description": "Managing daily reservations, check-ins, and check-outs for individual guests and groups at a 160-room hotel. Preparing reservation schedules using Excel, issuing and archiving receipts, preparing Word documents, and monitoring service quality and health compliance requirements."
         },
         {
           "role": "Telecommunications SIM Sales Representative",
@@ -73,7 +74,7 @@
           "employmentType": "seasonal",
           "startDate": "2025-04-16",
           "endDate": "2025-05-16",
-          "description": "Market and activate SIM cards for visitors using digital systems and fingerprint scanners, enter customer information, and document payments. Achieved the full monthly sales target within 24 days, reaching up to 40 activations per day during peak periods."
+          "description": "Marketing and activating SIM cards for visitors using digital systems and fingerprint readers, entering customer information, and documenting payments. Achieved the full monthly sales target within 24 days, reaching up to 40 activations per day during peak periods."
         },
         {
           "role": "Food and Beverage Cashier",
@@ -81,9 +82,9 @@
           "employmentType": "full-time",
           "startDate": "2024-01-27",
           "endDate": "2024-04-21",
-          "description": "Receive and process orders through point-of-sale systems and delivery applications, collect payments, reconcile revenue, coordinate with team members, and monitor order preparation quality.",
+          "description": "Receiving and processing customer orders through point-of-sale systems and delivery applications, collecting payments, reconciling revenue, coordinating with team members, and monitoring order preparation quality.",
           "documentType": "experience",
-          "document": "/documents/experience/altahlia-cashier.pdf"
+          "document": "/documents/experience/altahlia-cashier.png"
         },
         {
           "role": "Cashier",
@@ -91,9 +92,9 @@
           "employmentType": "full-time",
           "startDate": "2022-05-16",
           "endDate": "2022-08-01",
-          "description": "Manage customer orders, issue invoices, collect cash and electronic payments, monitor delivery application orders, coordinate with the team, and reconcile daily revenue.",
+          "description": "Managing customer orders, issuing invoices, collecting cash and electronic payments, handling delivery application orders, coordinating with the team, and reconciling daily revenue.",
           "documentType": "experience",
-          "document": "/documents/experience/frawlaty-cashier.pdf"
+          "document": "/documents/experience/frawlaty-cashier.png"
         }
       ]
     },
@@ -103,22 +104,22 @@
       "items": [
         {
           "name": "Fundamentals of Human Resource Management",
-          "provider": "Mustaqbaluna Training Institute",
+          "provider": "Our Future Training Institute",
           "date": "2026-10-05",
           "hours": "40 training hours — 10 days",
           "documentType": "certificate",
-          "document": "/documents/courses/hr-management-basics.pdf"
+          "document": "/documents/courses/hr-management-basics.png"
         },
         {
           "name": "Introduction to Cybersecurity",
-          "provider": "Mustaqbaluna Training Institute",
+          "provider": "Our Future Training Institute",
           "date": "2026-10-03",
           "hours": "50 training hours — 10 days",
           "documentType": "certificate",
-          "document": "/documents/courses/cybersecurity-introduction.pdf"
+          "document": "/documents/courses/cybersecurity-introduction.png"
         },
         {
-          "name": "Soft Skills and the Art of Communication",
+          "name": "Soft Skills and Effective Communication",
           "provider": "Human Resources Development Fund (HRDF)",
           "date": "2026-05-05",
           "hours": "1 training hour",
@@ -130,51 +131,51 @@
           "provider": "Hsoub Academy",
           "date": "2026-03-27",
           "documentType": "completion",
-          "document": "/documents/courses/hsoub-frontend.pdf"
+          "document": "/documents/courses/hsoub-frontend.png"
         },
         {
           "name": "Introduction to Human Resources Development Fund Programs",
           "provider": "Human Resources Development Fund (HRDF)",
           "date": "2023-07-05",
           "documentType": "certificate",
-          "document": "/documents/courses/hr-fund-programs.pdf"
+          "document": "/documents/courses/hr-fund-programs.png"
         },
         {
           "name": "Tolerance, Coexistence, and National Unity",
           "provider": "King Abdulaziz Center for National Dialogue — Najran Branch",
           "date": "2023-05-14",
           "documentType": "certificate",
-          "document": "/documents/courses/tolerance-coexistence.pdf"
+          "document": "/documents/courses/tolerance-coexistence.png"
         },
         {
           "name": "Psychological Resilience",
-          "provider": "Ibn Baz Family Development Association",
+          "provider": "Ibn Baz Association for Family Development",
           "date": "2023-03-23",
           "documentType": "certificate",
-          "document": "/documents/courses/psychological-resilience.pdf"
+          "document": "/documents/courses/psychological-resilience.png"
         },
         {
           "name": "Work Ethics",
           "provider": "Taqat Center",
           "date": "2022-09-13",
           "documentType": "certificate",
-          "document": "/documents/courses/work-ethics.pdf"
+          "document": "/documents/courses/work-ethics.png"
         },
         {
           "name": "Customer Service",
           "provider": "Taqat Center",
           "date": "2022-09-08",
           "documentType": "certificate",
-          "document": "/documents/courses/customer-service.pdf"
+          "document": "/documents/courses/customer-service.png"
         }
       ]
     },
     "skills": {
       "title": "My Skills",
-      "description": "Technical, office, and professional skills acquired through education, training courses, projects, work experience, and volunteer activities.",
+      "description": "Technical, office, and professional skills acquired through education, training courses, projects, work experience, and volunteering.",
       "groups": [
         {
-          "title": "Front-End Web Development",
+          "title": "Frontend Web Development",
           "items": [
             {
               "name": "HTML5",
@@ -227,7 +228,7 @@
           ]
         },
         {
-          "title": "Back-End Development and Databases",
+          "title": "Backend and Databases",
           "items": [
             {
               "name": "PHP",
@@ -382,7 +383,7 @@
           ]
         },
         {
-          "title": "Professional and Interpersonal Skills",
+          "title": "Professional and Personal Skills",
           "items": [
             {
               "name": "Time Management",
@@ -396,8 +397,8 @@
             {
               "name": "Effective Communication",
               "sources": [
-                "Soft Skills and the Art of Communication",
-                "Dialogue Competitions at the Medina Education Level",
+                "Soft Skills and Effective Communication",
+                "Dialogue Competitions at Medina Education Department",
                 "Hotel Receptionist",
                 "Telecommunications SIM Sales Representative",
                 "Food and Beverage Cashier",
@@ -413,7 +414,7 @@
                 "Food and Beverage Cashier",
                 "Cashier",
                 "Technical Aoun Initiative at the Prophet's Mosque",
-                "Messengers of Peace Scouting and Technical Excellence Camp 2023"
+                "Peace Messengers Scouting and Technology Excellence Camp 2023"
               ]
             },
             {
@@ -421,7 +422,7 @@
               "sources": [
                 "Intermediate Diploma in Full-Stack Web Development",
                 "Hotel Receptionist",
-                "Messengers of Peace Scouting and Technical Excellence Camp 2023"
+                "Peace Messengers Scouting and Technology Excellence Camp 2023"
               ]
             },
             {
@@ -435,7 +436,7 @@
               ]
             },
             {
-              "name": "Adaptability Under Pressure",
+              "name": "Adaptability Under Work Pressure",
               "sources": [
                 "Psychological Resilience",
                 "Hotel Receptionist",
@@ -448,7 +449,7 @@
               "name": "Responsibility",
               "sources": [
                 "Hotel Receptionist",
-                "Messengers of Peace Scouting and Technical Excellence Camp 2023"
+                "Peace Messengers Scouting and Technology Excellence Camp 2023"
               ]
             }
           ]
@@ -457,7 +458,7 @@
     },
     "volunteering": {
       "title": "Volunteer Activities",
-      "description": "Community, technical, and scouting activities, along with a documented record of volunteer hours.",
+      "description": "Community, technical, and scouting activities, along with an officially documented record of volunteer hours.",
       "summary": {
         "label": "Total Documented Volunteer Hours",
         "value": "189 hours",
@@ -465,49 +466,49 @@
         "opportunities": 14,
         "startDate": "2022-12-17",
         "endDate": "2023-06-05",
-        "description": "A total of 189 documented volunteer hours across 14 completed opportunities on the National Volunteer Work Platform, from December 17, 2022, to June 5, 2023.",
+        "description": "A total of 189 documented volunteer hours across 14 completed volunteer opportunities on the National Volunteer Work Platform, from December 17, 2022, to June 5, 2023.",
         "documentType": "volunteering",
-        "document": "/documents/volunteering/volunteering-189-hours.pdf"
+        "document": "/documents/volunteering/volunteering-189-hours.png"
       },
       "items": [
         {
-          "name": "Messengers of Peace Scouting and Technical Excellence Camp 2023",
+          "name": "Peace Messengers Scouting and Technology Excellence Camp 2023",
           "provider": "Technical College in Medina — Najran",
           "startDate": "2023-05-14",
           "endDate": "2023-05-18",
-          "description": "Participated in scouting and technical camp activities and programs.",
+          "description": "Participated in the scouting and technology camp, including its activities and programs.",
           "documentType": "participation",
-          "document": "/documents/volunteering/rusul-alsalam-camp.PDF"
+          "document": "/documents/volunteering/rusul-alsalam-camp.png"
         },
         {
           "name": "Technical Aoun Initiative at the Prophet's Mosque",
-          "provider": "General Administration of Technical and Vocational Training — Medina Region",
+          "provider": "General Directorate of Technical and Vocational Training — Medina Region",
           "startDate": "2023-03-26",
           "endDate": "2023-04-06",
           "description": "Participated in a technical volunteer initiative serving visitors to the Prophet's Mosque.",
           "documentType": "appreciation",
-          "document": "/documents/volunteering/technical-aoun.pdf"
+          "document": "/documents/volunteering/technical-aoun.png"
         },
         {
-          "name": "Dialogue Competitions at the Medina Education Level",
+          "name": "Dialogue Competitions at Medina Education Department",
           "provider": "King Abdulaziz Center for National Dialogue — Medina Education Department",
           "startDate": "2021-10-24",
           "endDate": "2021-11-04",
-          "description": "Participated in dialogue activities and competitions focused on developing communication and dialogue skills.",
+          "description": "Participated in dialogue activities and competitions, developing communication and dialogue skills.",
           "documentType": "appreciation",
-          "document": "/documents/volunteering/dialogue-competition.pdf"
+          "document": "/documents/volunteering/dialogue-competition.png"
         }
       ]
     },
     "goal": {
-      "title": "Career Aspirations",
-      "description": "I seek a stable, long-term professional opportunity in web development, technical support, or digital and administrative operations where I can apply my technical knowledge and practical experience, contribute to efficiency and productivity, and continue my professional growth."
+      "title": "My Career Aspirations",
+      "description": "I seek a stable, long-term professional opportunity in web development, technical support, or digital and administrative operations, where I can apply my technical knowledge and practical experience, contribute to improving operational efficiency and productivity, and continue learning and developing professionally."
     }
   },
   "title": "About Me",
-  "description": "Learn about my education, professional experience, certificates, skills, and volunteer activities.",
+  "description": "Explore my education, professional experience, certifications, skills, and volunteer activities.",
   "breadcrumb": {
     "title": "About Me",
-    "description": "Learn about my education, professional experience, certificates, skills, and volunteer activities."
+    "description": "Explore my education, professional experience, certifications, skills, and volunteer activities."
   }
 }
