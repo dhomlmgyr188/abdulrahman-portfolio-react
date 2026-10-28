@@ -392,20 +392,20 @@ const documentLabel = (type, isArabic) => {
     : selected.en;
 };
 
+
 const documentUrl = (path) => {
-  if (
-    typeof path !== "string" ||
-    !path.trim()
-  ) {
+  if (typeof path !== "string" || !path.trim()) {
     return "";
   }
 
   const clean = path.trim();
 
+  // الروابط الخارجية
   if (/^https?:\/\//i.test(clean)) {
     return clean;
   }
 
+  // منع الروابط غير الآمنة
   if (
     clean.startsWith("//") ||
     /^(javascript|data):/i.test(clean)
@@ -415,23 +415,33 @@ const documentUrl = (path) => {
 
   const base = String(
     process.env.PUBLIC_URL || ""
-  ).replace(/\/$/, "");
+  ).replace(/\/+$/, "");
 
   const relative = clean.replace(/^\/+/, "");
-  const basePart = base.replace(/^\/+/, "");
+
+  // تجنب تكرار مسار المشروع
+  const basePath = (() => {
+    try {
+      return new URL(
+        base || "/",
+        window.location.origin
+      ).pathname.replace(/^\/+|\/+$/g, "");
+    } catch {
+      return base.replace(/^\/+|\/+$/g, "");
+    }
+  })();
 
   if (
-    basePart &&
-    (
-      relative === basePart ||
-      relative.startsWith(`${basePart}/`)
-    )
+    basePath &&
+    (relative === basePath ||
+      relative.startsWith(`${basePath}/`))
   ) {
     return `/${relative}`;
   }
 
   return `${base}/${relative}`;
 };
+
 
 const getFileExtension = (path) => {
   const clean = String(path || "")
