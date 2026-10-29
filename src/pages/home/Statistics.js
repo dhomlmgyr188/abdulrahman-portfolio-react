@@ -1,6 +1,6 @@
 
-import styled from "styled-components";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const StatisticsWrapper = styled.div`
   position: relative;
@@ -31,14 +31,13 @@ const Statistic = styled.div`
   gap: 5px;
 
   min-width: 105px;
-  max-width: 150px;
+  max-width: 155px;
   padding: 15px 18px;
 
-  background-color: var(--color-background-secondary);
+  background: var(--color-background-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: 15px;
   box-shadow: var(--shadow-sm);
-
   text-align: center;
 
   transition:
@@ -47,41 +46,38 @@ const Statistic = styled.div`
     border-color 0.3s ease;
 
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-md, var(--shadow-sm));
-    border-color: var(--color-secondary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
   }
 
   strong {
     display: block;
-    color: var(--color-primary);
+    color: var(--color-text-primary);
     font-size: clamp(1.35rem, 2.5vw, 1.8rem);
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.3;
     font-variant-numeric: tabular-nums;
   }
 
   span {
     display: block;
-    color: var(--color-text-secondary, var(--color-text));
+    color: var(--color-text-secondary);
     font-size: 0.8rem;
     line-height: 1.5;
     overflow-wrap: anywhere;
   }
 
-  /* البطاقة العلوية */
   &.top {
     top: 6%;
     inset-inline-end: 3%;
   }
 
-  /* البطاقة السفلية اليسرى */
   &.left {
     bottom: 19%;
     inset-inline-start: 0;
   }
 
-  /* البطاقة السفلية اليمنى */
   &.right {
     bottom: 5%;
     inset-inline-end: 0;
@@ -91,7 +87,6 @@ const Statistic = styled.div`
     min-width: 95px;
     max-width: 125px;
     padding: 12px 14px;
-    border-radius: 13px;
 
     &.top {
       top: 4%;
@@ -100,12 +95,10 @@ const Statistic = styled.div`
 
     &.left {
       bottom: 16%;
-      inset-inline-start: 0;
     }
 
     &.right {
       bottom: 2%;
-      inset-inline-end: 0;
     }
   }
 
@@ -131,17 +124,19 @@ const Statistic = styled.div`
 
     &.left {
       bottom: 15%;
-      inset-inline-start: 0;
     }
 
     &.right {
       bottom: 1%;
-      inset-inline-end: 0;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
+
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
@@ -151,7 +146,13 @@ const AnimatedNumber = ({ value, duration = 1200 }) => {
   useEffect(() => {
     const target = Math.max(0, Number(value) || 0);
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+    if (reduceMotion) {
       setCount(target);
       return;
     }

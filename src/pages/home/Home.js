@@ -1,17 +1,17 @@
+
 import Hero from "./Hero";
 import Services from "./Services";
-import Statistics from "./Statistics"
 import FeaturedProjects from "./FeaturedProjects";
-import CTA from "./CallToAction"
+import CTA from "./CallToAction";
 
 const Home = () => {
   return (
-    <>
+    <main id="main-content">
       <Hero />
       <Services />
       <FeaturedProjects />
       <CTA />
-    </>
+    </main>
   );
 };
 

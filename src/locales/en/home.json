@@ -1,18 +1,21 @@
 
 {
   "hero": {
-    "availability_status": "Open to work and freelance projects",
+    "availability_status": "Open to Career Moves & Freelance Projects",
     "name": "Abdulrahman Al-Mughyir",
     "job_titles": [
-      "IT Support",
+      "Software Support Technician",
+      "IT Support Technician",
+      "Database Support Technician",
+      "Computer Systems Technician",
+      "Data Entry Clerk",
       "Full-Stack Web Developer",
-      "Application Support",
-      "Technical Support Specialist",
-      "IT Systems Technician",
-      "Administrative Assistant",
-      "Data Entry Specialist"
+      "Website Administrator",
+      "Website Developer",
+      "Receptionist",
+      "Cashier"
     ],
-    "introduction": "Full-Stack Web Development diploma graduate from Taibah University in Madinah, Saudi Arabia. Skilled in React, JavaScript, and web interfaces, with knowledge of IT support and digital systems.",
+    "introduction": "A Full-Stack Web Development diploma graduate from Taibah University, with technical and administrative skills in website development, IT support, data management, and digital systems. I aim to apply my skills and experience to career opportunities and projects that improve business operations and efficiency.",
     "tech_stack": [
       {
         "text": "React",
@@ -23,11 +26,11 @@
         "icon": "JavaScript"
       },
       {
-        "text": "HTML",
+        "text": "HTML5",
         "icon": "HTML"
       },
       {
-        "text": "CSS",
+        "text": "CSS3",
         "icon": "CSS"
       },
       {
@@ -39,49 +42,45 @@
         "icon": "SQL"
       },
       {
-        "text": "REST API",
-        "icon": "REST API"
-      },
-      {
         "text": "Microsoft 365",
         "icon": "Microsoft 365"
       }
     ],
-    "profileAlt": "Abdulrahman Al-Mughyir - Web Developer and IT Support in Madinah",
+    "profileAlt": "Abdulrahman Al-Mughyir - Web Development, IT Support, and Data Management in Madinah",
     "statistic": {
       "projects": "Completed Projects",
-      "technologies": "Technologies Used",
+      "technologies": "Technologies and Tools Used",
       "years": "Years in Web Development"
     }
   },
   "services": {
-    "title": "My Services",
-    "description": "Web development, IT support, and application assistance for individuals and businesses.",
+    "title": "My Skills & Services",
+    "description": "Technical and administrative skills and services in website development, IT support, and data management to streamline workflows and improve efficiency.",
     "items": [
       {
         "id": "1",
         "icon": "web",
-        "title": "Web Development",
-        "description": "Building responsive websites and interfaces using React, JavaScript, and modern web technologies."
+        "title": "Website Development & Management",
+        "description": "Designing and developing responsive websites and interfaces using HTML, CSS, JavaScript, and React, with a focus on content organization, user experience, and website updates."
       },
       {
         "id": "2",
         "icon": "technology",
-        "title": "IT Support",
-        "description": "Assisting with computers, software, and basic technical troubleshooting."
+        "title": "IT Support & Systems Assistance",
+        "description": "Assisting users with computers, software, and applications, troubleshooting basic technical issues, following up on reported problems, and providing appropriate user guidance."
       },
       {
         "id": "3",
         "icon": "applications",
-        "title": "Application Support",
-        "description": "Helping users operate applications and systems and resolve technical issues."
+        "title": "Data Management & Office Administration",
+        "description": "Entering and reviewing data, organizing files and records, and using Microsoft 365 applications to prepare documents, spreadsheets, and reports, with attention to accuracy and information confidentiality."
       }
     ]
   },
   "featuredProjects": {
     "header": {
       "title": "Featured Projects",
-      "desc": "Selected projects showcasing my React development, web design, and front-end skills.",
+      "desc": "Selected work in website and application development, data organization, and user-friendly digital interfaces.",
       "view_projects": "All Projects"
     },
     "items": [
@@ -95,7 +94,7 @@
         "desc": [
           {
             "type": "text",
-            "value": "A React app for managing notes with LocalStorage and CRUD operations. Developed as part of the "
+            "value": "A notes management application built with React and LocalStorage, allowing users to create, view, update, and delete data (CRUD). The project demonstrates my ability to build interactive interfaces and organize data within applications. Developed as part of the "
           },
           {
             "type": "link",
@@ -126,7 +125,7 @@
         "desc": [
           {
             "type": "text",
-            "value": "A responsive, multi-page portfolio website showcasing my projects and services with a clean, user-friendly interface."
+            "value": "A responsive, multi-page personal portfolio website designed to present professional information, projects, and services. It features well-organized content and a user-friendly interface, reflecting my skills in website development and digital content management."
           }
         ],
         "tech_stack": [
@@ -162,7 +161,7 @@
     "copyright": "Abdulrahman Al-Mughyir. All rights reserved."
   },
   "callToAction": {
-    "title": "Have a project or opportunity?",
-    "paragraph": "Let's connect about web development, IT support, or career opportunities that match my skills."
+    "title": "Have a Career Opportunity or Project in Mind?",
+    "paragraph": "I welcome discussions about suitable career opportunities and freelance projects in technical and administrative fields."
   }
 }

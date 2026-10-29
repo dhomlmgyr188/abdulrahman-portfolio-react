@@ -11,7 +11,7 @@
     "react-dom": "^19.3.0",
     "react-i18next": "^17.0.13",
     "react-icons": "^5.7.0",
-    "react-pdf": "^11.0.0",
+    "react-pnpdf": "^11.0.0",
     "react-router-dom": "^7.18.3",
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",

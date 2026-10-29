@@ -1,1 +1,69 @@
-{}
+{
+    "pageTitle": "My Projects",
+    "pageDesc": "A collection of projects I have developed, showcasing my technical skills and experience in designing and building websites and web interfaces.",
+    "details": {
+        "overview": "Project Overview",
+        "features": "Key Features",
+        "technologies": "Technologies Used",
+        "gallery": "Project Gallery",
+        "date": "Completion Date",
+        "liveDemo": "Live Preview",
+        "sourceCode": "Source Code",
+        "backToProjects": "Back to Projects",
+        "notFound": "Project Not Found",
+        "notFoundDescription": "We couldn't find the requested project."
+    },
+    "items": [
+        {
+            "id": "React-To-Do-List",
+            "title": "React Notes Management App",
+            "date": "2026/08/30",
+            "shortDescription": "An interactive application for creating, editing, deleting, and locally saving notes.",
+            "overview": "A notes management web application built with React and LocalStorage. Users can create, view, edit, and delete notes through an interactive interface, with data stored directly in the browser without requiring an external server. Developed as part of the JavaScript Application Development course at Hsoub Academy.",
+            "features": [
+                "Create new notes",
+                "View saved notes",
+                "Edit existing notes",
+                "Delete notes",
+                "Store data locally using LocalStorage",
+                "Update the interface interactively with React"
+            ],
+            "tech_stack": [
+                "React",
+                "React Hooks",
+                "JavaScript",
+                "CRUD",
+                "LocalStorage"
+            ],
+            "project_img": [
+                "react1"
+            ],
+            "demo": "https://dhomlmgyr188.github.io/React-To-Do-List/",
+            "github": "https://github.com/dhomlmgyr188/React-To-Do-List"
+        },
+        {
+            "id": "Portfolio_v1",
+            "title": "Personal Portfolio - Previous Version",
+            "date": "2026/05/24",
+            "shortDescription": "A responsive, multi-page personal portfolio showcasing professional information, projects, and services.",
+            "overview": "A multi-page personal portfolio website designed to showcase professional information, skills, projects, and services, with an emphasis on intuitive navigation, organized content, and a consistent user experience across different devices.",
+            "features": [
+                "Responsive design across different screen sizes",
+                "Multiple pages for organized content",
+                "Professional information and project showcase",
+                "Clear navigation between website sections",
+                "Interactive functionality using JavaScript"
+            ],
+            "tech_stack": [
+                "HTML",
+                "CSS",
+                "Vanilla JavaScript"
+            ],
+            "project_img": [
+                "anaalmughyir1"
+            ],
+            "demo": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/",
+            "github": ""
+        }
+    ]
+}

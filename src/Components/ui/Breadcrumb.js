@@ -18,7 +18,6 @@ import Container from "../layout/PageContainer";
 const BCPageContainer = styled.nav`
   width: 100%;
   min-width: 0;
-
   margin: 0;
   padding: 0;
 
@@ -38,16 +37,18 @@ const BCContent = styled(Container)`
 
 const BCContainer = styled.ol`
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 10px;
 
-  min-width: 0;
+  width: fit-content;
   max-width: 100%;
+  min-width: 0;
 
   margin: 0;
   padding: 0;
-
   list-style: none;
 
   @media (max-width: 480px) {
@@ -65,7 +66,6 @@ const BCLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-
   min-height: 32px;
 
   color: var(--color-text-secondary);
@@ -79,7 +79,6 @@ const BCLink = styled(Link)`
   svg {
     width: 15px;
     height: 15px;
-
     flex-shrink: 0;
     color: var(--color-primary);
   }
@@ -129,7 +128,6 @@ const CurrentPage = styled.span`
   font-size: 0.85rem;
   font-weight: 700;
   line-height: 1.6;
-
   overflow-wrap: anywhere;
 
   @media (max-width: 480px) {
@@ -141,7 +139,10 @@ const CurrentPage = styled.span`
    BREADCRUMB COMPONENT
 ========================================= */
 
-const BreadCrumb = ({ value = "" }) => {
+const BreadCrumb = ({
+  value = "",
+  projectTitle = "",
+}) => {
   const { t, i18n } = useTranslation([
     "common",
     "home",
@@ -149,6 +150,8 @@ const BreadCrumb = ({ value = "" }) => {
     "projects",
     "contact",
   ]);
+
+  /* Language */
 
   const language =
     i18n.resolvedLanguage ||
@@ -160,6 +163,8 @@ const BreadCrumb = ({ value = "" }) => {
   const SeparatorIcon = isArabic
     ? FiChevronLeft
     : FiChevronRight;
+
+  /* Page title */
 
   const namespaces = [
     "home",
@@ -177,12 +182,38 @@ const BreadCrumb = ({ value = "" }) => {
     defaultValue: value,
   });
 
-  const currentPageTitle = pageNamespace
-    ? t("pageTitle", {
-        ns: pageNamespace,
+  const currentPageTitle = value === "about"
+    ? t("about:pageTitle", {
+      defaultValue: isArabic ? "عني" : "About Me",
+    })
+    : pageNamespace
+      ? t(`${pageNamespace}:pageTitle`, {
         defaultValue: fallbackTitle,
       })
-    : fallbackTitle;
+      : fallbackTitle;
+
+  /* Project details */
+
+  const isProjectDetails =
+    value === "projects" &&
+    typeof projectTitle === "string" &&
+    projectTitle.trim().length > 0;
+
+  const projectsTitle = t("pageTitle", {
+    ns: "projects",
+    defaultValue: isArabic
+      ? "مشاريعي"
+      : "My Projects",
+  });
+
+  const homeTitle = t("nav.home", {
+    ns: "common",
+    defaultValue: isArabic
+      ? "الرئيسية"
+      : "Home",
+  });
+
+  /* Render */
 
   return (
     <BCPageContainer
@@ -195,18 +226,12 @@ const BreadCrumb = ({ value = "" }) => {
     >
       <BCContent>
         <BCContainer>
+
+          {/* Home - First item */}
           <BCItem>
             <BCLink to="/">
               <FiHome aria-hidden="true" />
-
-              <span>
-                {t("nav.home", {
-                  ns: "common",
-                  defaultValue: isArabic
-                    ? "الرئيسية"
-                    : "Home",
-                })}
-              </span>
+              <span>{homeTitle}</span>
             </BCLink>
           </BCItem>
 
@@ -214,11 +239,37 @@ const BreadCrumb = ({ value = "" }) => {
             <SeparatorIcon />
           </Separator>
 
-          <BCItem aria-current="page">
-            <CurrentPage>
-              {currentPageTitle}
-            </CurrentPage>
-          </BCItem>
+          {isProjectDetails ? (
+            <>
+              {/* My Projects - Second item */}
+              <BCItem>
+                <BCLink to="/projects">
+                  {projectsTitle}
+                </BCLink>
+              </BCItem>
+
+              <Separator aria-hidden="true">
+                <SeparatorIcon />
+              </Separator>
+
+              {/* Project Name - Last item */}
+              <BCItem aria-current="page">
+                <CurrentPage>
+                  {projectTitle}
+                </CurrentPage>
+              </BCItem>
+            </>
+          ) : (
+            <>
+              {/* Current Page */}
+              <BCItem aria-current="page">
+                <CurrentPage>
+                  {currentPageTitle}
+                </CurrentPage>
+              </BCItem>
+            </>
+          )}
+
         </BCContainer>
       </BCContent>
     </BCPageContainer>

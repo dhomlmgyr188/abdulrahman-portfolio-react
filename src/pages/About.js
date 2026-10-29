@@ -64,9 +64,9 @@ const asText = (value, isArabic) => {
   ) {
     return String(
       (isArabic ? value.ar : value.en) ||
-        value.ar ||
-        value.en ||
-        ""
+      value.ar ||
+      value.en ||
+      ""
     );
   }
 
@@ -258,9 +258,8 @@ const getDateLabel = (item, isArabic) => {
   const endText = formatParsedDate(end);
 
   if (startText && current) {
-    return `${startText} – ${
-      isArabic ? "حتى الآن" : "Present"
-    }`;
+    return `${startText} – ${isArabic ? "حتى الآن" : "Present"
+      }`;
   }
 
   if (startText && endText) {
@@ -401,7 +400,7 @@ const calculateExperience = (items) => {
     months,
     days: Math.round(
       totalDays -
-        totalMonths * (365.2425 / 12)
+      totalMonths * (365.2425 / 12)
     ),
     totalDays,
     totalMonths,
@@ -434,8 +433,7 @@ const formatExperience = (
       );
     } else {
       parts.push(
-        `${years} ${
-          years === 1 ? "year" : "years"
+        `${years} ${years === 1 ? "year" : "years"
         }`
       );
     }
@@ -452,8 +450,7 @@ const formatExperience = (
       );
     } else {
       parts.push(
-        `${months} ${
-          months === 1 ? "month" : "months"
+        `${months} ${months === 1 ? "month" : "months"
         }`
       );
     }
@@ -2106,6 +2103,55 @@ const ModalMessage = styled.div`
 `;
 
 /* =========================================
+   DOCUMENT LOADING INDICATOR
+========================================= */
+
+const DocumentLoading = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 240px;
+  width: 100%;
+  padding: 30px 16px;
+  color: var(--about-muted);
+  text-align: center;
+
+  .spinner {
+    width: 46px;
+    height: 46px;
+    border: 4px solid var(--about-border);
+    border-top-color: var(--about-primary);
+    border-radius: 50%;
+    animation: about-spin 0.85s linear infinite;
+  }
+
+  p { margin: 0; font-size: 0.95rem; line-height: 1.9; }
+
+  .dots { display: flex; gap: 7px; }
+  .dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--about-primary);
+    animation: about-pulse 1.2s ease-in-out infinite;
+  }
+  .dots span:nth-child(2) { animation-delay: 0.15s; }
+  .dots span:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes about-spin { to { transform: rotate(360deg); } }
+  @keyframes about-pulse {
+    0%, 70%, 100% { opacity: 0.3; transform: translateY(0); }
+    35% { opacity: 1; transform: translateY(-6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinner, .dots span { animation: none; }
+  }
+`;
+
+/* =========================================
    REUSABLE SECTION TITLE
 ========================================= */
 
@@ -2304,6 +2350,14 @@ const DocumentModal = ({
 }) => {
   const closeRef = useRef(null);
   const titleId = useId();
+  const { t } = useTranslation("about");
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setLoadError(false);
+  }, [item?.path]);
 
   useEffect(() => {
     if (!item) return undefined;
@@ -2445,45 +2499,49 @@ const DocumentModal = ({
           {!url ? (
             <ModalMessage>
               <FiFileText />
-
-              <p>
-                {isArabic
-                  ? "رابط المستند غير متوفر."
-                  : "Document URL is unavailable."}
-              </p>
+              <p>{t("documentPreview.unavailable")}</p>
             </ModalMessage>
-          ) : type === "image" ? (
-            <img
-              src={url}
-              alt={
-                item.title || label
-              }
-              draggable={false}
-              onContextMenu={(event) =>
-                event.preventDefault()
-              }
-              onError={(event) => {
-                event.currentTarget.style.display =
-                  "none";
-              }}
-            />
-          ) : type === "pdf" ? (
-            <iframe
-              src={`${url}#toolbar=0&navpanes=0&scrollbar=1`}
-              title={
-                item.title || label
-              }
-              loading="lazy"
-            />
+          ) : type === "image" || type === "pdf" ? (
+            <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 240 }}>
+              {loading && !loadError && (
+                <DocumentLoading role="status" aria-live="polite">
+                  <span className="spinner" aria-hidden="true" />
+                  <p>{t("documentPreview.loading")}</p>
+                  <div className="dots" aria-hidden="true"><span /><span /><span /></div>
+                </DocumentLoading>
+              )}
+              {loadError && (
+                <ModalMessage role="alert">
+                  <FiFileText />
+                  <p>{t("documentPreview.error")}</p>
+                </ModalMessage>
+              )}
+              {type === "image" ? (
+                <img
+                  key={url}
+                  src={url}
+                  alt={item.title || label}
+                  draggable={false}
+                  style={{ display: loading || loadError ? "none" : "block" }}
+                  onContextMenu={(event) => event.preventDefault()}
+                  onLoad={() => setLoading(false)}
+                  onError={() => { setLoading(false); setLoadError(true); }}
+                />
+              ) : (
+                <iframe
+                  key={url}
+                  src={`${url}#toolbar=0&navpanes=0&scrollbar=1`}
+                  title={item.title || label}
+                  style={{ display: loading || loadError ? "none" : "block" }}
+                  onLoad={() => setLoading(false)}
+                  onError={() => { setLoading(false); setLoadError(true); }}
+                />
+              )}
+            </div>
           ) : (
             <ModalMessage>
               <FiFileText />
-
-              <p>
-                {isArabic
-                  ? "لا يمكن معاينة هذه الصيغة داخل الصفحة."
-                  : "This file format cannot be previewed here."}
-              </p>
+              <p>{t("documentPreview.unsupported")}</p>
             </ModalMessage>
           )}
         </ModalBody>
@@ -2503,6 +2561,7 @@ const skillGroupIcons = [
   FiMonitor,
   FiBookOpen,
   FiUsers,
+  FiMonitor,
 ];
 
 /* =========================================
@@ -2553,8 +2612,8 @@ const About = () => {
 
   const content =
     translated &&
-    typeof translated === "object" &&
-    !Array.isArray(translated)
+      typeof translated === "object" &&
+      !Array.isArray(translated)
       ? translated
       : {};
 
@@ -2600,9 +2659,18 @@ const About = () => {
     content.volunteering?.items
   );
 
-  const skillGroups = asArray(
-    content.skills?.groups
-  );
+  const aiSkillGroup = {
+    title: t("aiSkills.title"),
+    items: ["chatgpt", "gemini", "claude", "deepseek"].map((key) => ({
+      name: t(`aiSkills.tools.${key}.name`),
+      sources: [t(`aiSkills.tools.${key}.usage`)],
+    })),
+  };
+
+  const skillGroups = [
+    ...asArray(content.skills?.groups),
+    aiSkillGroup,
+  ];
 
   const volunteerSummary =
     content.volunteering?.summary || {};
@@ -2637,12 +2705,10 @@ const About = () => {
     >
       {/* PAGE HEADER */}
 
+
       <PageHeader>
         <PageHeaderContainer>
-          <BreadCrumb
-            title={pageTitle}
-            description={pageDesc}
-          />
+          <BreadCrumb value="about" />
 
           <AboutHeaderTitle>
             {pageTitle}
@@ -2653,6 +2719,7 @@ const About = () => {
           </AboutHeaderDescription>
         </PageHeaderContainer>
       </PageHeader>
+
 
       <MainContent>
         {/* INTRODUCTION */}
@@ -2902,8 +2969,8 @@ const About = () => {
 
                 const Icon =
                   skillGroupIcons[
-                    index %
-                      skillGroupIcons.length
+                  index %
+                  skillGroupIcons.length
                   ];
 
                 const items = asArray(
@@ -2998,33 +3065,33 @@ const About = () => {
 
                                 {sources.length >
                                   0 && (
-                                  <>
-                                    <span className="source-label">
-                                      <FiBookOpen />
+                                    <>
+                                      <span className="source-label">
+                                        <FiBookOpen />
 
-                                      {isArabic
-                                        ? "مصادر اكتساب المهارة"
-                                        : "Skill Sources"}
-                                    </span>
+                                        {isArabic
+                                          ? "مصادر اكتساب المهارة"
+                                          : "Skill Sources"}
+                                      </span>
 
-                                    <SkillSources>
-                                      {sources.map(
-                                        (
-                                          source,
-                                          sourceIndex
-                                        ) => (
-                                          <li
-                                            key={`${source}-${sourceIndex}`}
-                                          >
-                                            {
-                                              source
-                                            }
-                                          </li>
-                                        )
-                                      )}
-                                    </SkillSources>
-                                  </>
-                                )}
+                                      <SkillSources>
+                                        {sources.map(
+                                          (
+                                            source,
+                                            sourceIndex
+                                          ) => (
+                                            <li
+                                              key={`${source}-${sourceIndex}`}
+                                            >
+                                              {
+                                                source
+                                              }
+                                            </li>
+                                          )
+                                        )}
+                                      </SkillSources>
+                                    </>
+                                  )}
                               </SkillCard>
                             );
                           }
@@ -3061,64 +3128,64 @@ const About = () => {
           {Object.keys(
             volunteerSummary
           ).length > 0 && (
-            <VolunteerSummary>
-              <div className="summary-heading">
-                <FiHeart />
+              <VolunteerSummary>
+                <div className="summary-heading">
+                  <FiHeart />
 
-                <h3>
-                  {volunteerSummary.label ||
-                    (isArabic
-                      ? "السجل التطوعي"
-                      : "Volunteer Record")}
-                </h3>
-              </div>
+                  <h3>
+                    {volunteerSummary.label ||
+                      (isArabic
+                        ? "السجل التطوعي"
+                        : "Volunteer Record")}
+                  </h3>
+                </div>
 
-              {volunteerSummary.value && (
-                <strong className="summary-value">
-                  {volunteerSummary.value}
-                </strong>
-              )}
-
-              <div className="summary-meta">
-                {volunteerSummary.opportunities && (
-                  <NeutralTag>
-                    <FiUsers />
-
-                    {volunteerSummary.opportunities}{" "}
-                    {isArabic
-                      ? "فرصة تطوعية"
-                      : "Volunteer Opportunities"}
-                  </NeutralTag>
+                {volunteerSummary.value && (
+                  <strong className="summary-value">
+                    {volunteerSummary.value}
+                  </strong>
                 )}
 
-                <DateDisplay
+                <div className="summary-meta">
+                  {volunteerSummary.opportunities && (
+                    <NeutralTag>
+                      <FiUsers />
+
+                      {volunteerSummary.opportunities}{" "}
+                      {isArabic
+                        ? "فرصة تطوعية"
+                        : "Volunteer Opportunities"}
+                    </NeutralTag>
+                  )}
+
+                  <DateDisplay
+                    item={volunteerSummary}
+                    isArabic={isArabic}
+                  />
+                </div>
+
+                {volunteerSummary.description && (
+                  <p className="summary-description">
+                    {
+                      volunteerSummary.description
+                    }
+                  </p>
+                )}
+
+                <DocumentButton
                   item={volunteerSummary}
-                  isArabic={isArabic}
-                />
-              </div>
-
-              {volunteerSummary.description && (
-                <p className="summary-description">
-                  {
-                    volunteerSummary.description
+                  title={
+                    volunteerSummary.label ||
+                    (isArabic
+                      ? "السجل التطوعي"
+                      : "Volunteer Record")
                   }
-                </p>
-              )}
-
-              <DocumentButton
-                item={volunteerSummary}
-                title={
-                  volunteerSummary.label ||
-                  (isArabic
-                    ? "السجل التطوعي"
-                    : "Volunteer Record")
-                }
-                fallbackType="volunteering"
-                isArabic={isArabic}
-                onPreview={setPreview}
-              />
-            </VolunteerSummary>
-          )}
+                  fallbackType="volunteering"
+                  isArabic={isArabic}
+                  onPreview={setPreview}
+                />
+              </VolunteerSummary>
+            )}
 
           <CardList>
             {renderEntries(

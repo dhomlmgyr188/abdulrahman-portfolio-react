@@ -2,144 +2,127 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
+import {
+  FiArrowUpLeft,
+  FiArrowUpRight,
+} from "react-icons/fi";
 
 import Container, {
   Section,
 } from "../../Components/layout/PageContainer";
 
-import {
-  SectionSTitle,
-  SectionLightDesc,
-} from "../../Components/ui/T";
-
 import ProjectGrid from "../../Components/projects/ProjectsGrid";
 
-/* =====================================
-   Section
-===================================== */
-
-const FeaturedProjectsSection = styled(Section)`
+const FeaturedSection = styled(Section)`
   width: 100%;
   min-height: auto;
-
-  padding-block: clamp(64px, 8vw, 110px);
-
+  padding-block: clamp(70px, 8vw, 110px);
   background: var(--color-background);
+  color: var(--color-text-primary);
 
   @media (max-width: 600px) {
-    padding-block: 54px 64px;
+    padding-block: 55px 70px;
   }
 `;
 
-const FeaturedProjectsContainer = styled(Container)`
+const FeaturedContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-  gap: clamp(28px, 4vw, 44px);
-
+  gap: clamp(30px, 4vw, 45px);
   width: 100%;
   min-width: 0;
 `;
 
-/* =====================================
-   Heading
-===================================== */
-
-const ProjectsHeading = styled.div`
+const Heading = styled.div`
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   justify-content: space-between;
-
-  gap: 28px;
+  gap: 25px;
 
   @media (max-width: 700px) {
     align-items: flex-start;
   }
 `;
 
-const HeadingText = styled.div`
+const HeadingContent = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-
   gap: 12px;
-  max-width: 690px;
-  min-width: 0;
+  max-width: 700px;
+`;
 
-  text-align: start;
+const Eyebrow = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 
-  @media (max-width: 600px) {
-    gap: 10px;
+  &::before {
+    content: "";
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
   }
 `;
 
-const TitleWrapper = styled.div`
-  width: 100%;
-
-  & > * {
-    margin: 0;
-    text-align: start;
-  }
+const HeadingTitle = styled.h2`
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: clamp(1.85rem, 3.5vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.4;
 `;
 
-const DescriptionWrapper = styled.div`
-  max-width: 650px;
-
-  & > * {
-    margin: 0;
-    text-align: start;
-
-    color: var(--color-text-secondary);
-    line-height: 1.9;
-  }
+const HeadingDescription = styled.p`
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: clamp(0.93rem, 1.5vw, 1.03rem);
+  line-height: 1.95;
 `;
-
-/* =====================================
-   View All Link
-===================================== */
 
 const ViewAllLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-
   flex-shrink: 0;
-  min-height: 44px;
+  min-height: 45px;
+  padding: 10px 16px;
 
-  color: var(--color-primary);
-  font-size: 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+
+  font-size: 0.87rem;
   font-weight: 700;
-
   text-decoration: none;
 
   transition:
-    color 0.2s ease,
-    gap 0.2s ease;
-
-  & svg {
-    width: 18px;
-    height: 18px;
-  }
+    border-color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
-    gap: 15px;
-    text-decoration: underline;
-    text-underline-offset: 6px;
+    border-color: var(--color-primary);
+    background: var(--color-background-tertiary);
   }
 
   &:focus-visible {
     outline: 2px solid var(--color-primary);
-    outline-offset: 4px;
-    border-radius: 4px;
+    outline-offset: 3px;
+  }
+
+  svg {
+    width: 17px;
+    height: 17px;
   }
 
   @media (max-width: 700px) {
     display: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 `;
 
@@ -148,24 +131,12 @@ const MobileViewAll = styled(ViewAllLink)`
 
   @media (max-width: 700px) {
     display: inline-flex;
-
     align-self: center;
-    justify-content: center;
-
-    width: fit-content;
-    margin-top: 4px;
   }
 `;
 
-const ArrowIcon = () => (
-  <>
-    <FiArrowUpLeft className="arrow-rtl" />
-    <FiArrowUpRight className="arrow-ltr" />
-  </>
-);
-
-const ArrowStyles = styled.div`
-  display: contents;
+const Arrow = styled.span`
+  display: inline-flex;
 
   .arrow-ltr {
     display: none;
@@ -180,55 +151,54 @@ const ArrowStyles = styled.div`
   }
 `;
 
-/* =====================================
-   Component
-===================================== */
-
 const FeaturedProjects = () => {
   const { t } = useTranslation();
 
-  const viewAllText = t(
+  const viewAll = t(
     "home:featuredProjects.header.view_projects"
   );
 
   return (
-    <FeaturedProjectsSection id="featured-projects">
-      <FeaturedProjectsContainer>
+    <FeaturedSection id="featured-projects">
+      <FeaturedContainer>
+        <Heading>
+          <HeadingContent>
+            <Eyebrow>
+              {t(
+                "home:featuredProjects.header.label",
+                { defaultValue: "PORTFOLIO" }
+              )}
+            </Eyebrow>
 
-        <ProjectsHeading>
-          <HeadingText>
-            <TitleWrapper>
-              <SectionSTitle
-                value="home:featuredProjects.header.title"
-              />
-            </TitleWrapper>
+            <HeadingTitle>
+              {t("home:featuredProjects.header.title")}
+            </HeadingTitle>
 
-            <DescriptionWrapper>
-              <SectionLightDesc
-                value="home:featuredProjects.header.desc"
-              />
-            </DescriptionWrapper>
-          </HeadingText>
+            <HeadingDescription>
+              {t("home:featuredProjects.header.desc")}
+            </HeadingDescription>
+          </HeadingContent>
 
           <ViewAllLink to="/projects">
-            {viewAllText}
-            <ArrowStyles>
-              <ArrowIcon />
-            </ArrowStyles>
+            {viewAll}
+            <Arrow>
+              <FiArrowUpLeft className="arrow-rtl" />
+              <FiArrowUpRight className="arrow-ltr" />
+            </Arrow>
           </ViewAllLink>
-        </ProjectsHeading>
+        </Heading>
 
         <ProjectGrid />
 
         <MobileViewAll to="/projects">
-          {viewAllText}
-          <ArrowStyles>
-            <ArrowIcon />
-          </ArrowStyles>
+          {viewAll}
+          <Arrow>
+            <FiArrowUpLeft className="arrow-rtl" />
+            <FiArrowUpRight className="arrow-ltr" />
+          </Arrow>
         </MobileViewAll>
-
-      </FeaturedProjectsContainer>
-    </FeaturedProjectsSection>
+      </FeaturedContainer>
+    </FeaturedSection>
   );
 };
 

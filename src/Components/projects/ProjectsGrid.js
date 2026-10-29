@@ -3,211 +3,131 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 import ProjectCard from "./ProjectCard";
-import ProjectGallery from "./ProjectGallery";
-import projectImages from "./projectImages";
 
 /* =====================================
-   Projects Grid
+   PROJECTS GRID STYLES
 ===================================== */
 
-const ProjGrid = styled.div`
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  align-items: stretch;
-
-  gap: clamp(20px, 3vw, 30px);
+const ProjectsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.5vw, 22px);
 
   width: 100%;
   min-width: 0;
-
-  @media (max-width: 800px) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 22px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 18px;
-  }
 `;
 
-/* =====================================
-   Project Card
-===================================== */
+const EmptyState = styled.p`
+  margin: 0;
+  padding: 40px 20px;
 
-const ProjectItem = styled.article`
-  display: flex;
-  flex-direction: column;
-
-  min-width: 0;
-  height: 100%;
-
-  overflow: hidden;
-
-  background: var(--color-background-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 18px;
+  border-radius: 14px;
+  background: var(--color-background-secondary);
 
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-
-  @media (hover: hover) {
-    &:hover {
-      transform: translateY(-5px);
-
-      border-color: color-mix(
-        in srgb,
-        var(--color-primary) 35%,
-        var(--color-border)
-      );
-
-      box-shadow: var(--shadow-md, 0 12px 30px rgba(0, 0, 0, 0.08));
-    }
-  }
-
-  @media (max-width: 480px) {
-    border-radius: 15px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-
-    &:hover {
-      transform: none;
-    }
-  }
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.8;
 `;
 
 /* =====================================
-   Project Media
-===================================== */
-
-const ProjectMedia = styled.div`
-  width: 100%;
-  min-width: 0;
-
-  aspect-ratio: 16 / 10;
-
-  overflow: hidden;
-
-  background: var(--color-background-tertiary, var(--color-background));
-
-  border-bottom: 1px solid var(--color-border);
-
-  & > * {
-    width: 100%;
-    height: 100%;
-  }
-
-  & img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    object-position: center;
-
-    transition: transform 0.4s ease;
-  }
-
-  @media (hover: hover) {
-    ${ProjectItem}:hover & img {
-      transform: scale(1.025);
-    }
-  }
-
-  @media (max-width: 480px) {
-    aspect-ratio: 16 / 10;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    & img {
-      transition: none;
-    }
-  }
-`;
-
-/* =====================================
-   Project Content
-===================================== */
-
-const ProjectInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
-  min-width: 0;
-
-  padding: clamp(18px, 2.5vw, 26px);
-
-  & > * {
-    width: 100%;
-    min-width: 0;
-  }
-
-  @media (max-width: 480px) {
-    padding: 18px 16px 20px;
-  }
-`;
-
-/* =====================================
-   Component
+   PROJECTS GRID COMPONENT
 ===================================== */
 
 const ProjectGrid = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation([
+    "home",
+    "projects",
+    "common",
+  ]);
+
+  const isArabic = (
+    i18n.resolvedLanguage ||
+    i18n.language ||
+    "ar"
+  ).startsWith("ar");
+
+  /*
+    Fetch project cards from home.json.
+    Full project information remains in projects.json.
+  */
 
   const translatedProjects = t(
-    "home:featuredProjects.items",
-    { returnObjects: true }
+    "featuredProjects.items",
+    {
+      ns: "home",
+      returnObjects: true,
+      defaultValue: [],
+    }
   );
 
   const projects = Array.isArray(translatedProjects)
     ? translatedProjects
     : [];
 
+  /* =====================================
+     EMPTY STATE
+  ===================================== */
+
+  if (projects.length === 0) {
+    return (
+      <EmptyState>
+        {isArabic
+          ? "لا توجد مشاريع متاحة للعرض حاليًا."
+          : "No projects available at the moment."}
+      </EmptyState>
+    );
+  }
+
+  /* =====================================
+     PROJECT CARDS
+  ===================================== */
+
   return (
-    <ProjGrid>
+    <ProjectsList>
       {projects.map((project, index) => {
-        const images = Array.isArray(project.project_img)
-          ? project.project_img
-            .map((image) => projectImages[image])
-            .filter(Boolean)
-          : [];
+        const projectId = project.id;
+
+        const detailsLink = projectId
+          ? `/projects/${encodeURIComponent(projectId)}`
+          : "/projects";
+
+        /*
+          Use a short description when available.
+          Otherwise preserve the original desc.
+        */
+
+        const description =
+          project.shortDescription ||
+          project.desc ||
+          "";
 
         return (
-          <ProjectItem key={project.id ?? index}>
-
-            <ProjectMedia>
-              <ProjectGallery
-                images={images}
-                alt={project.title}
-              />
-            </ProjectMedia>
-
-            <ProjectInfo>
-              <ProjectCard
-                title={project.title}
-                date={project.date}
-                description={project.desc}
-                value1={t("buttons.view_project")}
-                toLink={`/projects/${project.id}`}
-                value2={t("buttons.demo")}
-                toHref={project.link}
-                techStack={project.tech_stack}
-                from={project.desc}
-              />
-            </ProjectInfo>
-
-          </ProjectItem>
+          <ProjectCard
+            key={projectId || index}
+            index={index}
+            title={project.title}
+            date={project.date}
+            description={description}
+            techStack={project.tech_stack}
+            toLink={detailsLink}
+            toHref={project.link}
+            value1={t("buttons.view_project", {
+              ns: "common",
+              defaultValue: isArabic
+                ? "تفاصيل المشروع"
+                : "Project Details",
+            })}
+            value2={t("buttons.demo", {
+              ns: "common",
+              defaultValue: isArabic
+                ? "معاينة المشروع"
+                : "Live Preview",
+            })}
+          />
         );
       })}
-    </ProjGrid>
+    </ProjectsList>
   );
 };
 

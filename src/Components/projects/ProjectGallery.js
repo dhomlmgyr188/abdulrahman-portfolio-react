@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import styled, { keyframes } from "styled-components";
 
 import {
   FiChevronLeft,
@@ -8,46 +9,33 @@ import {
   FiImage,
 } from "react-icons/fi";
 
-/* =====================================
-   Gallery Wrapper
-===================================== */
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
 
 const GalleryWrapper = styled.div`
   position: relative;
   isolation: isolate;
-
   width: 100%;
   height: 100%;
   min-width: 0;
-
   overflow: hidden;
-
-  background: var(
-    --color-background-tertiary,
-    var(--color-background)
-  );
-
-  /* Border radius is controlled by ProjectItem */
+  background: var(--color-background-tertiary);
   border-radius: 0;
-
   user-select: none;
   -webkit-user-select: none;
 `;
 
-/* =====================================
-   Gallery Image
-===================================== */
-
 const GalleryImage = styled.img`
   display: block;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
   object-position: center;
-
-  transition: transform 0.45s ease;
+  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  transition:
+    opacity 0.3s ease,
+    transform 0.45s ease;
 
   @media (hover: hover) {
     ${GalleryWrapper}:hover & {
@@ -60,34 +48,26 @@ const GalleryImage = styled.img`
   }
 `;
 
-/* =====================================
-   Navigation Buttons
-===================================== */
-
 const NavigationButton = styled.button`
   position: absolute;
   top: 50%;
-  z-index: 2;
+  z-index: 3;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 36px;
-  height: 36px;
-
+  width: 37px;
+  height: 37px;
   padding: 0;
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--color-border);
   border-radius: 50%;
-
-  background: rgba(15, 23, 42, 0.68);
-  color: #ffffff;
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
 
   cursor: pointer;
-
   transform: translateY(-50%);
-
   opacity: 0;
 
   transition:
@@ -110,12 +90,12 @@ const NavigationButton = styled.button`
   }
 
   &:hover {
-    background: rgba(15, 23, 42, 0.9);
+    background: var(--color-background-tertiary);
   }
 
   &:focus-visible {
     opacity: 1;
-    outline: 2px solid #ffffff;
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
 
@@ -124,8 +104,8 @@ const NavigationButton = styled.button`
   }
 
   @media (max-width: 480px) {
-    width: 32px;
-    height: 32px;
+    width: 33px;
+    height: 33px;
 
     ${({ $side }) =>
       $side === "start"
@@ -134,28 +114,24 @@ const NavigationButton = styled.button`
   }
 `;
 
-/* =====================================
-   Image Indicators
-===================================== */
-
 const Indicators = styled.div`
   position: absolute;
   bottom: 12px;
   left: 50%;
-  z-index: 2;
+  z-index: 3;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 6px;
 
   max-width: calc(100% - 24px);
-  padding: 7px 10px;
+  padding: 8px 11px;
 
+  border: 1px solid var(--color-border);
   border-radius: 30px;
-
-  background: rgba(15, 23, 42, 0.55);
+  background: var(--color-background-secondary);
+  box-shadow: var(--shadow-sm);
 
   transform: translateX(-50%);
 `;
@@ -164,15 +140,16 @@ const Indicator = styled.button`
   display: block;
   flex-shrink: 0;
 
-  width: ${({ $active }) => ($active ? "20px" : "6px")};
-  height: 6px;
-
+  width: ${({ $active }) => ($active ? "20px" : "7px")};
+  height: 7px;
   padding: 0;
   border: none;
   border-radius: 20px;
 
   background: ${({ $active }) =>
-    $active ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
+    $active
+      ? "var(--color-primary)"
+      : "var(--color-border)"};
 
   cursor: pointer;
 
@@ -181,21 +158,16 @@ const Indicator = styled.button`
     background 0.2s ease;
 
   &:focus-visible {
-    outline: 2px solid #ffffff;
+    outline: 2px solid var(--color-primary);
     outline-offset: 3px;
   }
 `;
-
-/* =====================================
-   Empty State
-===================================== */
 
 const EmptyGallery = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 10px;
 
   width: 100%;
@@ -203,11 +175,12 @@ const EmptyGallery = styled.div`
   min-height: 180px;
 
   color: var(--color-text-secondary);
+  text-align: center;
 
   & svg {
     width: 32px;
     height: 32px;
-    opacity: 0.55;
+    opacity: 0.6;
   }
 
   & span {
@@ -215,14 +188,44 @@ const EmptyGallery = styled.div`
   }
 `;
 
-/* =====================================
-   Component
-===================================== */
+const LoadingOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  background: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+
+  font-size: 0.84rem;
+  text-align: center;
+`;
+
+const Spinner = styled.span`
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: ${spin} 0.8s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
 
 const ProjectGallery = ({
   images = [],
   alt = "Project preview",
 }) => {
+  const { i18n } = useTranslation();
+  const isArabic = i18n.language?.startsWith("ar");
+
   const imageList = Array.isArray(images)
     ? images.filter(Boolean)
     : images
@@ -231,21 +234,30 @@ const ProjectGallery = ({
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const totalImages = imageList.length;
 
   const currentIndex =
-    totalImages > 0 ? activeIndex % totalImages : 0;
+    totalImages > 0
+      ? activeIndex % totalImages
+      : 0;
 
+  const currentImage = imageList[currentIndex];
   const hasMultipleImages = totalImages > 1;
 
   const nextImage = () => {
+    if (!hasMultipleImages) return;
+
     setActiveIndex((prev) =>
       (prev + 1) % totalImages
     );
   };
 
   const previousImage = () => {
+    if (!hasMultipleImages) return;
+
     setActiveIndex((prev) =>
       (prev - 1 + totalImages) % totalImages
     );
@@ -254,6 +266,11 @@ const ProjectGallery = ({
   useEffect(() => {
     setActiveIndex(0);
   }, [images]);
+
+  useEffect(() => {
+    setImageLoaded(false);
+    setImageError(false);
+  }, [currentImage]);
 
   const handleTouchStart = (event) => {
     setTouchStart(event.touches[0].clientX);
@@ -286,7 +303,11 @@ const ProjectGallery = ({
       <GalleryWrapper>
         <EmptyGallery>
           <FiImage aria-hidden="true" />
-          <span>No preview available</span>
+          <span>
+            {isArabic
+              ? "لا تتوفر صور لهذا المشروع"
+              : "No preview available"}
+          </span>
         </EmptyGallery>
       </GalleryWrapper>
     );
@@ -299,13 +320,39 @@ const ProjectGallery = ({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <GalleryImage
-        src={imageList[currentIndex]}
-        alt={`${alt} - ${currentIndex + 1}`}
-        loading="lazy"
-        decoding="async"
-        draggable="false"
-      />
+      {!imageLoaded && !imageError && (
+        <LoadingOverlay role="status">
+          <Spinner aria-hidden="true" />
+          <span>
+            {isArabic
+              ? "يرجى الانتظار، جارٍ تحميل الصورة..."
+              : "Please wait, loading image..."}
+          </span>
+        </LoadingOverlay>
+      )}
+
+      {imageError ? (
+        <EmptyGallery>
+          <FiImage aria-hidden="true" />
+          <span>
+            {isArabic
+              ? "تعذر تحميل الصورة"
+              : "Unable to load image"}
+          </span>
+        </EmptyGallery>
+      ) : (
+        <GalleryImage
+          key={currentImage}
+          src={currentImage}
+          alt={`${alt} - ${currentIndex + 1}`}
+          $loaded={imageLoaded}
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageError(true)}
+        />
+      )}
 
       {hasMultipleImages && (
         <>
@@ -313,7 +360,11 @@ const ProjectGallery = ({
             type="button"
             $side="start"
             onClick={previousImage}
-            aria-label="Previous image"
+            aria-label={
+              isArabic
+                ? "الصورة السابقة"
+                : "Previous image"
+            }
           >
             <FiChevronRight aria-hidden="true" />
           </NavigationButton>
@@ -322,7 +373,11 @@ const ProjectGallery = ({
             type="button"
             $side="end"
             onClick={nextImage}
-            aria-label="Next image"
+            aria-label={
+              isArabic
+                ? "الصورة التالية"
+                : "Next image"
+            }
           >
             <FiChevronLeft aria-hidden="true" />
           </NavigationButton>
@@ -334,7 +389,11 @@ const ProjectGallery = ({
                 type="button"
                 $active={currentIndex === index}
                 onClick={() => setActiveIndex(index)}
-                aria-label={`Show image ${index + 1}`}
+                aria-label={
+                  isArabic
+                    ? `عرض الصورة ${index + 1}`
+                    : `Show image ${index + 1}`
+                }
                 aria-current={
                   currentIndex === index
                     ? "true"
