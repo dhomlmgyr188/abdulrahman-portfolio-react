@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-react",
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.6.3",
     "i18next": "^26.4.2",
     "i18next-browser-languagedetector": "^8.2.1",
     "pdfjs-dist": "^6.4.299",
@@ -11,7 +12,6 @@
     "react-dom": "^19.3.0",
     "react-i18next": "^17.0.13",
     "react-icons": "^5.7.0",
-    "react-pnpdf": "^11.0.0",
     "react-router-dom": "^7.18.3",
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",
