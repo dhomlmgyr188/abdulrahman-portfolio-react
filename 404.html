@@ -1,27 +1,244 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Redirecting...</title>
-  <script>
-    var pathSegmentsToKeep = 1;
+<html lang="ar" dir="rtl">
+  <head>
+    <!-- =========================================
+         DOCUMENT SETTINGS
+    ========================================== -->
 
-    var l = window.location;
+    <meta charset="utf-8" />
 
-    l.replace(
-      l.protocol + "//" + l.hostname +
-      (l.port ? ":" + l.port : "") +
-      l.pathname.split("/")
-        .slice(0, 1 + pathSegmentsToKeep)
-        .join("/") +
-      "/?/" +
-      l.pathname.slice(1).split("/")
-        .slice(pathSegmentsToKeep)
-        .join("/").replace(/&/g, "~and~") +
-      (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
-      l.hash
-    );
-  </script>
-</head>
-<body></body>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <meta
+      name="robots"
+      content="noindex, nofollow"
+    />
+
+    <meta
+      name="theme-color"
+      content="#174667"
+    />
+
+    <title>جارٍ إعادة التوجيه | عبدالرحمن المغير</title>
+
+    <!-- =========================================
+         GITHUB PAGES SPA REDIRECT
+    ========================================== -->
+
+    <!--
+      GitHub Pages serves this file when a
+      requested path does not exist physically.
+
+      React Router handles application routes,
+      but GitHub Pages needs this redirect to
+      restore direct links and page refreshes.
+
+      This script works together with the
+      redirect restoration script in index.html.
+
+      Repository:
+      /abdulrahman-portfolio-react/
+
+      Important:
+      Keep pathSegmentsToKeep = 1 while the
+      application is hosted in this repository.
+    -->
+
+    <script>
+      (function () {
+        "use strict";
+
+        /* -------------------------
+           CONFIGURATION
+        ------------------------- */
+
+        var pathSegmentsToKeep = 1;
+
+        var location = window.location;
+
+        /* -------------------------
+           BASE URL
+        ------------------------- */
+
+        var pathSegments =
+          location.pathname.split("/");
+
+        var basePath = pathSegments
+          .slice(0, 1 + pathSegmentsToKeep)
+          .join("/");
+
+        /* -------------------------
+           REQUESTED ROUTE
+        ------------------------- */
+
+        var route = pathSegments
+          .slice(pathSegmentsToKeep + 1)
+          .join("/");
+
+        /*
+          If there is no route to restore,
+          return to the application root.
+        */
+
+        if (!route) {
+          window.location.replace(
+            location.protocol +
+              "//" +
+              location.host +
+              basePath +
+              "/"
+          );
+
+          return;
+        }
+
+        /* -------------------------
+           PRESERVE QUERY PARAMETERS
+        ------------------------- */
+
+        var query = location.search
+          ? "&" +
+            location.search
+              .slice(1)
+              .replace(/&/g, "~and~")
+          : "";
+
+        /* -------------------------
+           PRESERVE URL HASH
+        ------------------------- */
+
+        var hash = location.hash || "";
+
+        /* -------------------------
+           BUILD REDIRECT URL
+        ------------------------- */
+
+        var redirectUrl =
+          location.protocol +
+          "//" +
+          location.host +
+          basePath +
+          "/?/" +
+          route.replace(/&/g, "~and~") +
+          query +
+          hash;
+
+        /* -------------------------
+           REDIRECT
+        ------------------------- */
+
+        window.location.replace(redirectUrl);
+      })();
+    </script>
+
+    <!-- =========================================
+         FALLBACK STYLES
+    ========================================== -->
+
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 100vh;
+        min-height: 100dvh;
+
+        margin: 0;
+        padding: 24px;
+
+        background: #f5f8fa;
+        color: #174667;
+
+        font-family:
+          Tahoma,
+          Arial,
+          sans-serif;
+
+        text-align: center;
+      }
+
+      main {
+        width: 100%;
+        max-width: 480px;
+      }
+
+      h1 {
+        margin: 0 0 16px;
+
+        font-size: clamp(1.4rem, 4vw, 1.9rem);
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      p {
+        margin: 0 0 24px;
+
+        color: #465f70;
+
+        font-size: 1rem;
+        line-height: 1.9;
+      }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 46px;
+
+        padding: 11px 22px;
+
+        border-radius: 10px;
+
+        background: #174667;
+        color: #ffffff;
+
+        font-size: 0.95rem;
+        font-weight: 700;
+
+        text-decoration: none;
+      }
+
+      a:hover {
+        background: #287c98;
+      }
+
+      a:focus-visible {
+        outline: 3px solid #287c98;
+        outline-offset: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================================
+         FALLBACK CONTENT
+    ========================================== -->
+
+    <main>
+      <h1>جارٍ إعادة توجيهك...</h1>
+
+      <p>
+        إذا لم يتم نقلك تلقائيًا، يمكنك العودة
+        إلى الصفحة الرئيسية باستخدام الرابط أدناه.
+      </p>
+
+      <a href="/abdulrahman-portfolio-react/">
+        العودة إلى الصفحة الرئيسية
+      </a>
+    </main>
+  </body>
 </html>

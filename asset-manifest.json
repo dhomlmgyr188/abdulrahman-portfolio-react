@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/abdulrahman-portfolio-react/static/css/main.91e3b4a9.css",
-    "main.js": "/abdulrahman-portfolio-react/static/js/main.c90cd2e6.js",
+    "main.css": "/abdulrahman-portfolio-react/static/css/main.a662cba6.css",
+    "main.js": "/abdulrahman-portfolio-react/static/js/main.7a76d28f.js",
     "static/media/me.png": "/abdulrahman-portfolio-react/static/media/me.93fc188400bffe390923.png",
     "static/media/saudia-sans-bold.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-bold.aeaeb29bd75393fdabfc.otf",
     "static/media/saudia-sans-regular.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-regular.9af8db836ec4b5272370.otf",
@@ -10,11 +10,11 @@
     "static/media/Barlow-Medium.ttf": "/abdulrahman-portfolio-react/static/media/Barlow-Medium.d4afdc134fc10b739bab.ttf",
     "static/media/react1.png": "/abdulrahman-portfolio-react/static/media/react1.e3bd6953a72d9511b7db.png",
     "index.html": "/abdulrahman-portfolio-react/index.html",
-    "main.91e3b4a9.css.map": "/abdulrahman-portfolio-react/static/css/main.91e3b4a9.css.map",
-    "main.c90cd2e6.js.map": "/abdulrahman-portfolio-react/static/js/main.c90cd2e6.js.map"
+    "main.a662cba6.css.map": "/abdulrahman-portfolio-react/static/css/main.a662cba6.css.map",
+    "main.7a76d28f.js.map": "/abdulrahman-portfolio-react/static/js/main.7a76d28f.js.map"
   },
   "entrypoints": [
-    "static/css/main.91e3b4a9.css",
-    "static/js/main.c90cd2e6.js"
+    "static/css/main.a662cba6.css",
+    "static/js/main.7a76d28f.js"
   ]
 }
