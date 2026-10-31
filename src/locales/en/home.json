@@ -1,7 +1,7 @@
 
 {
   "hero": {
-    "availability_status": "Open to Career Moves & Freelance Projects",
+    "availability_status": "Open to Job Opportunities & Freelance Projects",
     "name": "Abdulrahman Al-Mughyir",
     "job_titles": [
       "Software Support Technician",
@@ -15,7 +15,7 @@
       "Receptionist",
       "Cashier"
     ],
-    "introduction": "A Full-Stack Web Development diploma graduate from Taibah University, with technical and administrative skills in website development, IT support, data management, and digital systems. I aim to apply my skills and experience to career opportunities and projects that improve business operations and efficiency.",
+    "introduction": "Full-Stack Web Development diploma graduate from Taibah University, skilled in web development, IT support, data management, and office administration. Experienced in customer service and digital systems, with a focus on accuracy, efficiency, and continuous growth.",
     "tech_stack": [
       {
         "text": "React",
@@ -46,42 +46,42 @@
         "icon": "Microsoft 365"
       }
     ],
-    "profileAlt": "Abdulrahman Al-Mughyir - Web Development, IT Support, and Data Management in Madinah",
+    "profileAlt": "Abdulrahman Al-Mughyir - Web Development and IT Support",
     "statistic": {
       "projects": "Completed Projects",
-      "technologies": "Technologies and Tools Used",
+      "technologies": "Technologies & Tools",
       "years": "Years in Web Development"
     }
   },
   "services": {
     "title": "My Skills & Services",
-    "description": "Technical and administrative skills and services in website development, IT support, and data management to streamline workflows and improve efficiency.",
+    "description": "Technical and administrative skills supporting digital solutions and efficient workflows.",
     "items": [
       {
         "id": "1",
         "icon": "web",
-        "title": "Website Development & Management",
-        "description": "Designing and developing responsive websites and interfaces using HTML, CSS, JavaScript, and React, with a focus on content organization, user experience, and website updates."
+        "title": "Web Development & Management",
+        "description": "Building responsive websites with HTML, CSS, JavaScript, and React, with a focus on usability and content management."
       },
       {
         "id": "2",
         "icon": "technology",
-        "title": "IT Support & Systems Assistance",
-        "description": "Assisting users with computers, software, and applications, troubleshooting basic technical issues, following up on reported problems, and providing appropriate user guidance."
+        "title": "IT Support",
+        "description": "Assisting users with computers and software, troubleshooting basic issues, and supporting digital systems."
       },
       {
         "id": "3",
         "icon": "applications",
-        "title": "Data Management & Office Administration",
-        "description": "Entering and reviewing data, organizing files and records, and using Microsoft 365 applications to prepare documents, spreadsheets, and reports, with attention to accuracy and information confidentiality."
+        "title": "Data & Office Administration",
+        "description": "Managing data, files, and records, and preparing documents, spreadsheets, and reports using Microsoft 365."
       }
     ]
   },
   "featuredProjects": {
     "header": {
       "title": "Featured Projects",
-      "desc": "Selected work in website and application development, data organization, and user-friendly digital interfaces.",
-      "view_projects": "All Projects"
+      "desc": "Selected projects showcasing my web development skills.",
+      "view_projects": "View All Projects"
     },
     "items": [
       {
@@ -94,7 +94,7 @@
         "desc": [
           {
             "type": "text",
-            "value": "A notes management application built with React and LocalStorage, allowing users to create, view, update, and delete data (CRUD). The project demonstrates my ability to build interactive interfaces and organize data within applications. Developed as part of the "
+            "value": "A React application for creating, editing, and deleting notes, with local data storage. Developed as part of the "
           },
           {
             "type": "link",
@@ -125,7 +125,7 @@
         "desc": [
           {
             "type": "text",
-            "value": "A responsive, multi-page personal portfolio website designed to present professional information, projects, and services. It features well-organized content and a user-friendly interface, reflecting my skills in website development and digital content management."
+            "value": "A responsive, multi-page portfolio built with HTML, CSS, and JavaScript to showcase professional information, skills, and projects."
           }
         ],
         "tech_stack": [
@@ -142,10 +142,10 @@
       "title": "Quick Links"
     },
     "socialMedia": {
-      "title": "Social Profiles"
+      "title": "Social Media"
     },
     "contactInfo": {
-      "title": "Contact Me",
+      "title": "Contact Information",
       "location": {
         "value": "Madinah, Saudi Arabia"
       },
@@ -161,7 +161,7 @@
     "copyright": "Abdulrahman Al-Mughyir. All rights reserved."
   },
   "callToAction": {
-    "title": "Have a Career Opportunity or Project in Mind?",
-    "paragraph": "I welcome discussions about suitable career opportunities and freelance projects in technical and administrative fields."
+    "title": "Let's Connect",
+    "paragraph": "Open to career opportunities, freelance projects, and collaborations."
   }
 }

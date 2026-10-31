@@ -2,47 +2,252 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
   <head>
+    <!-- =========================================
+         BASIC DOCUMENT SETTINGS
+    ========================================== -->
+
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
-    <meta name="theme-color" content="#0065A8" />
+
     <meta
-      name="description"
-      content="الموقع الشخصي لعبدالرحمن ناصر المغير، خريج تطوير الويب المتكامل من جامعة طيبة. تعرف على المهارات والمشاريع والخبرات المهنية."
+      name="theme-color"
+      content="#174667"
     />
+
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- =========================================
+         PAGE TITLE AND DESCRIPTION
+    ========================================== -->
+
     <title>عبدالرحمن المغير | الموقع الشخصي</title>
 
-    <!-- GitHub Pages SPA Redirect Fix -->
-    <script>
-      (function (l) {
-        if (l.search[1] === "/") {
-          var decoded = l.search
-            .slice(1)
-            .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
-            })
-            .join("?");
+    <meta
+      name="description"
+      content="الموقع الشخصي لعبدالرحمن ناصر المغير، خريج دبلوم تطوير الويب المتكامل من جامعة طيبة. استعرض المهارات التقنية والإدارية والمشاريع والخبرات المهنية ووسائل التواصل."
+    />
 
-          window.history.replaceState(
-            null,
-            null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
+    <meta name="robots" content="index, follow" />
+
+    <meta
+      name="author"
+      content="عبدالرحمن ناصر المغير"
+    />
+
+    <!-- =========================================
+         CANONICAL URL
+    ========================================== -->
+
+    <link
+      rel="canonical"
+      href="https://dhomlmgyr188.github.io/abdulrahman-portfolio-react/"
+    />
+
+    <!-- =========================================
+         FAVICON
+    ========================================== -->
+
+    <link
+      rel="icon"
+      href="%PUBLIC_URL%/favicon.ico"
+    />
+
+    <!-- =========================================
+         SOCIAL SHARING
+    ========================================== -->
+
+    <meta
+      property="og:type"
+      content="website"
+    />
+
+    <meta
+      property="og:locale"
+      content="ar_SA"
+    />
+
+    <meta
+      property="og:site_name"
+      content="عبدالرحمن المغير"
+    />
+
+    <meta
+      property="og:title"
+      content="عبدالرحمن المغير | الموقع الشخصي"
+    />
+
+    <meta
+      property="og:description"
+      content="تعرف على المهارات والمشاريع والخبرات المهنية لعبدالرحمن المغير في تطوير الويب والدعم التقني وإدارة البيانات."
+    />
+
+    <meta
+      property="og:url"
+      content="https://dhomlmgyr188.github.io/abdulrahman-portfolio-react/"
+    />
+
+    <meta
+      name="twitter:card"
+      content="summary"
+    />
+
+    <meta
+      name="twitter:title"
+      content="عبدالرحمن المغير | الموقع الشخصي"
+    />
+
+    <meta
+      name="twitter:description"
+      content="الموقع الشخصي لعبدالرحمن المغير لعرض المهارات والمشاريع والخبرات المهنية."
+    />
+
+    <!-- =========================================
+         GITHUB PAGES SPA REDIRECT FIX
+    ========================================== -->
+
+    <!--
+      This script works together with 404.html.
+
+      It restores the requested route when
+      GitHub Pages redirects a direct page visit
+      to the application's main index.html.
+
+      Do not remove this script while using
+      BrowserRouter with GitHub Pages.
+    -->
+
+    <script>
+      (function (location) {
+        if (
+          !location.search ||
+          location.search.charAt(1) !== "/"
+        ) {
+          return;
         }
+
+        var decoded = location.search
+          .slice(1)
+          .split("&")
+          .map(function (segment) {
+            return segment.replace(/~and~/g, "&");
+          })
+          .join("?");
+
+        window.history.replaceState(
+          null,
+          "",
+          location.pathname.slice(0, -1) +
+            decoded +
+            location.hash
+        );
       })(window.location);
     </script>
-    <!-- End GitHub Pages SPA Redirect Fix -->
 
+    <!-- =========================================
+         INITIAL THEME
+    ========================================== -->
+
+    <!--
+      Apply the saved theme before React mounts
+      to reduce the initial light/dark flash.
+
+      ThemeContext.js remains responsible for
+      managing subsequent theme changes.
+    -->
+
+    <script>
+      (function () {
+        var theme = "light";
+
+        try {
+          var savedTheme =
+            window.localStorage.getItem("theme");
+
+          if (
+            savedTheme === "light" ||
+            savedTheme === "dark"
+          ) {
+            theme = savedTheme;
+          }
+        } catch (error) {
+          theme = "light";
+        }
+
+        document.documentElement.setAttribute(
+          "data-theme",
+          theme
+        );
+
+        document.documentElement.style.colorScheme =
+          theme;
+      })();
+    </script>
+
+    <!-- =========================================
+         INITIAL LANGUAGE
+    ========================================== -->
+
+    <!--
+      Match the saved language before React mounts.
+
+      i18n.js remains responsible for language
+      changes after the application initializes.
+    -->
+
+    <script>
+      (function () {
+        var language = "ar";
+
+        try {
+          var savedLanguage =
+            window.localStorage.getItem(
+              "i18nextLng"
+            );
+
+          var normalized = String(
+            savedLanguage || ""
+          )
+            .trim()
+            .toLowerCase()
+            .replace(/_/g, "-")
+            .split("-")[0];
+
+          if (
+            normalized === "ar" ||
+            normalized === "en"
+          ) {
+            language = normalized;
+          }
+        } catch (error) {
+          language = "ar";
+        }
+
+        document.documentElement.setAttribute(
+          "lang",
+          language
+        );
+
+        document.documentElement.setAttribute(
+          "dir",
+          language === "ar" ? "rtl" : "ltr"
+        );
+      })();
+    </script>
   </head>
 
   <body>
     <noscript>
       يجب تفعيل JavaScript لتشغيل هذا الموقع.
+      JavaScript is required to run this website.
     </noscript>
+
+    <!-- =========================================
+         REACT APPLICATION ROOT
+    ========================================== -->
 
     <div id="root"></div>
   </body>

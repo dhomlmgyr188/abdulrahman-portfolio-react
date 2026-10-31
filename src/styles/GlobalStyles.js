@@ -1,51 +1,67 @@
 
 import { createGlobalStyle } from "styled-components";
 
+/* =========================================
+   LOCAL FONTS
+========================================= */
+
 import SaudiaBold from "../assets/fonts/saudia-sans-bold.otf";
 import SaudiaRegular from "../assets/fonts/saudia-sans-regular.otf";
+
 import BarlowBold from "../assets/fonts/Barlow-Bold.ttf";
 import BarlowMedium from "../assets/fonts/Barlow-Medium.ttf";
+
+/* =========================================
+   GLOBAL STYLES
+   Modern Professional Design System
+
+   Colors and design tokens:
+   styles/variables.css
+
+   Component-specific styles:
+   Styled Components
+========================================= */
 
 const GlobalStyles = createGlobalStyle`
 
   /* =====================================
-     Fonts
+     01 — FONT FACES
   ===================================== */
 
   @font-face {
     font-family: "saudia-sans";
     src: url(${SaudiaRegular}) format("opentype");
-    font-weight: 400;
     font-style: normal;
+    font-weight: 400;
     font-display: swap;
   }
 
   @font-face {
     font-family: "saudia-sans";
     src: url(${SaudiaBold}) format("opentype");
-    font-weight: 700;
     font-style: normal;
+    font-weight: 700;
     font-display: swap;
   }
 
   @font-face {
     font-family: "Barlow";
     src: url(${BarlowMedium}) format("truetype");
-    font-weight: 500;
     font-style: normal;
+    font-weight: 500;
     font-display: swap;
   }
 
   @font-face {
     font-family: "Barlow";
     src: url(${BarlowBold}) format("truetype");
-    font-weight: 700;
     font-style: normal;
+    font-weight: 700;
     font-display: swap;
   }
 
   /* =====================================
-     Global Reset
+     02 — GLOBAL RESET
   ===================================== */
 
   *,
@@ -60,21 +76,24 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* =====================================
-     HTML
+     03 — DOCUMENT
   ===================================== */
 
   html {
     scroll-behavior: smooth;
+
     scroll-padding-top: calc(
-      var(--header-height) + 20px
+      var(--header-height) + 16px
     );
 
     text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* =====================================
-     Body
+     04 — BODY
   ===================================== */
 
   body {
@@ -84,9 +103,9 @@ const GlobalStyles = createGlobalStyle`
 
     font-size: var(--size-md);
     font-weight: 400;
-    line-height: 1.75;
+    line-height: var(--line-height-body);
 
-    color: var(--color-text);
+    color: var(--color-text-primary);
     background-color: var(--color-background);
 
     -webkit-font-smoothing: antialiased;
@@ -100,7 +119,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* =====================================
-     Language & Typography
+     05 — LANGUAGE & DIRECTION
   ===================================== */
 
   html[lang="ar"] body {
@@ -122,18 +141,34 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.65;
   }
 
+  /*
+    The application manages the document's
+    lang and dir attributes through i18n.
+
+    We do not force direction globally.
+  */
+
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+
+  html[dir="ltr"] {
+    direction: ltr;
+  }
+
   /* =====================================
-     Root Application
+     06 — APPLICATION ROOT
   ===================================== */
 
   #root {
     min-height: 100vh;
     min-height: 100dvh;
+
     isolation: isolate;
   }
 
   /* =====================================
-     Headings
+     07 — TYPOGRAPHY
   ===================================== */
 
   h1,
@@ -142,15 +177,18 @@ const GlobalStyles = createGlobalStyle`
   h4,
   h5,
   h6 {
-    color: var(--color-text-primary);
+    color: var(--color-heading);
+
     font-weight: 700;
-    line-height: 1.3;
+    line-height: var(--heading-line-height);
+
+    overflow-wrap: break-word;
     text-wrap: balance;
   }
 
   h1 {
     font-size: clamp(
-      var(--size-2xl),
+      2rem,
       4.5vw,
       var(--size-4xl)
     );
@@ -158,7 +196,7 @@ const GlobalStyles = createGlobalStyle`
 
   h2 {
     font-size: clamp(
-      var(--size-xl),
+      1.5rem,
       3.5vw,
       var(--size-3xl)
     );
@@ -166,7 +204,7 @@ const GlobalStyles = createGlobalStyle`
 
   h3 {
     font-size: clamp(
-      var(--size-ml),
+      1.2rem,
       2.5vw,
       var(--size-2xl)
     );
@@ -185,16 +223,17 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* =====================================
-     Paragraphs & Text
+     08 — PARAGRAPHS & TEXT
   ===================================== */
 
   p {
-    line-height: inherit;
     color: inherit;
+    line-height: inherit;
   }
 
   small {
     font-size: var(--size-sm);
+    color: var(--color-text-secondary);
   }
 
   strong,
@@ -202,8 +241,34 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 700;
   }
 
+  em,
+  i {
+    font-style: italic;
+  }
+
+  /*
+    Preserve whitespace in code blocks,
+    but prevent long content from
+    overflowing the viewport.
+  */
+
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family:
+      "Consolas",
+      "Courier New",
+      monospace;
+  }
+
   /* =====================================
-     Links
+     09 — LINKS
   ===================================== */
 
   a {
@@ -216,61 +281,100 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 4px;
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 3px;
     border-radius: var(--radius-sm);
   }
 
   /* =====================================
-     Buttons & Form Elements
+     10 — BUTTONS
   ===================================== */
 
-  button,
+  /*
+    Button appearance belongs to:
+    Components/ui/Button/Button.js
+
+    Global styles only provide basic
+    browser normalization.
+  */
+
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 3px;
+  }
+
+  /* =====================================
+     11 — FORM CONTROLS
+  ===================================== */
+
   input,
   textarea,
   select {
     font: inherit;
-    color: inherit;
+
+    max-width: 100%;
+    min-width: 0;
+
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+
+    border-color: var(--color-border);
+    border-radius: var(--radius-input);
   }
 
-  button {
-    cursor: pointer;
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-input-placeholder);
+    opacity: 1;
   }
 
-  button:disabled,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
+  }
+
   input:disabled,
   textarea:disabled,
   select:disabled {
     cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  button:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible,
-  select:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
-  }
-
-  input,
-  textarea,
-  select {
-    max-width: 100%;
   }
 
   textarea {
     resize: vertical;
   }
 
-  input::placeholder,
-  textarea::placeholder {
-    color: var(--color-text-light);
-    opacity: 0.85;
+  /*
+    Keep checkbox and radio controls
+    consistent with the active theme.
+  */
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: var(--color-primary);
+  }
+
+  /*
+    File inputs retain their native
+    functionality and accessibility.
+  */
+
+  input[type="file"] {
+    max-width: 100%;
   }
 
   /* =====================================
-     Lists
+     12 — LISTS
   ===================================== */
 
   ul,
@@ -279,7 +383,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* =====================================
-     Images & Media
+     13 — IMAGES & MEDIA
   ===================================== */
 
   img,
@@ -296,30 +400,31 @@ const GlobalStyles = createGlobalStyle`
 
   svg {
     vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  iframe {
+    max-width: 100%;
   }
 
   /* =====================================
-     Sections & Anchors
+     14 — SECTIONS & ANCHORS
   ===================================== */
 
-  section {
-    scroll-margin-top: calc(
-      var(--header-height) + 20px
-    );
-  }
-
+  section,
   [id] {
     scroll-margin-top: calc(
-      var(--header-height) + 20px
+      var(--header-height) + 16px
     );
   }
 
   /* =====================================
-     Tables
+     15 — TABLES
   ===================================== */
 
   table {
     width: 100%;
+
     border-collapse: collapse;
     border-spacing: 0;
 
@@ -338,20 +443,17 @@ const GlobalStyles = createGlobalStyle`
   }
 
   th {
+    color: var(--color-text-primary);
     background-color: var(
       --color-background-tertiary
     );
 
-    color: var(--color-text-primary);
     font-weight: 700;
   }
 
   td {
-    background-color: var(
-      --color-background
-    );
-
-    color: var(--color-text);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
   }
 
   tbody tr {
@@ -361,91 +463,101 @@ const GlobalStyles = createGlobalStyle`
 
   tbody tr:hover td {
     background-color: var(
-      --color-background-secondary
+      --color-background-tertiary
     );
   }
 
   /* =====================================
-     Text Selection
+     16 — HORIZONTAL RULE
   ===================================== */
 
-  ::selection {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-  }
-
-  [data-theme="dark"] ::selection {
-    background-color: var(--color-primary);
-    color: var(--color-black);
+  hr {
+    border: 0;
+    border-top: 1px solid var(--color-divider);
   }
 
   /* =====================================
-     Scrollbar
-  ===================================== */
-
-  html {
-    scrollbar-color:
-      var(--color-border)
-      var(--color-background);
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--color-background);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-border);
-    border-radius: var(--radius-full);
-    border: 2px solid var(--color-background);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text-light);
-  }
-
-  /* =====================================
-     Accessibility
+     17 — FOCUS & ACCESSIBILITY
   ===================================== */
 
   :focus-visible {
-    outline-color: var(--color-primary);
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 3px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
+  /*
+    Accessible screen-reader-only utility.
+  */
 
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+  .sr-only {
+    position: absolute !important;
+
+    width: 1px !important;
+    height: 1px !important;
+
+    padding: 0 !important;
+    margin: -1px !important;
+
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /*
+    Skip link for keyboard navigation.
+    It becomes visible when focused.
+  */
+
+  .skip-link {
+    position: fixed;
+    inset-block-start: 12px;
+    inset-inline-start: 12px;
+
+    z-index: 10000;
+
+    padding: 12px 18px;
+
+    color: var(--color-on-primary);
+    background-color: var(--color-primary);
+
+    border-radius: var(--radius-button);
+
+    transform: translateY(-160%);
+
+    transition:
+      transform var(--transition-fast);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
   }
 
   /* =====================================
-     Responsive
+     18 — RESPONSIVE
   ===================================== */
 
   @media (max-width: 768px) {
+
     body {
       font-size: var(--size-md);
     }
 
     h1 {
-      font-size: clamp(2rem, 7vw, 2.5rem);
+      font-size: clamp(
+        2rem,
+        7vw,
+        2.5rem
+      );
     }
 
     h2 {
-      font-size: clamp(1.5rem, 5.5vw, 2rem);
+      font-size: clamp(
+        1.5rem,
+        5.5vw,
+        2rem
+      );
     }
 
     h3 {
@@ -468,6 +580,66 @@ const GlobalStyles = createGlobalStyle`
     td {
       padding: 10px 12px;
     }
+
+  }
+
+  /* =====================================
+     19 — SMALL MOBILE DEVICES
+  ===================================== */
+
+  @media (max-width: 480px) {
+
+    body {
+      min-width: 320px;
+    }
+
+    h1 {
+      font-size: clamp(
+        1.85rem,
+        8vw,
+        2.2rem
+      );
+    }
+
+    h2 {
+      font-size: clamp(
+        1.4rem,
+        6vw,
+        1.8rem
+      );
+    }
+
+    h3 {
+      font-size: clamp(
+        1.15rem,
+        5vw,
+        1.35rem
+      );
+    }
+
+  }
+
+  /* =====================================
+     20 — REDUCED MOTION
+  ===================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+
+      transition-duration: 0.01ms !important;
+    }
+
   }
 
 `;

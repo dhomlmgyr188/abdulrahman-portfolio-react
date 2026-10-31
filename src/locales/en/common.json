@@ -1,19 +1,20 @@
+
 {
-    "logo": {
-        "me": "Abdulrahman"
-    },
-    "nav": {
-        "home": "Home",
-        "about": "About",
-        "projects": "Projects",
-        "contact": "Contact"
-    },
-    "buttons": {
-        "contact": "Contact Me",
-        "view_project": "Project Details",
-        "demo": "Live Preview",
-        "cv":  "My Resume",
-        "projects": "Discover my projects"
-    },
-    "copyright": "All rights reserved"
+  "logo": {
+    "me": "Abdulrahman"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "contact": "Contact Me",
+    "view_project": "Project Details",
+    "demo": "Project Preview",
+    "cv": "Resume",
+    "projects": "View Projects"
+  },
+  "copyright": "All rights reserved"
 }

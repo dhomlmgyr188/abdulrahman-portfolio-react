@@ -2,127 +2,339 @@
 import styled, { css } from "styled-components";
 import { LinkU } from "../T";
 
-/* =====================================
-   Actions Container
-===================================== */
+/* =========================================================
+   ABDULRAHMAN PORTFOLIO
+   SHARED BUTTON DESIGN SYSTEM
+
+   Theme:
+   - Ocean (Light)
+   - Orca (Dark)
+
+   Original exports preserved:
+   - Actions
+   - Button (default)
+   - NavLink
+   - IconButton
+
+   Supported props:
+   - $variant
+   - $size
+   - $rounded
+
+   Supported polymorphic rendering:
+   - as="a"
+   - as={Link}
+   - as={NavLink}
+========================================================= */
+
+
+/* =========================================================
+   01 — ACTIONS CONTAINER
+
+   Shared wrapper for groups of buttons.
+========================================================= */
 
 export const Actions = styled.div`
   display: flex;
   flex-wrap: wrap;
+
   align-items: center;
-  gap: clamp(10px, 1.5vw, 16px);
+  justify-content: flex-start;
+
+  width: 100%;
+  min-width: 0;
+
+  gap: clamp(
+    10px,
+    1.5vw,
+    16px
+  );
 
   @media (max-width: 480px) {
-    justify-content: center;
     gap: 10px;
+
+    justify-content: flex-start;
   }
 `;
 
-/* =====================================
-   Button Variants
-===================================== */
+
+/* =========================================================
+   02 — BUTTON VARIANTS
+
+   All colors come from variables.css.
+
+   This avoids inconsistent colors
+   between pages and themes.
+========================================================= */
 
 const buttonVariants = {
+
+  /* -------------------------------------------------------
+     PRIMARY
+  ------------------------------------------------------- */
+
   primary: css`
-    --button-bg: var(--color-primary);
-    --button-text: var(--color-background);
-    --button-border: var(--color-primary);
+    --button-bg:
+      var(--button-primary-bg);
 
-    --button-hover-bg: var(--color-primary-dark);
-    --button-hover-text: var(--color-white);
-    --button-hover-border: var(--color-primary-dark);
+    --button-text:
+      var(--button-primary-text);
 
-    --button-shadow: 0 4px 12px
-      color-mix(
-        in srgb,
-        var(--color-primary) 18%,
-        transparent
-      );
+    --button-border:
+      var(--button-primary-border);
+
+    --button-hover-bg:
+      var(--button-primary-hover-bg);
+
+    --button-hover-text:
+      var(--button-primary-hover-text);
+
+    --button-hover-border:
+      var(--button-primary-hover-border);
+
+    --button-shadow:
+      var(--shadow-sm);
   `,
+
+  /* -------------------------------------------------------
+     SECONDARY
+  ------------------------------------------------------- */
 
   secondary: css`
-    --button-bg: var(--color-background);
-    --button-text: var(--color-primary);
-    --button-border: color-mix(
-      in srgb,
-      var(--color-primary) 22%,
-      var(--color-border)
-    );
+    --button-bg:
+      var(--button-secondary-bg);
 
-    --button-hover-bg: var(--color-background-secondary);
-    --button-hover-text: var(--color-primary);
-    --button-hover-border: var(--color-primary);
+    --button-text:
+      var(--button-secondary-text);
+
+    --button-border:
+      var(--button-secondary-border);
+
+    --button-hover-bg:
+      var(--button-secondary-hover-bg);
+
+    --button-hover-text:
+      var(--button-secondary-hover-text);
+
+    --button-hover-border:
+      var(--button-secondary-hover-border);
 
     --button-shadow: none;
   `,
+
+  /* -------------------------------------------------------
+     TERTIARY
+  ------------------------------------------------------- */
 
   tertiary: css`
-    --button-bg: var(--color-tertiary);
-    --button-text: var(--color-background);
-    --button-border: var(--color-tertiary);
+    --button-bg:
+      var(--button-tertiary-bg);
 
-    --button-hover-bg: var(--color-tertiary-dark);
-    --button-hover-text: var(--color-white);
-    --button-hover-border: var(--color-tertiary-dark);
+    --button-text:
+      var(--button-tertiary-text);
 
-    --button-shadow: 0 4px 12px
-      color-mix(
-        in srgb,
-        var(--color-tertiary) 15%,
-        transparent
-      );
-  `,
+    --button-border:
+      var(--button-tertiary-border);
 
-  ghost: css`
-    --button-bg: transparent;
-    --button-text: var(--color-text-primary);
-    --button-border: transparent;
+    --button-hover-bg:
+      var(--button-tertiary-hover-bg);
 
-    --button-hover-bg: var(--color-background-secondary);
-    --button-hover-text: var(--color-primary);
-    --button-hover-border: transparent;
+    --button-hover-text:
+      var(--button-tertiary-hover-text);
+
+    --button-hover-border:
+      var(--button-tertiary-hover-border);
 
     --button-shadow: none;
   `,
+
+  /* -------------------------------------------------------
+     GHOST
+  ------------------------------------------------------- */
+
+  ghost: css`
+    --button-bg:
+      var(--button-ghost-bg);
+
+    --button-text:
+      var(--button-ghost-text);
+
+    --button-border:
+      var(--button-ghost-border);
+
+    --button-hover-bg:
+      var(--button-ghost-hover-bg);
+
+    --button-hover-text:
+      var(--button-ghost-hover-text);
+
+    --button-hover-border:
+      var(--button-ghost-border);
+
+    --button-shadow: none;
+  `,
+
 };
 
-/* =====================================
-   Base Button
-===================================== */
+
+/* =========================================================
+   03 — BUTTON SIZES
+========================================================= */
+
+const buttonSizes = {
+
+  sm: css`
+    min-height: 38px;
+
+    padding: 8px 14px;
+
+    font-size: 0.85rem;
+
+    gap: 7px;
+
+    svg,
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  `,
+
+  md: css`
+    min-height: var(--button-height);
+
+    padding:
+      var(--button-padding-block)
+      var(--button-padding-inline);
+
+    font-size: var(--button-font-size);
+
+    gap: 10px;
+  `,
+
+  lg: css`
+    min-height: 52px;
+
+    padding: 13px 26px;
+
+    font-size: 1rem;
+
+    gap: 10px;
+
+    svg,
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  `,
+
+};
+
+
+/* =========================================================
+   04 — BASE BUTTON
+
+   Works as:
+   - HTML button
+   - React Router Link
+   - External anchor
+
+   Examples:
+   <Button>Submit</Button>
+
+   <Button $variant="secondary">
+     Download
+   </Button>
+
+   <Button as={Link} to="/contact">
+     Contact
+   </Button>
+========================================================= */
 
 const Button = styled.button`
+
+  /* -------------------------------------------------------
+     VARIANT
+  ------------------------------------------------------- */
+
   ${({ $variant = "primary" }) =>
-    buttonVariants[$variant] || buttonVariants.primary}
+    buttonVariants[$variant] ||
+    buttonVariants.primary
+  }
+
+  /* -------------------------------------------------------
+     LAYOUT
+  ------------------------------------------------------- */
 
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
+  flex-shrink: 0;
+
+  position: relative;
+
+  width: auto;
+  max-width: 100%;
+
+  min-width: 0;
+
   gap: 10px;
 
-  min-height: 46px;
-  padding: 11px 22px;
+  /* -------------------------------------------------------
+     SIZE
+  ------------------------------------------------------- */
 
-  border: 1px solid var(--button-border);
-  border-radius: 12px;
+  ${({ $size = "md" }) =>
+    buttonSizes[$size] ||
+    buttonSizes.md
+  }
 
-  background-color: var(--button-bg);
-  color: var(--button-text);
+  /* -------------------------------------------------------
+     APPEARANCE
+  ------------------------------------------------------- */
+
+  border:
+    1px solid var(--button-border);
+
+  border-radius:
+    var(--button-radius);
+
+  background-color:
+    var(--button-bg);
+
+  color:
+    var(--button-text);
+
+  box-shadow:
+    var(--button-shadow);
+
+  /* -------------------------------------------------------
+     TYPOGRAPHY
+  ------------------------------------------------------- */
 
   font: inherit;
-  font-size: 0.94rem;
-  font-weight: 700;
+
+  font-weight:
+    var(--button-font-weight);
+
   line-height: 1.45;
 
   text-align: center;
   text-decoration: none;
-  white-space: nowrap;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+
+  /* -------------------------------------------------------
+     INTERACTION
+  ------------------------------------------------------- */
 
   cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
 
-  box-shadow: var(--button-shadow);
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
 
   transition:
     transform var(--transition-fast),
@@ -131,71 +343,161 @@ const Button = styled.button`
     border-color var(--transition-fast),
     box-shadow var(--transition-fast);
 
-  & svg,
-  & img {
+  /* -------------------------------------------------------
+     ICONS
+  ------------------------------------------------------- */
+
+  svg,
+  img {
     display: block;
+
     width: 18px;
     height: 18px;
+
     flex-shrink: 0;
+
     object-fit: contain;
 
-    transition: transform var(--transition-fast);
+    transition:
+      transform var(--transition-fast);
   }
 
-  &:hover:not(:disabled):not([aria-disabled="true"]) {
-    transform: translateY(-2px);
+  /* -------------------------------------------------------
+     HOVER
+  ------------------------------------------------------- */
 
-    background-color: var(--button-hover-bg);
-    color: var(--button-hover-text);
-    border-color: var(--button-hover-border);
+  @media (hover: hover) {
 
-    box-shadow: var(--shadow-md);
+    &:hover:not(:disabled):not([aria-disabled="true"]) {
+      transform: translateY(-2px);
+
+      background-color:
+        var(--button-hover-bg);
+
+      color:
+        var(--button-hover-text);
+
+      border-color:
+        var(--button-hover-border);
+
+      box-shadow:
+        var(--shadow-sm);
+
+      text-decoration: none;
+    }
+
+    &:hover:not(:disabled):not([aria-disabled="true"]) svg {
+      transform: translateY(-1px);
+    }
+
   }
 
-  &:hover:not(:disabled):not([aria-disabled="true"]) svg {
-    transform: translateY(-1px);
-  }
+  /* -------------------------------------------------------
+     ACTIVE
+  ------------------------------------------------------- */
 
   &:active:not(:disabled):not([aria-disabled="true"]) {
     transform: translateY(0);
+
     box-shadow: none;
   }
 
+  /* -------------------------------------------------------
+     FOCUS
+  ------------------------------------------------------- */
+
   &:focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline:
+      2px solid var(--focus-ring-color);
+
     outline-offset: 4px;
   }
 
+  /* -------------------------------------------------------
+     DISABLED
+  ------------------------------------------------------- */
+
   &:disabled,
   &[aria-disabled="true"] {
-    opacity: 0.5;
+    opacity: 0.55;
+
     cursor: not-allowed;
     pointer-events: none;
+
     box-shadow: none;
     transform: none;
   }
 
-  &.active {
-    --button-bg: var(--color-secondary);
-    --button-border: var(--color-secondary);
-    --button-text: var(--color-background);
+  /* -------------------------------------------------------
+     ACTIVE CLASS
 
-    --button-hover-bg: var(--color-secondary-dark);
-    --button-hover-border: var(--color-secondary-dark);
-    --button-hover-text: var(--color-white);
+     Preserved for compatibility with
+     existing components.
+  ------------------------------------------------------- */
+
+  &.active {
+    --button-bg:
+      var(--button-primary-bg);
+
+    --button-text:
+      var(--button-primary-text);
+
+    --button-border:
+      var(--button-primary-border);
+
+    --button-hover-bg:
+      var(--button-primary-hover-bg);
+
+    --button-hover-text:
+      var(--button-primary-hover-text);
+
+    --button-hover-border:
+      var(--button-primary-hover-border);
   }
+
+  /* -------------------------------------------------------
+     FULL WIDTH
+
+     Optional prop:
+     $fullWidth
+  ------------------------------------------------------- */
+
+  ${({ $fullWidth }) =>
+    $fullWidth &&
+    css`
+      width: 100%;
+    `
+  }
+
+  /* -------------------------------------------------------
+     MOBILE
+  ------------------------------------------------------- */
 
   @media (max-width: 480px) {
-    min-height: 44px;
-    padding: 10px 16px;
-    font-size: 0.875rem;
+
+    ${({ $size = "md" }) =>
+      $size === "md" &&
+      css`
+        min-height: 44px;
+
+        padding: 10px 16px;
+
+        font-size: 0.875rem;
+      `
+    }
+
   }
 
+  /* -------------------------------------------------------
+     REDUCED MOTION
+  ------------------------------------------------------- */
+
   @media (prefers-reduced-motion: reduce) {
+
     transition: none;
 
-    & svg,
-    & img {
+    svg,
+    img {
       transition: none;
     }
 
@@ -208,30 +510,50 @@ const Button = styled.button`
     &:hover img {
       transform: none !important;
     }
+
   }
+
 `;
 
-/* =====================================
-   Navigation Link
-===================================== */
+
+/* =========================================================
+   05 — NAVIGATION LINK
+
+   This component is for navigation,
+   not for primary call-to-action buttons.
+
+   It preserves the original LinkU base.
+========================================================= */
 
 export const NavLink = styled(LinkU)`
   position: relative;
 
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
   min-height: 40px;
+
   padding: 9px 13px;
 
-  border: 1px solid transparent;
+  gap: 7px;
+
+  border:
+    1px solid transparent;
+
   border-radius: 10px;
 
-  color: var(--color-text-primary);
+  background-color: transparent;
+
+  color:
+    var(--color-text-primary);
 
   font-size: 0.94rem;
   font-weight: 500;
+
+  line-height: 1.5;
+
   text-decoration: none;
 
   transition:
@@ -239,129 +561,237 @@ export const NavLink = styled(LinkU)`
     background-color var(--transition-fast),
     border-color var(--transition-fast);
 
+  /* -------------------------------------------------------
+     HOVER
+  ------------------------------------------------------- */
+
   &:hover {
     color: var(--color-primary);
 
-    background-color: var(--color-background-secondary);
-    border-color: var(--color-border);
+    background-color:
+      var(--color-surface-hover);
+
+    border-color:
+      var(--color-border);
+
+    text-decoration: none;
 
     opacity: 1;
   }
 
+  /* -------------------------------------------------------
+     CURRENT PAGE
+  ------------------------------------------------------- */
+
   &.active,
   &[aria-current="page"] {
-    color: var(--color-primary);
+    color:
+      var(--color-primary);
+
     font-weight: 700;
 
-    background-color: color-mix(
-      in srgb,
-      var(--color-primary) 7%,
-      var(--color-background)
-    );
+    background-color:
+      var(--color-primary-soft);
 
-    border-color: color-mix(
-      in srgb,
-      var(--color-primary) 12%,
-      transparent
-    );
+    border-color:
+      var(--color-border);
   }
 
+  /* -------------------------------------------------------
+     FOCUS
+  ------------------------------------------------------- */
+
   &:focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline:
+      2px solid var(--focus-ring-color);
+
     outline-offset: 3px;
+  }
+
+  /* -------------------------------------------------------
+     REDUCED MOTION
+  ------------------------------------------------------- */
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 `;
 
-/* =====================================
-   Icon Button
-===================================== */
+
+/* =========================================================
+   06 — ICON BUTTON
+
+   Uses the shared Button component.
+
+   Supported props:
+   - $size="sm"
+   - $size="md"
+   - $size="lg"
+   - $rounded
+
+   Example:
+   <IconButton
+     aria-label="Open settings"
+     $rounded
+   >
+     <SettingsIcon />
+   </IconButton>
+========================================================= */
 
 export const IconButton = styled(Button)`
-  --button-bg: var(--color-background-secondary);
-  --button-text: var(--color-primary);
-  --button-border: var(--color-border);
 
-  --button-hover-bg: var(--color-background-tertiary);
-  --button-hover-text: var(--color-primary);
-  --button-hover-border: var(--color-primary);
+  /* -------------------------------------------------------
+     DEFAULT COLORS
 
-  --button-shadow: none;
+     Uses the secondary button palette
+     unless a different $variant is passed.
+  ------------------------------------------------------- */
+
+  ${({ $variant = "secondary" }) =>
+    buttonVariants[$variant] ||
+    buttonVariants.secondary
+  }
+
+  /* -------------------------------------------------------
+     DEFAULT DIMENSIONS
+  ------------------------------------------------------- */
 
   width: 44px;
   height: 44px;
+
+  min-width: 44px;
   min-height: 44px;
 
   padding: 0;
+
   flex-shrink: 0;
 
-  border-radius: 12px;
+  gap: 0;
 
-  & svg,
-  & img {
+  border-radius:
+    var(--radius-button);
+
+  /* -------------------------------------------------------
+     ICON DIMENSIONS
+  ------------------------------------------------------- */
+
+  svg,
+  img {
     width: 20px;
     height: 20px;
   }
 
-  &:hover:not(:disabled):not([aria-disabled="true"]) {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+  /* -------------------------------------------------------
+     HOVER
+  ------------------------------------------------------- */
+
+  @media (hover: hover) {
+
+    &:hover:not(:disabled):not([aria-disabled="true"]) {
+      transform: translateY(-2px);
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+    &:hover:not(:disabled):not([aria-disabled="true"]) svg,
+    &:hover:not(:disabled):not([aria-disabled="true"]) img {
+      transform: scale(1.08);
+    }
+
   }
 
-  &:hover:not(:disabled):not([aria-disabled="true"]) svg,
-  &:hover:not(:disabled):not([aria-disabled="true"]) img {
-    transform: scale(1.08);
-  }
+  /* -------------------------------------------------------
+     ACTIVE
+  ------------------------------------------------------- */
 
   &:active:not(:disabled):not([aria-disabled="true"]) {
     transform: scale(0.96);
   }
 
-  /* Circular variant */
-  ${({ $rounded }) =>
-    $rounded &&
-    css`
-      border-radius: 50%;
-    `}
+  /* -------------------------------------------------------
+     SMALL SIZE
+  ------------------------------------------------------- */
 
-  /* Small size */
   ${({ $size }) =>
     $size === "sm" &&
     css`
       width: 36px;
       height: 36px;
+
+      min-width: 36px;
       min-height: 36px;
 
       border-radius: 10px;
 
-      & svg,
-      & img {
+      svg,
+      img {
         width: 17px;
         height: 17px;
       }
-    `}
+    `
+  }
 
-  /* Large size */
+  /* -------------------------------------------------------
+     LARGE SIZE
+  ------------------------------------------------------- */
+
   ${({ $size }) =>
     $size === "lg" &&
     css`
       width: 52px;
       height: 52px;
+
+      min-width: 52px;
       min-height: 52px;
 
       border-radius: 15px;
 
-      & svg,
-      & img {
+      svg,
+      img {
         width: 24px;
         height: 24px;
       }
-    `}
+    `
+  }
+
+  /* -------------------------------------------------------
+     CIRCULAR VARIANT
+
+     Applied last so it overrides
+     small and large corner radii.
+  ------------------------------------------------------- */
 
   ${({ $rounded }) =>
     $rounded &&
     css`
       border-radius: 50%;
-    `}
+    `
+  }
+
+  /* -------------------------------------------------------
+     REDUCED MOTION
+  ------------------------------------------------------- */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    &:hover,
+    &:active {
+      transform: none !important;
+    }
+
+    &:hover svg,
+    &:hover img {
+      transform: none !important;
+    }
+
+  }
+
 `;
+
+
+/* =========================================================
+   07 — DEFAULT EXPORT
+========================================================= */
 
 export default Button;

@@ -8,10 +8,7 @@ import BreadCrumb from "../Components/ui/Breadcrumb";
 import Container from "../Components/layout/PageContainer";
 import ProjectsGrid from "../Components/projects/ProjectsGrid";
 
-import {
-    PageHeader,
-    PageHeaderContainer,
-} from "../Components/ui/T";
+import { PageHeader } from "../Components/ui/T";
 
 /* =========================================
    PROJECTS PAGE
@@ -31,74 +28,6 @@ const ProjectsPage = styled.main`
     --color-text-primary,
     #172435
   );
-`;
-
-/* =========================================
-   PAGE HEADER
-========================================= */
-
-const HeaderContent = styled.div`
-  width: 100%;
-  padding: 0;
-  margin: 0;
-`;
-
-const HeaderTitle = styled.h1`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  margin: 0 0 14px;
-
-  color: var(
-    --color-text-primary,
-    #172435
-  );
-
-  font-size: clamp(
-    2rem,
-    4vw,
-    3rem
-  );
-
-  font-weight: 800;
-  line-height: 1.45;
-  text-align: start;
-
-  svg {
-    flex-shrink: 0;
-
-    color: var(
-      --color-primary,
-      #0065a8
-    );
-
-    font-size: 0.8em;
-  }
-
-  @media (max-width: 600px) {
-    gap: 10px;
-  }
-`;
-
-const HeaderDescription = styled.p`
-  max-width: 850px;
-  margin: 0;
-
-  color: var(
-    --color-text-secondary,
-    #475569
-  );
-
-  font-size: clamp(
-    0.92rem,
-    1.5vw,
-    1rem
-  );
-
-  font-weight: 400;
-  line-height: 2;
-  text-align: start;
 `;
 
 /* =========================================
@@ -243,129 +172,89 @@ const GridWrapper = styled.div`
 ========================================= */
 
 const Projects = () => {
-    const { t, i18n } = useTranslation([
-        "projects",
-        "common",
-    ]);
+  const { t, i18n } = useTranslation([
+    "projects",
+    "common",
+  ]);
 
-    const language =
-        i18n.resolvedLanguage ||
-        i18n.language ||
-        "ar";
+  const language =
+    i18n.resolvedLanguage ||
+    i18n.language ||
+    "ar";
 
-    const isArabic =
-        language.startsWith("ar");
+  const isArabic = language.startsWith("ar");
 
-    /* PAGE TITLE */
+  /* SECTION TITLE */
 
-    const pageTitle = t("projects:pageTitle", {
-        defaultValue: isArabic
-            ? "مشاريعي"
-            : "My Projects",
-    });
+  const sectionTitle = t(
+    "projects:section.title",
+    {
+      defaultValue: isArabic
+        ? "استكشف مشاريعي"
+        : "Explore My Projects",
+    }
+  );
 
-    /* PAGE DESCRIPTION */
+  /* SECTION DESCRIPTION */
 
-    const pageDescription = t(
-        "projects:pageDesc",
-        {
-            defaultValue: isArabic
-                ? "مجموعة من المشاريع والأعمال التي قمت بتصميمها وتطويرها، وتعكس مهاراتي التقنية وخبرتي في تطوير مواقع وتطبيقات الويب."
-                : "A collection of projects I have designed and developed, reflecting my technical skills and experience in building websites and web applications.",
-        }
-    );
+  const sectionDescription = t(
+    "projects:section.description",
+    {
+      defaultValue: isArabic
+        ? "تصفح المشاريع واطلع على تفاصيل كل مشروع والتقنيات المستخدمة في تطويره."
+        : "Browse my projects and explore their details and the technologies used to build them.",
+    }
+  );
 
-    /* SECTION TITLE */
-
-    const sectionTitle = t(
-        "projects:section.title",
-        {
-            defaultValue: isArabic
-                ? "استكشف مشاريعي"
-                : "Explore My Projects",
-        }
-    );
-
-    /* SECTION DESCRIPTION */
-
-    const sectionDescription = t(
-        "projects:section.description",
-        {
-            defaultValue: isArabic
-                ? "تصفح المشاريع واطلع على تفاصيل كل مشروع والتقنيات المستخدمة في تطويره."
-                : "Browse my projects and explore their details and the technologies used to build them.",
-        }
-    );
-
-    return (
-        <ProjectsPage
-            dir={isArabic ? "rtl" : "ltr"}
-        >
-
-            {/* =================================
-          PAGE HEADER
+  return (
+    <ProjectsPage
+      dir={isArabic ? "rtl" : "ltr"}
+    >
+      {/* =================================
+          PAGE HEADER — BREADCRUMB ONLY
       ================================= */}
 
+      <PageHeader>
+        <BreadCrumb value="projects" />
+      </PageHeader>
 
-            <PageHeader>
-                <BreadCrumb value="projects" />
-
-                <PageHeaderContainer>
-                    <HeaderContent>
-                        <HeaderTitle>
-                            {pageTitle}
-                        </HeaderTitle>
-
-                        <HeaderDescription>
-                            {pageDescription}
-                        </HeaderDescription>
-                    </HeaderContent>
-                </PageHeaderContainer>
-            </PageHeader>
-
-
-            {/* =================================
+      {/* =================================
           PROJECTS SECTION
       ================================= */}
 
-            <ProjectsSection
-                aria-label={sectionTitle}
+      <ProjectsSection
+        aria-label={sectionTitle}
+      >
+        <ProjectsContainer>
+          {/* SECTION HEADER */}
+
+          <SectionHeader>
+            <SectionIcon
+              aria-hidden="true"
             >
-                <ProjectsContainer>
+              <FiGrid />
+            </SectionIcon>
 
-                    {/* SECTION HEADER */}
-                    <SectionHeader>
+            <SectionHeadingContent>
+              <SectionTitle>
+                {sectionTitle}
+              </SectionTitle>
 
-                        <SectionIcon
-                            aria-hidden="true"
-                        >
-                            <FiGrid />
-                        </SectionIcon>
+              <SectionDescription>
+                {sectionDescription}
+              </SectionDescription>
+            </SectionHeadingContent>
+          </SectionHeader>
 
-                        <SectionHeadingContent>
+          {/* PROJECTS GRID */}
 
-                            <SectionTitle>
-                                {sectionTitle}
-                            </SectionTitle>
-
-                            <SectionDescription>
-                                {sectionDescription}
-                            </SectionDescription>
-
-                        </SectionHeadingContent>
-
-                    </SectionHeader>
-
-                    {/* PROJECTS GRID */}
-                    <GridWrapper>
-                        <ProjectsGrid />
-                    </GridWrapper>
-
-                </ProjectsContainer>
-            </ProjectsSection>
-
-        </ProjectsPage>
-    );
+          <GridWrapper>
+            <ProjectsGrid />
+          </GridWrapper>
+        </ProjectsContainer>
+      </ProjectsSection>
+    </ProjectsPage>
+  );
 };
 
 export default Projects;

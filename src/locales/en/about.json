@@ -1,11 +1,12 @@
+
 {
   "pageTitle": "About Me",
-  "pageDesc": "Explore my education, professional experience, certifications, skills, and volunteer activities.",
+  "pageDesc": "My education, experience, skills, and achievements.",
   "content": {
     "intro": {
       "title": "About Me",
-      "paragraph1": "I am Abdulrahman Nasser Al-Mughyir, a graduate with an Intermediate Diploma in Full-Stack Web Development from the Applied College at Taibah University in Medina, Saudi Arabia. I combine knowledge of web development with practical experience in digital systems, data organization, and operational and administrative tasks.",
-      "paragraph2": "I have gained practical experience in hotel reception, sales, and point-of-sale operations, alongside developing independent and academic web projects. I am interested in technology, accuracy, information organization, and problem-solving. I aim to continuously develop my skills and contribute to a productive professional environment."
+      "paragraph1": "I'm Abdulrahman Nasser Al-Mughyir, a Full-Stack Web Development diploma graduate from Taibah University, with skills in web development, digital systems, and data management.",
+      "paragraph2": "My experience spans hotel reception, sales, and administrative operations. I enjoy learning, solving problems, and building practical digital solutions."
     },
     "infoTitle": "Quick Information",
     "profile": [
@@ -27,12 +28,12 @@
       },
       {
         "label": "Professional Status",
-        "value": "Available for job opportunities and freelance projects"
+        "value": "Open to jobs and freelance projects"
       }
     ],
     "education": {
-      "title": "My Educational Journey",
-      "description": "My academic qualifications, educational institutions, specializations, graduation dates, and grades.",
+      "title": "Education",
+      "description": "Academic qualifications and achievements.",
       "gradeLabel": "GPA",
       "items": [
         {
@@ -57,7 +58,7 @@
     },
     "experience": {
       "title": "Professional Experience",
-      "description": "Four professional roles that helped me develop my skills in operations, administration, sales, and digital systems.",
+      "description": "My work experience across different industries.",
       "items": [
         {
           "role": "Hotel Receptionist",
@@ -65,7 +66,7 @@
           "employmentType": "full-time",
           "startDate": "2025-07-12",
           "endDate": "Present",
-          "description": "Managing daily reservations, check-ins, and check-outs for individual guests and groups at a 160-room hotel. Preparing reservation schedules using Excel, issuing and archiving receipts, preparing Word documents, and monitoring service quality and health compliance requirements."
+          "description": "Managing guest check-ins, check-outs, and reservations at a 160-room hotel, alongside records, Excel schedules, documents, and service coordination."
         },
         {
           "role": "Telecommunications SIM Sales Representative",
@@ -73,7 +74,7 @@
           "employmentType": "seasonal",
           "startDate": "2025-04-16",
           "endDate": "2025-05-16",
-          "description": "Marketing and activating SIM cards for visitors using digital systems and fingerprint readers, entering customer information, and documenting payments. Achieved the full monthly sales target within 24 days, reaching up to 40 activations per day during peak periods."
+          "description": "Selling and activating SIM cards, verifying customer information, and recording payments. Achieved the monthly sales target in 24 days."
         },
         {
           "role": "Food and Beverage Cashier",
@@ -81,7 +82,7 @@
           "employmentType": "full-time",
           "startDate": "2024-01-27",
           "endDate": "2024-04-21",
-          "description": "Receiving and processing customer orders through point-of-sale systems and delivery applications, collecting payments, reconciling revenue, coordinating with team members, and monitoring order preparation quality.",
+          "description": "Processing orders and payments, managing delivery applications, reconciling revenue, and coordinating with the team.",
           "documentType": "experience",
           "document": "/documents/experience/altahlia-cashier.png"
         },
@@ -91,15 +92,15 @@
           "employmentType": "full-time",
           "startDate": "2022-05-16",
           "endDate": "2022-08-01",
-          "description": "Managing customer orders, issuing invoices, collecting cash and electronic payments, handling delivery application orders, coordinating with the team, and reconciling daily revenue.",
+          "description": "Handling customer orders, invoices, payments, delivery applications, and daily revenue reconciliation.",
           "documentType": "experience",
           "document": "/documents/experience/frawlaty-cashier.png"
         }
       ]
     },
     "certificates": {
-      "title": "Certificates and Training Courses",
-      "description": "Certificates and training courses in web development, cybersecurity, human resources, and professional skills, listed from newest to oldest.",
+      "title": "Certificates & Courses",
+      "description": "Training and professional development.",
       "items": [
         {
           "name": "Fundamentals of Human Resource Management",
@@ -170,11 +171,11 @@
       ]
     },
     "skills": {
-      "title": "My Skills",
-      "description": "Technical, office, and professional skills acquired through education, training courses, projects, work experience, and volunteering.",
+      "title": "Skills",
+      "description": "Technical, administrative, and professional skills.",
       "groups": [
         {
-          "title": "Frontend Web Development",
+          "title": "Frontend Development",
           "items": [
             {
               "name": "HTML5",
@@ -227,7 +228,7 @@
           ]
         },
         {
-          "title": "Backend and Databases",
+          "title": "Backend & Databases",
           "items": [
             {
               "name": "PHP",
@@ -256,7 +257,7 @@
           ]
         },
         {
-          "title": "Development Tools and Platforms",
+          "title": "Development Tools",
           "items": [
             {
               "name": "Git",
@@ -288,7 +289,7 @@
           ]
         },
         {
-          "title": "Design and Digital Tools",
+          "title": "Design & Digital Tools",
           "items": [
             {
               "name": "Figma",
@@ -328,7 +329,7 @@
           ]
         },
         {
-          "title": "Office and Administrative Skills",
+          "title": "Office & Administration",
           "items": [
             {
               "name": "Microsoft Word",
@@ -382,7 +383,7 @@
           ]
         },
         {
-          "title": "Artificial Intelligence Tools",
+          "title": "AI Tools",
           "items": [
             {
               "name": "ChatGPT",
@@ -411,7 +412,7 @@
           ]
         },
         {
-          "title": "Professional and Personal Skills",
+          "title": "Professional Skills",
           "items": [
             {
               "name": "Time Management",
@@ -485,16 +486,16 @@
       ]
     },
     "volunteering": {
-      "title": "Volunteer Activities",
-      "description": "Community, technical, and scouting activities, along with an officially documented record of volunteer hours.",
+      "title": "Volunteering",
+      "description": "Volunteer work and community participation.",
       "summary": {
-        "label": "Total Documented Volunteer Hours",
+        "label": "Documented Volunteer Hours",
         "value": "189 hours",
         "hours": 189,
         "opportunities": 14,
         "startDate": "2022-12-17",
         "endDate": "2023-06-05",
-        "description": "A total of 189 documented volunteer hours across 14 completed volunteer opportunities on the National Volunteer Work Platform, from December 17, 2022, to June 5, 2023.",
+        "description": "189 documented hours across 14 volunteer opportunities.",
         "documentType": "volunteering",
         "document": "/documents/volunteering/volunteering-189-hours.png"
       },
@@ -504,7 +505,7 @@
           "provider": "Technical College in Medina — Najran",
           "startDate": "2023-05-14",
           "endDate": "2023-05-18",
-          "description": "Participated in the scouting and technology camp, including its activities and programs.",
+          "description": "Participated in scouting and technology activities.",
           "documentType": "participation",
           "document": "/documents/volunteering/rusul-alsalam-camp.png"
         },
@@ -513,7 +514,7 @@
           "provider": "General Directorate of Technical and Vocational Training — Medina Region",
           "startDate": "2023-03-26",
           "endDate": "2023-04-06",
-          "description": "Participated in a technical volunteer initiative serving visitors to the Prophet's Mosque.",
+          "description": "Supported visitors through a technical volunteer initiative.",
           "documentType": "appreciation",
           "document": "/documents/volunteering/technical-aoun.png"
         },
@@ -522,47 +523,47 @@
           "provider": "King Abdulaziz Center for National Dialogue — Medina Education Department",
           "startDate": "2021-10-24",
           "endDate": "2021-11-04",
-          "description": "Participated in dialogue activities and competitions, developing communication and dialogue skills.",
+          "description": "Participated in dialogue activities and competitions.",
           "documentType": "appreciation",
           "document": "/documents/volunteering/dialogue-competition.png"
         }
       ]
     },
     "goal": {
-      "title": "My Career Aspirations",
-      "description": "I seek a stable, long-term professional opportunity in web development, technical support, or digital and administrative operations, where I can apply my technical knowledge and practical experience, contribute to improving operational efficiency and productivity, and continue learning and developing professionally."
+      "title": "Career Goals",
+      "description": "Seeking a long-term opportunity in web development, IT support, or administrative operations where I can contribute, learn, and grow."
     }
   },
   "title": "About Me",
-  "description": "Explore my education, professional experience, certifications, skills, and volunteer activities.",
+  "description": "My education, experience, skills, and achievements.",
   "breadcrumb": {
     "title": "About Me",
-    "description": "Explore my education, professional experience, certifications, skills, and volunteer activities."
+    "description": "My education, experience, skills, and achievements."
   },
   "documentPreview": {
-    "loading": "Please wait a moment while we prepare your certificate for viewing...",
-    "error": "Unable to load the certificate. Please try again.",
-    "unavailable": "The document URL is unavailable.",
-    "unsupported": "This file format cannot be previewed on this page."
+    "loading": "Loading document...",
+    "error": "Unable to load the document.",
+    "unavailable": "Document unavailable.",
+    "unsupported": "Preview not supported for this file."
   },
   "aiSkills": {
-    "title": "Artificial Intelligence Tools",
+    "title": "AI Tools",
     "tools": {
       "chatgpt": {
         "name": "ChatGPT",
-        "usage": "Using AI for programming, problem-solving, research, and content writing."
+        "usage": "Programming, research, and writing."
       },
       "gemini": {
         "name": "Google Gemini",
-        "usage": "Research, information analysis, idea generation, and technical assistance."
+        "usage": "Research and idea generation."
       },
       "claude": {
         "name": "Claude",
-        "usage": "Document and text analysis, programming assistance, and writing."
+        "usage": "Writing, analysis, and programming."
       },
       "deepseek": {
         "name": "DeepSeek",
-        "usage": "Code generation, error analysis, and programming problem-solving."
+        "usage": "Programming and debugging."
       }
     }
   }

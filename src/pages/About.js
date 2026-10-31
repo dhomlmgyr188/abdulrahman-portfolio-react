@@ -1,12 +1,4 @@
-
-import React, {
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -21,9 +13,7 @@ import {
   FiHeart,
   FiCalendar,
   FiClock,
-  FiFileText,
   FiEye,
-  FiX,
   FiChevronDown,
   FiArrowUpRight,
   FiMonitor,
@@ -36,37 +26,25 @@ import {
 
 import Container from "../Components/layout/PageContainer";
 import BreadCrumb from "../Components/ui/Breadcrumb";
+import Button from "../Components/ui/Button/Button";
+import { ImgModal } from "../Components/ui/Modal";
 
-import {
-  PageHeader,
-  PageHeaderContainer,
-} from "../Components/ui/T";
+import { PageHeader } from "../Components/ui/T";
 
-/* =========================================
-   GENERAL HELPERS
-========================================= */
+/* =====================================================
+   HELPERS
+===================================================== */
 
-const asArray = (value) =>
-  Array.isArray(value) ? value : [];
+const asArray = (value) => (Array.isArray(value) ? value : []);
 
 const asText = (value, isArabic) => {
-  if (
-    typeof value === "string" ||
-    typeof value === "number"
-  ) {
+  if (typeof value === "string" || typeof value === "number") {
     return String(value);
   }
 
-  if (
-    value &&
-    typeof value === "object" &&
-    !Array.isArray(value)
-  ) {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
     return String(
-      (isArabic ? value.ar : value.en) ||
-      value.ar ||
-      value.en ||
-      ""
+      (isArabic ? value.ar : value.en) || value.ar || value.en || "",
     );
   }
 
@@ -74,28 +52,23 @@ const asText = (value, isArabic) => {
 };
 
 const firstValue = (...values) =>
-  values.find(
-    (value) =>
-      value !== undefined &&
-      value !== null &&
-      value !== ""
-  );
+  values.find((value) => value !== undefined && value !== null && value !== "");
 
 const normalizeDigits = (value) =>
   String(value ?? "")
-    .replace(/[٠-٩]/g, (digit) =>
-      String("٠١٢٣٤٥٦٧٨٩".indexOf(digit))
-    )
-    .replace(/[۰-۹]/g, (digit) =>
-      String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit))
-    );
+    .replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+    .replace(/[۰-۹]/g, (digit) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)));
 
-const pad = (number) =>
-  String(number).padStart(2, "0");
+const pad = (value) => String(value).padStart(2, "0");
 
-/* =========================================
+const isPresent = (value) =>
+  /present|current|ongoing|now|حتى الآن|حاليا|حالياً/i.test(
+    String(value || ""),
+  );
+
+/* =====================================================
    DATE HELPERS
-========================================= */
+===================================================== */
 
 const parseDate = (value) => {
   if (!value || isPresent(value)) return null;
@@ -107,27 +80,21 @@ const parseDate = (value) => {
   let day = 1;
   let precision = "day";
 
-  let match = text.match(
-    /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/
-  );
+  let match = text.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
 
   if (match) {
     year = Number(match[1]);
     month = Number(match[2]);
     day = Number(match[3]);
   } else {
-    match = text.match(
-      /^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/
-    );
+    match = text.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
 
     if (match) {
       day = Number(match[1]);
       month = Number(match[2]);
       year = Number(match[3]);
     } else {
-      match = text.match(
-        /^(\d{4})[-/.](\d{1,2})$/
-      );
+      match = text.match(/^(\d{4})[-/.](\d{1,2})$/);
 
       if (match) {
         year = Number(match[1]);
@@ -144,9 +111,7 @@ const parseDate = (value) => {
     }
   }
 
-  const date = new Date(
-    Date.UTC(year, month - 1, day)
-  );
+  const date = new Date(Date.UTC(year, month - 1, day));
 
   if (
     year < 1900 ||
@@ -167,13 +132,7 @@ const parseDate = (value) => {
   };
 };
 
-function isPresent(value) {
-  return /present|current|ongoing|now|حتى الآن|حاليا|حالياً/i.test(
-    String(value || "")
-  );
-}
-
-const formatParsedDate = (parsed) => {
+const formatDate = (parsed) => {
   if (!parsed) return "";
 
   if (parsed.precision === "year") {
@@ -184,21 +143,13 @@ const formatParsedDate = (parsed) => {
     return `${pad(parsed.month)}/${parsed.year}`;
   }
 
-  return `${pad(parsed.day)}/${pad(
-    parsed.month
-  )}/${parsed.year}`;
+  return `${pad(parsed.day)}/${pad(parsed.month)}/${parsed.year}`;
 };
 
 const extractDates = (item = {}) => {
-  const startValue = firstValue(
-    item.startDate,
-    item.start
-  );
+  const startValue = firstValue(item.startDate, item.start);
 
-  const endValue = firstValue(
-    item.endDate,
-    item.end
-  );
+  const endValue = firstValue(item.endDate, item.end);
 
   const current =
     item.current === true ||
@@ -215,12 +166,10 @@ const extractDates = (item = {}) => {
     };
   }
 
-  const raw = normalizeDigits(
-    firstValue(item.date, item.period, "")
-  );
+  const raw = normalizeDigits(firstValue(item.date, item.period, ""));
 
   const matches = raw.match(
-    /\d{4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{1,2}[-/.]\d{1,2}[-/.]\d{4}|\d{4}[-/.]\d{1,2}/g
+    /\d{4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{1,2}[-/.]\d{1,2}[-/.]\d{4}|\d{4}[-/.]\d{1,2}/g,
   );
 
   if (matches?.length >= 2) {
@@ -237,45 +186,33 @@ const extractDates = (item = {}) => {
     end: null,
     current,
     single: parseDate(
-      firstValue(
-        item.issuedDate,
-        item.completionDate,
-        item.date
-      )
+      firstValue(item.issuedDate, item.completionDate, item.date),
     ),
   };
 };
 
 const getDateLabel = (item, isArabic) => {
-  const {
-    start,
-    end,
-    current,
-    single,
-  } = extractDates(item);
+  const dates = extractDates(item);
 
-  const startText = formatParsedDate(start);
-  const endText = formatParsedDate(end);
+  const start = formatDate(dates.start);
+  const end = formatDate(dates.end);
 
-  if (startText && current) {
-    return `${startText} – ${isArabic ? "حتى الآن" : "Present"
-      }`;
+  if (start && dates.current) {
+    return `${start} – ${isArabic ? "حتى الآن" : "Present"}`;
   }
 
-  if (startText && endText) {
-    return `${startText} – ${endText}`;
+  if (start && end) {
+    return `${start} – ${end}`;
   }
 
-  if (startText) return startText;
-  if (endText) return endText;
+  if (start) return start;
+  if (end) return end;
 
-  if (single) {
-    return formatParsedDate(single);
+  if (dates.single) {
+    return formatDate(dates.single);
   }
 
-  return String(
-    firstValue(item?.date, item?.period, "")
-  );
+  return String(firstValue(item?.date, item?.period, ""));
 };
 
 const getSortTime = (item) => {
@@ -286,31 +223,19 @@ const getSortTime = (item) => {
   }
 
   const parsed =
-    parseDate(item?.sortDate) ||
-    dates.end ||
-    dates.single ||
-    dates.start;
+    parseDate(item?.sortDate) || dates.end || dates.single || dates.start;
 
-  return parsed
-    ? parsed.date.getTime()
-    : -Infinity;
+  return parsed ? parsed.date.getTime() : -Infinity;
 };
 
 const sortNewest = (items) =>
-  [...asArray(items)].sort(
-    (a, b) => getSortTime(b) - getSortTime(a)
-  );
+  [...asArray(items)].sort((a, b) => getSortTime(b) - getSortTime(a));
 
-/* =========================================
-   EXPERIENCE CALCULATION
+/* =====================================================
+   EXPERIENCE HELPERS
+===================================================== */
 
-   - Uses all professional jobs.
-   - Merges overlapping periods.
-   - Calculates ongoing jobs until today.
-   - Does not count a gap between jobs.
-========================================= */
-
-const DAY_MS = 24 * 60 * 60 * 1000;
+const DAY_MS = 86400000;
 
 const calculateExperience = (items) => {
   const today = new Date();
@@ -318,7 +243,7 @@ const calculateExperience = (items) => {
   const todayUTC = Date.UTC(
     today.getFullYear(),
     today.getMonth(),
-    today.getDate()
+    today.getDate(),
   );
 
   const periods = asArray(items)
@@ -327,18 +252,11 @@ const calculateExperience = (items) => {
 
       if (!dates.start) return null;
 
-      const start =
-        dates.start.date.getTime();
+      const start = dates.start.date.getTime();
 
-      const end = dates.current
-        ? todayUTC
-        : dates.end?.date.getTime();
+      const end = dates.current ? todayUTC : dates.end?.date.getTime();
 
-      if (
-        typeof end !== "number" ||
-        !Number.isFinite(end) ||
-        start > end
-      ) {
+      if (!Number.isFinite(end) || start > end) {
         return null;
       }
 
@@ -350,237 +268,115 @@ const calculateExperience = (items) => {
     .filter(Boolean)
     .sort((a, b) => a.start - b.start);
 
-  if (!periods.length) {
-    return {
-      years: 0,
-      months: 0,
-      days: 0,
-      totalDays: 0,
-      totalMonths: 0,
-    };
-  }
-
   const merged = [];
 
   periods.forEach((period) => {
     const previous = merged[merged.length - 1];
 
-    if (
-      previous &&
-      period.start <= previous.end + DAY_MS
-    ) {
-      previous.end = Math.max(
-        previous.end,
-        period.end
-      );
+    if (previous && period.start <= previous.end + DAY_MS) {
+      previous.end = Math.max(previous.end, period.end);
     } else {
       merged.push({ ...period });
     }
   });
 
   const totalDays = merged.reduce(
-    (sum, period) =>
-      sum +
-      Math.floor(
-        (period.end - period.start) / DAY_MS
-      ) +
-      1,
-    0
+    (sum, period) => sum + Math.floor((period.end - period.start) / DAY_MS) + 1,
+    0,
   );
 
-  const totalMonths = Math.floor(
-    totalDays / (365.2425 / 12)
-  );
-
-  const years = Math.floor(totalMonths / 12);
-  const months = totalMonths % 12;
+  const totalMonths = Math.floor(totalDays / (365.2425 / 12));
 
   return {
-    years,
-    months,
-    days: Math.round(
-      totalDays -
-      totalMonths * (365.2425 / 12)
-    ),
+    years: Math.floor(totalMonths / 12),
+    months: totalMonths % 12,
     totalDays,
-    totalMonths,
   };
 };
 
-const formatExperience = (
-  experience,
-  isArabic
-) => {
-  const { years, months, totalDays } =
-    experience;
+const formatExperience = (experience, isArabic) => {
+  const { years, months, totalDays } = experience;
 
   if (!totalDays) {
-    return isArabic
-      ? "غير محدد"
-      : "Not specified";
+    return isArabic ? "غير محدد" : "Not specified";
   }
 
   const parts = [];
 
   if (years) {
-    if (isArabic) {
-      parts.push(
-        years === 1
+    parts.push(
+      isArabic
+        ? years === 1
           ? "سنة"
           : years === 2
             ? "سنتان"
             : `${years} سنوات`
-      );
-    } else {
-      parts.push(
-        `${years} ${years === 1 ? "year" : "years"
-        }`
-      );
-    }
+        : `${years} ${years === 1 ? "year" : "years"}`,
+    );
   }
 
   if (months) {
-    if (isArabic) {
-      parts.push(
-        months === 1
+    parts.push(
+      isArabic
+        ? months === 1
           ? "شهر"
           : months === 2
             ? "شهران"
             : `${months} أشهر`
-      );
-    } else {
-      parts.push(
-        `${months} ${months === 1 ? "month" : "months"
-        }`
-      );
-    }
+        : `${months} ${months === 1 ? "month" : "months"}`,
+    );
   }
 
   if (!parts.length) {
-    return isArabic
-      ? "أقل من شهر"
-      : "Less than one month";
+    return isArabic ? "أقل من شهر" : "Less than one month";
   }
 
-  return parts.join(
-    isArabic ? " و" : " and "
-  );
+  return parts.join(isArabic ? " و" : " and ");
 };
 
-/* =========================================
-   EMPLOYMENT TYPE
-========================================= */
-
-const getEmploymentType = (
-  item,
-  isArabic
-) => {
-  const type = String(
-    item?.employmentType || ""
-  ).toLowerCase();
-
+const getEmploymentType = (item, isArabic) => {
   const labels = {
-    "full-time": {
-      ar: "دوام كامل",
-      en: "Full-time",
-    },
-    "part-time": {
-      ar: "دوام جزئي",
-      en: "Part-time",
-    },
-    seasonal: {
-      ar: "عمل موسمي",
-      en: "Seasonal",
-    },
-    contract: {
-      ar: "عمل بعقد",
-      en: "Contract",
-    },
-    internship: {
-      ar: "تدريب",
-      en: "Internship",
-    },
+    "full-time": ["دوام كامل", "Full-time"],
+    "part-time": ["دوام جزئي", "Part-time"],
+    seasonal: ["عمل موسمي", "Seasonal"],
+    contract: ["عمل بعقد", "Contract"],
+    internship: ["تدريب", "Internship"],
   };
 
-  const selected = labels[type];
+  const key = String(item?.employmentType || "").toLowerCase();
 
-  if (selected) {
-    return isArabic
-      ? selected.ar
-      : selected.en;
+  if (labels[key]) {
+    return labels[key][isArabic ? 0 : 1];
   }
 
-  return asText(
-    item?.employmentType,
-    isArabic
-  );
+  return asText(item?.employmentType, isArabic);
 };
 
-/* =========================================
+/* =====================================================
    DOCUMENT HELPERS
-========================================= */
+===================================================== */
 
 const DOCUMENT_TYPES = {
-  diploma: {
-    ar: "وثيقة الدبلوم",
-    en: "Diploma Document",
-  },
-  graduation: {
-    ar: "وثيقة التخرج",
-    en: "Graduation Document",
-  },
-  completion: {
-    ar: "شهادة إتمام الدورة",
-    en: "Completion Certificate",
-  },
-  attendance: {
-    ar: "شهادة حضور",
-    en: "Attendance Certificate",
-  },
-  appreciation: {
-    ar: "شهادة شكر وتقدير",
-    en: "Appreciation Certificate",
-  },
-  participation: {
-    ar: "شهادة مشاركة",
-    en: "Participation Certificate",
-  },
-  experience: {
-    ar: "شهادة خبرة",
-    en: "Experience Certificate",
-  },
-  volunteering: {
-    ar: "سجل الساعات التطوعية",
-    en: "Volunteer Hours Record",
-  },
-  certificate: {
-    ar: "الشهادة",
-    en: "Certificate",
-  },
-  document: {
-    ar: "الوثيقة",
-    en: "Document",
-  },
+  diploma: ["وثيقة الدبلوم", "Diploma Document"],
+  graduation: ["وثيقة التخرج", "Graduation Document"],
+  completion: ["شهادة إتمام الدورة", "Completion Certificate"],
+  attendance: ["شهادة حضور", "Attendance Certificate"],
+  appreciation: ["شهادة شكر وتقدير", "Appreciation Certificate"],
+  participation: ["شهادة مشاركة", "Participation Certificate"],
+  experience: ["شهادة خبرة", "Experience Certificate"],
+  volunteering: ["سجل الساعات التطوعية", "Volunteer Hours Record"],
+  certificate: ["الشهادة", "Certificate"],
+  document: ["الوثيقة", "Document"],
 };
 
-const documentLabel = (
-  type,
-  isArabic
-) => {
-  const selected =
-    DOCUMENT_TYPES[type] ||
-    DOCUMENT_TYPES.document;
+const documentLabel = (type, isArabic) => {
+  const labels = DOCUMENT_TYPES[type] || DOCUMENT_TYPES.document;
 
-  return isArabic
-    ? selected.ar
-    : selected.en;
+  return labels[isArabic ? 0 : 1];
 };
 
 const documentUrl = (path) => {
-  if (
-    typeof path !== "string" ||
-    !path.trim()
-  ) {
+  if (typeof path !== "string" || !path.trim()) {
     return "";
   }
 
@@ -590,40 +386,28 @@ const documentUrl = (path) => {
     return clean;
   }
 
-  if (
-    clean.startsWith("//") ||
-    /^(javascript|data):/i.test(clean)
-  ) {
+  if (clean.startsWith("//") || /^[a-z][a-z\d+.-]*:/i.test(clean)) {
     return "";
   }
 
-  const base = String(
-    process.env.PUBLIC_URL || ""
-  ).replace(/\/+$/, "");
+  const base = String(process.env.PUBLIC_URL || "").replace(/\/+$/, "");
 
-  const relative = clean.replace(
-    /^\/+/,
-    ""
-  );
+  const relative = clean.replace(/^\/+/, "");
 
   let basePath = "";
 
   try {
-    basePath = new URL(
-      base || "/",
-      window.location.origin
-    ).pathname.replace(/^\/+|\/+$/g, "");
-  } catch {
-    basePath = base.replace(
+    basePath = new URL(base || "/", window.location.origin).pathname.replace(
       /^\/+|\/+$/g,
-      ""
+      "",
     );
+  } catch {
+    basePath = base.replace(/^\/+|\/+$/g, "");
   }
 
   if (
     basePath &&
-    (relative === basePath ||
-      relative.startsWith(`${basePath}/`))
+    (relative === basePath || relative.startsWith(`${basePath}/`))
   ) {
     return `/${relative}`;
   }
@@ -631,199 +415,87 @@ const documentUrl = (path) => {
   return `${base}/${relative}`;
 };
 
-const getFileExtension = (path) => {
-  const clean = String(path || "")
+const getFileExtension = (path) =>
+  String(path || "")
     .split("?")[0]
-    .split("#")[0];
+    .split("#")[0]
+    .match(/\.([a-z0-9]+)$/i)?.[1]
+    ?.toUpperCase() || "";
 
-  const match = clean.match(
-    /\.([a-z0-9]+)$/i
+const isImageDocument = (path) =>
+  ["PNG", "JPG", "JPEG", "WEBP", "GIF", "AVIF"].includes(
+    getFileExtension(path),
   );
 
-  return match
-    ? match[1].toUpperCase()
-    : "";
-};
-
-const fileType = (path) => {
-  const extension =
-    getFileExtension(path);
-
-  if (extension === "PDF") {
-    return "pdf";
-  }
-
-  if (
-    [
-      "PNG",
-      "JPG",
-      "JPEG",
-      "WEBP",
-      "GIF",
-      "AVIF",
-    ].includes(extension)
-  ) {
-    return "image";
-  }
-
-  return "other";
-};
-
-const getFileFormatLabel = (
-  path,
-  isArabic
-) => {
-  return (
-    getFileExtension(path) ||
-    (isArabic
-      ? "صيغة غير محددة"
-      : "Unknown format")
-  );
-};
-
-/* =========================================
+/* =====================================================
    SKILL HELPERS
-========================================= */
+===================================================== */
 
-const getSkillName = (
-  skill,
-  isArabic
-) => {
+const getSkillName = (skill, isArabic) => {
   if (typeof skill === "string") {
     return skill;
   }
 
   return asText(
-    firstValue(
-      skill?.name,
-      skill?.title,
-      skill?.skill,
-      skill?.label
-    ),
-    isArabic
+    firstValue(skill?.name, skill?.title, skill?.skill, skill?.label),
+    isArabic,
   );
 };
 
-const getSkillSources = (
-  skill,
-  isArabic
-) => {
-  if (
-    !skill ||
-    typeof skill !== "object"
-  ) {
+const getSkillSources = (skill, isArabic) => {
+  if (!skill || typeof skill !== "object") {
     return [];
   }
 
-  const raw = firstValue(
-    skill.sources,
-    skill.source,
-    skill.learnedFrom
-  );
+  const raw = firstValue(skill.sources, skill.source, skill.learnedFrom);
 
-  const values = Array.isArray(raw)
-    ? raw
-    : raw
-      ? [raw]
-      : [];
+  const values = Array.isArray(raw) ? raw : raw ? [raw] : [];
 
   return [
     ...new Set(
-      values
-        .map((value) =>
-          asText(value, isArabic).trim()
-        )
-        .filter(Boolean)
+      values.map((value) => asText(value, isArabic).trim()).filter(Boolean),
     ),
   ];
 };
 
-const getSkillLevel = (
-  skill,
-  isArabic
-) => {
-  if (
-    !skill ||
-    typeof skill !== "object"
-  ) {
-    return "";
-  }
-
-  const level = firstValue(
-    skill.level,
-    skill.proficiency
-  );
+const getSkillLevel = (skill, isArabic) => {
+  const level = firstValue(skill?.level, skill?.proficiency);
 
   if (!level) return "";
 
   const labels = {
-    advanced: {
-      ar: "متقدم",
-      en: "Advanced",
-    },
-    intermediate: {
-      ar: "متوسط",
-      en: "Intermediate",
-    },
-    basic: {
-      ar: "أساسي",
-      en: "Basic",
-    },
-    beginner: {
-      ar: "مبتدئ",
-      en: "Beginner",
-    },
-    good: {
-      ar: "جيد",
-      en: "Good",
-    },
+    advanced: ["متقدم", "Advanced"],
+    intermediate: ["متوسط", "Intermediate"],
+    basic: ["أساسي", "Basic"],
+    beginner: ["مبتدئ", "Beginner"],
+    good: ["جيد", "Good"],
   };
 
-  const selected =
-    labels[String(level).toLowerCase()];
+  const selected = labels[String(level).toLowerCase()];
 
-  if (selected) {
-    return isArabic
-      ? selected.ar
-      : selected.en;
-  }
-
-  return asText(level, isArabic);
+  return selected ? selected[isArabic ? 0 : 1] : asText(level, isArabic);
 };
 
-/* =========================================
-   MAIN STYLES
-========================================= */
+/* =====================================================
+   PAGE STYLES
+===================================================== */
 
 const Main = styled.main`
-  --about-bg:
-    var(--color-background, #f4f7fb);
+  --about-bg: var(--color-background, #f4f7fb);
 
-  --about-card:
-    var(--color-card-background, #ffffff);
+  --about-card: var(--color-card-background, #ffffff);
 
-  --about-section:
-    var(--color-section-background, #edf3f9);
+  --about-section: var(--color-background-secondary, #edf3f9);
 
-  --about-neutral:
-    var(--color-card-background, #ffffff);
+  --about-border: var(--color-border, #d5e0eb);
 
-  --about-border:
-    var(--color-border, #d5e0eb);
+  --about-border-strong: var(--color-border-strong, #bfcfdf);
 
-  --about-border-strong:
-    var(--color-border-strong, #bfcfdf);
+  --about-text: var(--color-text-primary, #172435);
 
-  --about-text:
-    var(--color-text-primary, #172435);
+  --about-muted: var(--color-text-secondary, #475569);
 
-  --about-muted:
-    var(--color-text-secondary, #475569);
-
-  --about-primary:
-    var(--color-primary, #0065a8);
-
-  --about-on-primary: #ffffff;
+  --about-primary: var(--color-primary, #287c98);
 
   width: 100%;
   min-width: 0;
@@ -831,11 +503,6 @@ const Main = styled.main`
 
   background: var(--about-bg);
   color: var(--about-text);
-
-  &,
-  & * {
-    box-shadow: none !important;
-  }
 
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -851,52 +518,45 @@ const MainContent = styled(Container)`
   display: flex;
   flex-direction: column;
 
-  gap: clamp(45px, 6vw, 75px);
+  gap: clamp(48px, 7vw, 80px);
 
-  padding-block:
-    clamp(35px, 5vw, 60px)
-    clamp(65px, 8vw, 100px);
-
-  @media (max-width: 600px) {
-    gap: 45px;
-  }
+  padding-block: clamp(40px, 6vw, 70px) clamp(70px, 9vw, 110px);
 `;
 
 const Section = styled.section`
   min-width: 0;
 
-  scroll-margin-top:
-    calc(var(--header-height, 70px) + 20px);
+  scroll-margin-top: calc(var(--header-height, 70px) + 20px);
 
   &.alternate {
     padding: clamp(18px, 3vw, 34px);
 
     border: 1px solid var(--about-border);
-    border-radius: 15px;
+    border-radius: var(--radius-card, 16px);
 
     background: var(--about-section);
   }
 
   @media (max-width: 600px) {
     &.alternate {
-      padding: 17px 12px;
+      padding: 18px 13px;
     }
   }
 `;
 
 const SectionHeading = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 
   .number {
     display: inline-flex;
     align-items: center;
     gap: 9px;
 
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 
     color: var(--about-primary);
 
-    font-size: 0.83rem;
+    font-size: 0.84rem;
     font-weight: 800;
   }
 
@@ -908,12 +568,7 @@ const SectionHeading = styled.div`
 
     color: var(--about-text);
 
-    font-size: clamp(
-      1.45rem,
-      3vw,
-      2rem
-    );
-
+    font-size: clamp(1.45rem, 3vw, 2rem);
     line-height: 1.5;
   }
 
@@ -921,10 +576,8 @@ const SectionHeading = styled.div`
     content: "";
 
     position: absolute;
-
     inset-inline-start: 0;
-    top: 12%;
-    bottom: 12%;
+    inset-block: 12%;
 
     width: 4px;
     border-radius: 4px;
@@ -938,7 +591,7 @@ const SectionHeading = styled.div`
 
     color: var(--about-muted);
 
-    font-size: 0.92rem;
+    font-size: 0.93rem;
     line-height: 1.95;
   }
 `;
@@ -946,78 +599,36 @@ const SectionHeading = styled.div`
 const Card = styled.article`
   min-width: 0;
 
-  padding: clamp(
-    18px,
-    2.5vw,
-    25px
-  );
+  padding: clamp(18px, 2.5vw, 26px);
 
   border: 1px solid var(--about-border);
-  border-radius: 12px;
+  border-radius: var(--radius-card, 13px);
 
   background: var(--about-card);
 
-  transition: border-color 0.2s ease;
+  box-shadow: var(--shadow-sm, none);
 
-  &:hover {
-    border-color:
-      var(--about-border-strong);
+  transition:
+    border-color var(--transition-fast, 0.2s),
+    box-shadow var(--transition-fast, 0.2s);
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--about-border-strong);
+      box-shadow: var(--shadow-md, none);
+    }
   }
 `;
 
 const CardList = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 15px;
+  gap: 16px;
 `;
 
-/* =========================================
-   PAGE HEADER
-========================================= */
-
-const AboutHeaderTitle = styled.h1`
-  display: block;
-  visibility: visible;
-  opacity: 1;
-
-  width: 100%;
-
-  margin: 18px 0 10px;
-  padding: 0;
-
-  color: var(--about-text);
-
-  font-size: clamp(
-    2rem,
-    4vw,
-    3rem
-  );
-
-  font-weight: 800;
-  line-height: 1.45;
-  text-align: start;
-`;
-
-const AboutHeaderDescription = styled.p`
-  display: block;
-  visibility: visible;
-  opacity: 1;
-
-  max-width: 850px;
-  margin: 0;
-  padding: 0;
-
-  color: var(--about-muted);
-
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 2;
-  text-align: start;
-`;
-
-/* =========================================
+/* =====================================================
    INTRODUCTION
-========================================= */
+===================================================== */
 
 const IntroGrid = styled.div`
   display: grid;
@@ -1026,12 +637,7 @@ const IntroGrid = styled.div`
     minmax(0, 1.35fr)
     minmax(270px, 0.8fr);
 
-  gap: clamp(
-    22px,
-    4vw,
-    40px
-  );
-
+  gap: clamp(24px, 4vw, 42px);
   align-items: start;
 
   @media (max-width: 850px) {
@@ -1041,16 +647,11 @@ const IntroGrid = styled.div`
 
 const IntroText = styled.div`
   h2 {
-    margin: 0 0 17px;
+    margin: 0 0 18px;
 
     color: var(--about-text);
 
-    font-size: clamp(
-      1.6rem,
-      3vw,
-      2.2rem
-    );
-
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
     line-height: 1.5;
   }
 
@@ -1076,6 +677,7 @@ const ProfileCard = styled(Card)`
 
     margin: 0 0 12px;
 
+    color: var(--about-text);
     font-size: 1.08rem;
   }
 
@@ -1087,11 +689,10 @@ const ProfileCard = styled(Card)`
 const ProfileRow = styled.div`
   padding-block: 12px;
 
-  border-bottom:
-    1px solid var(--about-border);
+  border-bottom: 1px solid var(--about-border);
 
   &:last-child {
-    border-bottom: 0;
+    border: 0;
     padding-bottom: 0;
   }
 
@@ -1100,7 +701,6 @@ const ProfileRow = styled.div`
     margin-bottom: 5px;
 
     color: var(--about-muted);
-
     font-size: 0.81rem;
   }
 
@@ -1109,22 +709,21 @@ const ProfileRow = styled.div`
 
     color: var(--about-text);
 
-    font-size: 0.91rem;
-    font-weight: 650;
+    font-size: 0.92rem;
     line-height: 1.8;
 
     overflow-wrap: anywhere;
   }
 `;
 
-/* =========================================
-   CONTENT ENTRIES
-========================================= */
+/* =====================================================
+   ENTRIES
+===================================================== */
 
 const EntryCard = styled(Card)`
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 14px;
 `;
 
 const EntryHeader = styled.div`
@@ -1148,8 +747,8 @@ const EntryInfo = styled.div`
 
     color: var(--about-text);
 
-    font-size: 1.06rem;
-    line-height: 1.75;
+    font-size: 1.08rem;
+    line-height: 1.7;
   }
 
   .subtitle {
@@ -1157,145 +756,17 @@ const EntryInfo = styled.div`
 
     color: var(--about-muted);
 
-    font-size: 0.89rem;
-    line-height: 1.85;
+    font-size: 0.9rem;
+    line-height: 1.8;
   }
 `;
-
-const NeutralTag = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  align-self: flex-start;
-
-  padding: 8px 12px;
-
-  border: 1px solid
-    var(--about-border-strong);
-
-  border-radius: 7px;
-
-  background: var(--about-neutral);
-  color: var(--about-text);
-
-  font-size: 0.82rem;
-  font-weight: 650;
-  line-height: 1.65;
-
-  svg {
-    flex-shrink: 0;
-    color: var(--about-primary);
-  }
-`;
-
-const DateTag = styled(NeutralTag)`
-  flex-shrink: 0;
-
-  .date-text {
-    unicode-bidi: isolate;
-  }
-`;
-
-const PresentTag = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  padding: 3px 9px;
-
-  border: 1px solid #16a34a;
-  border-radius: 6px;
-
-  background: rgba(22, 163, 74, 0.09);
-  color: #15803d;
-
-  font-size: 0.78rem;
-  font-weight: 800;
-  white-space: nowrap;
-
-  svg {
-    color: currentColor;
-  }
-`;
-
-const DateDisplay = ({
-  item,
-  isArabic,
-}) => {
-  const dates = extractDates(item);
-
-  const start = formatParsedDate(
-    dates.start
-  );
-
-  const end = formatParsedDate(
-    dates.end
-  );
-
-  if (!start && !end && !dates.single) {
-    const fallback = getDateLabel(
-      item,
-      isArabic
-    );
-
-    if (!fallback) return null;
-
-    return (
-      <DateTag>
-        <FiCalendar />
-        <span className="date-text" dir="auto">
-          {fallback}
-        </span>
-      </DateTag>
-    );
-  }
-
-  return (
-    <DateTag>
-      <FiCalendar />
-
-      <span
-        className="date-text"
-        dir="ltr"
-      >
-        {start || end || formatParsedDate(
-          dates.single
-        )}
-      </span>
-
-      {start && (end || dates.current) && (
-        <>
-          <span aria-hidden="true">–</span>
-
-          {dates.current ? (
-            <PresentTag>
-              <FiCheckCircle />
-
-              {isArabic
-                ? "حتى الآن"
-                : "Present"}
-            </PresentTag>
-          ) : (
-            <span
-              className="date-text"
-              dir="ltr"
-            >
-              {end}
-            </span>
-          )}
-        </>
-      )}
-    </DateTag>
-  );
-};
 
 const Description = styled.p`
   margin: 0;
 
   color: var(--about-muted);
 
-  font-size: 0.91rem;
+  font-size: 0.93rem;
   line-height: 2;
 
   overflow-wrap: anywhere;
@@ -1312,8 +783,61 @@ const MetaRow = styled.div`
     unicode-bidi: isolate;
 
     color: var(--about-primary);
-    font-weight: 750;
+    font-weight: 800;
   }
+`;
+
+const Tag = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  max-width: 100%;
+  padding: 8px 12px;
+
+  border: 1px solid var(--about-border);
+  border-radius: 9px;
+
+  background: var(--about-section);
+  color: var(--about-text);
+
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+
+  svg {
+    flex-shrink: 0;
+    color: var(--about-primary);
+  }
+`;
+
+const DateTag = styled(Tag)`
+  flex-shrink: 0;
+
+  .date-text {
+    unicode-bidi: isolate;
+  }
+`;
+
+const PresentTag = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 3px 8px;
+
+  border: 1px solid #16a34a;
+  border-radius: 6px;
+
+  background: rgba(22, 163, 74, 0.1);
+  color: #15803d;
+
+  font-size: 0.76rem;
+  font-weight: 800;
+
+  white-space: nowrap;
 `;
 
 const DocumentActions = styled.div`
@@ -1324,98 +848,52 @@ const DocumentActions = styled.div`
   margin-top: 3px;
   padding-top: 14px;
 
-  border-top:
-    1px solid var(--about-border);
-`;
-
-const OutlineButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-
-  min-height: 43px;
-  padding: 10px 16px;
-
-  border: 1px solid
-    var(--about-border-strong);
-
-  border-radius: 7px;
-
-  background: var(--about-neutral);
-  color: var(--about-text);
-
-  font: inherit;
-  font-size: 0.86rem;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
-
-  svg {
-    color: var(--about-primary);
-  }
-
-  &:hover {
-    border-color: var(--about-primary);
-    color: var(--about-primary);
-  }
-
-  &:focus-visible {
-    outline:
-      2px solid var(--about-primary);
-
-    outline-offset: 3px;
-  }
+  border-top: 1px solid var(--about-border);
 
   @media (max-width: 500px) {
-    width: 100%;
+    & > * {
+      width: 100%;
+    }
   }
 `;
 
-const FileFormatBadge = styled.span`
+const FormatBadge = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   padding: 3px 7px;
 
-  border: 1px solid
-    var(--about-border-strong);
-
+  border: 1px solid currentColor;
   border-radius: 5px;
-
-  color: var(--about-primary);
 
   font-size: 0.72rem;
   font-weight: 800;
-  line-height: 1.4;
+
+  opacity: 0.85;
 `;
 
-/* =========================================
-   EXPERIENCE TIMELINE
-========================================= */
+/* =====================================================
+   EXPERIENCE
+===================================================== */
 
 const ExperienceSummary = styled(Card)`
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: 18px;
 
-  margin-bottom: 25px;
+  margin-bottom: 26px;
 
   border-color: var(--about-primary);
 
-  .summary-icon {
+  .icon {
     display: grid;
     place-items: center;
 
     flex-shrink: 0;
 
-    width: 53px;
-    height: 53px;
+    width: 54px;
+    height: 54px;
 
     border-radius: 12px;
 
@@ -1425,51 +903,35 @@ const ExperienceSummary = styled(Card)`
     font-size: 1.5rem;
   }
 
-  .summary-content {
+  .content {
     min-width: 0;
   }
 
-  .summary-label {
+  .label,
+  .note {
     display: block;
-
-    margin-bottom: 5px;
 
     color: var(--about-muted);
 
-    font-size: 0.86rem;
+    font-size: 0.84rem;
+    line-height: 1.8;
   }
 
-  .summary-value {
+  .value {
     display: block;
+    margin-block: 5px;
 
     color: var(--about-primary);
 
-    font-size: clamp(
-      1.15rem,
-      2.5vw,
-      1.55rem
-    );
-
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
     font-weight: 800;
-    line-height: 1.7;
-  }
-
-  .summary-note {
-    display: block;
-    margin-top: 5px;
-
-    color: var(--about-muted);
-
-    font-size: 0.79rem;
-    line-height: 1.8;
   }
 
   @media (max-width: 500px) {
     align-items: flex-start;
     gap: 12px;
-    padding: 16px;
 
-    .summary-icon {
+    .icon {
       width: 44px;
       height: 44px;
     }
@@ -1481,7 +943,7 @@ const Timeline = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  gap: 20px;
 
   padding-inline-start: 35px;
 
@@ -1489,15 +951,13 @@ const Timeline = styled.div`
     content: "";
 
     position: absolute;
-
     inset-inline-start: 11px;
     top: 17px;
     bottom: 17px;
 
     width: 2px;
 
-    background:
-      var(--about-border-strong);
+    background: var(--about-border-strong);
   }
 
   @media (max-width: 600px) {
@@ -1517,35 +977,22 @@ const TimelineItem = styled.div`
     content: "";
 
     position: absolute;
-
     inset-inline-start: -31px;
     top: 24px;
 
     width: 13px;
     height: 13px;
 
-    border: 3px solid
-      var(--about-primary);
-
+    border: 3px solid var(--about-primary);
     border-radius: 50%;
 
     background: var(--about-card);
-
     z-index: 1;
   }
 
   &[data-current="true"]::before {
     border-color: #16a34a;
     background: #16a34a;
-  }
-
-  &[data-current="true"] ${EntryCard} {
-    border-color: rgba(
-      22,
-      163,
-      74,
-      0.45
-    );
   }
 
   @media (max-width: 600px) {
@@ -1557,9 +1004,9 @@ const TimelineItem = styled.div`
   }
 `;
 
-/* =========================================
-   SKILLS ACCORDION
-========================================= */
+/* =====================================================
+   SKILLS
+===================================================== */
 
 const SkillsList = styled.div`
   display: grid;
@@ -1571,13 +1018,12 @@ const SkillAccordion = styled.div`
   overflow: hidden;
 
   border: 1px solid var(--about-border);
-  border-radius: 12px;
+  border-radius: 13px;
 
   background: var(--about-card);
 
   &[data-open="true"] {
-    border-color:
-      var(--about-border-strong);
+    border-color: var(--about-primary);
   }
 `;
 
@@ -1600,9 +1046,7 @@ const SkillAccordionButton = styled.button`
   cursor: pointer;
 
   &:focus-visible {
-    outline:
-      2px solid var(--about-primary);
-
+    outline: 2px solid var(--about-primary);
     outline-offset: -3px;
   }
 
@@ -1612,13 +1056,13 @@ const SkillAccordionButton = styled.button`
 
     flex-shrink: 0;
 
-    width: 41px;
-    height: 41px;
+    width: 42px;
+    height: 42px;
 
     border: 1px solid var(--about-border);
-    border-radius: 8px;
+    border-radius: 10px;
 
-    background: var(--about-neutral);
+    background: var(--about-section);
     color: var(--about-primary);
   }
 
@@ -1631,20 +1075,19 @@ const SkillAccordionButton = styled.button`
     display: block;
 
     font-size: 1rem;
-    line-height: 1.65;
+    line-height: 1.6;
   }
 
   .group-name small {
     display: block;
-    margin-top: 3px;
+    margin-top: 4px;
 
     color: var(--about-muted);
-    font-size: 0.79rem;
+    font-size: 0.8rem;
   }
 
   .chevron {
     flex-shrink: 0;
-
     color: var(--about-primary);
 
     transition: transform 0.2s ease;
@@ -1658,26 +1101,20 @@ const SkillAccordionButton = styled.button`
 const SkillContent = styled.div`
   display: grid;
 
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 12px;
   padding: 18px;
 
-  border-top:
-    1px solid var(--about-border);
-
+  border-top: 1px solid var(--about-border);
   background: var(--about-section);
 
   @media (max-width: 1000px) {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @media (max-width: 650px) {
-    grid-template-columns:
-      minmax(0, 1fr);
-
+    grid-template-columns: minmax(0, 1fr);
     padding: 13px;
   }
 `;
@@ -1691,7 +1128,7 @@ const SkillCard = styled.div`
   padding: 16px;
 
   border: 1px solid var(--about-border);
-  border-radius: 9px;
+  border-radius: 10px;
 
   background: var(--about-card);
 
@@ -1706,16 +1143,15 @@ const SkillCard = styled.div`
   .skill-name {
     color: var(--about-text);
 
-    font-size: 0.93rem;
+    font-size: 0.94rem;
     font-weight: 750;
-    line-height: 1.7;
   }
 
   .skill-level {
     color: var(--about-primary);
 
-    font-size: 0.76rem;
-    font-weight: 650;
+    font-size: 0.77rem;
+    font-weight: 700;
   }
 
   .source-label {
@@ -1724,32 +1160,25 @@ const SkillCard = styled.div`
     gap: 7px;
 
     padding-top: 10px;
-
-    border-top:
-      1px solid var(--about-border);
+    border-top: 1px solid var(--about-border);
 
     color: var(--about-muted);
 
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 700;
-  }
-
-  .source-label svg {
-    color: var(--about-primary);
   }
 `;
 
 const SkillSources = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+  display: grid;
+  gap: 6px;
 
   margin: 0;
   padding-inline-start: 18px;
 
   color: var(--about-muted);
 
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   line-height: 1.8;
 
   li::marker {
@@ -1757,16 +1186,15 @@ const SkillSources = styled.ul`
   }
 `;
 
-/* =========================================
+/* =====================================================
    VOLUNTEERING
-========================================= */
+===================================================== */
 
 const VolunteerSummary = styled(Card)`
-  margin-bottom: 17px;
-
+  margin-bottom: 18px;
   border-color: var(--about-primary);
 
-  .summary-heading {
+  .heading {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -1774,25 +1202,21 @@ const VolunteerSummary = styled(Card)`
     margin-bottom: 14px;
   }
 
-  .summary-heading svg {
-    flex-shrink: 0;
-
+  .heading svg {
     color: var(--about-primary);
     font-size: 1.4rem;
   }
 
-  .summary-heading h3 {
+  .heading h3 {
     margin: 0;
 
     color: var(--about-text);
-
     font-size: 1.08rem;
   }
 
-  .summary-value {
+  .value {
     display: block;
-
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     color: var(--about-primary);
 
@@ -1800,16 +1224,7 @@ const VolunteerSummary = styled(Card)`
     font-weight: 800;
   }
 
-  .summary-description {
-    margin: 0 0 15px;
-
-    color: var(--about-muted);
-
-    font-size: 0.9rem;
-    line-height: 1.95;
-  }
-
-  .summary-meta {
+  .meta {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -1818,21 +1233,18 @@ const VolunteerSummary = styled(Card)`
   }
 `;
 
-/* =========================================
+/* =====================================================
    CAREER GOAL
-========================================= */
+===================================================== */
 
 const GoalCard = styled(Card)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 25px;
 
-  padding: clamp(
-    22px,
-    4vw,
-    35px
-  );
+  gap: 26px;
+
+  padding: clamp(22px, 4vw, 36px);
 
   border-color: var(--about-primary);
 
@@ -1841,11 +1253,7 @@ const GoalCard = styled(Card)`
 
     color: var(--about-text);
 
-    font-size: clamp(
-      1.4rem,
-      3vw,
-      1.9rem
-    );
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
   }
 
   p {
@@ -1854,356 +1262,116 @@ const GoalCard = styled(Card)`
 
     color: var(--about-muted);
 
-    font-size: 0.94rem;
+    font-size: 0.95rem;
     line-height: 2;
   }
 
   @media (max-width: 750px) {
     flex-direction: column;
     align-items: stretch;
-  }
-`;
 
-const ContactButton = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-
-  flex-shrink: 0;
-
-  min-height: 46px;
-  padding: 12px 20px;
-
-  border-radius: 8px;
-
-  background: var(--about-primary);
-  color: var(--about-on-primary);
-
-  font-size: 0.9rem;
-  font-weight: 750;
-  text-decoration: none;
-
-  &:hover {
-    opacity: 0.9;
+    & > a {
+      align-self: flex-start;
+    }
   }
 
-  &:focus-visible {
-    outline: 2px solid
-      var(--about-primary);
-
-    outline-offset: 3px;
-  }
-`;
-
-/* =========================================
-   DOCUMENT MODAL
-
-   - Same preview on mobile and desktop.
-   - No external open button.
-   - Images are preferred.
-   - PDF iframe remains as a fallback.
-========================================= */
-
-const ModalBackdrop = styled.div`
-  position: fixed;
-  inset: 0;
-
-  z-index: 9999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: clamp(8px, 2vw, 24px);
-
-  background: rgba(8, 17, 29, 0.82);
-`;
-
-const ModalPanel = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: min(100%, 1100px);
-  max-height: 94vh;
-  max-height: 94dvh;
-
-  overflow: hidden;
-
-  border: 1px solid var(--about-border);
-  border-radius: 13px;
-
-  background: var(--about-card);
-  color: var(--about-text);
-
-  @media (max-width: 600px) {
-    width: 100%;
-    max-height: 96vh;
-    max-height: 96dvh;
-
-    border-radius: 9px;
-  }
-`;
-
-const ModalHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-
-  flex-shrink: 0;
-
-  padding: 15px 19px;
-
-  border-bottom:
-    1px solid var(--about-border);
-
-  .modal-heading {
-    min-width: 0;
-  }
-
-  h2 {
-    margin: 0 0 5px;
-
-    color: var(--about-text);
-
-    font-size: 1.02rem;
-    line-height: 1.7;
-
-    overflow-wrap: anywhere;
-  }
-
-  p {
-    margin: 0;
-
-    color: var(--about-muted);
-
-    font-size: 0.8rem;
-    line-height: 1.7;
-  }
-
-  @media (max-width: 600px) {
-    padding: 12px;
-
-    h2 {
-      font-size: 0.92rem;
+  @media (max-width: 480px) {
+    & > a {
+      width: 100%;
     }
   }
 `;
 
-const CloseButton = styled.button`
-  display: grid;
-  place-items: center;
+/* =====================================================
+   REUSABLE PAGE COMPONENTS
+===================================================== */
 
-  flex-shrink: 0;
-
-  width: 39px;
-  height: 39px;
-
-  border: 1px solid var(--about-border);
-  border-radius: 8px;
-
-  background: var(--about-neutral);
-  color: var(--about-text);
-
-  font-size: 1.2rem;
-  cursor: pointer;
-
-  &:hover {
-    border-color: var(--about-primary);
-    color: var(--about-primary);
-  }
-
-  &:focus-visible {
-    outline: 2px solid
-      var(--about-primary);
-
-    outline-offset: 2px;
-  }
-`;
-
-const ModalBody = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex: 1;
-  min-height: 0;
-  overflow: auto;
-
-  padding: 14px;
-
-  background: var(--about-section);
-
-  img {
-    display: block;
-
-    max-width: 100%;
-    max-height: 74vh;
-    max-height: 74dvh;
-
-    width: auto;
-    height: auto;
-
-    object-fit: contain;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
-  }
-
-  iframe {
-    display: block;
-
-    width: 100%;
-    height: 72vh;
-    height: 72dvh;
-
-    border: 0;
-    background: #ffffff;
-  }
-
-  @media (max-width: 600px) {
-    padding: 8px;
-
-    img {
-      max-height: 78vh;
-      max-height: 78dvh;
-    }
-
-    iframe {
-      height: 76vh;
-      height: 76dvh;
-    }
-  }
-`;
-
-const ModalMessage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-
-  min-height: 220px;
-  padding: 25px;
-
-  color: var(--about-muted);
-  text-align: center;
-
-  svg {
-    color: var(--about-primary);
-    font-size: 2rem;
-  }
-
-  p {
-    margin: 0;
-    line-height: 1.9;
-  }
-`;
-
-/* =========================================
-   DOCUMENT LOADING INDICATOR
-========================================= */
-
-const DocumentLoading = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  min-height: 240px;
-  width: 100%;
-  padding: 30px 16px;
-  color: var(--about-muted);
-  text-align: center;
-
-  .spinner {
-    width: 46px;
-    height: 46px;
-    border: 4px solid var(--about-border);
-    border-top-color: var(--about-primary);
-    border-radius: 50%;
-    animation: about-spin 0.85s linear infinite;
-  }
-
-  p { margin: 0; font-size: 0.95rem; line-height: 1.9; }
-
-  .dots { display: flex; gap: 7px; }
-  .dots span {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--about-primary);
-    animation: about-pulse 1.2s ease-in-out infinite;
-  }
-  .dots span:nth-child(2) { animation-delay: 0.15s; }
-  .dots span:nth-child(3) { animation-delay: 0.3s; }
-
-  @keyframes about-spin { to { transform: rotate(360deg); } }
-  @keyframes about-pulse {
-    0%, 70%, 100% { opacity: 0.3; transform: translateY(0); }
-    35% { opacity: 1; transform: translateY(-6px); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .spinner, .dots span { animation: none; }
-  }
-`;
-
-/* =========================================
-   REUSABLE SECTION TITLE
-========================================= */
-
-const SectionTitle = ({
-  number,
-  icon: Icon,
-  title,
-  description,
-}) => (
+const SectionTitle = ({ number, icon: Icon, title, description }) => (
   <SectionHeading>
     <span className="number">
-      <Icon />
+      <Icon aria-hidden="true" />
       {number}
     </span>
 
     <h2>{title}</h2>
 
-    {description && (
-      <p>{description}</p>
-    )}
+    {description && <p>{description}</p>}
   </SectionHeading>
 );
 
-/* =========================================
-   DOCUMENT PREVIEW BUTTON
-========================================= */
+const DateDisplay = ({ item, isArabic }) => {
+  const dates = extractDates(item);
 
-const DocumentButton = ({
-  item,
-  title,
-  fallbackType,
-  isArabic,
-  onPreview,
-}) => {
-  if (!item?.document) {
-    return null;
+  const start = formatDate(dates.start);
+  const end = formatDate(dates.end);
+
+  if (!start && !end && !dates.single) {
+    const fallback = getDateLabel(item, isArabic);
+
+    if (!fallback) return null;
+
+    return (
+      <DateTag>
+        <FiCalendar aria-hidden="true" />
+
+        <span className="date-text" dir="auto">
+          {fallback}
+        </span>
+      </DateTag>
+    );
   }
 
-  const type =
-    item.documentType ||
-    fallbackType ||
-    "document";
+  return (
+    <DateTag>
+      <FiCalendar aria-hidden="true" />
 
-  const format = getFileFormatLabel(
-    item.document,
-    isArabic
+      <span className="date-text" dir="ltr">
+        {start || end || formatDate(dates.single)}
+      </span>
+
+      {start && (end || dates.current) && (
+        <>
+          <span aria-hidden="true">–</span>
+
+          {dates.current ? (
+            <PresentTag>
+              <FiCheckCircle aria-hidden="true" />
+
+              {isArabic ? "حتى الآن" : "Present"}
+            </PresentTag>
+          ) : (
+            <span className="date-text" dir="ltr">
+              {end}
+            </span>
+          )}
+        </>
+      )}
+    </DateTag>
   );
+};
+
+const DocumentButton = ({ item, title, fallbackType, isArabic, onPreview }) => {
+  if (!item?.document) return null;
+
+  const type = item.documentType || fallbackType || "document";
+
+  const format = getFileExtension(item.document) || (isArabic ? "ملف" : "File");
+
+  const supported = isImageDocument(item.document);
 
   return (
     <DocumentActions>
-      <OutlineButton
+      <Button
         type="button"
+        $variant="secondary"
+        disabled={!supported}
+        title={
+          !supported
+            ? isArabic
+              ? "هذا النوع من الملفات يحتاج دعمًا في المودال المشترك"
+              : "This file type requires support in the shared modal"
+            : undefined
+        }
         onClick={() =>
           onPreview({
             path: item.document,
@@ -2212,23 +1380,16 @@ const DocumentButton = ({
           })
         }
       >
-        <FiEye />
+        <FiEye aria-hidden="true" />
 
         {isArabic ? "عرض " : "View "}
-
         {documentLabel(type, isArabic)}
 
-        <FileFormatBadge dir="ltr">
-          {format}
-        </FileFormatBadge>
-      </OutlineButton>
+        <FormatBadge dir="ltr">{format}</FormatBadge>
+      </Button>
     </DocumentActions>
   );
 };
-
-/* =========================================
-   REUSABLE CONTENT ENTRY
-========================================= */
 
 const ContentEntry = ({
   item,
@@ -2246,313 +1407,71 @@ const ContentEntry = ({
   <EntryCard>
     <EntryHeader>
       <EntryInfo>
-        <h3>
-          {asText(title, isArabic)}
-        </h3>
+        <h3>{asText(title, isArabic)}</h3>
 
         {subtitle && (
-          <span className="subtitle">
-            {asText(
-              subtitle,
-              isArabic
-            )}
-          </span>
+          <span className="subtitle">{asText(subtitle, isArabic)}</span>
         )}
       </EntryInfo>
 
-      <DateDisplay
-        item={item}
-        isArabic={isArabic}
-      />
+      <DateDisplay item={item} isArabic={isArabic} />
     </EntryHeader>
 
     {employmentType && (
       <MetaRow>
-        <NeutralTag>
-          <FiBriefcase />
+        <Tag>
+          <FiBriefcase aria-hidden="true" />
           {employmentType}
-        </NeutralTag>
+        </Tag>
       </MetaRow>
     )}
 
-    {description && (
-      <Description>
-        {asText(
-          description,
-          isArabic
-        )}
-      </Description>
-    )}
+    {description && <Description>{asText(description, isArabic)}</Description>}
 
     {(grade || hours) && (
       <MetaRow>
         {grade && (
-          <NeutralTag>
-            <FiAward />
+          <Tag>
+            <FiAward aria-hidden="true" />
 
             {gradeLabel}
 
-            <span className="grade-value">
-              {grade}
-            </span>
-          </NeutralTag>
+            <span className="grade-value">{grade}</span>
+          </Tag>
         )}
 
         {hours && (
-          <NeutralTag>
-            <FiClock />
-
-            {asText(
-              hours,
-              isArabic
-            )}
-          </NeutralTag>
+          <Tag>
+            <FiClock aria-hidden="true" />
+            {asText(hours, isArabic)}
+          </Tag>
         )}
       </MetaRow>
     )}
 
     {item?.note && (
       <MetaRow>
-        <NeutralTag>
-          <FiInfo />
+        <Tag>
+          <FiInfo aria-hidden="true" />
 
-          {asText(
-            item.note,
-            isArabic
-          )}
-        </NeutralTag>
+          {asText(item.note, isArabic)}
+        </Tag>
       </MetaRow>
     )}
 
     <DocumentButton
       item={item}
-      title={asText(
-        title,
-        isArabic
-      )}
-      fallbackType={
-        fallbackDocumentType
-      }
+      title={asText(title, isArabic)}
+      fallbackType={fallbackDocumentType}
       isArabic={isArabic}
       onPreview={onPreview}
     />
   </EntryCard>
 );
 
-/* =========================================
-   DOCUMENT MODAL
-========================================= */
-
-const DocumentModal = ({
-  item,
-  onClose,
-  isArabic,
-}) => {
-  const closeRef = useRef(null);
-  const titleId = useId();
-  const { t } = useTranslation("about");
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    setLoadError(false);
-  }, [item?.path]);
-
-  useEffect(() => {
-    if (!item) return undefined;
-
-    const previousOverflow =
-      document.body.style.overflow;
-
-    const previousFocus =
-      document.activeElement;
-
-    document.body.style.overflow =
-      "hidden";
-
-    closeRef.current?.focus();
-
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-        return;
-      }
-
-      if (event.key !== "Tab") {
-        return;
-      }
-
-      const modal =
-        closeRef.current?.closest(
-          '[role="dialog"]'
-        );
-
-      if (!modal) return;
-
-      const elements = [
-        ...modal.querySelectorAll(
-          "button:not([disabled]), a[href], iframe"
-        ),
-      ].filter(
-        (element) =>
-          element.getClientRects().length > 0
-      );
-
-      if (!elements.length) return;
-
-      const first = elements[0];
-      const last =
-        elements[elements.length - 1];
-
-      if (
-        event.shiftKey &&
-        document.activeElement === first
-      ) {
-        event.preventDefault();
-        last.focus();
-      } else if (
-        !event.shiftKey &&
-        document.activeElement === last
-      ) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener(
-      "keydown",
-      handleKeyDown
-    );
-
-    return () => {
-      document.body.style.overflow =
-        previousOverflow;
-
-      document.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
-
-      previousFocus?.focus?.();
-    };
-  }, [item, onClose]);
-
-  if (!item) return null;
-
-  const url = documentUrl(item.path);
-  const type = fileType(item.path);
-
-  const label = documentLabel(
-    item.documentType,
-    isArabic
-  );
-
-  const format = getFileFormatLabel(
-    item.path,
-    isArabic
-  );
-
-  return (
-    <ModalBackdrop
-      onMouseDown={(event) => {
-        if (
-          event.target ===
-          event.currentTarget
-        ) {
-          onClose();
-        }
-      }}
-    >
-      <ModalPanel
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        dir={isArabic ? "rtl" : "ltr"}
-      >
-        <ModalHeader>
-          <div className="modal-heading">
-            <h2 id={titleId}>
-              {item.title || label}
-            </h2>
-
-            <p>
-              {label} — {format}
-            </p>
-          </div>
-
-          <CloseButton
-            ref={closeRef}
-            type="button"
-            onClick={onClose}
-            aria-label={
-              isArabic
-                ? "إغلاق المعاينة"
-                : "Close preview"
-            }
-          >
-            <FiX />
-          </CloseButton>
-        </ModalHeader>
-
-        <ModalBody>
-          {!url ? (
-            <ModalMessage>
-              <FiFileText />
-              <p>{t("documentPreview.unavailable")}</p>
-            </ModalMessage>
-          ) : type === "image" || type === "pdf" ? (
-            <div style={{ width: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 240 }}>
-              {loading && !loadError && (
-                <DocumentLoading role="status" aria-live="polite">
-                  <span className="spinner" aria-hidden="true" />
-                  <p>{t("documentPreview.loading")}</p>
-                  <div className="dots" aria-hidden="true"><span /><span /><span /></div>
-                </DocumentLoading>
-              )}
-              {loadError && (
-                <ModalMessage role="alert">
-                  <FiFileText />
-                  <p>{t("documentPreview.error")}</p>
-                </ModalMessage>
-              )}
-              {type === "image" ? (
-                <img
-                  key={url}
-                  src={url}
-                  alt={item.title || label}
-                  draggable={false}
-                  style={{ display: loading || loadError ? "none" : "block" }}
-                  onContextMenu={(event) => event.preventDefault()}
-                  onLoad={() => setLoading(false)}
-                  onError={() => { setLoading(false); setLoadError(true); }}
-                />
-              ) : (
-                <iframe
-                  key={url}
-                  src={`${url}#toolbar=0&navpanes=0&scrollbar=1`}
-                  title={item.title || label}
-                  style={{ display: loading || loadError ? "none" : "block" }}
-                  onLoad={() => setLoading(false)}
-                  onError={() => { setLoading(false); setLoadError(true); }}
-                />
-              )}
-            </div>
-          ) : (
-            <ModalMessage>
-              <FiFileText />
-              <p>{t("documentPreview.unsupported")}</p>
-            </ModalMessage>
-          )}
-        </ModalBody>
-      </ModalPanel>
-    </ModalBackdrop>
-  );
-};
-
-/* =========================================
-   SKILL GROUP ICONS
-========================================= */
+/* =====================================================
+   MAIN COMPONENT
+===================================================== */
 
 const skillGroupIcons = [
   FiCode,
@@ -2564,131 +1483,61 @@ const skillGroupIcons = [
   FiMonitor,
 ];
 
-/* =========================================
-   MAIN ABOUT COMPONENT
-========================================= */
-
 const About = () => {
-  const {
-    t,
-    i18n,
-  } = useTranslation("about");
+  const { t, i18n } = useTranslation("about");
 
-  const isArabic = (
-    i18n.resolvedLanguage ||
-    i18n.language ||
-    "ar"
-  )
+  const isArabic = (i18n.resolvedLanguage || i18n.language || "ar")
     .toLowerCase()
     .startsWith("ar");
 
-  const pageTitle = t(
-    "pageTitle",
-    {
-      ns: "about",
-      defaultValue: isArabic
-        ? "عني"
-        : "About Me",
-    }
-  );
+  const [preview, setPreview] = useState(null);
 
-  const pageDesc = t(
-    "pageDesc",
-    {
-      ns: "about",
-      defaultValue: isArabic
-        ? "تعرف على مؤهلاتي العلمية وخبراتي المهنية وشهاداتي ومهاراتي ومشاركاتي التطوعية."
-        : "Learn about my education, professional experience, certificates, skills, and volunteer activities.",
-    }
-  );
+  const [openSkillIndex, setOpenSkillIndex] = useState(null);
 
-  const translated = t(
-    "content",
-    {
-      ns: "about",
-      returnObjects: true,
-    }
-  );
+  const closePreview = useCallback(() => {
+    setPreview(null);
+  }, []);
+
+  const translated = t("content", {
+    returnObjects: true,
+  });
 
   const content =
-    translated &&
-      typeof translated === "object" &&
-      !Array.isArray(translated)
+    translated && typeof translated === "object" && !Array.isArray(translated)
       ? translated
       : {};
 
-  const [
-    preview,
-    setPreview,
-  ] = useState(null);
+  const education = sortNewest(content.education?.items);
 
-  const [
-    openSkillIndex,
-    setOpenSkillIndex,
-  ] = useState(null);
+  const experience = sortNewest(content.experience?.items);
 
-  const toggleSkillGroup = (index) => {
-    setOpenSkillIndex(
-      (previous) =>
-        previous === index
-          ? null
-          : index
-    );
-  };
+  const certificates = sortNewest(content.certificates?.items);
 
-  const closePreview = useCallback(
-    () => {
-      setPreview(null);
-    },
-    []
-  );
-
-  const education = sortNewest(
-    content.education?.items
-  );
-
-  const experience = sortNewest(
-    content.experience?.items
-  );
-
-  const certificates = sortNewest(
-    content.certificates?.items
-  );
-
-  const volunteering = sortNewest(
-    content.volunteering?.items
-  );
+  const volunteering = sortNewest(content.volunteering?.items);
 
   const aiSkillGroup = {
     title: t("aiSkills.title"),
+
     items: ["chatgpt", "gemini", "claude", "deepseek"].map((key) => ({
       name: t(`aiSkills.tools.${key}.name`),
+
       sources: [t(`aiSkills.tools.${key}.usage`)],
     })),
   };
 
-  const skillGroups = [
-    ...asArray(content.skills?.groups),
-    aiSkillGroup,
-  ];
+  const skillGroups = [...asArray(content.skills?.groups), aiSkillGroup];
 
-  const volunteerSummary =
-    content.volunteering?.summary || {};
+  const volunteerSummary = content.volunteering?.summary || {};
 
-  const experienceSignature = JSON.stringify(
-    content.experience?.items || []
-  );
+  const experienceSignature = JSON.stringify(content.experience?.items || []);
 
   const totalExperience = useMemo(
     () => calculateExperience(experience),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [experienceSignature]
+    [experienceSignature],
   );
 
-  const renderEntries = (
-    items,
-    getProps
-  ) =>
+  const renderEntries = (items, getProps) =>
     items.map((item, index) => (
       <ContentEntry
         key={`${index}-${getSortTime(item)}`}
@@ -2700,26 +1549,12 @@ const About = () => {
     ));
 
   return (
-    <Main
-      dir={isArabic ? "rtl" : "ltr"}
-    >
+    <Main dir={isArabic ? "rtl" : "ltr"}>
       {/* PAGE HEADER */}
 
-
       <PageHeader>
-        <PageHeaderContainer>
-          <BreadCrumb value="about" />
-
-          <AboutHeaderTitle>
-            {pageTitle}
-          </AboutHeaderTitle>
-
-          <AboutHeaderDescription>
-            {pageDesc}
-          </AboutHeaderDescription>
-        </PageHeaderContainer>
+        <BreadCrumb value="about" />
       </PageHeader>
-
 
       <MainContent>
         {/* INTRODUCTION */}
@@ -2728,54 +1563,27 @@ const About = () => {
           <IntroGrid>
             <IntroText>
               <h2>
-                {content.intro?.title ||
-                  (isArabic
-                    ? "نبذة عني"
-                    : "About Me")}
+                {content.intro?.title || (isArabic ? "نبذة عني" : "About Me")}
               </h2>
 
-              {content.intro?.paragraph1 && (
-                <p>
-                  {content.intro.paragraph1}
-                </p>
-              )}
+              {content.intro?.paragraph1 && <p>{content.intro.paragraph1}</p>}
 
-              {content.intro?.paragraph2 && (
-                <p>
-                  {content.intro.paragraph2}
-                </p>
-              )}
+              {content.intro?.paragraph2 && <p>{content.intro.paragraph2}</p>}
             </IntroText>
 
             <ProfileCard>
               <h3>
-                <FiUser />
+                <FiUser aria-hidden="true" />
 
                 {content.infoTitle ||
-                  (isArabic
-                    ? "معلومات سريعة"
-                    : "Quick Information")}
+                  (isArabic ? "معلومات سريعة" : "Quick Information")}
               </h3>
 
-              {asArray(
-                content.profile
-              ).map((item, index) => (
-                <ProfileRow
-                  key={index}
-                >
-                  <span>
-                    {asText(
-                      item.label,
-                      isArabic
-                    )}
-                  </span>
+              {asArray(content.profile).map((item, index) => (
+                <ProfileRow key={index}>
+                  <span>{asText(item.label, isArabic)}</span>
 
-                  <strong>
-                    {asText(
-                      item.value,
-                      isArabic
-                    )}
-                  </strong>
+                  <strong>{asText(item.value, isArabic)}</strong>
                 </ProfileRow>
               ))}
             </ProfileCard>
@@ -2784,46 +1592,32 @@ const About = () => {
 
         {/* EDUCATION */}
 
-        <Section
-          id="about-education"
-          className="alternate"
-        >
+        <Section id="about-education" className="alternate">
           <SectionTitle
             number="01"
             icon={FiBookOpen}
             title={
               content.education?.title ||
-              (isArabic
-                ? "رحلتي التعليمية"
-                : "Education")
+              (isArabic ? "رحلتي التعليمية" : "Education")
             }
-            description={
-              content.education?.description
-            }
+            description={content.education?.description}
           />
 
           <CardList>
-            {renderEntries(
-              education,
-              (item) => ({
-                title: item.degree,
-                subtitle: item.school,
-                description: item.field,
-                grade: item.grade,
-                gradeLabel:
-                  content.education
-                    ?.gradeLabel ||
-                  (isArabic
-                    ? "المعدل التراكمي"
-                    : "GPA"),
-                fallbackDocumentType:
-                  "graduation",
-              })
-            )}
+            {renderEntries(education, (item) => ({
+              title: item.degree,
+              subtitle: item.school,
+              description: item.field,
+              grade: item.grade,
+              gradeLabel:
+                content.education?.gradeLabel ||
+                (isArabic ? "المعدل التراكمي" : "GPA"),
+              fallbackDocumentType: "graduation",
+            }))}
           </CardList>
         </Section>
 
-        {/* PROFESSIONAL EXPERIENCE */}
+        {/* EXPERIENCE */}
 
         <Section id="about-experience">
           <SectionTitle
@@ -2831,89 +1625,63 @@ const About = () => {
             icon={FiBriefcase}
             title={
               content.experience?.title ||
-              (isArabic
-                ? "خبراتي المهنية"
-                : "Professional Experience")
+              (isArabic ? "خبراتي المهنية" : "Professional Experience")
             }
-            description={
-              content.experience?.description
-            }
+            description={content.experience?.description}
           />
 
           <ExperienceSummary>
-            <div className="summary-icon">
-              <FiClock />
+            <div className="icon">
+              <FiClock aria-hidden="true" />
             </div>
 
-            <div className="summary-content">
-              <span className="summary-label">
+            <div className="content">
+              <span className="label">
                 {isArabic
                   ? "إجمالي سنوات الخبرة المهنية"
                   : "Total Professional Experience"}
               </span>
 
-              <strong className="summary-value">
-                {formatExperience(
-                  totalExperience,
-                  isArabic
-                )}
+              <strong className="value">
+                {formatExperience(totalExperience, isArabic)}
               </strong>
 
-              <span className="summary-note">
+              <span className="note">
                 {isArabic
-                  ? "يُحسب الإجمالي من جميع فترات العمل الفعلية دون تكرار الفترات المتداخلة، ويُحدَّث تلقائيًا للوظائف المستمرة."
+                  ? "يُحسب الإجمالي من فترات العمل الفعلية دون تكرار الفترات المتداخلة، ويُحدَّث تلقائيًا للوظائف المستمرة."
                   : "Calculated from actual employment periods without double-counting overlapping dates. Ongoing roles update automatically."}
               </span>
             </div>
           </ExperienceSummary>
 
           <Timeline>
-            {experience.map(
-              (item, index) => {
-                const dates =
-                  extractDates(item);
+            {experience.map((item, index) => {
+              const dates = extractDates(item);
 
-                return (
-                  <TimelineItem
-                    key={`${index}-${getSortTime(item)}`}
-                    data-current={
-                      dates.current
-                        ? "true"
-                        : "false"
-                    }
-                  >
-                    <ContentEntry
-                      item={item}
-                      title={item.role}
-                      subtitle={item.company}
-                      description={
-                        item.description
-                      }
-                      employmentType={
-                        getEmploymentType(
-                          item,
-                          isArabic
-                        )
-                      }
-                      fallbackDocumentType="experience"
-                      isArabic={isArabic}
-                      onPreview={
-                        setPreview
-                      }
-                    />
-                  </TimelineItem>
-                );
-              }
-            )}
+              return (
+                <TimelineItem
+                  key={`${index}-${getSortTime(item)}`}
+                  data-current={dates.current ? "true" : "false"}
+                >
+                  <ContentEntry
+                    item={item}
+                    title={item.role}
+                    subtitle={item.company}
+                    description={item.description}
+                    employmentType={getEmploymentType(item, isArabic)}
+                    fallbackDocumentType="experience"
+                    isArabic={isArabic}
+                    onPreview={setPreview}
+                  />
+                </TimelineItem>
+              );
+            })}
           </Timeline>
         </Section>
 
         {/* CERTIFICATES */}
 
-        <Section
-          id="about-certificates"
-          className="alternate"
-        >
+        <Section id="about-certificates" className="alternate">
           <SectionTitle
             number="03"
             icon={FiAward}
@@ -2923,24 +1691,17 @@ const About = () => {
                 ? "الشهادات والدورات التدريبية"
                 : "Certificates and Courses")
             }
-            description={
-              content.certificates?.description
-            }
+            description={content.certificates?.description}
           />
 
           <CardList>
-            {renderEntries(
-              certificates,
-              (item) => ({
-                title: item.name,
-                subtitle: item.provider,
-                description:
-                  item.description,
-                hours: item.hours,
-                fallbackDocumentType:
-                  "certificate",
-              })
-            )}
+            {renderEntries(certificates, (item) => ({
+              title: item.name,
+              subtitle: item.provider,
+              description: item.description,
+              hours: item.hours,
+              fallbackDocumentType: "certificate",
+            }))}
           </CardList>
         </Section>
 
@@ -2951,254 +1712,163 @@ const About = () => {
             number="04"
             icon={FiCode}
             title={
-              content.skills?.title ||
-              (isArabic
-                ? "مهاراتي"
-                : "My Skills")
+              content.skills?.title || (isArabic ? "مهاراتي" : "My Skills")
             }
-            description={
-              content.skills?.description
-            }
+            description={content.skills?.description}
           />
 
           <SkillsList>
-            {skillGroups.map(
-              (group, index) => {
-                const isOpen =
-                  openSkillIndex === index;
+            {skillGroups.map((group, index) => {
+              const isOpen = openSkillIndex === index;
 
-                const Icon =
-                  skillGroupIcons[
-                  index %
-                  skillGroupIcons.length
-                  ];
+              const Icon = skillGroupIcons[index % skillGroupIcons.length];
 
-                const items = asArray(
-                  group.items
-                );
+              const items = asArray(group.items);
 
-                return (
-                  <SkillAccordion
-                    key={index}
-                    data-open={
-                      isOpen
-                        ? "true"
-                        : "false"
-                    }
+              return (
+                <SkillAccordion
+                  key={index}
+                  data-open={isOpen ? "true" : "false"}
+                >
+                  <SkillAccordionButton
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={`about-skill-group-${index}`}
+                    onClick={() => setOpenSkillIndex(isOpen ? null : index)}
                   >
-                    <SkillAccordionButton
-                      type="button"
-                      aria-expanded={
-                        isOpen
-                      }
-                      onClick={() =>
-                        toggleSkillGroup(
-                          index
-                        )
-                      }
-                    >
-                      <span className="group-icon">
-                        <Icon />
-                      </span>
+                    <span className="group-icon">
+                      <Icon aria-hidden="true" />
+                    </span>
 
-                      <span className="group-name">
-                        <strong>
-                          {asText(
-                            group.title,
-                            isArabic
-                          )}
-                        </strong>
+                    <span className="group-name">
+                      <strong>{asText(group.title, isArabic)}</strong>
 
-                        <small>
-                          {items.length}{" "}
-                          {isArabic
-                            ? "مهارة"
-                            : items.length === 1
-                              ? "skill"
-                              : "skills"}
-                        </small>
-                      </span>
+                      <small>
+                        {items.length}{" "}
+                        {isArabic
+                          ? "مهارة"
+                          : items.length === 1
+                            ? "skill"
+                            : "skills"}
+                      </small>
+                    </span>
 
-                      <FiChevronDown className="chevron" />
-                    </SkillAccordionButton>
+                    <FiChevronDown className="chevron" aria-hidden="true" />
+                  </SkillAccordionButton>
 
-                    {isOpen && (
-                      <SkillContent>
-                        {items.map(
-                          (
-                            skill,
-                            skillIndex
-                          ) => {
-                            const name =
-                              getSkillName(
-                                skill,
-                                isArabic
-                              );
+                  {isOpen && (
+                    <SkillContent id={`about-skill-group-${index}`}>
+                      {items.map((skill, skillIndex) => {
+                        const name = getSkillName(skill, isArabic);
 
-                            const level =
-                              getSkillLevel(
-                                skill,
-                                isArabic
-                              );
+                        const level = getSkillLevel(skill, isArabic);
 
-                            const sources =
-                              getSkillSources(
-                                skill,
-                                isArabic
-                              );
+                        const sources = getSkillSources(skill, isArabic);
 
-                            return (
-                              <SkillCard
-                                key={`${name}-${skillIndex}`}
-                              >
-                                <div className="skill-header">
-                                  <strong className="skill-name">
-                                    {name}
-                                  </strong>
+                        return (
+                          <SkillCard key={`${name}-${skillIndex}`}>
+                            <div className="skill-header">
+                              <strong className="skill-name">{name}</strong>
 
-                                  {level && (
-                                    <span className="skill-level">
-                                      {level}
-                                    </span>
-                                  )}
-                                </div>
+                              {level && (
+                                <span className="skill-level">{level}</span>
+                              )}
+                            </div>
 
-                                {sources.length >
-                                  0 && (
-                                    <>
-                                      <span className="source-label">
-                                        <FiBookOpen />
+                            {sources.length > 0 && (
+                              <>
+                                <span className="source-label">
+                                  <FiBookOpen aria-hidden="true" />
 
-                                        {isArabic
-                                          ? "مصادر اكتساب المهارة"
-                                          : "Skill Sources"}
-                                      </span>
+                                  {isArabic
+                                    ? "مصادر اكتساب المهارة"
+                                    : "Skill Sources"}
+                                </span>
 
-                                      <SkillSources>
-                                        {sources.map(
-                                          (
-                                            source,
-                                            sourceIndex
-                                          ) => (
-                                            <li
-                                              key={`${source}-${sourceIndex}`}
-                                            >
-                                              {
-                                                source
-                                              }
-                                            </li>
-                                          )
-                                        )}
-                                      </SkillSources>
-                                    </>
-                                  )}
-                              </SkillCard>
-                            );
-                          }
-                        )}
-                      </SkillContent>
-                    )}
-                  </SkillAccordion>
-                );
-              }
-            )}
+                                <SkillSources>
+                                  {sources.map((source, sourceIndex) => (
+                                    <li key={`${source}-${sourceIndex}`}>
+                                      {source}
+                                    </li>
+                                  ))}
+                                </SkillSources>
+                              </>
+                            )}
+                          </SkillCard>
+                        );
+                      })}
+                    </SkillContent>
+                  )}
+                </SkillAccordion>
+              );
+            })}
           </SkillsList>
         </Section>
 
         {/* VOLUNTEERING */}
 
-        <Section
-          id="about-volunteering"
-          className="alternate"
-        >
+        <Section id="about-volunteering" className="alternate">
           <SectionTitle
             number="05"
             icon={FiHeart}
             title={
               content.volunteering?.title ||
-              (isArabic
-                ? "المشاركات التطوعية"
-                : "Volunteer Activities")
+              (isArabic ? "المشاركات التطوعية" : "Volunteer Activities")
             }
-            description={
-              content.volunteering?.description
-            }
+            description={content.volunteering?.description}
           />
 
-          {Object.keys(
-            volunteerSummary
-          ).length > 0 && (
-              <VolunteerSummary>
-                <div className="summary-heading">
-                  <FiHeart />
+          {Object.keys(volunteerSummary).length > 0 && (
+            <VolunteerSummary>
+              <div className="heading">
+                <FiHeart aria-hidden="true" />
 
-                  <h3>
-                    {volunteerSummary.label ||
-                      (isArabic
-                        ? "السجل التطوعي"
-                        : "Volunteer Record")}
-                  </h3>
-                </div>
+                <h3>
+                  {volunteerSummary.label ||
+                    (isArabic ? "السجل التطوعي" : "Volunteer Record")}
+                </h3>
+              </div>
 
-                {volunteerSummary.value && (
-                  <strong className="summary-value">
-                    {volunteerSummary.value}
-                  </strong>
+              {volunteerSummary.value && (
+                <strong className="value">{volunteerSummary.value}</strong>
+              )}
+
+              <div className="meta">
+                {volunteerSummary.opportunities && (
+                  <Tag>
+                    <FiUsers aria-hidden="true" />
+                    {volunteerSummary.opportunities}{" "}
+                    {isArabic ? "فرصة تطوعية" : "Volunteer Opportunities"}
+                  </Tag>
                 )}
 
-                <div className="summary-meta">
-                  {volunteerSummary.opportunities && (
-                    <NeutralTag>
-                      <FiUsers />
+                <DateDisplay item={volunteerSummary} isArabic={isArabic} />
+              </div>
 
-                      {volunteerSummary.opportunities}{" "}
-                      {isArabic
-                        ? "فرصة تطوعية"
-                        : "Volunteer Opportunities"}
-                    </NeutralTag>
-                  )}
+              {volunteerSummary.description && (
+                <Description>{volunteerSummary.description}</Description>
+              )}
 
-                  <DateDisplay
-                    item={volunteerSummary}
-                    isArabic={isArabic}
-                  />
-                </div>
-
-                {volunteerSummary.description && (
-                  <p className="summary-description">
-                    {
-                      volunteerSummary.description
-                    }
-                  </p>
-                )}
-
-                <DocumentButton
-                  item={volunteerSummary}
-                  title={
-                    volunteerSummary.label ||
-                    (isArabic
-                      ? "السجل التطوعي"
-                      : "Volunteer Record")
-                  }
-                  fallbackType="volunteering"
-                  isArabic={isArabic}
-                  onPreview={setPreview}
-                />
-              </VolunteerSummary>
-            )}
+              <DocumentButton
+                item={volunteerSummary}
+                title={
+                  volunteerSummary.label ||
+                  (isArabic ? "السجل التطوعي" : "Volunteer Record")
+                }
+                fallbackType="volunteering"
+                isArabic={isArabic}
+                onPreview={setPreview}
+              />
+            </VolunteerSummary>
+          )}
 
           <CardList>
-            {renderEntries(
-              volunteering,
-              (item) => ({
-                title: item.name,
-                subtitle: item.provider,
-                description:
-                  item.description,
-                fallbackDocumentType:
-                  "participation",
-              })
-            )}
+            {renderEntries(volunteering, (item) => ({
+              title: item.name,
+              subtitle: item.provider,
+              description: item.description,
+              fallbackDocumentType: "participation",
+            }))}
           </CardList>
         </Section>
 
@@ -3209,35 +1879,28 @@ const About = () => {
             <div>
               <h2>
                 {content.goal?.title ||
-                  (isArabic
-                    ? "تطلعاتي المهنية"
-                    : "Career Aspirations")}
+                  (isArabic ? "تطلعاتي المهنية" : "Career Aspirations")}
               </h2>
 
-              <p>
-                {
-                  content.goal?.description
-                }
-              </p>
+              {content.goal?.description && <p>{content.goal.description}</p>}
             </div>
 
-            <ContactButton to="/contact">
-              {isArabic
-                ? "تواصل معي"
-                : "Contact Me"}
+            <Button as={Link} to="/contact" $variant="primary">
+              {isArabic ? "تواصل معي" : "Contact Me"}
 
-              <FiArrowUpRight />
-            </ContactButton>
+              <FiArrowUpRight aria-hidden="true" />
+            </Button>
           </GoalCard>
         </Section>
       </MainContent>
 
-      {/* DOCUMENT PREVIEW */}
+      {/* SHARED IMAGE MODAL */}
 
-      <DocumentModal
-        item={preview}
+      <ImgModal
+        isOpen={Boolean(preview)}
+        ImgSource={preview ? documentUrl(preview.path) : ""}
+        ImgAlt={preview?.title || ""}
         onClose={closePreview}
-        isArabic={isArabic}
       />
     </Main>
   );

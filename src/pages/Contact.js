@@ -1,6 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Turnstile } from "@marsidev/react-turnstile";
 
@@ -24,32 +24,21 @@ import {
   FiRefreshCw,
 } from "react-icons/fi";
 
-import {
-  FaWhatsapp,
-  FaSnapchatGhost,
-} from "react-icons/fa";
+import { FaWhatsapp, FaSnapchatGhost } from "react-icons/fa";
 
 import BreadCrumb from "../Components/ui/Breadcrumb";
+import { PageHeader } from "../Components/ui/T";
 
-import {
-  SectionSTitle,
-  SectionLightDesc,
-  PageHeader,
-  PageHeaderContainer,
-} from "../Components/ui/T";
-
-/* =========================================
+/* =====================================================
    CONFIGURATION
-========================================= */
+===================================================== */
 
 const EDGE_FUNCTION_URL =
   "https://odjamyrqnamvqyzzqiow.supabase.co/functions/v1/upload-contact-attachment";
 
-const TURNSTILE_SITE_KEY =
-  "0x4AAAAAAFryCxCaPlh1qRrw";
+const TURNSTILE_SITE_KEY = "0x4AAAAAAFryCxCaPlh1qRrw";
 
-const DRAFT_KEY =
-  "abdulrahman-contact-draft-v2";
+const DRAFT_KEY = "abdulrahman-contact-draft-v2";
 
 const MAX_FILES = 3;
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -79,9 +68,7 @@ const ALLOWED_MIME_TYPES = {
 };
 
 const ACCEPTED_EXTENSIONS = [
-  ...new Set(
-    Object.values(ALLOWED_MIME_TYPES).flat()
-  ),
+  ...new Set(Object.values(ALLOWED_MIME_TYPES).flat()),
 ];
 
 const CONTACT = {
@@ -90,10 +77,8 @@ const CONTACT = {
   whatsapp: "https://wa.me/966541590819",
   linkedin: "https://linkedin.com/in/dhomlmgyr",
   github: "https://github.com/dhomlmgyr188",
-  instagram:
-    "https://www.instagram.com/dhomlmgyr",
-  snapchat:
-    "https://www.snapchat.com/t/0jbJpmvk",
+  instagram: "https://www.instagram.com/dhomlmgyr",
+  snapchat: "https://www.snapchat.com/t/0jbJpmvk",
 };
 
 const TOPICS = [
@@ -118,9 +103,9 @@ const initialForm = {
   botcheck: "",
 };
 
-/* =========================================
+/* =====================================================
    HELPERS
-========================================= */
+===================================================== */
 
 const validateEmail = (email) => {
   const value = email.trim();
@@ -137,17 +122,13 @@ const normalizePhone = (value) =>
 const validatePhone = (phone) => {
   if (!phone.trim()) return true;
 
-  return /^\+[1-9]\d{7,14}$/.test(
-    normalizePhone(phone)
-  );
+  return /^\+[1-9]\d{7,14}$/.test(normalizePhone(phone));
 };
 
 const getExtension = (name) => {
   const index = name.lastIndexOf(".");
 
-  return index === -1
-    ? ""
-    : name.slice(index).toLowerCase();
+  return index === -1 ? "" : name.slice(index).toLowerCase();
 };
 
 const formatSize = (bytes) =>
@@ -157,44 +138,25 @@ const readDraft = () => {
   try {
     const saved =
       sessionStorage.getItem(DRAFT_KEY) ||
-      sessionStorage.getItem(
-        "abdulrahman-contact-draft-v1"
-      );
+      sessionStorage.getItem("abdulrahman-contact-draft-v1");
 
     if (!saved) return { ...initialForm };
 
     const parsed = JSON.parse(saved);
 
-    if (
-      !parsed ||
-      typeof parsed !== "object"
-    ) {
+    if (!parsed || typeof parsed !== "object") {
       return { ...initialForm };
     }
 
     return {
       ...initialForm,
-      firstName: String(
-        parsed.firstName || ""
-      ).slice(0, 80),
-      lastName: String(
-        parsed.lastName || ""
-      ).slice(0, 80),
-      email: String(
-        parsed.email || ""
-      ).slice(0, 254),
-      phone: String(
-        parsed.phone || ""
-      ).slice(0, 25),
-      topic: TOPICS.includes(parsed.topic)
-        ? parsed.topic
-        : "",
-      customTopic: String(
-        parsed.customTopic || ""
-      ).slice(0, 120),
-      message: String(
-        parsed.message || ""
-      ).slice(0, 5000),
+      firstName: String(parsed.firstName || "").slice(0, 80),
+      lastName: String(parsed.lastName || "").slice(0, 80),
+      email: String(parsed.email || "").slice(0, 254),
+      phone: String(parsed.phone || "").slice(0, 25),
+      topic: TOPICS.includes(parsed.topic) ? parsed.topic : "",
+      customTopic: String(parsed.customTopic || "").slice(0, 120),
+      message: String(parsed.message || "").slice(0, 5000),
       botcheck: "",
     };
   } catch {
@@ -234,17 +196,65 @@ const saveDraft = (form) => {
 const clearDraft = () => {
   try {
     sessionStorage.removeItem(DRAFT_KEY);
-    sessionStorage.removeItem(
-      "abdulrahman-contact-draft-v1"
-    );
+    sessionStorage.removeItem("abdulrahman-contact-draft-v1");
   } catch {
     // Ignore storage errors.
   }
 };
 
-/* =========================================
+/* =====================================================
+   FORM VALIDATION
+
+   Centralized validation for all fields.
+===================================================== */
+
+const validateForm = (form) => {
+  const errors = {};
+
+  const firstName = form.firstName.trim();
+  const lastName = form.lastName.trim();
+  const email = form.email.trim();
+  const phone = form.phone.trim();
+  const customTopic = form.customTopic.trim();
+  const message = form.message.trim();
+
+  if (!firstName || firstName.length > 80) {
+    errors.firstName = true;
+  }
+
+  if (!lastName || lastName.length > 80) {
+    errors.lastName = true;
+  }
+
+  if (!validateEmail(email)) {
+    errors.email = true;
+  }
+
+  if (phone && !validatePhone(phone)) {
+    errors.phone = true;
+  }
+
+  if (!TOPICS.includes(form.topic)) {
+    errors.topic = true;
+  }
+
+  if (
+    form.topic === "other" &&
+    (!customTopic || customTopic.length > 120)
+  ) {
+    errors.customTopic = true;
+  }
+
+  if (message.length < 10 || message.length > 5000) {
+    errors.message = true;
+  }
+
+  return errors;
+};
+
+/* =====================================================
    ANIMATIONS
-========================================= */
+===================================================== */
 
 const spin = keyframes`
   from {
@@ -256,10 +266,9 @@ const spin = keyframes`
   }
 `;
 
-/* =========================================
+/* =====================================================
    CONTACT PAGE
-   OCEAN LIGHT / ORCA DARK
-========================================= */
+===================================================== */
 
 const ContactPage = styled.main`
   --contact-bg: var(--color-background);
@@ -269,9 +278,19 @@ const ContactPage = styled.main`
   --contact-muted: var(--color-text-secondary);
   --contact-border: var(--color-border);
   --contact-accent: var(--color-primary);
-  --contact-accent-text: var(--color-on-primary);
   --contact-soft: var(--color-primary-soft);
   --contact-focus: var(--color-border-focus);
+
+  /*
+   * Reusable validation tokens.
+   * They reference existing theme variables.
+   *
+   * These can later be moved to variables.css
+   * without changing the field components.
+   */
+
+  --contact-error-border: var(--color-danger);
+  --contact-error-focus: var(--color-danger);
 
   width: 100%;
   min-width: 0;
@@ -282,24 +301,6 @@ const ContactPage = styled.main`
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-
-  /*
-    Uses the site's actual theme variables.
-    Dark section background remains black.
-  */
-
-  [data-theme="dark"] & {
-    --contact-bg: var(--color-background);
-    --contact-panel-bg: var(--color-surface);
-    --contact-input-bg: var(--color-input-background);
-    --contact-text: var(--color-text-primary);
-    --contact-muted: var(--color-text-secondary);
-    --contact-border: var(--color-border);
-    --contact-accent: var(--color-primary);
-    --contact-accent-text: var(--color-on-primary);
-    --contact-soft: var(--color-primary-soft);
-    --contact-focus: var(--color-border-focus);
-  }
 `;
 
 const ContactContainer = styled.div`
@@ -310,7 +311,6 @@ const ContactContainer = styled.div`
 
   max-width: 100%;
   min-width: 0;
-
   margin-inline: auto;
 `;
 
@@ -318,13 +318,13 @@ const ContactSection = styled.section`
   width: 100%;
   min-width: 0;
 
-  padding: 60px 0 90px;
+  padding: 35px 0 90px;
 
   background-color: var(--contact-bg);
   color: var(--contact-text);
 
   @media (max-width: 768px) {
-    padding: 35px 0 60px;
+    padding: 24px 0 60px;
   }
 `;
 
@@ -351,9 +351,9 @@ const ContactLayout = styled.div`
   }
 `;
 
-/* =========================================
+/* =====================================================
    PANELS
-========================================= */
+===================================================== */
 
 const Panel = styled.div`
   min-width: 0;
@@ -376,7 +376,7 @@ const Panel = styled.div`
 `;
 
 const PanelTitle = styled.h2`
-  margin: 0 0 10px;
+  margin: 0 0 18px;
 
   font-size: clamp(21px, 2.5vw, 27px);
   font-weight: 700;
@@ -384,18 +384,9 @@ const PanelTitle = styled.h2`
   color: var(--contact-text);
 `;
 
-const PanelDescription = styled.p`
-  margin: 0 0 28px;
-
-  font-size: 14px;
-  line-height: 1.9;
-
-  color: var(--contact-muted);
-`;
-
-/* =========================================
+/* =====================================================
    FORM
-========================================= */
+===================================================== */
 
 const Form = styled.form`
   display: flex;
@@ -405,10 +396,7 @@ const Form = styled.form`
 
 const FormRow = styled.div`
   display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 
   @media (max-width: 600px) {
@@ -427,7 +415,6 @@ const FormGroup = styled.div`
 const Label = styled.label`
   font-size: 14px;
   font-weight: 600;
-
   color: var(--contact-text);
 `;
 
@@ -436,7 +423,18 @@ const Required = styled.span`
   margin-inline-start: 3px;
 `;
 
-const FieldStyle = `
+/* =====================================================
+   SHARED FIELD STYLES
+
+   One error style for:
+   - Input
+   - Select
+   - Textarea
+
+   The error state has priority over focus.
+===================================================== */
+
+const FieldStyle = css`
   width: 100%;
   min-width: 0;
   min-height: 49px;
@@ -467,10 +465,31 @@ const FieldStyle = `
 
   &:focus {
     border-color: var(--contact-focus);
+
     box-shadow: 0 0 0 3px
       color-mix(
         in srgb,
         var(--contact-focus) 15%,
+        transparent
+      );
+  }
+
+  /*
+   * Validation error:
+   * red border only, no red background.
+   */
+
+  &[aria-invalid="true"] {
+    border-color: var(--contact-error-border);
+  }
+
+  &[aria-invalid="true"]:focus {
+    border-color: var(--contact-error-focus);
+
+    box-shadow: 0 0 0 2px
+      color-mix(
+        in srgb,
+        var(--contact-error-focus) 12%,
         transparent
       );
   }
@@ -526,7 +545,6 @@ const FormNote = styled.p`
 
   font-size: 12px;
   line-height: 1.8;
-
   color: var(--contact-muted);
 `;
 
@@ -547,9 +565,9 @@ const HiddenField = styled.div`
   pointer-events: none;
 `;
 
-/* =========================================
+/* =====================================================
    ATTACHMENTS
-========================================= */
+===================================================== */
 
 const UploadArea = styled.div`
   padding: 25px 20px;
@@ -584,7 +602,6 @@ const UploadTitle = styled.p`
 
   font-size: 14px;
   font-weight: 600;
-
   color: var(--contact-text);
 `;
 
@@ -593,7 +610,6 @@ const UploadDescription = styled.p`
 
   font-size: 12px;
   line-height: 1.8;
-
   color: var(--contact-muted);
 `;
 
@@ -619,7 +635,6 @@ const UploadButton = styled.button`
 
   &:hover:not(:disabled) {
     border-color: var(--contact-focus);
-    color: var(--contact-text);
     background-color: var(--contact-soft);
   }
 
@@ -672,7 +687,6 @@ const FileDetails = styled.div`
 
     font-size: 12px;
     font-weight: 600;
-
     color: var(--contact-text);
   }
 
@@ -718,9 +732,9 @@ const FileSummary = styled.div`
   color: var(--contact-muted);
 `;
 
-/* =========================================
+/* =====================================================
    TURNSTILE
-========================================= */
+===================================================== */
 
 const TurnstileContainer = styled.div`
   display: flex;
@@ -753,7 +767,6 @@ const RetryButton = styled.button`
 
   font: inherit;
   font-size: 12px;
-
   cursor: pointer;
 
   &:hover {
@@ -761,15 +774,9 @@ const RetryButton = styled.button`
   }
 `;
 
-/* =========================================
+/* =====================================================
    SUBMIT BUTTON
-
-   LIGHT:
-   Ocean blue background / white text
-
-   DARK:
-   White background / black text
-========================================= */
+===================================================== */
 
 const SubmitButton = styled.button`
   display: inline-flex;
@@ -828,9 +835,9 @@ const LoadingIcon = styled(FiLoader)`
   animation: ${spin} 1s linear infinite;
 `;
 
-/* =========================================
+/* =====================================================
    STATUS MESSAGES
-========================================= */
+===================================================== */
 
 const StatusMessage = styled.div`
   display: flex;
@@ -871,9 +878,9 @@ const StatusMessage = styled.div`
   }
 `;
 
-/* =========================================
+/* =====================================================
    SIDEBAR
-========================================= */
+===================================================== */
 
 const Sidebar = styled.aside`
   display: flex;
@@ -950,10 +957,6 @@ const ExternalIcon = styled(FiArrowUpRight)`
   color: var(--contact-muted);
 `;
 
-/* =========================================
-   RESPONSE TIME
-========================================= */
-
 const ResponseTime = styled.div`
   display: flex;
   align-items: flex-start;
@@ -983,18 +986,9 @@ const ResponseTime = styled.div`
 
     font-size: 13px;
     line-height: 1.9;
-
     color: var(--contact-muted);
   }
 `;
-
-/* =========================================
-   SOCIAL LINKS
-
-   Hover contrast:
-   LIGHT -> Ocean blue / white icon
-   DARK  -> White / black icon
-========================================= */
 
 const SocialLinks = styled.div`
   display: flex;
@@ -1037,49 +1031,38 @@ const SocialLink = styled.a`
     color: var(--color-on-primary);
     transform: translateY(-2px);
   }
-
-  &:hover svg,
-  &:focus-visible svg {
-    color: currentColor;
-  }
 `;
 
-/* =========================================
+/* =====================================================
    CONTACT COMPONENT
-========================================= */
+===================================================== */
 
 const Contact = () => {
   const { t, i18n } = useTranslation("contact");
 
-  const isArabic =
-    i18n.language?.startsWith("ar");
+  const isArabic = i18n.language?.startsWith("ar");
 
-  const localText = (ar, en) =>
-    isArabic ? ar : en;
+  const localText = (ar, en) => (isArabic ? ar : en);
 
   const [form, setForm] = useState(readDraft);
   const [files, setFiles] = useState([]);
 
-  const [
-    turnstileToken,
-    setTurnstileToken,
-  ] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileState, setTurnstileState] = useState("loading");
 
-  const [
-    turnstileState,
-    setTurnstileState,
-  ] = useState("loading");
+  const [status, setStatus] = useState("idle");
+  const [customError, setCustomError] = useState("");
+  const [sentVia, setSentVia] = useState("email");
 
-  const [status, setStatus] =
-    useState("idle");
+  /*
+   * Validation starts only after the first
+   * submission attempt.
+   *
+   * After that, each field is revalidated
+   * automatically as its value changes.
+   */
 
-  const [
-    customError,
-    setCustomError,
-  ] = useState("");
-
-  const [sentVia, setSentVia] =
-    useState("email");
+  const [validationEnabled, setValidationEnabled] = useState(false);
 
   const submittingRef = useRef(false);
   const fileInputRef = useRef(null);
@@ -1088,9 +1071,13 @@ const Contact = () => {
 
   const busy = status === "loading";
 
-  /* =====================================
+  const errors = validationEnabled ? validateForm(form) : {};
+
+  const isInvalid = (name) => Boolean(errors[name]);
+
+  /* =====================================================
      SAVE DRAFT
-  ===================================== */
+  ===================================================== */
 
   useEffect(() => {
     if (skipDraftSaveRef.current) {
@@ -1101,9 +1088,9 @@ const Contact = () => {
     saveDraft(form);
   }, [form]);
 
-  /* =====================================
+  /* =====================================================
      STATUS HELPERS
-  ===================================== */
+  ===================================================== */
 
   const setError = (message) => {
     setCustomError(message);
@@ -1121,9 +1108,9 @@ const Contact = () => {
     }
   };
 
-  /* =====================================
-     FORM INPUTS
-  ===================================== */
+  /* =====================================================
+     INPUT HANDLING
+  ===================================================== */
 
   const updateField = (event) => {
     const { name, value } = event.target;
@@ -1131,8 +1118,7 @@ const Contact = () => {
     setForm((previous) => ({
       ...previous,
       [name]: value,
-      ...(name === "topic" &&
-      value !== "other"
+      ...(name === "topic" && value !== "other"
         ? { customTopic: "" }
         : {}),
     }));
@@ -1143,23 +1129,18 @@ const Contact = () => {
     }
   };
 
-  /* =====================================
+  /* =====================================================
      ATTACHMENTS
-  ===================================== */
+  ===================================================== */
 
   const addFiles = (event) => {
-    const selected = Array.from(
-      event.target.files || []
-    );
+    const selected = Array.from(event.target.files || []);
 
     event.target.value = "";
 
     if (!selected.length || busy) return;
 
-    const nextFiles = [
-      ...files,
-      ...selected,
-    ];
+    const nextFiles = [...files, ...selected];
 
     if (nextFiles.length > MAX_FILES) {
       setError(
@@ -1172,10 +1153,7 @@ const Contact = () => {
     }
 
     for (const file of selected) {
-      if (
-        file.size === 0 ||
-        file.size > MAX_FILE_SIZE
-      ) {
+      if (file.size === 0 || file.size > MAX_FILE_SIZE) {
         setError(
           localText(
             `حجم الملف "${file.name}" غير مسموح. الحد الأقصى 5 MB لكل ملف.`,
@@ -1185,17 +1163,11 @@ const Contact = () => {
         return;
       }
 
-      const extension = getExtension(
-        file.name
-      );
+      const extension = getExtension(file.name);
 
       if (
-        !ACCEPTED_EXTENSIONS.includes(
-          extension
-        ) ||
-        !ALLOWED_MIME_TYPES[
-          file.type
-        ]?.includes(extension)
+        !ACCEPTED_EXTENSIONS.includes(extension) ||
+        !ALLOWED_MIME_TYPES[file.type]?.includes(extension)
       ) {
         setError(
           localText(
@@ -1208,8 +1180,7 @@ const Contact = () => {
     }
 
     const totalSize = nextFiles.reduce(
-      (sum, file) =>
-        sum + file.size,
+      (sum, file) => sum + file.size,
       0
     );
 
@@ -1232,10 +1203,7 @@ const Contact = () => {
     if (busy) return;
 
     setFiles((previous) =>
-      previous.filter(
-        (_, currentIndex) =>
-          currentIndex !== index
-      )
+      previous.filter((_, currentIndex) => currentIndex !== index)
     );
 
     setStatus("idle");
@@ -1243,58 +1211,51 @@ const Contact = () => {
   };
 
   const totalFileSize = files.reduce(
-    (sum, file) =>
-      sum + file.size,
+    (sum, file) => sum + file.size,
     0
   );
 
-  /* =====================================
+  /* =====================================================
      SUBMIT
-  ===================================== */
+  ===================================================== */
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (submittingRef.current) return;
 
-    const firstName =
-      form.firstName.trim();
+    setValidationEnabled(true);
 
-    const lastName =
-      form.lastName.trim();
+    const nextErrors = validateForm(form);
 
-    const email =
-      form.email.trim();
+    if (Object.keys(nextErrors).length > 0) {
+      setStatus("invalid");
+      setCustomError("");
 
-    const phone =
-      normalizePhone(form.phone);
+      const firstInvalidField = Object.keys(nextErrors)[0];
 
-    const message =
-      form.message.trim();
+      /*
+       * Focus the first invalid field so the user
+       * can correct it immediately.
+       */
+
+      requestAnimationFrame(() => {
+        document.getElementById(firstInvalidField)?.focus();
+      });
+
+      return;
+    }
+
+    const firstName = form.firstName.trim();
+    const lastName = form.lastName.trim();
+    const email = form.email.trim();
+    const phone = normalizePhone(form.phone);
+    const message = form.message.trim();
 
     const selectedTopic =
       form.topic === "other"
         ? form.customTopic.trim()
-        : form.topic
-          ? t(`topics.${form.topic}`)
-          : "";
-
-    if (
-      !firstName ||
-      firstName.length > 80 ||
-      !lastName ||
-      lastName.length > 80 ||
-      !validateEmail(email) ||
-      !validatePhone(phone) ||
-      !selectedTopic ||
-      selectedTopic.length > 120 ||
-      message.length < 10 ||
-      message.length > 5000
-    ) {
-      setStatus("invalid");
-      setCustomError("");
-      return;
-    }
+        : t(`topics.${form.topic}`);
 
     if (form.botcheck) {
       setError(
@@ -1331,78 +1292,34 @@ const Contact = () => {
     try {
       const payload = new FormData();
 
-      payload.append(
-        "firstName",
-        firstName
-      );
-
-      payload.append(
-        "lastName",
-        lastName
-      );
-
-      payload.append(
-        "email",
-        email
-      );
-
-      payload.append(
-        "phone",
-        phone
-      );
-
+      payload.append("firstName", firstName);
+      payload.append("lastName", lastName);
+      payload.append("email", email);
+      payload.append("phone", phone);
       payload.append(
         "preferredContact",
         phone ? "whatsapp" : "email"
       );
-
-      payload.append(
-        "topic",
-        selectedTopic
-      );
-
-      payload.append(
-        "message",
-        message
-      );
-
-      payload.append(
-        "botcheck",
-        form.botcheck
-      );
-
-      payload.append(
-        "turnstileToken",
-        turnstileToken
-      );
+      payload.append("topic", selectedTopic);
+      payload.append("message", message);
+      payload.append("botcheck", form.botcheck);
+      payload.append("turnstileToken", turnstileToken);
 
       files.forEach((file) => {
-        payload.append(
-          "files",
-          file,
-          file.name
-        );
+        payload.append("files", file, file.name);
       });
 
-      const response = await fetch(
-        EDGE_FUNCTION_URL,
-        {
-          method: "POST",
-          body: payload,
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await fetch(EDGE_FUNCTION_URL, {
+        method: "POST",
+        body: payload,
+        headers: {
+          Accept: "application/json",
+        },
+      });
 
-      const result = await response
-        .json()
-        .catch(() => null);
+      const result = await response.json().catch(() => null);
 
-      if (
-        !response.ok ||
-        result?.success !== true
-      ) {
+      if (!response.ok || result?.success !== true) {
         if (response.status === 429) {
           throw new Error(
             localText(
@@ -1447,18 +1364,15 @@ const Contact = () => {
         );
       }
 
-      setSentVia(
-        phone ? "whatsapp" : "email"
-      );
+      setSentVia(phone ? "whatsapp" : "email");
 
       skipDraftSaveRef.current = true;
       clearDraft();
 
-      setForm({
-        ...initialForm,
-      });
-
+      setForm({ ...initialForm });
       setFiles([]);
+
+      setValidationEnabled(false);
       setStatus("success");
       setCustomError("");
 
@@ -1466,10 +1380,7 @@ const Contact = () => {
         fileInputRef.current.value = "";
       }
     } catch (error) {
-      console.error(
-        "Contact form error:",
-        error
-      );
+      console.error("Contact form error:", error);
 
       setError(
         error.message ||
@@ -1484,9 +1395,9 @@ const Contact = () => {
     }
   };
 
-  /* =====================================
+  /* =====================================================
      CONTACT METHODS
-  ===================================== */
+  ===================================================== */
 
   const contactMethods = [
     {
@@ -1551,28 +1462,16 @@ const Contact = () => {
     },
   ];
 
-  /* =====================================
+  /* =====================================================
      RENDER
-  ===================================== */
+  ===================================================== */
 
   return (
-    <ContactPage
-      dir={isArabic ? "rtl" : "ltr"}
-    >
-      {/* PAGE HEADER */}
+    <ContactPage dir={isArabic ? "rtl" : "ltr"}>
+      {/* BREADCRUMB */}
 
       <PageHeader>
         <BreadCrumb value="contact" />
-
-        <PageHeaderContainer>
-          <SectionSTitle
-            value="contact:page.title"
-          />
-
-          <SectionLightDesc
-            value="contact:page.description"
-          />
-        </PageHeaderContainer>
       </PageHeader>
 
       {/* CONTACT SECTION */}
@@ -1587,20 +1486,15 @@ const Contact = () => {
                 {t("form.title")}
               </PanelTitle>
 
-              <PanelDescription>
-                {t("form.description")}
-              </PanelDescription>
-
               <Form
                 onSubmit={handleSubmit}
+                noValidate
               >
                 {/* NAME */}
 
                 <FormRow>
                   <FormGroup>
-                    <Label
-                      htmlFor="firstName"
-                    >
+                    <Label htmlFor="firstName">
                       {t("form.firstName")}
                       <Required>*</Required>
                     </Label>
@@ -1613,18 +1507,15 @@ const Contact = () => {
                       maxLength={80}
                       value={form.firstName}
                       onChange={updateField}
-                      placeholder={t(
-                        "form.firstNamePlaceholder"
-                      )}
+                      placeholder={t("form.firstNamePlaceholder")}
                       disabled={busy}
                       required
+                      aria-invalid={isInvalid("firstName")}
                     />
                   </FormGroup>
 
                   <FormGroup>
-                    <Label
-                      htmlFor="lastName"
-                    >
+                    <Label htmlFor="lastName">
                       {t("form.lastName")}
                       <Required>*</Required>
                     </Label>
@@ -1637,11 +1528,10 @@ const Contact = () => {
                       maxLength={80}
                       value={form.lastName}
                       onChange={updateField}
-                      placeholder={t(
-                        "form.lastNamePlaceholder"
-                      )}
+                      placeholder={t("form.lastNamePlaceholder")}
                       disabled={busy}
                       required
+                      aria-invalid={isInvalid("lastName")}
                     />
                   </FormGroup>
                 </FormRow>
@@ -1666,24 +1556,22 @@ const Contact = () => {
                     placeholder="example@email.com"
                     disabled={busy}
                     required
+                    aria-invalid={isInvalid("email")}
                   />
 
                   <FormNote>
                     {localText(
-                      "يرجى إدخال بريد إلكتروني صحيح، فقد نستخدمه للرد على رسالتك.",
-                      "Please enter a valid email address, as we may use it to reply to your message."
+                      "يرجى إدخال بريد إلكتروني صحيح للرد على رسالتك.",
+                      "Enter a valid email address so I can reply."
                     )}
                   </FormNote>
                 </FormGroup>
 
-                {/* MOBILE NUMBER */}
+                {/* PHONE */}
 
                 <FormGroup>
                   <Label htmlFor="phone">
-                    {localText(
-                      "رقم الجوال",
-                      "Mobile Number"
-                    )}
+                    {localText("رقم الجوال", "Mobile Number")}
                   </Label>
 
                   <Input
@@ -1698,13 +1586,14 @@ const Contact = () => {
                     onChange={updateField}
                     placeholder="+966541234567"
                     disabled={busy}
+                    aria-invalid={isInvalid("phone")}
                     aria-describedby="phoneHint"
                   />
 
                   <FormNote id="phoneHint">
                     {localText(
-                      "يرجى إدخال رقم جوال صحيح مع مفتاح الدولة، فقد نستخدمه للرد على رسالتك عبر واتساب.",
-                      "Please enter a valid mobile number with the country code, as we may use it to reply to your message via WhatsApp."
+                      "اختياري. استخدم مفتاح الدولة إذا أردت الرد عبر واتساب.",
+                      "Optional. Include your country code for WhatsApp replies."
                     )}
                   </FormNote>
                 </FormGroup>
@@ -1725,45 +1614,33 @@ const Contact = () => {
                       onChange={updateField}
                       disabled={busy}
                       required
+                      aria-invalid={isInvalid("topic")}
                     >
                       <option value="">
-                        {t(
-                          "form.selectTopic"
-                        )}
+                        {t("form.selectTopic")}
                       </option>
 
-                      {TOPICS.map(
-                        (topic) => (
-                          <option
-                            key={topic}
-                            value={topic}
-                          >
-                            {t(
-                              `topics.${topic}`
-                            )}
-                          </option>
-                        )
-                      )}
+                      {TOPICS.map((topic) => (
+                        <option
+                          key={topic}
+                          value={topic}
+                        >
+                          {t(`topics.${topic}`)}
+                        </option>
+                      ))}
                     </Select>
 
-                    <FiChevronDown />
+                    <FiChevronDown aria-hidden="true" />
                   </SelectWrapper>
                 </FormGroup>
 
                 {/* CUSTOM TOPIC */}
 
-                {form.topic ===
-                  "other" && (
+                {form.topic === "other" && (
                   <FormGroup>
-                    <Label
-                      htmlFor="customTopic"
-                    >
-                      {t(
-                        "form.customTopic"
-                      )}
-                      <Required>
-                        *
-                      </Required>
+                    <Label htmlFor="customTopic">
+                      {t("form.customTopic")}
+                      <Required>*</Required>
                     </Label>
 
                     <Input
@@ -1771,17 +1648,12 @@ const Contact = () => {
                       name="customTopic"
                       type="text"
                       maxLength={120}
-                      value={
-                        form.customTopic
-                      }
-                      onChange={
-                        updateField
-                      }
-                      placeholder={t(
-                        "form.customTopicPlaceholder"
-                      )}
+                      value={form.customTopic}
+                      onChange={updateField}
+                      placeholder={t("form.customTopicPlaceholder")}
                       disabled={busy}
                       required
+                      aria-invalid={isInvalid("customTopic")}
                     />
                   </FormGroup>
                 )}
@@ -1802,32 +1674,25 @@ const Contact = () => {
                     maxLength={5000}
                     value={form.message}
                     onChange={updateField}
-                    placeholder={t(
-                      "form.messagePlaceholder"
-                    )}
+                    placeholder={t("form.messagePlaceholder")}
                     disabled={busy}
                     required
+                    aria-invalid={isInvalid("message")}
                   />
 
                   <FileSummary>
                     <span />
 
                     <span dir="ltr">
-                      {form.message.length}
-                      {" / "}
-                      5000
+                      {form.message.length} / 5000
                     </span>
                   </FileSummary>
                 </FormGroup>
 
                 {/* HONEYPOT */}
 
-                <HiddenField
-                  aria-hidden="true"
-                >
-                  <label
-                    htmlFor="botcheck"
-                  >
+                <HiddenField aria-hidden="true">
+                  <label htmlFor="botcheck">
                     Leave this field empty
                   </label>
 
@@ -1835,12 +1700,8 @@ const Contact = () => {
                     id="botcheck"
                     name="botcheck"
                     type="text"
-                    value={
-                      form.botcheck
-                    }
-                    onChange={
-                      updateField
-                    }
+                    value={form.botcheck}
+                    onChange={updateField}
                     tabIndex={-1}
                     autoComplete="off"
                   />
@@ -1849,17 +1710,12 @@ const Contact = () => {
                 {/* ATTACHMENTS */}
 
                 <FormGroup>
-                  <Label
-                    htmlFor="contactFiles"
-                  >
-                    {localText(
-                      "المرفقات",
-                      "Attachments"
-                    )}
+                  <Label htmlFor="contactFiles">
+                    {localText("المرفقات", "Attachments")}
                   </Label>
 
                   <UploadArea>
-                    <UploadIcon />
+                    <UploadIcon aria-hidden="true" />
 
                     <UploadTitle>
                       {localText(
@@ -1870,8 +1726,8 @@ const Contact = () => {
 
                     <UploadDescription>
                       {localText(
-                        "يمكنك إرفاق 3 ملفات بحد أقصى، 5 MB لكل ملف و15 MB إجمالًا.",
-                        "Up to 3 files, 5 MB per file and 15 MB total."
+                        "حتى 3 ملفات، 5 MB لكل ملف و15 MB إجمالًا.",
+                        "Up to 3 files, 5 MB each and 15 MB total."
                       )}
                     </UploadDescription>
 
@@ -1880,85 +1736,54 @@ const Contact = () => {
                       id="contactFiles"
                       type="file"
                       multiple
-                      accept={ACCEPTED_EXTENSIONS.join(
-                        ","
-                      )}
-                      onChange={
-                        addFiles
-                      }
+                      accept={ACCEPTED_EXTENSIONS.join(",")}
+                      onChange={addFiles}
                       disabled={busy}
-                      style={{
-                        display: "none",
-                      }}
+                      style={{ display: "none" }}
                     />
 
                     <UploadButton
                       type="button"
-                      disabled={
-                        busy ||
-                        files.length >=
-                          MAX_FILES
-                      }
-                      onClick={() =>
-                        fileInputRef.current?.click()
-                      }
+                      disabled={busy || files.length >= MAX_FILES}
+                      onClick={() => fileInputRef.current?.click()}
                     >
                       <FiPaperclip />
 
-                      {localText(
-                        "اختيار الملفات",
-                        "Choose Files"
-                      )}
+                      {localText("اختيار الملفات", "Choose Files")}
                     </UploadButton>
                   </UploadArea>
 
                   {files.length > 0 && (
                     <FileList>
-                      {files.map(
-                        (file, index) => (
-                          <FileItem
-                            key={`${file.name}-${file.size}-${index}`}
+                      {files.map((file, index) => (
+                        <FileItem
+                          key={`${file.name}-${file.size}-${index}`}
+                        >
+                          <FileIcon aria-hidden="true" />
+
+                          <FileDetails>
+                            <strong title={file.name}>
+                              {file.name}
+                            </strong>
+
+                            <small>
+                              {formatSize(file.size)}
+                            </small>
+                          </FileDetails>
+
+                          <RemoveFileButton
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            disabled={busy}
+                            aria-label={localText(
+                              "حذف الملف",
+                              "Remove file"
+                            )}
                           >
-                            <FileIcon />
-
-                            <FileDetails>
-                              <strong
-                                title={
-                                  file.name
-                                }
-                              >
-                                {
-                                  file.name
-                                }
-                              </strong>
-
-                              <small>
-                                {formatSize(
-                                  file.size
-                                )}
-                              </small>
-                            </FileDetails>
-
-                            <RemoveFileButton
-                              type="button"
-                              onClick={() =>
-                                removeFile(
-                                  index
-                                )
-                              }
-                              disabled={
-                                busy
-                              }
-                              aria-label={localText(
-                                "حذف الملف",
-                                "Remove file"
-                              )}
-                            >
-                              <FiX />
-                            </RemoveFileButton>
-                          </FileItem>
-                        )
-                      )}
+                            <FiX />
+                          </RemoveFileButton>
+                        </FileItem>
+                      ))}
                     </FileList>
                   )}
 
@@ -1971,18 +1796,14 @@ const Contact = () => {
                     </span>
 
                     <span dir="ltr">
-                      {formatSize(
-                        totalFileSize
-                      )}
-                      {" / "}
-                      15 MB
+                      {formatSize(totalFileSize)} / 15 MB
                     </span>
                   </FileSummary>
 
                   <FormNote>
                     {localText(
-                      "تُحفظ بيانات النموذج عند تحديث الصفحة، ولكن يجب إعادة اختيار المرفقات.",
-                      "Your form details are preserved on refresh, but attachments must be selected again."
+                      "تُحفظ بيانات النموذج مؤقتًا، لكن يجب إعادة اختيار المرفقات بعد تحديث الصفحة.",
+                      "Form details are saved temporarily. Attachments must be reselected after refreshing."
                     )}
                   </FormNote>
                 </FormGroup>
@@ -2001,68 +1822,41 @@ const Contact = () => {
                   <TurnstileWrapper>
                     <Turnstile
                       ref={turnstileRef}
-                      siteKey={
-                        TURNSTILE_SITE_KEY
-                      }
+                      siteKey={TURNSTILE_SITE_KEY}
                       options={{
                         theme: "auto",
-                        language:
-                          isArabic
-                            ? "ar"
-                            : "en",
+                        language: isArabic ? "ar" : "en",
                         retry: "auto",
-                        "retry-interval":
-                          2000,
-                        "refresh-expired":
-                          "auto",
-                        "refresh-timeout":
-                          "auto",
+                        "retry-interval": 2000,
+                        "refresh-expired": "auto",
+                        "refresh-timeout": "auto",
                       }}
-                      onSuccess={(
-                        token
-                      ) => {
-                        setTurnstileToken(
-                          token
-                        );
-                        setTurnstileState(
-                          "success"
-                        );
+                      onSuccess={(token) => {
+                        setTurnstileToken(token);
+                        setTurnstileState("success");
                       }}
                       onExpire={() => {
-                        setTurnstileToken(
-                          ""
-                        );
-                        setTurnstileState(
-                          "expired"
-                        );
+                        setTurnstileToken("");
+                        setTurnstileState("expired");
                       }}
                       onError={() => {
-                        setTurnstileToken(
-                          ""
-                        );
-                        setTurnstileState(
-                          "error"
-                        );
+                        setTurnstileToken("");
+                        setTurnstileState("error");
                       }}
                     />
                   </TurnstileWrapper>
 
-                  {turnstileState ===
-                    "success" && (
+                  {turnstileState === "success" && (
                     <FormNote
                       style={{
-                        color:
-                          "#16a34a",
+                        color: "#16a34a",
                       }}
                     >
                       <FiCheckCircle
                         style={{
-                          display:
-                            "inline",
-                          verticalAlign:
-                            "middle",
-                          marginInlineEnd:
-                            5,
+                          display: "inline",
+                          verticalAlign: "middle",
+                          marginInlineEnd: 5,
                         }}
                       />
 
@@ -2073,23 +1867,19 @@ const Contact = () => {
                     </FormNote>
                   )}
 
-                  {(turnstileState ===
-                    "error" ||
-                    turnstileState ===
-                      "expired") && (
+                  {(turnstileState === "error" ||
+                    turnstileState === "expired") && (
                     <>
                       <FormNote>
                         {localText(
-                          "تعذر إكمال التحقق أو انتهت صلاحيته. يمكنك إعادة المحاولة دون تحديث الصفحة.",
-                          "Verification failed or expired. You can retry without refreshing the page."
+                          "تعذر إكمال التحقق أو انتهت صلاحيته.",
+                          "Verification failed or expired."
                         )}
                       </FormNote>
 
                       <RetryButton
                         type="button"
-                        onClick={
-                          resetTurnstile
-                        }
+                        onClick={resetTurnstile}
                       >
                         <FiRefreshCw />
 
@@ -2102,10 +1892,9 @@ const Contact = () => {
                   )}
                 </TurnstileContainer>
 
-                {/* SUCCESS MESSAGE */}
+                {/* SUCCESS */}
 
-                {status ===
-                  "success" && (
+                {status === "success" && (
                   <StatusMessage
                     $success
                     role="status"
@@ -2128,20 +1917,15 @@ const Contact = () => {
                         )}
                       </p>
 
-                      <p
-                        style={{
-                          marginTop: 8,
-                        }}
-                      >
-                        {sentVia ===
-                        "whatsapp"
+                      <p style={{ marginTop: 8 }}>
+                        {sentVia === "whatsapp"
                           ? localText(
-                              "قد أتواصل معك عبر واتساب على الرقم الذي أرفقته، لذا يُرجى التأكد من صحته.",
-                              "I may contact you via WhatsApp at the number you provided, so please make sure it is correct."
+                              "قد أتواصل معك عبر واتساب على الرقم الذي أرفقته.",
+                              "I may contact you via WhatsApp at the number provided."
                             )
                           : localText(
-                              "سيكون الرد عبر بريدك الإلكتروني. يُرجى متابعة صندوق الوارد والبريد غير المرغوب فيه.",
-                              "I'll reply via email. Please check your inbox and spam folder."
+                              "سيكون الرد عبر بريدك الإلكتروني.",
+                              "I'll reply via email."
                             )}
                       </p>
                     </div>
@@ -2150,11 +1934,8 @@ const Contact = () => {
 
                 {/* INVALID FORM */}
 
-                {status ===
-                  "invalid" && (
-                  <StatusMessage
-                    role="alert"
-                  >
+                {status === "invalid" && (
+                  <StatusMessage role="alert">
                     <FiAlertCircle />
 
                     <div>
@@ -2167,21 +1948,18 @@ const Contact = () => {
 
                       <p>
                         {localText(
-                          "تأكد من تعبئة الحقول المطلوبة بشكل صحيح، وأن الرسالة لا تقل عن 10 أحرف. إذا أدخلت رقم جوال، فتأكد من كتابته بصيغة دولية تبدأ بعلامة + ومفتاح الدولة.",
-                          "Complete the required fields correctly and enter at least 10 characters. If you provide a mobile number, use international format starting with + and the country code."
+                          "صحح الحقول المحددة باللون الأحمر ثم حاول الإرسال.",
+                          "Correct the fields outlined in red, then try again."
                         )}
                       </p>
                     </div>
                   </StatusMessage>
                 )}
 
-                {/* ERROR */}
+                {/* SUBMISSION ERROR */}
 
-                {status ===
-                  "error" && (
-                  <StatusMessage
-                    role="alert"
-                  >
+                {status === "error" && (
+                  <StatusMessage role="alert">
                     <FiAlertCircle />
 
                     <div>
@@ -2192,9 +1970,7 @@ const Contact = () => {
                         )}
                       </strong>
 
-                      <p>
-                        {customError}
-                      </p>
+                      <p>{customError}</p>
                     </div>
                   </StatusMessage>
                 )}
@@ -2241,62 +2017,37 @@ const Contact = () => {
                   )}
                 </PanelTitle>
 
-                <PanelDescription>
-                  {localText(
-                    "يمكنك التواصل معي مباشرة من خلال الوسائل التالية.",
-                    "You can contact me directly using the following methods."
-                  )}
-                </PanelDescription>
+                {contactMethods.map((method) => {
+                  const Icon = method.icon;
 
-                {contactMethods.map(
-                  (method) => {
-                    const Icon =
-                      method.icon;
+                  return (
+                    <ContactItem
+                      key={method.id}
+                      href={method.href}
+                      target={
+                        method.id === "whatsapp"
+                          ? "_blank"
+                          : undefined
+                      }
+                      rel={
+                        method.id === "whatsapp"
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                    >
+                      <ContactIcon>
+                        <Icon />
+                      </ContactIcon>
 
-                    return (
-                      <ContactItem
-                        key={
-                          method.id
-                        }
-                        href={
-                          method.href
-                        }
-                        target={
-                          method.id ===
-                          "whatsapp"
-                            ? "_blank"
-                            : undefined
-                        }
-                        rel={
-                          method.id ===
-                          "whatsapp"
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
-                      >
-                        <ContactIcon>
-                          <Icon />
-                        </ContactIcon>
+                      <ContactItemText>
+                        <strong>{method.title}</strong>
+                        <small>{method.value}</small>
+                      </ContactItemText>
 
-                        <ContactItemText>
-                          <strong>
-                            {
-                              method.title
-                            }
-                          </strong>
-
-                          <small>
-                            {
-                              method.value
-                            }
-                          </small>
-                        </ContactItemText>
-
-                        <ExternalIcon />
-                      </ContactItem>
-                    );
-                  }
-                )}
+                      <ExternalIcon />
+                    </ContactItem>
+                  );
+                })}
               </Panel>
 
               {/* RESPONSE TIME */}
@@ -2316,7 +2067,7 @@ const Contact = () => {
                     <p>
                       {localText(
                         "عادةً ما أرد على الرسائل خلال 24 ساعة، وقد يختلف وقت الاستجابة حسب الظروف.",
-                        "I usually respond to messages within 24 hours, although response times may vary depending on circumstances."
+                        "I usually respond within 24 hours, although response times may vary."
                       )}
                     </p>
                   </div>
@@ -2333,51 +2084,31 @@ const Contact = () => {
                   )}
                 </PanelTitle>
 
-                <PanelDescription>
-                  {localText(
-                    "تابع حساباتي المهنية أو تواصل معي عبر منصات التواصل الاجتماعي.",
-                    "Explore my professional profiles or connect with me on social media."
-                  )}
-                </PanelDescription>
-
                 <SocialLinks>
-                  {socialMedia.map(
-                    (social) => {
-                      const Icon =
-                        social.icon;
+                  {socialMedia.map((social) => {
+                    const Icon = social.icon;
 
-                      return (
-                        <SocialLink
-                          key={
-                            social.id
-                          }
-                          href={
-                            social.href
-                          }
-                          title={
-                            social.title
-                          }
-                          aria-label={
-                            social.title
-                          }
-                          target={
-                            social.id ===
-                            "email"
-                              ? undefined
-                              : "_blank"
-                          }
-                          rel={
-                            social.id ===
-                            "email"
-                              ? undefined
-                              : "noopener noreferrer"
-                          }
-                        >
-                          <Icon />
-                        </SocialLink>
-                      );
-                    }
-                  )}
+                    return (
+                      <SocialLink
+                        key={social.id}
+                        href={social.href}
+                        title={social.title}
+                        aria-label={social.title}
+                        target={
+                          social.id === "email"
+                            ? undefined
+                            : "_blank"
+                        }
+                        rel={
+                          social.id === "email"
+                            ? undefined
+                            : "noopener noreferrer"
+                        }
+                      >
+                        <Icon />
+                      </SocialLink>
+                    );
+                  })}
                 </SocialLinks>
               </Panel>
             </Sidebar>

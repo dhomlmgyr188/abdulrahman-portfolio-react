@@ -1,483 +1,764 @@
 /* =========================================================
-PORTFOLIO DESIGN SYSTEM
-DARK  : ORCA BLACK & WHITE
-LIGHT : OCEAN BLUE & SEA FOAM
+   ABDULRAHMAN PORTFOLIO
+   DESIGN SYSTEM — MODERN PROFESSIONAL
+
+   LIGHT THEME : OCEAN BLUE
+   DARK THEME  : ORCA BLACK & WHITE
+
+   Existing variable names are preserved for compatibility.
 ========================================================= */
+
 /* =========================================================
-GLOBAL HTML SETTINGS
+   01 — LIGHT THEME / OCEAN
 ========================================================= */
-html {
-scroll-padding-top: var(--header-height);
-}
-/* =========================================================
-LIGHT THEME — OCEAN
-========================================================= */
+
 :root {
-/* =======================================================
-BRAND COLORS
-======================================================= */
-/* PRIMARY — Deep Ocean */
---color-primary: #174667;
---color-primary-light: #397b98;
---color-primary-dark: #10354e;
-/* SECONDARY — Ocean Teal */
---color-secondary: #287c98;
---color-secondary-light: #74b3c6;
---color-secondary-dark: #1c6078;
-/* TERTIARY — Ocean Mist */
---color-tertiary: #81b8c9;
---color-tertiary-light: #dceff4;
---color-tertiary-dark: #43849a;
---color-on-primary: #ffffff;
---color-on-secondary: #ffffff;
---color-on-tertiary: #ffffff;
---color-danger: #b54848;
-/* =======================================================
-BASE COLORS
-======================================================= */
---color-white: #ffffff;
---color-black: #102c3c;
---color-gray: #77848d;
---color-yellow: #81b8c9;
---color-blue: #287c98;
-/* =======================================================
-TEXT COLORS
-======================================================= */
---color-text: #263845;
---color-text-primary: #263845;
---color-text-secondary: #586873;
---color-text-light: #74828b;
---color-link: #176b85;
-/* =======================================================
-BACKGROUND COLORS
-======================================================= */
---color-background: #ffffff;
---color-background-secondary: #ffffff;
---color-background-tertiary: #fafcfd;
---color-background-breadcrumb: #f7fafc;
---color-background-rgba: rgba(9, 44, 69, 0.76);
-/* =======================================================
-SURFACE COLORS
-======================================================= */
---color-surface: #ffffff;
---color-surface-hover: #f7fafc;
---color-surface-secondary: #fafcfd;
---color-surface-tertiary: #f3f8fa;
---color-section-background: #ffffff;
---color-section-background-alt: #fafcfd;
---color-card-background: #ffffff;
---color-card-background-hover: #fbfdfe;
-/* =======================================================
-BORDERS
-======================================================= */
---color-border: #e5ebef;
---color-border-light: #f0f3f5;
---color-border-strong: #cbd8df;
---color-border-focus: #287c98;
-/* =======================================================
-SOFT ACCENT BACKGROUNDS
-======================================================= */
---color-primary-soft: #f0f6f9;
---color-secondary-soft: #f3f9fb;
---color-tertiary-soft: #f5fafb;
---color-danger-soft: #fae8e8;
-/* =======================================================
-PATTERN BACKGROUND — OCEAN
-======================================================= */
---pattern-background-color: #ffffff;
---pattern-background-image:
-radial-gradient(ellipse at 12% 15%, rgba(116, 179, 198, 0.055) 0%, transparent 42%), radial-gradient(ellipse at 88% 85%, rgba(129, 184, 201, 0.045) 0%, transparent 40%), linear-gradient(135deg, #ffffff 0%, #ffffff 60%, #fbfdfe 100%);
---pattern-background-size: cover;
---pattern-background-position: center;
-/* =======================================================
-TECHNOLOGY COLORS
-Unified with Ocean Theme
-======================================================= */
---color-react: #287c98;
---color-js: #43849a;
---color-html: #1c6078;
---color-css: #74b3c6;
---color-git: #586873;
---color-sql: #176b85;
---color-rest_api: #74828b;
---color-ms365: #174667;
-/* =======================================================
-TECHNOLOGY SHADOWS
-======================================================= */
---color-shadow-react: #287c9866;
---color-shadow-js: #43849a66;
---color-shadow-html: #1c607866;
---color-shadow-css: #74b3c666;
---color-shadow-git: #58687366;
---color-shadow-sql: #176b8566;
---color-shadow-rest_api: #74828b66;
---color-shadow-ms365: #17466766;
-/* =======================================================
-SOCIAL MEDIA COLORS
-Unified Ocean Theme Colors
-======================================================= */
---color-linkedin: #174667;
---color-github: #263845;
---color-whatsapp: #287c98;
---color-email: #176b85;
---color-instgram: #74b3c6;
---color-snapchat: #43849a;
-/* Optional Correct Spelling Alias */
---color-instagram: var(--color-instgram);
-/* =======================================================
-FONT SIZES
-======================================================= */
---size-xs: 0.75rem;
---size-sm: 0.875rem;
---size-md: 1rem;
---size-ml: 1.125rem;
---size-lg: 1.25rem;
---size-xl: 1.5rem;
---size-2xl: 2rem;
---size-3xl: 2.5rem;
---size-4xl: 3rem;
-/* =======================================================
-SPACING
-======================================================= */
---space-xs: 0.25rem;
---space-sm: 0.5rem;
---space-md: 1rem;
---space-lg: 1.5rem;
---space-xl: 2rem;
---space-2xl: 3rem;
---space-3xl: 4rem;
---space-4xl: 5rem;
-/* =======================================================
-BORDER RADIUS
-======================================================= */
---radius-sm: 0.25rem;
---radius-md: 0.5rem;
---radius-lg: 1rem;
---radius-xl: 1.5rem;
---radius-full: 999px;
-/* =======================================================
-SHADOWS
-======================================================= */
---shadow-sm:
-0 2px 8px rgba(18, 59, 89, 0.06);
---shadow-md:
-0 5px 16px rgba(18, 59, 89, 0.08),
-0 12px 28px rgba(18, 59, 89, 0.03);
---shadow-lg:
-0 12px 32px rgba(18, 59, 89, 0.13);
-/* =======================================================
-CARD SHADOWS
-======================================================= */
---shadow-card:
-0 3px 12px rgba(18, 59, 89, 0.05),
-0 12px 30px rgba(18, 59, 89, 0.03);
---shadow-card-hover:
-0 6px 20px rgba(18, 59, 89, 0.10),
-0 16px 36px rgba(18, 59, 89, 0.05);
-/* =======================================================
-LAYOUT
-======================================================= */
---container-width: 1200px;
---header-height: 70px;
-/* =======================================================
-TRANSITIONS
-======================================================= */
---transition-fast: 0.2s ease;
---transition-normal: 0.3s ease;
-/* =======================================================
-ADDITIONAL THEME TOKENS
-======================================================= */
---color-heading: #173c55;
---color-heading-secondary: #287c98;
---color-button-background: #174667;
---color-button-text: #ffffff;
---color-button-hover: #1c6078;
---color-input-background: #ffffff;
---color-input-text: #263845;
---color-input-placeholder: #74828b;
---color-divider: #e5ebef;
---color-overlay: rgba(9, 44, 69, 0.76);
---color-scrollbar-track: #f6f8fa;
---color-scrollbar-thumb: #b5cbd5;
-color-scheme: light;
+
+    /* BRAND COLORS */
+
+    --color-primary: #174667;
+    --color-primary-light: #397b98;
+    --color-primary-dark: #10354e;
+
+    --color-secondary: #287c98;
+    --color-secondary-light: #74b3c6;
+    --color-secondary-dark: #1c6078;
+
+    --color-tertiary: #81b8c9;
+    --color-tertiary-light: #dceff4;
+    --color-tertiary-dark: #43849a;
+
+    --color-on-primary: #ffffff;
+    --color-on-secondary: #ffffff;
+    --color-on-tertiary: #102c3c;
+
+    /* STATUS COLORS */
+
+    --color-danger: #b54848;
+    --color-danger-soft: #fae8e8;
+
+    --color-success: #267451;
+    --color-success-soft: #e8f5ed;
+
+    --color-warning: #936318;
+    --color-warning-soft: #fff5dd;
+
+    /* BASE COLORS */
+
+    --color-white: #ffffff;
+    --color-black: #102c3c;
+    --color-gray: #77848d;
+
+    --color-yellow: #81b8c9;
+    --color-blue: #287c98;
+
+    /* TEXT COLORS */
+
+    --color-text: #263845;
+    --color-text-primary: #263845;
+    --color-text-secondary: #506675;
+    --color-text-light: #617785;
+
+    --color-heading: #173c55;
+    --color-heading-secondary: #287c98;
+
+    --color-link: #176b85;
+    --color-link-hover: #10354e;
+
+    /* BACKGROUND COLORS */
+
+    --color-background: #f2f8fc;
+    --color-background-secondary: #ffffff;
+    --color-background-tertiary: #e5f1f7;
+
+    --color-background-breadcrumb: #e1eef5;
+
+    --color-background-rgba: rgba(9, 44, 69, 0.76);
+
+    /* SURFACES */
+
+    --color-surface: #ffffff;
+    --color-surface-hover: #edf6fa;
+
+    --color-surface-secondary: #edf5f9;
+    --color-surface-tertiary: #dcecf4;
+
+    --color-section-background: #ffffff;
+    --color-section-background-alt: #e5f1f7;
+
+    --color-card-background: #ffffff;
+    --color-card-background-hover: #f0f8fc;
+
+    /* Shared component aliases */
+
+    --surface-card: var(--color-card-background);
+    --surface-card-hover: var(--color-card-background-hover);
+    --surface-border: var(--color-border);
+
+    /* BORDERS */
+
+    --color-border: #c5dce7;
+    --color-border-light: #dceaf1;
+    --color-border-strong: #a3c4d5;
+
+    --color-border-focus: #287c98;
+
+    --color-divider: #c5dce7;
+
+    /* SOFT ACCENTS */
+
+    --color-primary-soft: #e0eff7;
+    --color-secondary-soft: #e7f3f9;
+    --color-tertiary-soft: #edf7fb;
+
+    /* PATTERN BACKGROUND */
+
+    --pattern-background-color: #f2f8fc;
+
+    --pattern-background-image:
+        radial-gradient(ellipse at 12% 15%,
+            rgba(116, 179, 198, 0.11) 0%,
+            transparent 42%),
+        radial-gradient(ellipse at 88% 85%,
+            rgba(129, 184, 201, 0.09) 0%,
+            transparent 40%),
+        linear-gradient(135deg,
+            #ffffff 0%,
+            #f2f8fc 60%,
+            #eaf4f9 100%);
+
+    --pattern-background-size: cover;
+    --pattern-background-position: center;
+
+    /* TECHNOLOGY COLORS */
+
+    --color-react: #287c98;
+    --color-js: #43849a;
+    --color-html: #1c6078;
+    --color-css: #74b3c6;
+
+    --color-git: #586873;
+    --color-sql: #176b85;
+    --color-rest_api: #74828b;
+    --color-ms365: #174667;
+
+    /* Technology shadows */
+
+    --color-shadow-react: #287c9866;
+    --color-shadow-js: #43849a66;
+    --color-shadow-html: #1c607866;
+    --color-shadow-css: #74b3c666;
+
+    --color-shadow-git: #58687366;
+    --color-shadow-sql: #176b8566;
+    --color-shadow-rest_api: #74828b66;
+    --color-shadow-ms365: #17466766;
+
+    /* SOCIAL COLORS */
+
+    --color-linkedin: #174667;
+    --color-github: #263845;
+    --color-whatsapp: #287c98;
+    --color-email: #176b85;
+
+    --color-instgram: #74b3c6;
+    --color-instagram: var(--color-instgram);
+
+    --color-snapchat: #43849a;
+
+    /* TYPOGRAPHY */
+
+    --size-xs: 0.75rem;
+    --size-sm: 0.875rem;
+    --size-md: 1rem;
+    --size-ml: 1.125rem;
+
+    --size-lg: 1.25rem;
+    --size-xl: 1.5rem;
+    --size-2xl: 2rem;
+    --size-3xl: 2.5rem;
+    --size-4xl: 3rem;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+
+    --line-height-body: 1.85;
+    --heading-line-height: 1.4;
+
+    --text-measure: 68ch;
+
+    /* SPACING SCALE */
+
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --space-4xl: 5rem;
+
+    /* Shared responsive spacing */
+
+    --section-space: clamp(56px, 7vw, 88px);
+    --section-space-sm: clamp(36px, 5vw, 56px);
+
+    --content-gap: clamp(20px, 3vw, 32px);
+    --card-gap: clamp(16px, 2vw, 24px);
+
+    /* LAYOUT */
+
+    --container-width: 1200px;
+    --container-gutter: clamp(16px, 4vw, 32px);
+
+    --header-height: 70px;
+
+    /* BORDER RADIUS */
+
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 999px;
+
+    /* Component radius */
+
+    --radius-button: 12px;
+    --radius-card: 18px;
+    --radius-input: 10px;
+
+    /* SHADOWS */
+
+    --shadow-sm:
+        0 2px 8px rgba(18, 59, 89, 0.09);
+
+    --shadow-md:
+        0 5px 16px rgba(18, 59, 89, 0.11),
+        0 12px 28px rgba(18, 59, 89, 0.05);
+
+    --shadow-lg:
+        0 12px 32px rgba(18, 59, 89, 0.16);
+
+    --shadow-card:
+        0 3px 12px rgba(18, 59, 89, 0.09),
+        0 12px 30px rgba(18, 59, 89, 0.05);
+
+    --shadow-card-hover:
+        0 6px 20px rgba(18, 59, 89, 0.14),
+        0 16px 36px rgba(18, 59, 89, 0.07);
+
+    /* COMPONENT TOKENS — BUTTONS */
+
+    --button-height: 46px;
+
+    --button-padding-inline: 22px;
+    --button-padding-block: 11px;
+
+    --button-radius: var(--radius-button);
+
+    --button-font-size: 0.94rem;
+    --button-font-weight: 700;
+
+    /* Primary */
+
+    --button-primary-bg: var(--color-primary);
+    --button-primary-text: var(--color-on-primary);
+    --button-primary-border: var(--color-primary);
+
+    --button-primary-hover-bg: var(--color-primary-dark);
+    --button-primary-hover-text: var(--color-on-primary);
+    --button-primary-hover-border: var(--color-primary-dark);
+
+    /* Secondary */
+
+    --button-secondary-bg: var(--color-background);
+    --button-secondary-text: var(--color-primary);
+    --button-secondary-border: var(--color-border-strong);
+
+    --button-secondary-hover-bg: var(--color-primary-soft);
+    --button-secondary-hover-text: var(--color-primary);
+    --button-secondary-hover-border: var(--color-primary);
+
+    /* Tertiary */
+
+    --button-tertiary-bg: var(--color-tertiary);
+    --button-tertiary-text: var(--color-on-tertiary);
+    --button-tertiary-border: var(--color-tertiary);
+
+    --button-tertiary-hover-bg: var(--color-tertiary-dark);
+    --button-tertiary-hover-text: #ffffff;
+    --button-tertiary-hover-border: var(--color-tertiary-dark);
+
+    /* Ghost */
+
+    --button-ghost-bg: transparent;
+    --button-ghost-text: var(--color-text-primary);
+    --button-ghost-border: transparent;
+
+    --button-ghost-hover-bg: var(--color-background-tertiary);
+    --button-ghost-hover-text: var(--color-primary);
+
+    /* Compatibility with existing components */
+
+    --color-button-background: var(--button-primary-bg);
+    --color-button-text: var(--button-primary-text);
+    --color-button-hover: var(--button-primary-hover-bg);
+
+    /* COMPONENT TOKENS — INPUTS */
+
+    --input-height: 48px;
+
+    --color-input-background: #ffffff;
+    --color-input-text: #263845;
+    --color-input-placeholder: #74828b;
+
+    /* INTERACTIONS */
+
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+
+    --focus-ring-color: var(--color-border-focus);
+
+    /* OVERLAY AND SCROLLBAR */
+
+    --color-overlay: rgba(9, 44, 69, 0.76);
+
+    --color-scrollbar-track: #eaf3f8;
+    --color-scrollbar-thumb: #a3c4d5;
+
+    color-scheme: light;
 }
+
+
 /* =========================================================
-DARK THEME — ORCA
-PURE BLACK, WHITE AND GRAYSCALE
+   02 — DARK THEME / ORCA
 ========================================================= */
+
 [data-theme="dark"] {
-/* =======================================================
-BRAND COLORS
-======================================================= */
---color-primary: #f5f5f3;
---color-primary-light: #ffffff;
---color-primary-dark: #d1d1d1;
---color-secondary: #d6d6d6;
---color-secondary-light: #f0f0f0;
---color-secondary-dark: #a9a9a9;
---color-tertiary: #bcbcbc;
---color-tertiary-light: #e0e0e0;
---color-tertiary-dark: #8d8d8d;
---color-on-primary: #080808;
---color-on-secondary: #080808;
---color-on-tertiary: #080808;
---color-danger: #e2a2a2;
-/* =======================================================
-BASE COLORS
-======================================================= */
---color-white: #ffffff;
---color-black: #080808;
---color-gray: #a8a8a8;
---color-yellow: #d4d4d4;
---color-blue: #e0e0e0;
-/* =======================================================
-TEXT COLORS
-======================================================= */
---color-text: #f5f5f3;
---color-text-primary: #f5f5f3;
---color-text-secondary: #c6c6c6;
---color-text-light: #afafaf;
---color-link: #ffffff;
-/* =======================================================
-BACKGROUND COLORS
-======================================================= */
---color-background: #080808;
---color-background-secondary: #111111;
---color-background-tertiary: #202020;
---color-background-breadcrumb: #1b1b1b;
---color-background-rgba: rgba(0, 0, 0, 0.88);
-/* =======================================================
-SURFACE COLORS
-======================================================= */
---color-surface: #181818;
---color-surface-hover: #242424;
---color-surface-secondary: #202020;
---color-surface-tertiary: #2c2c2c;
---color-section-background: #101010;
---color-section-background-alt: #171717;
---color-card-background: #181818;
---color-card-background-hover: #242424;
-/* =======================================================
-BORDERS
-======================================================= */
---color-border: #343434;
---color-border-light: #292929;
---color-border-strong: #555555;
---color-border-focus: #f5f5f3;
-/* =======================================================
-SOFT ACCENT BACKGROUNDS
-======================================================= */
---color-primary-soft: #292929;
---color-secondary-soft: #242424;
---color-tertiary-soft: #303030;
---color-danger-soft: #332727;
-/* =======================================================
-PATTERN BACKGROUND
-======================================================= */
---pattern-background-color: #080808;
---pattern-background-image:
-radial-gradient(ellipse at 15% 12%,
-rgba(255, 255, 255, 0.035) 0%,
-transparent 48%),
-radial-gradient(ellipse at 88% 85%,
-rgba(255, 255, 255, 0.025) 0%,
-transparent 45%),
-linear-gradient(135deg,
-#080808 0%,
-#111111 55%,
-#080808 100%);
---pattern-background-size: cover;
---pattern-background-position: center;
-/* =======================================================
-TECHNOLOGY COLORS
-GRAYSCALE ONLY
-======================================================= */
---color-react: #f0f0f0;
---color-js: #dddddd;
---color-html: #cccccc;
---color-css: #e5e5e5;
---color-git: #bdbdbd;
---color-sql: #d4d4d4;
---color-rest_api: #aaaaaa;
---color-ms365: #ededed;
-/* =======================================================
-TECHNOLOGY SHADOWS
-======================================================= */
---color-shadow-react: #f0f0f066;
---color-shadow-js: #dddddd66;
---color-shadow-html: #cccccc66;
---color-shadow-css: #e5e5e566;
---color-shadow-git: #bdbdbd66;
---color-shadow-sql: #d4d4d466;
---color-shadow-rest_api: #aaaaaa66;
---color-shadow-ms365: #ededed66;
-/* =======================================================
-SOCIAL MEDIA COLORS
-GRAYSCALE ONLY
-======================================================= */
---color-linkedin: #f5f5f3;
---color-github: #ffffff;
---color-whatsapp: #dddddd;
---color-email: #cccccc;
---color-instgram: #eeeeee;
---color-snapchat: #e0e0e0;
---color-instagram: var(--color-instgram);
-/* =======================================================
-SHADOWS
-======================================================= */
---shadow-sm:
-0 2px 8px rgba(0, 0, 0, 0.25);
---shadow-md:
-0 6px 20px rgba(0, 0, 0, 0.35);
---shadow-lg:
-0 14px 40px rgba(0, 0, 0, 0.48);
-/* =======================================================
-CARD SHADOWS
-======================================================= */
---shadow-card:
-0 5px 18px rgba(0, 0, 0, 0.22);
---shadow-card-hover:
-0 10px 30px rgba(0, 0, 0, 0.38);
-/* =======================================================
-ADDITIONAL THEME TOKENS
-======================================================= */
---color-heading: #ffffff;
---color-heading-secondary: #dddddd;
---color-button-background: #f5f5f3;
---color-button-text: #080808;
---color-button-hover: #dddddd;
---color-input-background: #181818;
---color-input-text: #f5f5f3;
---color-input-placeholder: #aaaaaa;
---color-divider: #343434;
---color-overlay: rgba(0, 0, 0, 0.88);
---color-scrollbar-track: #111111;
---color-scrollbar-thumb: #666666;
-color-scheme: dark;
+
+    /* BRAND COLORS */
+
+    --color-primary: #f5f5f3;
+    --color-primary-light: #ffffff;
+    --color-primary-dark: #d1d1d1;
+
+    --color-secondary: #d6d6d6;
+    --color-secondary-light: #f0f0f0;
+    --color-secondary-dark: #a9a9a9;
+
+    --color-tertiary: #bcbcbc;
+    --color-tertiary-light: #e0e0e0;
+    --color-tertiary-dark: #8d8d8d;
+
+    --color-on-primary: #080808;
+    --color-on-secondary: #080808;
+    --color-on-tertiary: #080808;
+
+    /* STATUS COLORS */
+
+    --color-danger: #e2a2a2;
+    --color-danger-soft: #332727;
+
+    --color-success: #9cd6b5;
+    --color-success-soft: #193026;
+
+    --color-warning: #e6c78b;
+    --color-warning-soft: #352b1a;
+
+    /* BASE COLORS */
+
+    --color-white: #ffffff;
+    --color-black: #080808;
+    --color-gray: #a8a8a8;
+
+    --color-yellow: #d4d4d4;
+    --color-blue: #e0e0e0;
+
+    /* TEXT COLORS */
+
+    --color-text: #f5f5f3;
+    --color-text-primary: #f5f5f3;
+    --color-text-secondary: #c6c6c6;
+    --color-text-light: #afafaf;
+
+    --color-heading: #ffffff;
+    --color-heading-secondary: #dddddd;
+
+    --color-link: #ffffff;
+    --color-link-hover: #d6d6d6;
+
+    /* BACKGROUNDS */
+
+    --color-background: #080808;
+    --color-background-secondary: #111111;
+    --color-background-tertiary: #202020;
+
+    --color-background-breadcrumb: #1b1b1b;
+
+    --color-background-rgba: rgba(0, 0, 0, 0.88);
+
+    /* SURFACES */
+
+    --color-surface: #181818;
+    --color-surface-hover: #242424;
+
+    --color-surface-secondary: #202020;
+    --color-surface-tertiary: #2c2c2c;
+
+    --color-section-background: #101010;
+    --color-section-background-alt: #171717;
+
+    --color-card-background: #181818;
+    --color-card-background-hover: #242424;
+
+    /* BORDERS */
+
+    --color-border: #343434;
+    --color-border-light: #292929;
+    --color-border-strong: #555555;
+
+    --color-border-focus: #f5f5f3;
+
+    --color-divider: #343434;
+
+    /* SOFT ACCENTS */
+
+    --color-primary-soft: #292929;
+    --color-secondary-soft: #242424;
+    --color-tertiary-soft: #303030;
+
+    /* PATTERN BACKGROUND */
+
+    --pattern-background-color: #080808;
+
+    --pattern-background-image:
+        radial-gradient(ellipse at 15% 12%,
+            rgba(255, 255, 255, 0.035) 0%,
+            transparent 48%),
+        radial-gradient(ellipse at 88% 85%,
+            rgba(255, 255, 255, 0.025) 0%,
+            transparent 45%),
+        linear-gradient(135deg,
+            #080808 0%,
+            #111111 55%,
+            #080808 100%);
+
+    --pattern-background-size: cover;
+    --pattern-background-position: center;
+
+    /* TECHNOLOGY COLORS */
+
+    --color-react: #f0f0f0;
+    --color-js: #dddddd;
+    --color-html: #cccccc;
+    --color-css: #e5e5e5;
+
+    --color-git: #bdbdbd;
+    --color-sql: #d4d4d4;
+    --color-rest_api: #aaaaaa;
+    --color-ms365: #ededed;
+
+    /* Technology shadows */
+
+    --color-shadow-react: #f0f0f066;
+    --color-shadow-js: #dddddd66;
+    --color-shadow-html: #cccccc66;
+    --color-shadow-css: #e5e5e566;
+
+    --color-shadow-git: #bdbdbd66;
+    --color-shadow-sql: #d4d4d466;
+    --color-shadow-rest_api: #aaaaaa66;
+    --color-shadow-ms365: #ededed66;
+
+    /* SOCIAL COLORS */
+
+    --color-linkedin: #f5f5f3;
+    --color-github: #ffffff;
+    --color-whatsapp: #dddddd;
+    --color-email: #cccccc;
+
+    --color-instgram: #eeeeee;
+    --color-instagram: var(--color-instgram);
+
+    --color-snapchat: #e0e0e0;
+
+    /* SHADOWS */
+
+    --shadow-sm:
+        0 2px 8px rgba(0, 0, 0, 0.25);
+
+    --shadow-md:
+        0 6px 20px rgba(0, 0, 0, 0.35);
+
+    --shadow-lg:
+        0 14px 40px rgba(0, 0, 0, 0.48);
+
+    /* CARD SHADOWS */
+
+    --shadow-card:
+        0 5px 18px rgba(0, 0, 0, 0.22);
+
+    --shadow-card-hover:
+        0 10px 30px rgba(0, 0, 0, 0.38);
+
+    /* BUTTON TOKENS */
+
+    --button-primary-bg: var(--color-primary);
+    --button-primary-text: var(--color-on-primary);
+    --button-primary-border: var(--color-primary);
+
+    --button-primary-hover-bg: var(--color-primary-dark);
+    --button-primary-hover-text: var(--color-on-primary);
+    --button-primary-hover-border: var(--color-primary-dark);
+
+    --button-secondary-bg: var(--color-background-secondary);
+    --button-secondary-text: var(--color-primary);
+    --button-secondary-border: var(--color-border-strong);
+
+    --button-secondary-hover-bg: var(--color-background-tertiary);
+    --button-secondary-hover-text: var(--color-primary);
+    --button-secondary-hover-border: var(--color-primary);
+
+    --button-tertiary-bg: var(--color-tertiary);
+    --button-tertiary-text: var(--color-on-tertiary);
+    --button-tertiary-border: var(--color-tertiary);
+
+    --button-tertiary-hover-bg: var(--color-tertiary-dark);
+    --button-tertiary-hover-text: #080808;
+    --button-tertiary-hover-border: var(--color-tertiary-dark);
+
+    --button-ghost-bg: transparent;
+    --button-ghost-text: var(--color-text-primary);
+    --button-ghost-border: transparent;
+
+    --button-ghost-hover-bg: var(--color-background-tertiary);
+    --button-ghost-hover-text: var(--color-primary);
+
+    /* INPUTS */
+
+    --color-input-background: #181818;
+    --color-input-text: #f5f5f3;
+    --color-input-placeholder: #aaaaaa;
+
+    /* OVERLAY AND SCROLLBAR */
+
+    --color-overlay: rgba(0, 0, 0, 0.88);
+
+    --color-scrollbar-track: #111111;
+    --color-scrollbar-thumb: #666666;
+
+    color-scheme: dark;
 }
+
+
 /* =========================================================
-GLOBAL THEME STYLES
+   03 — RESPONSIVE DESIGN TOKENS
 ========================================================= */
+
+@media (max-width: 600px) {
+
+    :root {
+
+        --container-gutter: 16px;
+
+        --section-space: 52px;
+        --section-space-sm: 36px;
+
+        --content-gap: 20px;
+        --card-gap: 16px;
+
+        --radius-card: 14px;
+
+        --button-padding-inline: 18px;
+    }
+}
+
+
+/* =========================================================
+   04 — GLOBAL HTML SETTINGS
+========================================================= */
+
+html {
+    scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+
+/* =========================================================
+   05 — GLOBAL THEME STYLES
+========================================================= */
+
 body {
-background-color: var(--color-background);
-color: var(--color-text-primary);
-transition:
-background-color var(--transition-normal),
-color var(--transition-normal);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+
+    transition:
+        background-color var(--transition-normal),
+        color var(--transition-normal);
 }
+
+
 /* =========================================================
-HEADINGS
+   06 — HEADINGS
 ========================================================= */
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-color: var(--color-heading);
+    color: var(--color-heading);
 }
+
+
 /* =========================================================
-TEXT
+   07 — TEXT
 ========================================================= */
+
 p,
 li,
 label {
-color: inherit;
+    color: inherit;
 }
+
 small {
-color: var(--color-text-secondary);
+    color: var(--color-text-secondary);
 }
+
+
 /* =========================================================
-LINKS
+   08 — LINKS
 ========================================================= */
+
 a {
-color: var(--color-link);
-transition: color var(--transition-fast);
+    color: var(--color-link);
+
+    transition:
+        color var(--transition-fast);
 }
+
 a:hover {
-color: var(--color-primary-light);
+    color: var(--color-link-hover);
 }
+
+
 /* =========================================================
-SELECTION
+   09 — TEXT SELECTION
 ========================================================= */
+
 ::selection {
-background-color: var(--color-primary);
-color: var(--color-on-primary);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
 }
+
+
 /* =========================================================
-FOCUS
+   10 — FOCUS
 ========================================================= */
+
 :focus-visible {
-outline: 2px solid var(--color-border-focus);
-outline-offset: 3px;
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 3px;
 }
+
+
 /* =========================================================
-FORM CONTROLS
+   11 — FORM CONTROLS
 ========================================================= */
+
 input,
 textarea,
 select {
-color: var(--color-input-text);
-background-color: var(--color-input-background);
-border-color: var(--color-border);
-accent-color: var(--color-primary);
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+    border-color: var(--color-border);
+
+    accent-color: var(--color-primary);
 }
+
 input::placeholder,
 textarea::placeholder {
-color: var(--color-input-placeholder);
+    color: var(--color-input-placeholder);
 }
+
 input:focus,
 textarea:focus,
 select:focus {
-border-color: var(--color-border-focus);
+    border-color: var(--color-border-focus);
 }
+
+
 /* =========================================================
-BUTTONS
+   12 — BUTTON BASE
+   Visual styles are defined in Button.js.
 ========================================================= */
+
 button {
-font: inherit;
-transition:
-background-color var(--transition-fast),
-color var(--transition-fast),
-border-color var(--transition-fast);
+    font: inherit;
+
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
 }
+
 button:focus-visible {
-outline-color: var(--color-border-focus);
+    outline-color: var(--color-border-focus);
 }
+
+
 /* =========================================================
-HORIZONTAL RULE
+   13 — DIVIDERS
 ========================================================= */
+
 hr {
-border: 0;
-border-top: 1px solid var(--color-divider);
+    border: 0;
+    border-top: 1px solid var(--color-divider);
 }
+
+
 /* =========================================================
-SCROLLBAR
+   14 — SCROLLBAR
 ========================================================= */
+
 ::-webkit-scrollbar {
-width: 10px;
-height: 10px;
+    width: 10px;
+    height: 10px;
 }
+
 ::-webkit-scrollbar-track {
-background: var(--color-scrollbar-track);
+    background: var(--color-scrollbar-track);
 }
+
 ::-webkit-scrollbar-thumb {
-background: var(--color-scrollbar-thumb);
-border-radius: var(--radius-full);
+    background: var(--color-scrollbar-thumb);
+    border-radius: var(--radius-full);
 }
+
 ::-webkit-scrollbar-thumb:hover {
-background: var(--color-primary-dark);
+    background: var(--color-border-strong);
 }
+
+
 /* =========================================================
-ACCESSIBILITY
+   15 — REDUCED MOTION
 ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
-*,
-*::before,
-*::after {
-scroll-behavior: auto !important;
-animation-duration: 0.01ms !important;
-animation-iteration-count: 1 !important;
-transition-duration: 0.01ms !important;
-}
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
 }

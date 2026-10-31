@@ -2,61 +2,61 @@
 {
   "page": {
     "title": "Get in Touch",
-    "description": "I'd be happy to hear from you, answer your questions, and explore your ideas and suggestions. Send me a message using the contact form or reach out directly through any of the available channels."
+    "description": "For inquiries, job opportunities, projects, and collaborations."
   },
   "form": {
     "title": "Send a Message",
-    "description": "Feel free to contact me for any reason, whether it's a general inquiry, suggestion, collaboration opportunity, or something else. Fill out the form below and your message will be delivered directly to my email inbox.",
+    "description": "I'd be happy to hear from you.",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "firstNamePlaceholder": "Enter your first name",
-    "lastNamePlaceholder": "Enter your last name",
+    "firstNamePlaceholder": "First name",
+    "lastNamePlaceholder": "Last name",
     "email": "Email Address",
-    "emailNote": "Please enter a valid email address so I can reply to you.",
-    "topic": "Contact Subject",
+    "emailNote": "Enter a valid email address so I can reply.",
+    "topic": "Subject",
     "selectTopic": "Select a subject",
-    "customTopic": "Custom Subject",
+    "customTopic": "Other Subject",
     "customTopicPlaceholder": "Enter your subject",
-    "message": "Your Message",
-    "messagePlaceholder": "Write your message here. I'll be happy to read it and get back to you...",
-    "messageNote": "Please write a clear message of at least 10 characters.",
+    "message": "Message",
+    "messagePlaceholder": "Write your message here...",
+    "messageNote": "At least 10 characters.",
     "submit": "Send Message",
-    "sending": "Sending your message...",
-    "privacyNote": "Your message will be delivered to my email through Web3Forms. Please avoid including sensitive or confidential information."
+    "sending": "Sending...",
+    "privacyNote": "Messages and attachments are processed through the services used to deliver them. Avoid sharing sensitive information."
   },
   "topics": {
     "general": "General Contact",
-    "question": "Question or Inquiry",
-    "suggestion": "Suggestion or Idea",
-    "feedback": "Feedback or Comment",
+    "question": "Inquiry",
+    "suggestion": "Suggestion",
+    "feedback": "Feedback",
     "collaboration": "Collaboration or Partnership",
     "employment": "Job Opportunity",
     "project": "Project or Service",
-    "other": "Other - Specify Your Subject"
+    "other": "Other"
   },
   "status": {
-    "success": "Your message has been sent successfully! Thank you for reaching out. I'll review it and respond as soon as possible.",
-    "error": "Unable to send your message right now. Please try again or contact me directly by email.",
-    "invalid": "Please complete all required fields correctly.",
-    "configError": "The contact form is not configured yet. Please contact me directly by email."
+    "success": "Your message was sent successfully. Thanks for reaching out!",
+    "error": "Unable to send your message. Please try again or contact me by email.",
+    "invalid": "Please check the required fields.",
+    "configError": "Messaging is currently unavailable. Please contact me by email."
   },
   "info": {
     "title": "Contact Information",
-    "description": "You can also reach me directly through the following contact channels."
+    "description": "Direct contact options."
   },
   "methods": {
-    "email": "Email Address",
+    "email": "Email",
     "whatsapp": "WhatsApp",
-    "whatsappValue": "Chat directly on WhatsApp",
+    "whatsappValue": "Chat on WhatsApp",
     "phone": "Phone Call"
   },
   "availability": {
-    "title": "Availability & Response Time",
-    "heading": "Messages Welcome 24/7",
-    "description": "You can send your message anytime, 24 hours a day, 7 days a week. I regularly check my inbox and typically respond within 24 hours, although response times may vary."
+    "title": "Response Time",
+    "heading": "Message Me Anytime",
+    "description": "I aim to respond within 24 hours whenever possible."
   },
   "social": {
     "title": "Social Media",
-    "description": "Explore my social media profiles and feel free to connect with me."
+    "description": "Connect with me on social media."
   }
 }
