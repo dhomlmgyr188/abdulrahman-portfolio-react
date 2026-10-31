@@ -9,6 +9,9 @@
 ------------------------- */
 
 import react1 from "../../assets/images/react1.png";
+import react2 from "../../assets/images/react2.png";
+import react3 from "../../assets/images/react3.png";
+import react4 from "../../assets/images/react4.png";
 
 import anaalmughyir1 from "../../assets/images/anaalmughyir1.png";
 
@@ -36,6 +39,9 @@ import anaalmughyir1 from "../../assets/images/anaalmughyir1.png";
 
 const projectImages = Object.freeze({
   react1,
+  react2,
+  react3,
+  react4,
   anaalmughyir1,
 });
 

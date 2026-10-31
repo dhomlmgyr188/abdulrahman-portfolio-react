@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -16,7 +16,6 @@ import {
 
 import BreadCrumb from "../Components/ui/Breadcrumb";
 import Container from "../Components/layout/PageContainer";
-
 import { PageHeader } from "../Components/ui/T";
 
 import Button, { Actions } from "../Components/ui/Button/Button";
@@ -25,37 +24,14 @@ import { ImgModal } from "../Components/ui/Modal";
 import projectImages from "../Components/projects/projectImages";
 
 /* =========================================================
-   PROJECT DETAILS — MODERN PROFESSIONAL
-
-   Design System:
-   - Ocean / Orca
-   - Responsive layout
-   - RTL / LTR support
-
-   Preserved:
-   - Route parameter: projectId
-   - projects translation namespace
-   - Project information
-   - Gallery and image lightbox
-   - Overview
-   - Features
-   - Technologies
-   - Demo and GitHub links
-   - Not-found state
-   - Shared buttons
-========================================================= */
-
-/* =========================================================
    01 — PAGE WRAPPER
 ========================================================= */
 
 const DetailsPage = styled.main`
   width: 100%;
   min-width: 0;
-
   background-color: var(--color-background);
   color: var(--color-text-primary);
-
   overflow-x: clip;
 `;
 
@@ -66,7 +42,6 @@ const DetailsPage = styled.main`
 const Content = styled(Container)`
   display: flex;
   flex-direction: column;
-
   gap: clamp(28px, 4vw, 44px);
 
   padding-block:
@@ -81,62 +56,49 @@ const Content = styled(Container)`
 const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
-
   gap: 14px;
-
   width: 100%;
   min-width: 0;
 `;
 
 const Title = styled.h1`
   margin: 0;
-
   color: var(
     --color-heading,
     var(--color-text-primary)
   );
-
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 800;
   line-height: 1.45;
-
   overflow-wrap: anywhere;
 `;
 
 const Description = styled.p`
   max-width: 850px;
-
   margin: 0;
-
   color: var(--color-text-secondary);
-
   font-size: clamp(0.95rem, 1.4vw, 1.05rem);
   font-weight: 400;
   line-height: 1.95;
-
   overflow-wrap: anywhere;
 `;
 
 /* =========================================================
-   04 — PROJECT METADATA
+   04 — PROJECT DATE
 ========================================================= */
 
 const ProjectMetadata = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-
   gap: 12px;
 `;
 
 const DateText = styled.span`
   display: inline-flex;
   align-items: center;
-
   gap: 9px;
-
   padding: 9px 13px;
-
   color: var(--color-text-secondary);
 
   background-color: var(
@@ -145,9 +107,7 @@ const DateText = styled.span`
   );
 
   border: 1px solid var(--color-border);
-
   border-radius: 10px;
-
   font-size: 0.9rem;
   line-height: 1.5;
 
@@ -164,16 +124,13 @@ const DateText = styled.span`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-
   gap: 20px;
-
   width: 100%;
   min-width: 0;
 `;
 
 const SectionTitle = styled.h2`
   margin: 0;
-
   padding-block-end: 14px;
 
   color: var(
@@ -182,40 +139,70 @@ const SectionTitle = styled.h2`
   );
 
   border-block-end: 1px solid var(--color-border);
-
   font-size: clamp(1.2rem, 2.4vw, 1.65rem);
   font-weight: 800;
   line-height: 1.5;
 `;
 
 /* =========================================================
-   06 — PROJECT GALLERY
+   06 — INTERACTIVE GALLERY
+
+   Desktop:
+   - Thumbnails on LEFT
+   - Main image on RIGHT
+
+   Same arrangement in Arabic and English.
 ========================================================= */
 
 const Gallery = styled.div`
   display: grid;
-
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, 320px), 1fr)
-  );
-
-  gap: clamp(14px, 2vw, 22px);
-
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 3fr);
+  grid-template-areas: "thumbs main";
+  gap: clamp(12px, 2vw, 20px);
   width: 100%;
   min-width: 0;
+  direction: ltr;
+
+  @media (max-width: 700px) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "main"
+      "thumbs";
+  }
+`;
+
+const GalleryMain = styled.div`
+  grid-area: main;
+  min-width: 0;
+`;
+
+const GalleryThumbnails = styled.div`
+  grid-area: thumbs;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  max-height: 520px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  @media (max-width: 700px) {
+    flex-direction: row;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 5px;
+  }
 `;
 
 const GalleryButton = styled.button`
   position: relative;
-
   display: block;
-
   width: 100%;
   min-width: 0;
-
   padding: 0;
-
   overflow: hidden;
 
   background-color: var(
@@ -224,14 +211,12 @@ const GalleryButton = styled.button`
   );
 
   border: 1px solid var(--color-border);
-
   border-radius: var(--radius-card, 14px);
-
   box-shadow: var(--shadow-sm, none);
-
-  cursor: zoom-in;
-
   box-sizing: border-box;
+
+  cursor: ${({ $main }) =>
+    $main ? "zoom-in" : "pointer"};
 
   transition:
     border-color 0.25s ease,
@@ -260,15 +245,30 @@ const GalleryButton = styled.button`
   }
 `;
 
-const GalleryImage = styled.img`
-  display: block;
+const MainImageButton = styled(GalleryButton)`
+  aspect-ratio: 16 / 10;
+`;
 
-  width: 100%;
-  height: auto;
-
+const ThumbnailButton = styled(GalleryButton)`
+  flex: 0 0 auto;
   aspect-ratio: 16 / 10;
 
-  padding: 12px;
+  @media (max-width: 700px) {
+    width: 125px;
+  }
+
+  @media (max-width: 420px) {
+    width: 105px;
+  }
+`;
+
+const GalleryImage = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  padding: ${({ $small }) =>
+    $small ? "6px" : "12px"};
 
   object-fit: contain;
   object-position: center;
@@ -279,16 +279,10 @@ const GalleryImage = styled.img`
   );
 
   box-sizing: border-box;
-
-  @media (max-width: 600px) {
-    aspect-ratio: 4 / 3;
-    padding: 8px;
-  }
 `;
 
 const ZoomIndicator = styled.span`
   position: absolute;
-
   inset-block-end: 12px;
   inset-inline-end: 12px;
 
@@ -298,15 +292,10 @@ const ZoomIndicator = styled.span`
 
   width: 34px;
   height: 34px;
-
   background-color: var(--color-background);
-
   color: var(--color-primary);
-
   border: 1px solid var(--color-border);
-
   border-radius: 9px;
-
   box-shadow: var(--shadow-sm);
 
   svg {
@@ -316,19 +305,15 @@ const ZoomIndicator = styled.span`
 `;
 
 /* =========================================================
-   07 — FEATURES
+   07 — FEATURES / RESPONSIBILITIES
 ========================================================= */
 
 const FeaturesList = styled.ul`
   display: grid;
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
-
   gap: 14px 22px;
-
   margin: 0;
   padding: 0;
-
   list-style: none;
 
   @media (max-width: 700px) {
@@ -339,13 +324,9 @@ const FeaturesList = styled.ul`
 const Feature = styled.li`
   display: flex;
   align-items: flex-start;
-
   gap: 12px;
-
   min-width: 0;
-
   padding: 15px;
-
   color: var(--color-text-secondary);
 
   background-color: var(
@@ -354,24 +335,17 @@ const Feature = styled.li`
   );
 
   border: 1px solid var(--color-border);
-
   border-radius: 12px;
-
   font-size: 0.95rem;
   line-height: 1.85;
-
   box-sizing: border-box;
-
   overflow-wrap: anywhere;
 
   svg {
     flex-shrink: 0;
-
     width: 19px;
     height: 19px;
-
     margin-block-start: 4px;
-
     color: var(--color-primary);
   }
 `;
@@ -383,21 +357,16 @@ const Feature = styled.li`
 const TechList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-
   gap: 10px;
-
   margin: 0;
   padding: 0;
-
   list-style: none;
 `;
 
 const Tech = styled.li`
   display: inline-flex;
   align-items: center;
-
   min-height: 38px;
-
   padding: 8px 14px;
 
   background-color: var(
@@ -406,11 +375,8 @@ const Tech = styled.li`
   );
 
   color: var(--color-text-primary);
-
   border: 1px solid var(--color-border);
-
   border-radius: 9px;
-
   font-size: 0.88rem;
   font-weight: 600;
   line-height: 1.5;
@@ -437,13 +403,11 @@ const ActionContent = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   gap: 10px;
 
   svg {
     width: 17px;
     height: 17px;
-
     flex-shrink: 0;
   }
 `;
@@ -455,18 +419,12 @@ const ActionContent = styled.span`
 const BackLink = styled(Link)`
   display: inline-flex;
   align-items: center;
-
   gap: 10px;
-
   align-self: flex-start;
-
   min-height: 44px;
-
   color: var(--color-primary);
-
   font-size: 0.95rem;
   font-weight: 700;
-
   text-decoration: none;
 
   transition:
@@ -476,7 +434,6 @@ const BackLink = styled(Link)`
   svg {
     width: 18px;
     height: 18px;
-
     flex-shrink: 0;
   }
 
@@ -486,7 +443,6 @@ const BackLink = styled(Link)`
 
   &:focus-visible {
     outline: 2px solid var(--color-primary);
-
     outline-offset: 4px;
     border-radius: 4px;
   }
@@ -497,7 +453,50 @@ const BackLink = styled(Link)`
 `;
 
 /* =========================================================
-   11 — IMAGE RESOLVER
+   11 — ADDITIONAL PROJECT INFORMATION
+========================================================= */
+
+const InformationGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const InformationCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+
+  background-color: var(
+    --color-card-background,
+    var(--color-background-secondary)
+  );
+
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+`;
+
+const InformationLabel = styled.span`
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+`;
+
+const InformationValue = styled.span`
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+`;
+
+/* =========================================================
+   12 — IMAGE RESOLVER
 ========================================================= */
 
 const resolveProjectImages = (value) => {
@@ -513,7 +512,6 @@ const resolveProjectImages = (value) => {
         return null;
       }
 
-      // Known project images from projectImages.js
       if (
         Object.prototype.hasOwnProperty.call(
           projectImages,
@@ -523,7 +521,6 @@ const resolveProjectImages = (value) => {
         return projectImages[key];
       }
 
-      // Allow explicit external image URLs
       if (/^https?:\/\//i.test(key)) {
         return key;
       }
@@ -534,19 +531,116 @@ const resolveProjectImages = (value) => {
 };
 
 /* =========================================================
-   12 — PROJECT DETAILS COMPONENT
+   13 — INTERACTIVE GALLERY COMPONENT
+========================================================= */
+
+const InteractiveGallery = ({
+  images,
+  projectTitle,
+  enlargeLabel,
+  onEnlarge,
+}) => {
+  const [imageOrder, setImageOrder] = useState(() =>
+    images.map((_, index) => index)
+  );
+
+  const imageSignature = JSON.stringify(images);
+
+  useEffect(() => {
+    setImageOrder(images.map((_, index) => index));
+  }, [imageSignature]);
+
+  if (images.length === 0) {
+    return null;
+  }
+
+  const swapImages = (clickedSlot) => {
+    setImageOrder((previous) => {
+      const updated = [...previous];
+
+      [updated[0], updated[clickedSlot]] = [
+        updated[clickedSlot],
+        updated[0],
+      ];
+
+      return updated;
+    });
+  };
+
+  const mainImageIndex = imageOrder[0];
+  const mainImageSrc = images[mainImageIndex];
+
+  return (
+    <Gallery>
+      {/* THUMBNAILS — LEFT IN BOTH LANGUAGES */}
+
+      {imageOrder.length > 1 && (
+        <GalleryThumbnails>
+          {imageOrder.slice(1).map((imageIndex, index) => {
+            const slot = index + 1;
+
+            return (
+              <ThumbnailButton
+                key={`thumbnail-slot-${slot}`}
+                type="button"
+                onClick={() => swapImages(slot)}
+                aria-label={
+                  `${projectTitle} - ${imageIndex + 1}`
+                }
+              >
+                <GalleryImage
+                  $small
+                  src={images[imageIndex]}
+                  alt={`${projectTitle} - ${imageIndex + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </ThumbnailButton>
+            );
+          })}
+        </GalleryThumbnails>
+      )}
+
+      {/* MAIN IMAGE — RIGHT IN BOTH LANGUAGES */}
+
+      <GalleryMain>
+        <MainImageButton
+          $main
+          type="button"
+          onClick={() =>
+            onEnlarge({
+              src: mainImageSrc,
+              alt: `${projectTitle} - ${mainImageIndex + 1}`,
+            })
+          }
+          aria-label={
+            `${enlargeLabel}: ${projectTitle}`
+          }
+        >
+          <GalleryImage
+            src={mainImageSrc}
+            alt={`${projectTitle} - ${mainImageIndex + 1}`}
+            decoding="async"
+          />
+
+          <ZoomIndicator aria-hidden="true">
+            <FiZoomIn />
+          </ZoomIndicator>
+        </MainImageButton>
+      </GalleryMain>
+    </Gallery>
+  );
+};
+
+/* =========================================================
+   14 — PROJECT DETAILS COMPONENT
 ========================================================= */
 
 const ProjectDetails = () => {
   const { projectId } = useParams();
-
   const { t, i18n } = useTranslation("projects");
 
   const [selectedImage, setSelectedImage] = useState(null);
-
-  /* -------------------------------------------------------
-     LANGUAGE
-  ------------------------------------------------------- */
 
   const language =
     i18n.resolvedLanguage ||
@@ -559,10 +653,6 @@ const ProjectDetails = () => {
     ? FiArrowRight
     : FiArrowLeft;
 
-  /* -------------------------------------------------------
-     PROJECT DATA
-  ------------------------------------------------------- */
-
   const projects = t("items", {
     returnObjects: true,
     defaultValue: [],
@@ -572,40 +662,35 @@ const ProjectDetails = () => {
     ? projects.find((item) => item.id === projectId)
     : undefined;
 
-  /* -------------------------------------------------------
-     TRANSLATIONS
-  ------------------------------------------------------- */
-
   const labels = {
     notFound: t("details.notFound"),
     notFoundDescription: t("details.notFoundDescription"),
     back: t("details.backToProjects"),
+
+    projectName: t("details.projectName"),
+    projectType: t("details.projectType"),
+    developedBy: t("details.developedBy"),
+    developmentArea: t("details.developmentArea"),
     date: t("details.date"),
-    gallery: t("details.gallery"),
     overview: t("details.overview"),
     features: t("details.features"),
+    responsibilities: t("details.responsibilities"),
     technologies: t("details.technologies"),
     liveDemo: t("details.liveDemo"),
     sourceCode: t("details.sourceCode"),
-    enlarge: isArabic
-      ? "تكبير صورة المشروع"
-      : "Enlarge project image",
+    enlarge: t("details.enlargeImage"),
   };
 
   /* -------------------------------------------------------
-     NOT FOUND
+     NOT FOUND — BREADCRUMB UNCHANGED
   ------------------------------------------------------- */
 
   if (!project) {
     return (
       <DetailsPage dir={isArabic ? "rtl" : "ltr"}>
-        {/* BREADCRUMB ONLY */}
-
         <PageHeader>
           <BreadCrumb value="projects" />
         </PageHeader>
-
-        {/* NOT FOUND CONTENT */}
 
         <Content>
           <HeaderContent>
@@ -625,23 +710,36 @@ const ProjectDetails = () => {
     );
   }
 
-  /* -------------------------------------------------------
-     PROJECT IMAGES
-  ------------------------------------------------------- */
-
   const images = resolveProjectImages(
     project.project_img
   );
 
-  /* -------------------------------------------------------
-     RENDER
-  ------------------------------------------------------- */
+  const developers = Array.isArray(project.developedBy)
+    ? project.developedBy.join(isArabic ? "، " : ", ")
+    : project.developedBy;
+
+  const information = [
+    {
+      label: labels.projectName,
+      value: project.title,
+    },
+    {
+      label: labels.projectType,
+      value: project.projectType,
+    },
+    {
+      label: labels.developedBy,
+      value: developers,
+    },
+    {
+      label: labels.developmentArea,
+      value: project.developmentArea,
+    },
+  ].filter((item) => item.value);
 
   return (
     <DetailsPage dir={isArabic ? "rtl" : "ltr"}>
-      {/* =====================================
-          PAGE HEADER — BREADCRUMB ONLY
-      ===================================== */}
+      {/* BREADCRUMB — UNCHANGED */}
 
       <PageHeader>
         <BreadCrumb
@@ -650,28 +748,22 @@ const ProjectDetails = () => {
         />
       </PageHeader>
 
-      {/* =====================================
-          MAIN CONTENT
-      ===================================== */}
-
       <Content>
-        {/* ===================================
-            PROJECT TITLE AND DESCRIPTION
-        =================================== */}
+        {/* PROJECT GALLERY — NO HEADING */}
 
-        <HeaderContent>
-          <Title>{project.title}</Title>
+        {images.length > 0 && (
+          <Section>
+            <InteractiveGallery
+              key={project.id}
+              images={images}
+              projectTitle={project.title}
+              enlargeLabel={labels.enlarge}
+              onEnlarge={setSelectedImage}
+            />
+          </Section>
+        )}
 
-          {project.shortDescription && (
-            <Description>
-              {project.shortDescription}
-            </Description>
-          )}
-        </HeaderContent>
-
-        {/* ===================================
-            PROJECT DATE
-        =================================== */}
+        {/* COMPLETION DATE — BELOW IMAGES */}
 
         {project.date && (
           <ProjectMetadata>
@@ -687,55 +779,25 @@ const ProjectDetails = () => {
           </ProjectMetadata>
         )}
 
-        {/* ===================================
-            PROJECT GALLERY
-        =================================== */}
+        {/* PROJECT INFORMATION */}
 
-        {images.length > 0 && (
-          <Section aria-label={labels.gallery}>
-            <SectionTitle>
-              {labels.gallery}
-            </SectionTitle>
+        {information.length > 0 && (
+          <InformationGrid>
+            {information.map((item) => (
+              <InformationCard key={item.label}>
+                <InformationLabel>
+                  {item.label}
+                </InformationLabel>
 
-            <Gallery>
-              {images.map((src, index) => {
-                const imageAlt =
-                  `${project.title} - ${index + 1}`;
-
-                return (
-                  <GalleryButton
-                    key={`${project.id}-${index}`}
-                    type="button"
-                    onClick={() =>
-                      setSelectedImage({
-                        src,
-                        alt: imageAlt,
-                      })
-                    }
-                    aria-label={
-                      `${labels.enlarge}: ${imageAlt}`
-                    }
-                  >
-                    <GalleryImage
-                      src={src}
-                      alt={imageAlt}
-                      loading="lazy"
-                      decoding="async"
-                    />
-
-                    <ZoomIndicator aria-hidden="true">
-                      <FiZoomIn />
-                    </ZoomIndicator>
-                  </GalleryButton>
-                );
-              })}
-            </Gallery>
-          </Section>
+                <InformationValue>
+                  {item.value}
+                </InformationValue>
+              </InformationCard>
+            ))}
+          </InformationGrid>
         )}
 
-        {/* ===================================
-            PROJECT OVERVIEW
-        =================================== */}
+        {/* PROJECT DESCRIPTION */}
 
         {project.overview && (
           <Section aria-label={labels.overview}>
@@ -749,9 +811,7 @@ const ProjectDetails = () => {
           </Section>
         )}
 
-        {/* ===================================
-            PROJECT FEATURES
-        =================================== */}
+        {/* KEY FEATURES */}
 
         {Array.isArray(project.features) &&
           project.features.length > 0 && (
@@ -766,10 +826,7 @@ const ProjectDetails = () => {
                     <Feature
                       key={`${project.id}-feature-${index}`}
                     >
-                      <FiCheckCircle
-                        aria-hidden="true"
-                      />
-
+                      <FiCheckCircle aria-hidden="true" />
                       <span>{feature}</span>
                     </Feature>
                   )
@@ -778,9 +835,31 @@ const ProjectDetails = () => {
             </Section>
           )}
 
-        {/* ===================================
-            TECHNOLOGIES
-        =================================== */}
+        {/* MY RESPONSIBILITIES */}
+
+        {Array.isArray(project.responsibilities) &&
+          project.responsibilities.length > 0 && (
+            <Section aria-label={labels.responsibilities}>
+              <SectionTitle>
+                {labels.responsibilities}
+              </SectionTitle>
+
+              <FeaturesList>
+                {project.responsibilities.map(
+                  (responsibility, index) => (
+                    <Feature
+                      key={`${project.id}-responsibility-${index}`}
+                    >
+                      <FiCheckCircle aria-hidden="true" />
+                      <span>{responsibility}</span>
+                    </Feature>
+                  )
+                )}
+              </FeaturesList>
+            </Section>
+          )}
+
+        {/* TECHNOLOGIES */}
 
         {Array.isArray(project.tech_stack) &&
           project.tech_stack.length > 0 && (
@@ -801,9 +880,7 @@ const ProjectDetails = () => {
             </Section>
           )}
 
-        {/* ===================================
-            PROJECT LINKS
-        =================================== */}
+        {/* PROJECT LINKS — ORIGINAL BUTTONS */}
 
         {(project.demo || project.github) && (
           <ProjectActions>
@@ -818,9 +895,7 @@ const ProjectDetails = () => {
                 <ActionContent>
                   {labels.liveDemo}
 
-                  <FiExternalLink
-                    aria-hidden="true"
-                  />
+                  <FiExternalLink aria-hidden="true" />
                 </ActionContent>
               </Button>
             )}
@@ -843,20 +918,15 @@ const ProjectDetails = () => {
           </ProjectActions>
         )}
 
-        {/* ===================================
-            BACK TO PROJECTS
-        =================================== */}
+        {/* BACK TO PROJECTS — UNCHANGED */}
 
         <BackLink to="/projects">
           <BackArrow aria-hidden="true" />
-
           {labels.back}
         </BackLink>
       </Content>
 
-      {/* =====================================
-          IMAGE LIGHTBOX
-      ===================================== */}
+      {/* ORIGINAL IMAGE MODAL */}
 
       <ImgModal
         ImgSource={selectedImage?.src}

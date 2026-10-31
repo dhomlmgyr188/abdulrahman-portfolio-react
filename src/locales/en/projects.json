@@ -1,33 +1,52 @@
-
 {
   "pageTitle": "My Projects",
-  "pageDesc": "Selected web development projects and applications.",
+  "pageDesc": "A collection of projects I have developed, showcasing my technical skills and experience in designing and building websites and web interfaces.",
   "details": {
-    "overview": "Project Overview",
-    "features": "Key Features",
-    "technologies": "Technologies Used",
     "gallery": "Project Gallery",
+    "projectName": "Project Name",
+    "projectType": "Project Type",
+    "developedBy": "Developed By",
+    "developmentArea": "Development Area",
     "date": "Completion Date",
-    "liveDemo": "Live Preview",
+    "overview": "Project Description",
+    "features": "Key Features",
+    "responsibilities": "My Responsibilities",
+    "technologies": "Technologies Used",
+    "liveDemo": "Live Demo",
     "sourceCode": "Source Code",
     "backToProjects": "Back to Projects",
     "notFound": "Project Not Found",
-    "notFoundDescription": "The requested project could not be found."
+    "notFoundDescription": "We couldn't find the requested project.",
+    "enlargeImage": "Enlarge Image",
+    "closeImage": "Close Image",
+    "previousImage": "Previous Image",
+    "nextImage": "Next Image",
+    "noImages": "No project images are currently available"
   },
   "items": [
     {
       "id": "React-To-Do-List",
       "title": "React Notes Management App",
+      "projectType": "Web Application",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir"
+      ],
+      "developmentArea": "Front-End Development",
       "date": "2026/08/30",
-      "shortDescription": "A notes management app with local browser storage.",
-      "overview": "An interactive React application for creating, viewing, editing, and deleting notes, with data stored locally using LocalStorage. Developed as part of the JavaScript Application Development course at Hsoub Academy.",
+      "shortDescription": "An interactive application for creating, editing, deleting, and locally saving notes.",
+      "overview": "A notes management web application built with React and LocalStorage. Users can create, view, edit, and delete notes through an interactive interface, with data stored directly in the browser without requiring an external server. Developed as part of the JavaScript Application Development course at Hsoub Academy.",
       "features": [
         "Create new notes",
         "View saved notes",
         "Edit existing notes",
         "Delete notes",
-        "Store data using LocalStorage",
+        "Store data locally using LocalStorage",
         "Update the interface interactively with React"
+      ],
+      "responsibilities": [
+        "Developing the user interface using React (sample wording)",
+        "Implementing note creation, editing, and deletion (sample wording)",
+        "Connecting notes to browser local storage (sample wording)"
       ],
       "tech_stack": [
         "React",
@@ -37,7 +56,10 @@
         "LocalStorage"
       ],
       "project_img": [
-        "react1"
+        "react1",
+        "react2",
+        "react3",
+        "react4"
       ],
       "demo": "https://dhomlmgyr188.github.io/React-To-Do-List/",
       "github": "https://github.com/dhomlmgyr188/React-To-Do-List"
@@ -46,14 +68,14 @@
       "id": "Portfolio_v1",
       "title": "Personal Portfolio - Previous Version",
       "date": "2026/05/24",
-      "shortDescription": "A responsive portfolio showcasing skills and projects.",
-      "overview": "A multi-page personal portfolio built with HTML, CSS, and JavaScript to showcase professional information, skills, projects, and services, featuring responsive design and easy navigation.",
+      "shortDescription": "A responsive, multi-page personal portfolio showcasing professional information, projects, and services.",
+      "overview": "A multi-page personal portfolio website designed to showcase professional information, skills, projects, and services, with an emphasis on intuitive navigation, organized content, and a consistent user experience across different devices.",
       "features": [
-        "Responsive design across screen sizes",
+        "Responsive design across different screen sizes",
         "Multiple pages for organized content",
         "Professional information and project showcase",
-        "Clear navigation between pages",
-        "Interactive features using JavaScript"
+        "Clear navigation between website sections",
+        "Interactive functionality using JavaScript"
       ],
       "tech_stack": [
         "HTML",
@@ -64,7 +86,7 @@
         "anaalmughyir1"
       ],
       "demo": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/",
-      "github": "https://github.com/dhomlmgyr188/abdulrahman-portfolio-static"
+      "github": ""
     }
   ]
 }
