@@ -1,23 +1,37 @@
 {
   "files": {
     "main.css": "/abdulrahman-portfolio-react/static/css/main.a662cba6.css",
-    "main.js": "/abdulrahman-portfolio-react/static/js/main.9b6b47e4.js",
+    "main.js": "/abdulrahman-portfolio-react/static/js/main.da2b6c6e.js",
+    "static/media/الرئيسية .png": "/abdulrahman-portfolio-react/static/media/الرئيسية .2045d44bc2482f1147a3.png",
     "static/media/me.png": "/abdulrahman-portfolio-react/static/media/me.93fc188400bffe390923.png",
     "static/media/saudia-sans-bold.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-bold.aeaeb29bd75393fdabfc.otf",
     "static/media/saudia-sans-regular.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-regular.9af8db836ec4b5272370.otf",
     "static/media/anaalmughyir1.png": "/abdulrahman-portfolio-react/static/media/anaalmughyir1.068f79c3a22321ddb8b5.png",
     "static/media/Barlow-Bold.ttf": "/abdulrahman-portfolio-react/static/media/Barlow-Bold.0cb1ab864072bf9e0991.ttf",
     "static/media/Barlow-Medium.ttf": "/abdulrahman-portfolio-react/static/media/Barlow-Medium.d4afdc134fc10b739bab.ttf",
+    "static/media/العمليات الموافقة على الحال - الادمن.png": "/abdulrahman-portfolio-react/static/media/العمليات الموافقة على الحال - الادمن.c8d4aa4526a361f07c27.png",
+    "static/media/لوحة التحكم - المدير.png": "/abdulrahman-portfolio-react/static/media/لوحة التحكم - المدير.bef8ad766d3572e3d1fe.png",
+    "static/media/العمليات - العميل.png": "/abdulrahman-portfolio-react/static/media/العمليات - العميل.c63edef8bcf808d1eea3.png",
+    "static/media/مشاريعي - العميل.png": "/abdulrahman-portfolio-react/static/media/مشاريعي - العميل.eac212abaf650103239e.png",
+    "static/media/عرض الملف الشخصي - العميل.png": "/abdulrahman-portfolio-react/static/media/عرض الملف الشخصي - العميل.a556a04ac43f2b9679c9.png",
+    "static/media/العمليات - الادمن.png": "/abdulrahman-portfolio-react/static/media/العمليات - الادمن.06fcda950b2e66c57cb2.png",
+    "static/media/العثور على مستقلين - العميل.png": "/abdulrahman-portfolio-react/static/media/العثور على مستقلين - العميل.9218c806d21e59622485.png",
+    "static/media/تصفح المشاريع - مستقل.png": "/abdulrahman-portfolio-react/static/media/تصفح المشاريع - مستقل.9674ed0287408172ab04.png",
+    "static/media/عروضي - مستقل.png": "/abdulrahman-portfolio-react/static/media/عروضي - مستقل.9529e85f51456ea84da8.png",
+    "static/media/جداول قاعدة البيانات mysql.png": "/abdulrahman-portfolio-react/static/media/جداول قاعدة البيانات mysql.124c14b046c7067a59e3.png",
+    "static/media/تسجيل جديد.png": "/abdulrahman-portfolio-react/static/media/تسجيل جديد.f6e4dcb2d4bff8f5eaa2.png",
+    "static/media/اضافة مشروع - العميل.png": "/abdulrahman-portfolio-react/static/media/اضافة مشروع - العميل.203cce8370b68f35e332.png",
+    "static/media/تعديل الملف الشخصي - العميل.png": "/abdulrahman-portfolio-react/static/media/تعديل الملف الشخصي - العميل.d95e1a16589889793af0.png",
     "static/media/react4.png": "/abdulrahman-portfolio-react/static/media/react4.7513cd4658bf4cd8e95d.png",
     "static/media/react3.png": "/abdulrahman-portfolio-react/static/media/react3.67821ea194bfac52e5c6.png",
     "static/media/react2.png": "/abdulrahman-portfolio-react/static/media/react2.072beaaa17420a55f0af.png",
     "static/media/react1.png": "/abdulrahman-portfolio-react/static/media/react1.e2f390ead0b946401503.png",
     "index.html": "/abdulrahman-portfolio-react/index.html",
     "main.a662cba6.css.map": "/abdulrahman-portfolio-react/static/css/main.a662cba6.css.map",
-    "main.9b6b47e4.js.map": "/abdulrahman-portfolio-react/static/js/main.9b6b47e4.js.map"
+    "main.da2b6c6e.js.map": "/abdulrahman-portfolio-react/static/js/main.da2b6c6e.js.map"
   },
   "entrypoints": [
     "static/css/main.a662cba6.css",
-    "static/js/main.9b6b47e4.js"
+    "static/js/main.da2b6c6e.js"
   ]
 }
