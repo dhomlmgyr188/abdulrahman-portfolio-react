@@ -1,6 +1,10 @@
 {
   "pageTitle": "My Projects",
   "pageDesc": "A collection of projects I have developed, showcasing my technical skills and experience in designing and building websites and web interfaces.",
+  "section": {
+    "title": "My Projects",
+    "description": "Explore my web development projects, including their objectives, key features, technologies, and my contributions to their development."
+  },
   "details": {
     "gallery": "Project Gallery",
     "projectName": "Project Name",
@@ -21,7 +25,8 @@
     "closeImage": "Close Image",
     "previousImage": "Previous Image",
     "nextImage": "Next Image",
-    "noImages": "No project images are currently available"
+    "noImages": "No project images are currently available",
+    "plannedFeature": "Planned for Future Development"
   },
   "items": [
     {
@@ -87,6 +92,122 @@
       ],
       "demo": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/",
       "github": ""
+    },
+    {
+      "id": "freelancer-hub",
+      "title": "Freelancers Hub",
+      "projectType": "Academic Graduation Project — Freelancing Platform",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir",
+        "Hatem Al-Juhani",
+        "Hisham Al-Harbi",
+        "Emad Al-Juhani",
+        "Mohammed Jablawi",
+        "Omar Al-Balawi"
+      ],
+      "developmentArea": "Full-Stack Web Development (Front-End, Back-End, and Databases)",
+      "date": "2026/01/19",
+      "shortDescription": "A graduation project connecting freelancers with project owners, featuring account and project management, search functionality, an administrative dashboard, and transaction records.",
+      "overview": "Freelancers Hub is an academic graduation project developed as part of the Intermediate Diploma in Full-Stack Web Development at the Applied College, Taibah University. The project aims to establish an online platform connecting freelancers with project owners, facilitating project publishing, opportunity discovery, and the management of user and project information through an organized digital environment.\n\nThe platform supports three account types: freelancer, project owner, and administrator. Project owners can create and manage projects, search for freelancers by name or skill, and review their professional profiles. Freelancers can maintain profiles featuring their skills, experience, hourly rates, and portfolio work, as well as browse, search, and filter available projects.\n\nThe platform includes transaction records and their associated statuses. Freelancers and project owners can view only their own transaction records, while administrators can manage recorded transaction statuses. These records do not represent actual payment processing, as no real payment gateway was integrated.\n\nThe administrative dashboard provides statistics covering users, freelancers, project owners, projects, and transactions. Administrators can manage users, projects, categories, and skills, as well as review and approve or reject project publication requests.\n\nThe project also includes interfaces and database structures related to project proposals. However, proposal submission and management were not completed as operational features and remain part of the planned future development.",
+      "features": [
+        {
+          "title": "Account and Permission Management",
+          "items": [
+            "Register freelancer and project owner accounts and authenticate users according to their account types.",
+            "Manage personal information and user profiles based on role-specific permissions."
+          ]
+        },
+        {
+          "title": "Professional Profiles",
+          "items": [
+            "Create freelancer profiles featuring specializations, skills, experience, hourly rates, and portfolio work.",
+            "Browse freelancer profiles and search for freelancers by name or skill."
+          ]
+        },
+        {
+          "title": "Project Management",
+          "items": [
+            "Create projects with titles, descriptions, and budgets.",
+            "View, edit, and delete projects owned by the project owner.",
+            "Browse available projects using search and filtering features."
+          ]
+        },
+        {
+          "title": "Transaction Records",
+          "items": [
+            "Allow freelancers and project owners to view their own transaction records with read-only access.",
+            "Enable administrators to manage recorded transaction statuses: pending, completed, failed, and refunded."
+          ],
+          "note": "This functionality concerns transaction records and their statuses within the system. No real payment gateway, fund transfer, or financial refund processing was implemented."
+        },
+        {
+          "title": "Administrative Dashboard",
+          "items": [
+            "Display statistics for users, freelancers, project owners, projects, and transactions.",
+            "Manage users, projects, categories, and skills.",
+            "Review project publication requests and approve or reject them."
+          ]
+        },
+        {
+          "title": "User Experience",
+          "items": [
+            "Provide search, filtering, and sorting capabilities to help users find relevant content.",
+            "Display clear success, error, and empty-state messages.",
+            "Organize navigation and content according to user account types."
+          ]
+        },
+        {
+          "title": "Project Proposal System — Future Development",
+          "status": "planned",
+          "items": [
+            "Allow freelancers to submit proposals containing an amount, estimated duration, and message.",
+            "Track proposal statuses such as pending, accepted, rejected, and withdrawn."
+          ],
+          "note": "Related interfaces and database structures are available, but proposal submission and management were not completed as operational features."
+        }
+      ],
+      "responsibilitiesIntro": "I played a pivotal role in developing Freelancers Hub as part of a six-member team, taking on extensive technical and implementation responsibilities. My contributions covered requirements analysis, system design, front-end and back-end development, database development, component integration, testing, debugging, and user experience improvements. I also collaborated closely with team members, supported their development tasks, and contributed substantially to integrating and completing the project.",
+      "responsibilities": [
+        "Made substantial contributions to analyzing the project concept, defining functional requirements, and identifying user roles and permissions.",
+        "Participated in planning the platform architecture, page structure, and user workflows.",
+        "Developed extensive front-end components and interfaces using HTML, CSS, and JavaScript.",
+        "Implemented back-end functionality using PHP to process requests and manage application data.",
+        "Contributed to designing the MySQL database, its tables, and relationships.",
+        "Implemented and integrated Create, Read, Update, and Delete (CRUD) operations.",
+        "Connected user interfaces with application logic and database operations, ensuring consistent data flow.",
+        "Developed and improved functionality related to user management, projects, search, and the administrative dashboard.",
+        "Tested pages and features, identified and resolved programming issues, and improved the user experience.",
+        "Coordinated with team members, assisted with technical challenges, integrated contributions, and reviewed implementation results."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "PHP",
+        "MySQL",
+        "Apache",
+        "XAMPP",
+        "phpMyAdmin",
+        "Visual Studio Code"
+      ],
+      "project_img": [
+        "freelancer_hub2",
+        "freelancer_hub7",
+        "freelancer_hub8",
+        "freelancer_hub14",
+        "freelancer_hub1",
+        "freelancer_hub3",
+        "freelancer_hub11",
+        "freelancer_hub9",
+        "freelancer_hub5",
+        "freelancer_hub13",
+        "freelancer_hub4",
+        "freelancer_hub6",
+        "freelancer_hub10",
+        "freelancer_hub12"
+      ],
+      "demo": "",
+      "github": "https://github.com/dhomlmgyr188/freelancer-hub"
     }
   ]
 }

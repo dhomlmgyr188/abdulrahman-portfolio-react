@@ -1,4 +1,3 @@
-
 {
   "hero": {
     "availability_status": "متاح للفرص الوظيفية والمشاريع المستقلة",
@@ -85,55 +84,10 @@
     },
     "items": [
       {
-        "id": "React-To-Do-List",
-        "date": "2026/08/30",
-        "project_img": [
-          "react1"
-        ],
-        "title": "تطبيق إدارة الملاحظات باستخدام React",
-        "desc": [
-          {
-            "type": "text",
-            "value": "تطبيق لإضافة الملاحظات وعرضها وتعديلها وحذفها باستخدام React وLocalStorage، مع حفظ البيانات محليًا. طُوّر ضمن "
-          },
-          {
-            "type": "link",
-            "text": "دورة تطوير تطبيقات JavaScript",
-            "href": "https://academy.hsoub.com/learn/javascript-application-development/"
-          },
-          {
-            "type": "text",
-            "value": " في أكاديمية حسوب."
-          }
-        ],
-        "tech_stack": [
-          "React",
-          "React Hooks",
-          "JavaScript",
-          "CRUD",
-          "LocalStorage"
-        ],
-        "link": "https://dhomlmgyr188.github.io/React-To-Do-List/"
+        "id": "React-To-Do-List"
       },
       {
-        "id": "Portfolio_v1",
-        "date": "2026/05/24",
-        "project_img": [
-          "anaalmughyir1"
-        ],
-        "title": "موقعي الشخصي - الإصدار السابق",
-        "desc": [
-          {
-            "type": "text",
-            "value": "موقع شخصي متعدد الصفحات لعرض المعلومات المهنية والمشاريع والخدمات، بتصميم متجاوب ومحتوى منظم وسهل التصفح."
-          }
-        ],
-        "tech_stack": [
-          "HTML",
-          "CSS",
-          "Vanilla JavaScript"
-        ],
-        "link": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/"
+        "id": "Portfolio_v1"
       }
     ]
   },

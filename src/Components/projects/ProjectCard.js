@@ -9,62 +9,26 @@ import {
   FiArrowUpRight,
   FiExternalLink,
   FiCalendar,
+  FiImage,
 } from "react-icons/fi";
 
-/* =========================================================
-   PROJECT CARD — MODERN PROFESSIONAL
-
-   Responsive Layout:
-   - Desktop: image beside content
-   - Tablet: image beside content
-   - Mobile: full-width image above content
-
-   Design:
-   - Ocean / Orca themes
-   - RTL / LTR support
-   - Responsive images
-   - Accessible project links
-
-   Preserved:
-   - Project number
-   - Title
-   - Date
-   - Rich description
-   - Technology stack
-   - Project details link
-   - Live preview link
-   - Multiple images
-========================================================= */
-
-
-/* =========================================================
-   01 — CARD CONTAINER
-========================================================= */
+/* =========================================
+   PROJECT CARD — OCEAN / ORCA
+========================================= */
 
 const Card = styled.article`
-  position: relative;
-
   display: flex;
   flex-direction: column;
-
   gap: clamp(18px, 2.5vw, 26px);
 
   width: 100%;
   min-width: 0;
-
   padding: clamp(18px, 3vw, 30px);
 
-  background-color:
-    var(--color-background-secondary);
-
-  color:
-    var(--color-text-primary);
-
-  border:
-    1px solid var(--color-border);
-
-  border-radius:
-    var(--radius-card, 18px);
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card, 18px);
 
   box-sizing: border-box;
 
@@ -75,12 +39,8 @@ const Card = styled.article`
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      border-color:
-        var(--color-primary);
-
-      box-shadow:
-        var(--shadow-md);
-
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
       transform: translateY(-3px);
     }
   }
@@ -88,7 +48,6 @@ const Card = styled.article`
   @media (max-width: 600px) {
     padding: 16px;
     gap: 18px;
-
     border-radius: 14px;
   }
 
@@ -101,123 +60,52 @@ const Card = styled.article`
   }
 `;
 
-
-/* =========================================================
-   02 — RESPONSIVE MAIN LAYOUT
-
-   Desktop / Tablet:
-   Two columns
-
-   RTL:
-   Image on the right
-
-   LTR:
-   Image on the left
-
-   Mobile:
-   Single column
-========================================================= */
+/* =========================================
+   RESPONSIVE LAYOUT
+========================================= */
 
 const ProjectMain = styled.div`
   display: grid;
-
   grid-template-columns:
-    minmax(0, 36%)
-    minmax(0, 1fr);
+    minmax(0, 36%) minmax(0, 1fr);
 
   align-items: start;
-
   gap: clamp(18px, 2.5vw, 28px);
 
   width: 100%;
   min-width: 0;
 
-  box-sizing: border-box;
-
-  /* -------------------------------------------------------
-     TABLET
-  ------------------------------------------------------- */
-
   @media (max-width: 900px) {
     grid-template-columns:
-      minmax(0, 40%)
-      minmax(0, 1fr);
+      minmax(0, 40%) minmax(0, 1fr);
 
     gap: 18px;
   }
-
-  /* -------------------------------------------------------
-     MOBILE
-
-     Image becomes full-width.
-  ------------------------------------------------------- */
 
   @media (max-width: 600px) {
-    grid-template-columns:
-      minmax(0, 1fr);
-
-    gap: 18px;
+    grid-template-columns: minmax(0, 1fr);
   }
 `;
 
-
-/* =========================================================
-   03 — IMAGE AREA
-
-   Desktop:
-   Takes 36% of main grid.
-
-   Tablet:
-   Takes 40% of main grid.
-
-   Mobile:
-   Takes 100% of main grid.
-========================================================= */
+/* =========================================
+   PROJECT IMAGE
+========================================= */
 
 const ImageArea = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
-
   width: 100%;
   min-width: 0;
-
-  box-sizing: border-box;
 `;
-
-
-/* =========================================================
-   04 — IMAGE FRAME
-
-   Responsive proportions:
-
-   Desktop: 16 / 10
-   Tablet: 4 / 3
-   Mobile: 16 / 9
-
-   Width always fills its grid column.
-========================================================= */
 
 const ImageFrame = styled.div`
   position: relative;
-
   width: 100%;
-  min-width: 0;
-
   aspect-ratio: 16 / 10;
 
   overflow: hidden;
 
-  background-color:
-    var(--color-background);
-
-  border:
-    1px solid var(--color-border);
-
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-
-  box-sizing: border-box;
 
   @media (max-width: 900px) {
     aspect-ratio: 4 / 3;
@@ -229,22 +117,15 @@ const ImageFrame = styled.div`
   }
 `;
 
-
-/* =========================================================
-   05 — PROJECT IMAGE
-========================================================= */
-
 const ProjectImage = styled.img`
   display: block;
-
   width: 100%;
   height: 100%;
 
   object-fit: cover;
   object-position: center;
 
-  transition:
-    transform 0.35s ease;
+  transition: transform 0.35s ease;
 
   @media (hover: hover) and (pointer: fine) {
     ${ImageFrame}:hover & {
@@ -257,93 +138,47 @@ const ProjectImage = styled.img`
   }
 `;
 
+const GalleryCount = styled.span`
+  position: absolute;
+  inset-inline-end: 12px;
+  bottom: 12px;
 
-/* =========================================================
-   06 — ADDITIONAL IMAGES
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 
-   Thumbnails are displayed below
-   the primary project image.
-========================================================= */
+  padding: 6px 10px;
+  border-radius: 8px;
 
-const Thumbnails = styled.div`
-  display: grid;
+  background: rgba(15, 23, 42, 0.82);
+  color: #ffffff;
 
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(min(100%, 65px), 1fr)
-    );
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.4;
 
-  gap: 8px;
-
-  width: 100%;
-  min-width: 0;
-
-  @media (max-width: 600px) {
-    grid-template-columns:
-      repeat(
-        auto-fill,
-        minmax(min(100%, 75px), 1fr)
-      );
+  svg {
+    width: 15px;
+    height: 15px;
   }
 `;
 
-const ThumbnailFrame = styled.div`
-  position: relative;
-
-  width: 100%;
-
-  aspect-ratio: 4 / 3;
-
-  overflow: hidden;
-
-  background-color:
-    var(--color-background);
-
-  border:
-    1px solid var(--color-border);
-
-  border-radius: 8px;
-
-  box-sizing: border-box;
-`;
-
-const ThumbnailImage = styled.img`
-  display: block;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-`;
-
-
-/* =========================================================
-   07 — PROJECT CONTENT
-========================================================= */
+/* =========================================
+   PROJECT CONTENT
+========================================= */
 
 const ProjectContent = styled.div`
   display: flex;
   flex-direction: column;
-
   gap: 18px;
 
   width: 100%;
   min-width: 0;
-
-  box-sizing: border-box;
 `;
-
-
-/* =========================================================
-   08 — PROJECT HEADER
-========================================================= */
 
 const CardHeader = styled.div`
   display: flex;
   align-items: flex-start;
-
   gap: clamp(12px, 2vw, 18px);
 
   width: 100%;
@@ -354,28 +189,19 @@ const ProjectNumber = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 
   width: 44px;
   height: 44px;
 
-  flex-shrink: 0;
-
-  background-color:
-    var(--color-background);
-
-  color:
-    var(--color-text-secondary);
-
-  border:
-    1px solid var(--color-border);
-
+  background: var(--color-background);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 11px;
 
   font-size: 0.95rem;
   font-weight: 800;
-
-  font-variant-numeric:
-    tabular-nums;
+  font-variant-numeric: tabular-nums;
 
   @media (max-width: 480px) {
     width: 38px;
@@ -386,7 +212,6 @@ const ProjectNumber = styled.span`
 const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
-
   gap: 10px;
 
   flex: 1;
@@ -397,24 +222,16 @@ const TitleRow = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-
   flex-wrap: wrap;
-
   gap: 8px 16px;
 `;
 
 const ProjectTitle = styled.h3`
   margin: 0;
 
-  color:
-    var(--color-text-primary);
+  color: var(--color-text-primary);
 
-  font-size: clamp(
-    1.1rem,
-    2vw,
-    1.4rem
-  );
-
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   font-weight: 800;
   line-height: 1.55;
 
@@ -425,14 +242,10 @@ const ProjectTitle = styled.h3`
 const ProjectDate = styled.span`
   display: inline-flex;
   align-items: center;
-
   gap: 7px;
-
   flex-shrink: 0;
 
-  color:
-    var(--color-text-secondary);
-
+  color: var(--color-text-secondary);
   font-size: 0.82rem;
   line-height: 1.5;
 
@@ -442,34 +255,19 @@ const ProjectDate = styled.span`
   }
 `;
 
-
-/* =========================================================
-   09 — PROJECT DESCRIPTION
-========================================================= */
-
 const ProjectDescription = styled.p`
   margin: 0;
 
-  color:
-    var(--color-text-secondary);
-
-  font-size: clamp(
-    0.9rem,
-    1.4vw,
-    0.98rem
-  );
-
+  color: var(--color-text-secondary);
+  font-size: clamp(0.9rem, 1.4vw, 0.98rem);
   line-height: 1.95;
 
   overflow-wrap: anywhere;
 `;
 
 const DescriptionLink = styled.a`
-  color:
-    var(--color-primary);
-
+  color: var(--color-primary);
   font-weight: 700;
-
   text-decoration: underline;
   text-underline-offset: 4px;
 
@@ -481,12 +279,14 @@ const DescriptionLink = styled.a`
   }
 
   &:focus-visible {
-    outline:
-      2px solid var(--color-primary);
-
+    outline: 2px solid var(--color-primary);
     outline-offset: 3px;
   }
 `;
+
+/* =========================================
+   RICH DESCRIPTION
+========================================= */
 
 function Description({ content }) {
   if (typeof content === "string") {
@@ -506,9 +306,7 @@ function Description({ content }) {
       {content.map((item, index) => {
         if (typeof item === "string") {
           return (
-            <span key={index}>
-              {item}
-            </span>
+            <span key={index}>{item}</span>
           );
         }
 
@@ -520,7 +318,7 @@ function Description({ content }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {item.text}
+              {item.text || item.value || item.href}
             </DescriptionLink>
           );
         }
@@ -535,21 +333,18 @@ function Description({ content }) {
   );
 }
 
-
-/* =========================================================
-   10 — TECHNOLOGY STACK
-========================================================= */
+/* =========================================
+   TECHNOLOGIES
+========================================= */
 
 const TechList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-
   gap: 8px;
 
   margin: 0;
   padding: 0;
-
   list-style: none;
 `;
 
@@ -559,18 +354,11 @@ const TechItem = styled.li`
   justify-content: center;
 
   min-height: 32px;
-
   padding: 6px 12px;
 
-  background-color:
-    var(--color-background);
-
-  color:
-    var(--color-text-secondary);
-
-  border:
-    1px solid var(--color-border);
-
+  background: var(--color-background);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
 
   font-size: 0.78rem;
@@ -583,51 +371,37 @@ const TechItem = styled.li`
 
   @media (hover: hover) {
     &:hover {
-      border-color:
-        var(--color-primary);
-
-      color:
-        var(--color-text-primary);
+      border-color: var(--color-primary);
+      color: var(--color-text-primary);
     }
   }
 `;
 
-
-/* =========================================================
-   11 — CARD FOOTER
-========================================================= */
+/* =========================================
+   CARD ACTIONS
+========================================= */
 
 const CardFooter = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-
   gap: 12px;
 
   margin-top: auto;
   padding-top: 18px;
-
-  border-top:
-    1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
 
   @media (max-width: 480px) {
     flex-direction: column;
     align-items: stretch;
-
     gap: 10px;
   }
 `;
-
-
-/* =========================================================
-   12 — PROJECT BUTTONS
-========================================================= */
 
 const ProjectButton = styled(Button)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   gap: 9px;
 
   min-width: 160px;
@@ -636,7 +410,6 @@ const ProjectButton = styled(Button)`
   svg {
     width: 17px;
     height: 17px;
-
     flex-shrink: 0;
   }
 
@@ -645,11 +418,6 @@ const ProjectButton = styled(Button)`
     min-width: 0;
   }
 `;
-
-
-/* =========================================================
-   13 — RTL / LTR ARROW
-========================================================= */
 
 const DirectionArrow = styled.span`
   display: inline-flex;
@@ -669,10 +437,9 @@ const DirectionArrow = styled.span`
   }
 `;
 
-
-/* =========================================================
-   14 — PROJECT CARD COMPONENT
-========================================================= */
+/* =========================================
+   PROJECT CARD COMPONENT
+========================================= */
 
 function ProjectCard({
   index = 0,
@@ -688,10 +455,9 @@ function ProjectCard({
   images,
   imageAlt,
 }) {
-  const technologies =
-    Array.isArray(techStack)
-      ? techStack
-      : [];
+  const technologies = Array.isArray(techStack)
+    ? techStack
+    : [];
 
   const imageList =
     Array.isArray(images) && images.length > 0
@@ -700,25 +466,19 @@ function ProjectCard({
         ? [image]
         : [];
 
-  const primaryImage =
-    imageList[0] || null;
-
-  const additionalImages =
-    imageList.slice(1);
+  const primaryImage = imageList[0] || null;
 
   const hasDemo =
     typeof toHref === "string" &&
     toHref.trim().length > 0 &&
     toHref.trim() !== "#";
 
-  const number =
-    String(index + 1).padStart(2, "0");
+  const number = String(index + 1).padStart(2, "0");
 
   return (
     <Card>
       <ProjectMain>
-
-        {/* RESPONSIVE PROJECT IMAGE */}
+        {/* MAIN PROJECT IMAGE */}
 
         {primaryImage && (
           <ImageArea>
@@ -729,30 +489,17 @@ function ProjectCard({
                 loading="lazy"
                 decoding="async"
               />
+
+              {imageList.length > 1 && (
+                <GalleryCount
+                  aria-label={`${imageList.length} images`}
+                  title={`${imageList.length} images`}
+                >
+                  <FiImage aria-hidden="true" />
+                  {imageList.length}
+                </GalleryCount>
+              )}
             </ImageFrame>
-
-            {/* ADDITIONAL IMAGES */}
-
-            {additionalImages.length > 0 && (
-              <Thumbnails>
-                {additionalImages.map(
-                  (src, imageIndex) => (
-                    <ThumbnailFrame
-                      key={`${src}-${imageIndex}`}
-                    >
-                      <ThumbnailImage
-                        src={src}
-                        alt={`${imageAlt || title || ""} ${
-                          imageIndex + 2
-                        }`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </ThumbnailFrame>
-                  )
-                )}
-              </Thumbnails>
-            )}
           </ImageArea>
         )}
 
@@ -773,33 +520,26 @@ function ProjectCard({
                 {date && (
                   <ProjectDate>
                     <FiCalendar aria-hidden="true" />
-
-                    <span dir="auto">
-                      {date}
-                    </span>
+                    <span dir="auto">{date}</span>
                   </ProjectDate>
                 )}
               </TitleRow>
 
-              <Description
-                content={description}
-              />
+              <Description content={description} />
             </HeaderContent>
           </CardHeader>
 
-          {/* TECHNOLOGIES */}
+          {/* TECHNOLOGY STACK */}
 
           {technologies.length > 0 && (
             <TechList>
-              {technologies.map(
-                (tech, techIndex) => (
-                  <TechItem
-                    key={`${tech}-${techIndex}`}
-                  >
-                    {tech}
-                  </TechItem>
-                )
-              )}
+              {technologies.map((tech, techIndex) => (
+                <TechItem
+                  key={`${tech}-${techIndex}`}
+                >
+                  {tech}
+                </TechItem>
+              ))}
             </TechList>
           )}
         </ProjectContent>
@@ -840,9 +580,7 @@ function ProjectCard({
           >
             {value2}
 
-            <FiExternalLink
-              aria-hidden="true"
-            />
+            <FiExternalLink aria-hidden="true" />
           </ProjectButton>
         )}
       </CardFooter>

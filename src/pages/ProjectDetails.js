@@ -12,61 +12,52 @@ import {
   FiGithub,
   FiCheckCircle,
   FiZoomIn,
+  FiInfo,
+  FiBookOpen,
+  FiLayers,
+  FiClipboard,
+  FiCode,
 } from "react-icons/fi";
 
 import BreadCrumb from "../Components/ui/Breadcrumb";
 import Container from "../Components/layout/PageContainer";
 import { PageHeader } from "../Components/ui/T";
-
 import Button, { Actions } from "../Components/ui/Button/Button";
 import { ImgModal } from "../Components/ui/Modal";
-
 import projectImages from "../Components/projects/projectImages";
 
-/* =========================================================
-   01 — PAGE WRAPPER
-========================================================= */
+/* =========================================
+   PAGE LAYOUT
+========================================= */
 
 const DetailsPage = styled.main`
   width: 100%;
   min-width: 0;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
   overflow-x: clip;
+  background: var(--color-background);
+  color: var(--color-text-primary);
 `;
-
-/* =========================================================
-   02 — PAGE CONTENT
-========================================================= */
 
 const Content = styled(Container)`
   display: flex;
   flex-direction: column;
-  gap: clamp(28px, 4vw, 44px);
+  gap: clamp(24px, 3.5vw, 38px);
 
   padding-block:
     clamp(36px, 5vw, 60px)
     clamp(70px, 8vw, 110px);
 `;
 
-/* =========================================================
-   03 — PROJECT HEADING
-========================================================= */
-
 const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
-  width: 100%;
   min-width: 0;
 `;
 
 const Title = styled.h1`
   margin: 0;
-  color: var(
-    --color-heading,
-    var(--color-text-primary)
-  );
+  color: var(--color-heading, var(--color-text-primary));
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 800;
   line-height: 1.45;
@@ -74,18 +65,129 @@ const Title = styled.h1`
 `;
 
 const Description = styled.p`
-  max-width: 850px;
+  max-width: 950px;
   margin: 0;
   color: var(--color-text-secondary);
   font-size: clamp(0.95rem, 1.4vw, 1.05rem);
-  font-weight: 400;
-  line-height: 1.95;
+  line-height: 2;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+`;
+
+/* =========================================
+   INDEPENDENT CONTENT SECTIONS
+========================================= */
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: clamp(20px, 3vw, 32px);
+
+  background: var(
+    --color-card-background,
+    var(--color-background-secondary)
+  );
+
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm, none);
+
+  @media (max-width: 600px) {
+    gap: 18px;
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+`;
+
+const GallerySection = styled.section`
+  width: 100%;
+  min-width: 0;
+`;
+
+const SectionHeading = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 0;
+  padding-block-end: 18px;
+  border-bottom: 1px solid var(--color-border);
+
+  @media (max-width: 600px) {
+    gap: 11px;
+    padding-block-end: 15px;
+  }
+`;
+
+const SectionIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 44px;
+  height: 44px;
+
+  color: var(--color-primary);
+  background: var(--color-background-secondary);
+
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+
+  svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  @media (max-width: 600px) {
+    width: 38px;
+    height: 38px;
+
+    svg {
+      width: 19px;
+      height: 19px;
+    }
+  }
+`;
+
+const SectionTitle = styled.h2`
+  margin: 0;
+  min-width: 0;
+
+  color: var(--color-heading, var(--color-text-primary));
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.55;
   overflow-wrap: anywhere;
 `;
 
-/* =========================================================
-   04 — PROJECT DATE
-========================================================= */
+const SectionBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+`;
+
+const SectionDescription = styled.p`
+  margin: 0;
+
+  color: var(--color-text-primary);
+  font-size: clamp(0.95rem, 1.4vw, 1.025rem);
+  font-weight: 400;
+  line-height: 2.05;
+
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+`;
+
+/* =========================================
+   PROJECT DATE
+========================================= */
 
 const ProjectMetadata = styled.div`
   display: flex;
@@ -99,9 +201,10 @@ const DateText = styled.span`
   align-items: center;
   gap: 9px;
   padding: 9px 13px;
+
   color: var(--color-text-secondary);
 
-  background-color: var(
+  background: var(
     --color-card-background,
     var(--color-background-secondary)
   );
@@ -109,7 +212,6 @@ const DateText = styled.span`
   border: 1px solid var(--color-border);
   border-radius: 10px;
   font-size: 0.9rem;
-  line-height: 1.5;
 
   svg {
     flex-shrink: 0;
@@ -117,49 +219,59 @@ const DateText = styled.span`
   }
 `;
 
-/* =========================================================
-   05 — CONTENT SECTIONS
-========================================================= */
+/* =========================================
+   PROJECT INFORMATION
+========================================= */
 
-const Section = styled.section`
+const InformationGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const InformationCard = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  min-width: 0;
-`;
+  gap: 8px;
+  padding: 16px;
 
-const SectionTitle = styled.h2`
-  margin: 0;
-  padding-block-end: 14px;
-
-  color: var(
-    --color-heading,
-    var(--color-text-primary)
+  background: var(
+    --color-card-background,
+    var(--color-background-secondary)
   );
 
-  border-block-end: 1px solid var(--color-border);
-  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
-  font-weight: 800;
-  line-height: 1.5;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
 `;
 
-/* =========================================================
-   06 — INTERACTIVE GALLERY
+const InformationLabel = styled.span`
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+`;
 
-   Desktop:
-   - Thumbnails on LEFT
-   - Main image on RIGHT
+const InformationValue = styled.span`
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+`;
 
-   Same arrangement in Arabic and English.
-========================================================= */
+/* =========================================
+   IMAGE GALLERY
+========================================= */
 
 const Gallery = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(0, 1fr)
-    minmax(0, 3fr);
+    minmax(0, 1fr) minmax(0, 3fr);
   grid-template-areas: "thumbs main";
+
   gap: clamp(12px, 2vw, 20px);
   width: 100%;
   min-width: 0;
@@ -183,6 +295,7 @@ const GalleryThumbnails = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   min-width: 0;
   max-height: 520px;
   overflow-y: auto;
@@ -205,7 +318,7 @@ const GalleryButton = styled.button`
   padding: 0;
   overflow: hidden;
 
-  background-color: var(
+  background: var(
     --color-card-background,
     var(--color-background-secondary)
   );
@@ -273,11 +386,7 @@ const GalleryImage = styled.img`
   object-fit: contain;
   object-position: center;
 
-  background-color: var(
-    --color-background-secondary,
-    #f4f5f7
-  );
-
+  background: var(--color-background-secondary);
   box-sizing: border-box;
 `;
 
@@ -292,11 +401,12 @@ const ZoomIndicator = styled.span`
 
   width: 34px;
   height: 34px;
-  background-color: var(--color-background);
+
+  background: var(--color-background);
   color: var(--color-primary);
+
   border: 1px solid var(--color-border);
   border-radius: 9px;
-  box-shadow: var(--shadow-sm);
 
   svg {
     width: 17px;
@@ -304,60 +414,232 @@ const ZoomIndicator = styled.span`
   }
 `;
 
-/* =========================================================
-   07 — FEATURES / RESPONSIBILITIES
-========================================================= */
+/* =========================================
+   FEATURES
+========================================= */
+
+const FeatureGroups = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+`;
+
+const FeatureGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  min-width: 0;
+  padding-block: 23px;
+
+  border-bottom: 1px solid var(--color-border);
+
+  &:first-child {
+    padding-block-start: 0;
+  }
+
+  &:last-child {
+    padding-block-end: 0;
+    border-bottom: none;
+  }
+`;
+
+const GroupHeading = styled.h3`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin: 0;
+  padding-inline-start: 13px;
+
+  color: var(--color-heading, var(--color-text-primary));
+  border-inline-start: 3px solid var(--color-primary);
+
+  font-size: clamp(1rem, 1.8vw, 1.12rem);
+  font-weight: 800;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+`;
 
 const FeaturesList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
   margin: 0;
   padding: 0;
   list-style: none;
-
-  @media (max-width: 700px) {
-    grid-template-columns: minmax(0, 1fr);
-  }
 `;
 
 const Feature = styled.li`
   display: flex;
   align-items: flex-start;
   gap: 12px;
+
   min-width: 0;
-  padding: 15px;
-  color: var(--color-text-secondary);
 
-  background-color: var(
-    --color-card-background,
-    var(--color-background-secondary)
-  );
-
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  color: var(--color-text-primary);
   font-size: 0.95rem;
-  line-height: 1.85;
-  box-sizing: border-box;
+  font-weight: 400;
+  line-height: 1.95;
   overflow-wrap: anywhere;
 
   svg {
     flex-shrink: 0;
-    width: 19px;
-    height: 19px;
-    margin-block-start: 4px;
+    width: 17px;
+    height: 17px;
+    margin-block-start: 8px;
+    color: var(--color-primary);
+  }
+
+  > span {
+    flex: 1;
+    min-width: 0;
+  }
+`;
+
+const PlannedLabel = styled.span`
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 9px;
+
+  color: var(--color-primary);
+  background: var(--color-background-secondary);
+
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.5;
+`;
+
+/* =========================================
+   RESPONSIBILITIES
+========================================= */
+
+const ResponsibilitiesList = styled.ol`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  counter-reset: responsibility;
+`;
+
+const ResponsibilityItem = styled.li`
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: start;
+  gap: 15px;
+
+  min-width: 0;
+  padding-block: 16px;
+
+  border-bottom: 1px solid var(--color-border);
+  counter-increment: responsibility;
+
+  &:first-child {
+    padding-block-start: 0;
+  }
+
+  &:last-child {
+    padding-block-end: 0;
+    border-bottom: none;
+  }
+
+  &::before {
+    content: counter(
+      responsibility,
+      decimal-leading-zero
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    color: var(--color-primary);
+    background: var(--color-background-secondary);
+
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+
+    font-size: 0.82rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+  }
+
+  > span {
+    min-width: 0;
+    padding-block-start: 3px;
+
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+    line-height: 1.95;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 11px;
+
+    &::before {
+      width: 32px;
+      height: 32px;
+    }
+  }
+`;
+
+/* =========================================
+   NOTES
+========================================= */
+
+const Notice = styled.p`
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin: 0;
+  padding: 14px 16px;
+
+  color: var(--color-text-secondary);
+  background: var(--color-background-secondary);
+
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+
+  svg {
+    flex-shrink: 0;
+    width: 17px;
+    height: 17px;
+    margin-block-start: 5px;
     color: var(--color-primary);
   }
 `;
 
-/* =========================================================
-   08 — TECHNOLOGIES
-========================================================= */
+/* =========================================
+   TECHNOLOGIES
+========================================= */
 
 const TechList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 11px;
+
   margin: 0;
   padding: 0;
   list-style: none;
@@ -366,25 +648,40 @@ const TechList = styled.ul`
 const Tech = styled.li`
   display: inline-flex;
   align-items: center;
-  min-height: 38px;
-  padding: 8px 14px;
+  justify-content: center;
 
-  background-color: var(
-    --color-card-background,
-    var(--color-background-secondary)
-  );
+  min-height: 40px;
+  padding: 9px 15px;
 
   color: var(--color-text-primary);
+  background: var(--color-background-secondary);
+
   border: 1px solid var(--color-border);
-  border-radius: 9px;
-  font-size: 0.88rem;
-  font-weight: 600;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
   line-height: 1.5;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
-/* =========================================================
-   09 — PROJECT ACTIONS
-========================================================= */
+/* =========================================
+   PROJECT ACTIONS
+========================================= */
 
 const ProjectActions = styled(Actions)`
   margin-block-start: 4px;
@@ -412,30 +709,17 @@ const ActionContent = styled.span`
   }
 `;
 
-/* =========================================================
-   10 — BACK LINK
-========================================================= */
-
 const BackLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 10px;
   align-self: flex-start;
   min-height: 44px;
+
   color: var(--color-primary);
   font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
-
-  transition:
-    gap 0.2s ease,
-    color 0.2s ease;
-
-  svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
 
   &:hover {
     text-decoration: underline;
@@ -447,57 +731,40 @@ const BackLink = styled(Link)`
     border-radius: 4px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
+  svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
   }
 `;
 
-/* =========================================================
-   11 — ADDITIONAL PROJECT INFORMATION
-========================================================= */
+/* =========================================
+   SECTION HEADER COMPONENT
+========================================= */
 
-const InformationGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+const ContentSection = ({
+  title,
+  icon: Icon,
+  children,
+}) => {
+  return (
+    <Section aria-label={title}>
+      <SectionHeading>
+        <SectionIcon aria-hidden="true">
+          <Icon />
+        </SectionIcon>
 
-  @media (max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
-`;
+        <SectionTitle>{title}</SectionTitle>
+      </SectionHeading>
 
-const InformationCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 16px;
-
-  background-color: var(
-    --color-card-background,
-    var(--color-background-secondary)
+      <SectionBody>{children}</SectionBody>
+    </Section>
   );
+};
 
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-`;
-
-const InformationLabel = styled.span`
-  color: var(--color-text-secondary);
-  font-size: 0.88rem;
-  font-weight: 600;
-`;
-
-const InformationValue = styled.span`
-  color: var(--color-text-primary);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-`;
-
-/* =========================================================
-   12 — IMAGE RESOLVER
-========================================================= */
+/* =========================================
+   IMAGE RESOLVER
+========================================= */
 
 const resolveProjectImages = (value) => {
   const keys = Array.isArray(value)
@@ -530,9 +797,9 @@ const resolveProjectImages = (value) => {
     .filter(Boolean);
 };
 
-/* =========================================================
-   13 — INTERACTIVE GALLERY COMPONENT
-========================================================= */
+/* =========================================
+   INTERACTIVE GALLERY
+========================================= */
 
 const InteractiveGallery = ({
   images,
@@ -572,8 +839,6 @@ const InteractiveGallery = ({
 
   return (
     <Gallery>
-      {/* THUMBNAILS — LEFT IN BOTH LANGUAGES */}
-
       {imageOrder.length > 1 && (
         <GalleryThumbnails>
           {imageOrder.slice(1).map((imageIndex, index) => {
@@ -584,9 +849,7 @@ const InteractiveGallery = ({
                 key={`thumbnail-slot-${slot}`}
                 type="button"
                 onClick={() => swapImages(slot)}
-                aria-label={
-                  `${projectTitle} - ${imageIndex + 1}`
-                }
+                aria-label={`${projectTitle} - ${imageIndex + 1}`}
               >
                 <GalleryImage
                   $small
@@ -601,8 +864,6 @@ const InteractiveGallery = ({
         </GalleryThumbnails>
       )}
 
-      {/* MAIN IMAGE — RIGHT IN BOTH LANGUAGES */}
-
       <GalleryMain>
         <MainImageButton
           $main
@@ -613,9 +874,7 @@ const InteractiveGallery = ({
               alt: `${projectTitle} - ${mainImageIndex + 1}`,
             })
           }
-          aria-label={
-            `${enlargeLabel}: ${projectTitle}`
-          }
+          aria-label={`${enlargeLabel}: ${projectTitle}`}
         >
           <GalleryImage
             src={mainImageSrc}
@@ -632,26 +891,94 @@ const InteractiveGallery = ({
   );
 };
 
-/* =========================================================
-   14 — PROJECT DETAILS COMPONENT
-========================================================= */
+/* =========================================
+   FEATURE LIST COMPONENT
+========================================= */
+
+const FeatureItems = ({
+  items,
+  projectId,
+  prefix,
+}) => {
+  if (!Array.isArray(items) || items.length === 0) {
+    return null;
+  }
+
+  return (
+    <FeaturesList>
+      {items.map((item, index) => (
+        <Feature
+          key={`${projectId}-${prefix}-${index}`}
+        >
+          <FiCheckCircle aria-hidden="true" />
+
+          <span>
+            {typeof item === "string"
+              ? item
+              : item?.text || item?.description || ""}
+          </span>
+        </Feature>
+      ))}
+    </FeaturesList>
+  );
+};
+
+/* =========================================
+   RESPONSIBILITIES COMPONENT
+========================================= */
+
+const ResponsibilityItems = ({
+  items,
+  projectId,
+}) => {
+  if (!Array.isArray(items) || items.length === 0) {
+    return null;
+  }
+
+  return (
+    <ResponsibilitiesList>
+      {items.map((item, index) => (
+        <ResponsibilityItem
+          key={`${projectId}-responsibility-${index}`}
+        >
+          <span>
+            {typeof item === "string"
+              ? item
+              : item?.text || item?.description || ""}
+          </span>
+        </ResponsibilityItem>
+      ))}
+    </ResponsibilitiesList>
+  );
+};
+
+/* =========================================
+   PROJECT DETAILS COMPONENT
+========================================= */
 
 const ProjectDetails = () => {
   const { projectId } = useParams();
   const { t, i18n } = useTranslation("projects");
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] =
+    useState(null);
 
   const language =
     i18n.resolvedLanguage ||
     i18n.language ||
     "ar";
 
-  const isArabic = language.startsWith("ar");
+  const isArabic = language
+    .toLowerCase()
+    .startsWith("ar");
 
   const BackArrow = isArabic
     ? FiArrowRight
     : FiArrowLeft;
+
+  /* =====================================
+     PROJECT DATA
+  ===================================== */
 
   const projects = t("items", {
     returnObjects: true,
@@ -662,28 +989,117 @@ const ProjectDetails = () => {
     ? projects.find((item) => item.id === projectId)
     : undefined;
 
-  const labels = {
-    notFound: t("details.notFound"),
-    notFoundDescription: t("details.notFoundDescription"),
-    back: t("details.backToProjects"),
+  /* =====================================
+     TRANSLATED LABELS
+  ===================================== */
 
-    projectName: t("details.projectName"),
-    projectType: t("details.projectType"),
-    developedBy: t("details.developedBy"),
-    developmentArea: t("details.developmentArea"),
-    date: t("details.date"),
-    overview: t("details.overview"),
-    features: t("details.features"),
-    responsibilities: t("details.responsibilities"),
-    technologies: t("details.technologies"),
-    liveDemo: t("details.liveDemo"),
-    sourceCode: t("details.sourceCode"),
-    enlarge: t("details.enlargeImage"),
+  const labels = {
+    notFound: t("details.notFound", {
+      defaultValue: isArabic
+        ? "المشروع غير موجود"
+        : "Project Not Found",
+    }),
+
+    notFoundDescription: t(
+      "details.notFoundDescription",
+      {
+        defaultValue: isArabic
+          ? "تعذر العثور على المشروع المطلوب."
+          : "The requested project could not be found.",
+      }
+    ),
+
+    back: t("details.backToProjects", {
+      defaultValue: isArabic
+        ? "العودة إلى المشاريع"
+        : "Back to Projects",
+    }),
+
+    projectName: t("details.projectName", {
+      defaultValue: isArabic
+        ? "اسم المشروع"
+        : "Project Name",
+    }),
+
+    projectType: t("details.projectType", {
+      defaultValue: isArabic
+        ? "نوع المشروع"
+        : "Project Type",
+    }),
+
+    developedBy: t("details.developedBy", {
+      defaultValue: isArabic
+        ? "مطورو المشروع"
+        : "Developed By",
+    }),
+
+    developmentArea: t("details.developmentArea", {
+      defaultValue: isArabic
+        ? "مجال المشروع"
+        : "Development Area",
+    }),
+
+    date: t("details.date", {
+      defaultValue: isArabic
+        ? "تاريخ الإنجاز"
+        : "Completion Date",
+    }),
+
+    overview: t("details.overview", {
+      defaultValue: isArabic
+        ? "وصف المشروع"
+        : "Project Overview",
+    }),
+
+    features: t("details.features", {
+      defaultValue: isArabic
+        ? "مميزات المشروع"
+        : "Key Features",
+    }),
+
+    responsibilities: t(
+      "details.responsibilities",
+      {
+        defaultValue: isArabic
+          ? "مسؤولياتي في المشروع"
+          : "My Responsibilities",
+      }
+    ),
+
+    technologies: t("details.technologies", {
+      defaultValue: isArabic
+        ? "تقنيات وأدوات التطوير"
+        : "Technologies and Tools",
+    }),
+
+    liveDemo: t("details.liveDemo", {
+      defaultValue: isArabic
+        ? "معاينة المشروع"
+        : "Live Preview",
+    }),
+
+    sourceCode: t("details.sourceCode", {
+      defaultValue: isArabic
+        ? "الكود المصدري"
+        : "Source Code",
+    }),
+
+    enlarge: t("details.enlargeImage", {
+      defaultValue: isArabic
+        ? "تكبير صورة المشروع"
+        : "Enlarge Project Image",
+    }),
+
+    planned: t("details.plannedFeature", {
+      defaultValue: isArabic
+        ? "ضمن خطة التطوير"
+        : "Planned Development",
+    }),
   };
 
-  /* -------------------------------------------------------
-     NOT FOUND — BREADCRUMB UNCHANGED
-  ------------------------------------------------------- */
+  /* =====================================
+     PROJECT NOT FOUND
+  ===================================== */
 
   if (!project) {
     return (
@@ -710,12 +1126,20 @@ const ProjectDetails = () => {
     );
   }
 
+  /* =====================================
+     PREPARE PROJECT DATA
+  ===================================== */
+
   const images = resolveProjectImages(
     project.project_img
   );
 
-  const developers = Array.isArray(project.developedBy)
-    ? project.developedBy.join(isArabic ? "، " : ", ")
+  const developers = Array.isArray(
+    project.developedBy
+  )
+    ? project.developedBy.join(
+        isArabic ? "، " : ", "
+      )
     : project.developedBy;
 
   const information = [
@@ -737,9 +1161,41 @@ const ProjectDetails = () => {
     },
   ].filter((item) => item.value);
 
+  const featureGroups = Array.isArray(
+    project.features
+  )
+    ? project.features
+    : [];
+
+  const responsibilities = Array.isArray(
+    project.responsibilities
+  )
+    ? project.responsibilities
+    : [];
+
+  const technologies = Array.isArray(
+    project.tech_stack
+  )
+    ? project.tech_stack
+    : [];
+
+  const demoUrl =
+    typeof project.demo === "string"
+      ? project.demo.trim()
+      : "";
+
+  const githubUrl =
+    typeof project.github === "string"
+      ? project.github.trim()
+      : "";
+
+  /* =====================================
+     RENDER
+  ===================================== */
+
   return (
     <DetailsPage dir={isArabic ? "rtl" : "ltr"}>
-      {/* BREADCRUMB — UNCHANGED */}
+      {/* PAGE HEADER */}
 
       <PageHeader>
         <BreadCrumb
@@ -749,10 +1205,12 @@ const ProjectDetails = () => {
       </PageHeader>
 
       <Content>
-        {/* PROJECT GALLERY — NO HEADING */}
+        {/* =================================
+            PROJECT GALLERY
+        ================================= */}
 
         {images.length > 0 && (
-          <Section>
+          <GallerySection>
             <InteractiveGallery
               key={project.id}
               images={images}
@@ -760,10 +1218,26 @@ const ProjectDetails = () => {
               enlargeLabel={labels.enlarge}
               onEnlarge={setSelectedImage}
             />
-          </Section>
+          </GallerySection>
         )}
 
-        {/* COMPLETION DATE — BELOW IMAGES */}
+        {/* =================================
+            PROJECT TITLE
+        ================================= */}
+
+        <HeaderContent>
+          <Title>{project.title}</Title>
+
+          {project.shortDescription && (
+            <Description>
+              {project.shortDescription}
+            </Description>
+          )}
+        </HeaderContent>
+
+        {/* =================================
+            COMPLETION DATE
+        ================================= */}
 
         {project.date && (
           <ProjectMetadata>
@@ -779,7 +1253,9 @@ const ProjectDetails = () => {
           </ProjectMetadata>
         )}
 
-        {/* PROJECT INFORMATION */}
+        {/* =================================
+            PROJECT INFORMATION
+        ================================= */}
 
         {information.length > 0 && (
           <InformationGrid>
@@ -797,120 +1273,175 @@ const ProjectDetails = () => {
           </InformationGrid>
         )}
 
-        {/* PROJECT DESCRIPTION */}
+        {/* =================================
+            PROJECT OVERVIEW
+        ================================= */}
 
         {project.overview && (
-          <Section aria-label={labels.overview}>
-            <SectionTitle>
-              {labels.overview}
-            </SectionTitle>
-
-            <Description>
+          <ContentSection
+            title={labels.overview}
+            icon={FiBookOpen}
+          >
+            <SectionDescription>
               {project.overview}
-            </Description>
-          </Section>
+            </SectionDescription>
+          </ContentSection>
         )}
 
-        {/* KEY FEATURES */}
+        {/* =================================
+            PROJECT FEATURES
+        ================================= */}
 
-        {Array.isArray(project.features) &&
-          project.features.length > 0 && (
-            <Section aria-label={labels.features}>
-              <SectionTitle>
-                {labels.features}
-              </SectionTitle>
+        {featureGroups.length > 0 && (
+          <ContentSection
+            title={labels.features}
+            icon={FiLayers}
+          >
+            <FeatureGroups>
+              {featureGroups.map((group, index) => {
+                /* SIMPLE STRING FEATURES */
 
-              <FeaturesList>
-                {project.features.map(
-                  (feature, index) => (
-                    <Feature
+                if (typeof group === "string") {
+                  return (
+                    <FeatureGroup
                       key={`${project.id}-feature-${index}`}
                     >
-                      <FiCheckCircle aria-hidden="true" />
-                      <span>{feature}</span>
-                    </Feature>
-                  )
-                )}
-              </FeaturesList>
-            </Section>
-          )}
+                      <FeatureItems
+                        projectId={project.id}
+                        prefix={`single-${index}`}
+                        items={[group]}
+                      />
+                    </FeatureGroup>
+                  );
+                }
 
-        {/* MY RESPONSIBILITIES */}
+                /* GROUPED FEATURES */
 
-        {Array.isArray(project.responsibilities) &&
-          project.responsibilities.length > 0 && (
-            <Section aria-label={labels.responsibilities}>
-              <SectionTitle>
-                {labels.responsibilities}
-              </SectionTitle>
+                if (
+                  !group ||
+                  typeof group !== "object"
+                ) {
+                  return null;
+                }
 
-              <FeaturesList>
-                {project.responsibilities.map(
-                  (responsibility, index) => (
-                    <Feature
-                      key={`${project.id}-responsibility-${index}`}
-                    >
-                      <FiCheckCircle aria-hidden="true" />
-                      <span>{responsibility}</span>
-                    </Feature>
-                  )
-                )}
-              </FeaturesList>
-            </Section>
-          )}
+                return (
+                  <FeatureGroup
+                    key={`${project.id}-group-${index}`}
+                  >
+                    {group.title && (
+                      <GroupHeading>
+                        {group.title}
 
-        {/* TECHNOLOGIES */}
+                        {group.status === "planned" && (
+                          <PlannedLabel>
+                            {labels.planned}
+                          </PlannedLabel>
+                        )}
+                      </GroupHeading>
+                    )}
 
-        {Array.isArray(project.tech_stack) &&
-          project.tech_stack.length > 0 && (
-            <Section aria-label={labels.technologies}>
-              <SectionTitle>
-                {labels.technologies}
-              </SectionTitle>
+                    <FeatureItems
+                      items={group.items}
+                      projectId={project.id}
+                      prefix={`group-${index}`}
+                    />
 
-              <TechList>
-                {project.tech_stack.map(
-                  (tech, index) => (
-                    <Tech key={`${tech}-${index}`}>
-                      {tech}
-                    </Tech>
-                  )
-                )}
-              </TechList>
-            </Section>
-          )}
+                    {group.note && (
+                      <Notice>
+                        <FiInfo aria-hidden="true" />
+                        <span>{group.note}</span>
+                      </Notice>
+                    )}
 
-        {/* PROJECT LINKS — ORIGINAL BUTTONS */}
+                    {group.status === "planned" &&
+                      !group.note && (
+                        <Notice>
+                          <FiInfo aria-hidden="true" />
+                          <span>
+                            {labels.planned}
+                          </span>
+                        </Notice>
+                      )}
+                  </FeatureGroup>
+                );
+              })}
+            </FeatureGroups>
+          </ContentSection>
+        )}
 
-        {(project.demo || project.github) && (
+        {/* =================================
+            MY RESPONSIBILITIES
+        ================================= */}
+
+        {(project.responsibilitiesIntro ||
+          responsibilities.length > 0) && (
+          <ContentSection
+            title={labels.responsibilities}
+            icon={FiClipboard}
+          >
+            {project.responsibilitiesIntro && (
+              <SectionDescription>
+                {project.responsibilitiesIntro}
+              </SectionDescription>
+            )}
+
+            <ResponsibilityItems
+              items={responsibilities}
+              projectId={project.id}
+            />
+          </ContentSection>
+        )}
+
+        {/* =================================
+            TECHNOLOGIES
+        ================================= */}
+
+        {technologies.length > 0 && (
+          <ContentSection
+            title={labels.technologies}
+            icon={FiCode}
+          >
+            <TechList>
+              {technologies.map((tech, index) => (
+                <Tech key={`${tech}-${index}`}>
+                  {tech}
+                </Tech>
+              ))}
+            </TechList>
+          </ContentSection>
+        )}
+
+        {/* =================================
+            PROJECT ACTIONS
+        ================================= */}
+
+        {(demoUrl || githubUrl) && (
           <ProjectActions>
-            {project.demo && (
+            {demoUrl && (
               <Button
                 as="a"
-                href={project.demo}
+                href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 $variant="primary"
               >
                 <ActionContent>
                   {labels.liveDemo}
-
                   <FiExternalLink aria-hidden="true" />
                 </ActionContent>
               </Button>
             )}
 
-            {project.github && (
+            {githubUrl && (
               <Button
                 as="a"
-                href={project.github}
+                href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 $variant="secondary"
               >
                 <ActionContent>
                   {labels.sourceCode}
-
                   <FiGithub aria-hidden="true" />
                 </ActionContent>
               </Button>
@@ -918,7 +1449,9 @@ const ProjectDetails = () => {
           </ProjectActions>
         )}
 
-        {/* BACK TO PROJECTS — UNCHANGED */}
+        {/* =================================
+            BACK TO PROJECTS
+        ================================= */}
 
         <BackLink to="/projects">
           <BackArrow aria-hidden="true" />
@@ -926,7 +1459,7 @@ const ProjectDetails = () => {
         </BackLink>
       </Content>
 
-      {/* ORIGINAL IMAGE MODAL */}
+      {/* IMAGE MODAL */}
 
       <ImgModal
         ImgSource={selectedImage?.src}

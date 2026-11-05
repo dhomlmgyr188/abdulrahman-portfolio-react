@@ -1,210 +1,156 @@
 
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import ProjectCard from "./ProjectCard";
 import projectImages from "./projectImages";
 
-/* =========================================================
-   ABDULRAHMAN PORTFOLIO
-   COMPONENTS — PROJECTS GRID
-
-   Design System:
-   - Modern Professional
-   - Ocean / Orca
-
-   Preserved:
-   - All featured projects
-   - Project IDs
-   - Project titles
-   - Project dates
-   - Descriptions with embedded links
-   - Technology stacks
-   - Project details routes
-   - Live preview URLs
-   - Arabic / English translations
-   - Light / Dark theme support
-   - Responsive layout
-
-   Added:
-   - Image resolution from projectImages.js
-   - Image data passed to ProjectCard
-   - Safe handling of missing image keys
-
-   Export:
-   - ProjectGrid (default)
-========================================================= */
-
-
-/* =========================================================
-   01 — PROJECTS LIST
-
-   Keep the original vertical layout.
-
-   ProjectCard currently uses a wide
-   horizontal-content design, so a
-   single-column list preserves the
-   intended presentation.
-========================================================= */
+/* =========================================
+   PROJECTS GRID STYLES
+========================================= */
 
 const ProjectsList = styled.div`
   display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr);
-
+  grid-template-columns: minmax(0, 1fr);
   align-items: stretch;
 
-  gap: clamp(
-    16px,
-    2.5vw,
-    24px
-  );
+  gap: clamp(16px, 2.5vw, 24px);
 
   width: 100%;
   min-width: 0;
-
   box-sizing: border-box;
 
   > * {
     min-width: 0;
   }
 
-  /* -------------------------------------------------------
-     MOBILE
-  ------------------------------------------------------- */
-
   @media (max-width: 600px) {
     gap: 16px;
   }
 `;
 
-
-/* =========================================================
-   02 — EMPTY STATE
-
-   Displayed only if no featured
-   projects are found in home.json.
-========================================================= */
-
 const EmptyState = styled.p`
   margin: 0;
+  padding: clamp(28px, 4vw, 40px) 20px;
 
-  padding:
-    clamp(28px, 4vw, 40px) 20px;
+  background: var(--color-background-secondary);
+  color: var(--color-text-secondary);
 
-  background-color:
-    var(--color-background-secondary);
-
-  color:
-    var(--color-text-secondary);
-
-  border:
-    1px solid var(--color-border);
-
-  border-radius:
-    var(--radius-card, 14px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card, 14px);
 
   font-size: 0.95rem;
   line-height: 1.8;
-
   text-align: center;
 `;
 
-
-/* =========================================================
-   03 — IMAGE RESOLVER
-
-   Source:
-   projectImages.js
-
-   Example:
-   project.project_img = ["react1"]
-
-   Result:
-   projectImages.react1
-
-   This helper does not change
-   image names or source files.
-========================================================= */
+/* =========================================
+   PROJECT IMAGE RESOLVER
+========================================= */
 
 const resolveProjectImages = (imageKeys) => {
-
-  /* -------------------------------------------------------
-     NORMALIZE INPUT
-
-     Support:
-     - Array of image keys
-     - Single image key
-     - Missing image data
-  ------------------------------------------------------- */
-
   const keys = Array.isArray(imageKeys)
     ? imageKeys
     : typeof imageKeys === "string"
       ? [imageKeys]
       : [];
 
-  /* -------------------------------------------------------
-     RESOLVE AVAILABLE IMAGES
-
-     Preserve the original order.
-  ------------------------------------------------------- */
-
   return keys
     .map((key) => {
-
       if (typeof key !== "string") {
         return null;
       }
 
-      return projectImages[key] || null;
+      if (
+        Object.prototype.hasOwnProperty.call(
+          projectImages,
+          key
+        )
+      ) {
+        return projectImages[key];
+      }
 
+      if (/^https?:\/\//i.test(key)) {
+        return key;
+      }
+
+      return null;
     })
     .filter(Boolean);
 };
 
+/* =========================================
+   PROJECTS GRID COMPONENT
+========================================= */
 
-/* =========================================================
-   04 — PROJECTS GRID COMPONENT
-========================================================= */
-
-function ProjectGrid() {
-
-  /* -------------------------------------------------------
-     TRANSLATIONS
-  ------------------------------------------------------- */
-
+function ProjectGrid({ source = "auto" }) {
   const { t, i18n } = useTranslation([
     "home",
     "projects",
     "common",
   ]);
 
-  /* -------------------------------------------------------
-     CURRENT LANGUAGE
-  ------------------------------------------------------- */
+  const location = useLocation();
 
   const language =
     i18n.resolvedLanguage ||
     i18n.language ||
     "ar";
 
-  const isArabic =
-    language.toLowerCase().startsWith("ar");
+  const isArabic = language
+    .toLowerCase()
+    .startsWith("ar");
 
-  /* =====================================================
-     05 — FEATURED PROJECTS DATA
+  /* =========================================
+     DETERMINE PROJECT SOURCE
 
-     Keep the original data source:
+     home     => Featured projects only
+     projects => All projects
+     auto     => Detect current page
+  ========================================= */
 
-     home:featuredProjects.items
+  const pathname = location.pathname.replace(/\/+$/, "");
 
-     Full project details remain
-     in projects.json.
-  ===================================================== */
+  const isProjectsPage =
+    pathname === "/projects" ||
+    pathname.endsWith("/projects");
 
-  const translatedProjects = t(
+  const dataSource =
+    source === "home" || source === "projects"
+      ? source
+      : isProjectsPage
+        ? "projects"
+        : "home";
+
+  /* =========================================
+     ALL PROJECTS
+
+     projects.json is the single source
+     for project information.
+  ========================================= */
+
+  const translatedProjects = t("items", {
+    ns: "projects",
+    returnObjects: true,
+    defaultValue: [],
+  });
+
+  const allProjects = Array.isArray(
+    translatedProjects
+  )
+    ? translatedProjects
+    : [];
+
+  /* =========================================
+     FEATURED PROJECT IDS
+
+     home.json determines only:
+     - Which projects are featured
+     - Their display order
+  ========================================= */
+
+  const featuredProjectsData = t(
     "featuredProjects.items",
     {
       ns: "home",
@@ -213,205 +159,195 @@ function ProjectGrid() {
     }
   );
 
-  /* -------------------------------------------------------
-     NORMALIZE PROJECTS
-  ------------------------------------------------------- */
+  const featuredProjectIds = Array.isArray(
+    featuredProjectsData
+  )
+    ? featuredProjectsData
+        .map((item) => {
+          if (typeof item === "string") {
+            return item;
+          }
+
+          if (
+            item &&
+            typeof item === "object"
+          ) {
+            return item.id;
+          }
+
+          return null;
+        })
+        .filter(
+          (id) =>
+            typeof id === "string" &&
+            id.trim() !== ""
+        )
+    : [];
+
+  /* =========================================
+     PROJECT LOOKUP
+
+     Match by stable project ID.
+  ========================================= */
+
+  const projectsById = new Map(
+    allProjects
+      .filter(
+        (project) =>
+          project &&
+          typeof project.id === "string" &&
+          project.id.trim() !== ""
+      )
+      .map((project) => [
+        project.id,
+        project,
+      ])
+  );
+
+  /* =========================================
+     SELECT PROJECTS
+
+     Home:
+       Featured IDs mapped to projects.json
+
+     Projects:
+       All projects from projects.json
+  ========================================= */
 
   const projects =
-    Array.isArray(translatedProjects)
-      ? translatedProjects
-      : [];
+    dataSource === "projects"
+      ? allProjects
+      : featuredProjectIds
+          .map((id) => projectsById.get(id))
+          .filter(Boolean);
 
-  /* =====================================================
-     06 — TRANSLATED BUTTON LABELS
+  /* =========================================
+     TRANSLATED BUTTON LABELS
+  ========================================= */
 
-     Preserve original translation
-     keys and fallback text.
-  ===================================================== */
+  const detailsLabel = t("buttons.view_project", {
+    ns: "common",
+    defaultValue: isArabic
+      ? "تفاصيل المشروع"
+      : "Project Details",
+  });
 
-  const detailsLabel = t(
-    "buttons.view_project",
-    {
-      ns: "common",
-      defaultValue: isArabic
-        ? "تفاصيل المشروع"
-        : "Project Details",
-    }
-  );
+  const demoLabel = t("buttons.demo", {
+    ns: "common",
+    defaultValue: isArabic
+      ? "معاينة المشروع"
+      : "Live Preview",
+  });
 
-  const demoLabel = t(
-    "buttons.demo",
-    {
-      ns: "common",
-      defaultValue: isArabic
-        ? "معاينة المشروع"
-        : "Live Preview",
-    }
-  );
-
-  /* =====================================================
-     07 — EMPTY STATE
-  ===================================================== */
+  /* =========================================
+     EMPTY STATE
+  ========================================= */
 
   if (projects.length === 0) {
-
     return (
       <EmptyState role="status">
-
         {isArabic
           ? "لا توجد مشاريع متاحة للعرض حاليًا."
           : "No projects available at the moment."}
-
       </EmptyState>
     );
   }
 
-  /* =====================================================
-     08 — RENDER PROJECT CARDS
-  ===================================================== */
+  /* =========================================
+     PROJECT CARDS
+  ========================================= */
 
   return (
     <ProjectsList>
-
       {projects.map((project, index) => {
+        const projectId = project.id;
 
-        /* -----------------------------------------------
-           PROJECT ID
-        ----------------------------------------------- */
-
-        const projectId =
-          project.id;
-
-        /* -----------------------------------------------
+        /* =====================================
            PROJECT DETAILS LINK
-
-           Preserve the existing route:
-           /projects/:projectId
-        ----------------------------------------------- */
+        ===================================== */
 
         const detailsLink = projectId
-          ? `/projects/${encodeURIComponent(
-              projectId
-            )}`
+          ? `/projects/${encodeURIComponent(projectId)}`
           : "/projects";
 
-        /* -----------------------------------------------
+        /* =====================================
            PROJECT DESCRIPTION
 
-           Preserve:
-           - shortDescription
-           - desc
-
-           Descriptions may be arrays
-           containing text and links.
-        ----------------------------------------------- */
+           Always from projects.json
+        ===================================== */
 
         const description =
           project.shortDescription ||
           project.desc ||
           "";
 
-        /* -----------------------------------------------
-           PROJECT TECHNOLOGIES
-        ----------------------------------------------- */
+        /* =====================================
+           TECHNOLOGIES
+        ===================================== */
 
-        const technologies =
-          Array.isArray(project.tech_stack)
-            ? project.tech_stack
-            : [];
+        const technologies = Array.isArray(
+          project.tech_stack
+        )
+          ? project.tech_stack
+          : [];
 
-        /* -----------------------------------------------
+        /* =====================================
            PROJECT IMAGES
+        ===================================== */
 
-           Example:
-           ["react1"]
-
-           Resolve using:
-           projectImages.js
-        ----------------------------------------------- */
-
-        const images =
-          resolveProjectImages(
-            project.project_img
-          );
-
-        /* -----------------------------------------------
-           PRIMARY IMAGE
-
-           The first image can be
-           displayed in ProjectCard.
-
-           All resolved images are
-           also passed separately.
-        ----------------------------------------------- */
+        const images = resolveProjectImages(
+          project.project_img
+        );
 
         const primaryImage =
-          images.length > 0
-            ? images[0]
-            : null;
+          images.length > 0 ? images[0] : null;
 
-        /* -----------------------------------------------
-           STABLE KEY
-        ----------------------------------------------- */
+        /* =====================================
+           LIVE DEMO
+
+           No demo URL = no preview button
+        ===================================== */
+
+        const demoUrl =
+          typeof project.demo === "string" &&
+          project.demo.trim()
+            ? project.demo.trim()
+            : typeof project.link === "string" &&
+                project.link.trim()
+              ? project.link.trim()
+              : undefined;
+
+        /* =====================================
+           UNIQUE PROJECT KEY
+        ===================================== */
 
         const projectKey =
           projectId || `project-${index}`;
 
-        /* =================================================
-           09 — PROJECT CARD
-
-           Existing ProjectCard props
-           are preserved.
-
-           Additional image props:
-           - image
-           - images
-           - imageAlt
-
-           The current ProjectCard
-           safely ignores these extra
-           props until it is updated.
-        ================================================= */
+        /* =====================================
+           PROJECT CARD
+        ===================================== */
 
         return (
           <ProjectCard
             key={projectKey}
-
             index={index}
-
             title={project.title}
-
             date={project.date}
-
             description={description}
-
             techStack={technologies}
-
             toLink={detailsLink}
-
-            toHref={project.link}
-
+            toHref={demoUrl}
             value1={detailsLabel}
-
             value2={demoLabel}
-
             image={primaryImage}
-
             images={images}
-
             imageAlt={project.title}
           />
         );
-
       })}
-
     </ProjectsList>
   );
 }
-
-
-/* =========================================================
-   10 — EXPORT
-========================================================= */
 
 export default ProjectGrid;

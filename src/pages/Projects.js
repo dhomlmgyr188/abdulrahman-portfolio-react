@@ -7,7 +7,6 @@ import { FiGrid } from "react-icons/fi";
 import BreadCrumb from "../Components/ui/Breadcrumb";
 import Container from "../Components/layout/PageContainer";
 import ProjectsGrid from "../Components/projects/ProjectsGrid";
-
 import { PageHeader } from "../Components/ui/T";
 
 /* =========================================
@@ -19,15 +18,8 @@ const ProjectsPage = styled.main`
   min-width: 0;
   overflow-x: clip;
 
-  background: var(
-    --color-background,
-    #f4f7fb
-  );
-
-  color: var(
-    --color-text-primary,
-    #172435
-  );
+  background: var(--color-background, #f4f7fb);
+  color: var(--color-text-primary, #172435);
 `;
 
 /* =========================================
@@ -41,16 +33,15 @@ const ProjectsSection = styled.section`
     clamp(35px, 5vw, 65px)
     clamp(65px, 8vw, 100px);
 
-  background: var(
-    --color-background,
-    #f4f7fb
-  );
+  background: var(--color-background, #f4f7fb);
 `;
 
 const ProjectsContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   gap: clamp(24px, 4vw, 35px);
+
+  min-width: 0;
 `;
 
 /* =========================================
@@ -63,14 +54,10 @@ const SectionHeader = styled.div`
   gap: 14px;
 
   width: 100%;
-
   padding-bottom: 20px;
 
   border-bottom: 1px solid
-    var(
-      --color-border,
-      #d5e0eb
-    );
+    var(--color-border, #d5e0eb);
 
   text-align: start;
 
@@ -83,18 +70,13 @@ const SectionHeader = styled.div`
 const SectionIcon = styled.span`
   display: grid;
   place-items: center;
-
   flex-shrink: 0;
 
   width: 46px;
   height: 46px;
 
   border: 1px solid
-    var(
-      --color-border,
-      #d5e0eb
-    );
-
+    var(--color-border, #d5e0eb);
   border-radius: 10px;
 
   background: var(
@@ -102,11 +84,7 @@ const SectionIcon = styled.span`
     #ffffff
   );
 
-  color: var(
-    --color-primary,
-    #0065a8
-  );
-
+  color: var(--color-primary, #0065a8);
   font-size: 1.3rem;
 
   @media (max-width: 600px) {
@@ -120,24 +98,15 @@ const SectionHeadingContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-
   min-width: 0;
 `;
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.h1`
   margin: 0;
 
-  color: var(
-    --color-text-primary,
-    #172435
-  );
+  color: var(--color-text-primary, #172435);
 
-  font-size: clamp(
-    1.25rem,
-    2.5vw,
-    1.65rem
-  );
-
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
   font-weight: 800;
   line-height: 1.5;
 `;
@@ -145,10 +114,7 @@ const SectionTitle = styled.h2`
 const SectionDescription = styled.p`
   margin: 0;
 
-  color: var(
-    --color-text-secondary,
-    #475569
-  );
+  color: var(--color-text-secondary, #475569);
 
   font-size: 0.88rem;
   line-height: 1.85;
@@ -184,59 +150,40 @@ const Projects = () => {
 
   const isArabic = language.startsWith("ar");
 
-  /* SECTION TITLE */
-
-  const sectionTitle = t(
-    "projects:section.title",
-    {
-      defaultValue: isArabic
-        ? "استكشف مشاريعي"
-        : "Explore My Projects",
-    }
-  );
-
-  /* SECTION DESCRIPTION */
+  const sectionTitle = t("projects:section.title", {
+    defaultValue: isArabic
+      ? "مشاريعي"
+      : "My Projects",
+  });
 
   const sectionDescription = t(
     "projects:section.description",
     {
       defaultValue: isArabic
-        ? "تصفح المشاريع واطلع على تفاصيل كل مشروع والتقنيات المستخدمة في تطويره."
-        : "Browse my projects and explore their details and the technologies used to build them.",
+        ? "استعرض مجموعة من مشاريعي في تطوير الويب، وتعرّف على أهداف كل مشروع ومميزاته والتقنيات المستخدمة في تطويره ودوري في تنفيذه."
+        : "Explore my web development projects, including their objectives, key features, technologies, and my contributions to their development.",
     }
   );
 
   return (
-    <ProjectsPage
-      dir={isArabic ? "rtl" : "ltr"}
-    >
-      {/* =================================
-          PAGE HEADER — BREADCRUMB ONLY
-      ================================= */}
+    <ProjectsPage dir={isArabic ? "rtl" : "ltr"}>
+      {/* PAGE HEADER */}
 
       <PageHeader>
         <BreadCrumb value="projects" />
       </PageHeader>
 
-      {/* =================================
-          PROJECTS SECTION
-      ================================= */}
+      {/* PROJECTS SECTION */}
 
-      <ProjectsSection
-        aria-label={sectionTitle}
-      >
+      <ProjectsSection aria-labelledby="projects-title">
         <ProjectsContainer>
-          {/* SECTION HEADER */}
-
           <SectionHeader>
-            <SectionIcon
-              aria-hidden="true"
-            >
+            <SectionIcon aria-hidden="true">
               <FiGrid />
             </SectionIcon>
 
             <SectionHeadingContent>
-              <SectionTitle>
+              <SectionTitle id="projects-title">
                 {sectionTitle}
               </SectionTitle>
 
@@ -245,8 +192,6 @@ const Projects = () => {
               </SectionDescription>
             </SectionHeadingContent>
           </SectionHeader>
-
-          {/* PROJECTS GRID */}
 
           <GridWrapper>
             <ProjectsGrid />
