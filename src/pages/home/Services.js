@@ -583,7 +583,7 @@ function Services() {
 
   const content = isArabic
     ? {
-        index: "01 / SERVICES",
+        index: "SERVICES",
 
         label: "ما أقدمه",
 
@@ -597,7 +597,7 @@ function Services() {
           "استكشف الخدمات",
       }
     : {
-        index: "01 / SERVICES",
+        index: "SERVICES",
 
         label: "What I Offer",
 

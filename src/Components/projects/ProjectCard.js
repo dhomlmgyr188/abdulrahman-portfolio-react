@@ -10,6 +10,7 @@ import {
   FiExternalLink,
   FiCalendar,
   FiImage,
+  FiLayers,
 } from "react-icons/fi";
 
 /* =========================================
@@ -334,6 +335,80 @@ function Description({ content }) {
 }
 
 /* =========================================
+   DEVELOPMENT AREA — NEW
+========================================= */
+
+const DevelopmentArea = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 12px 14px;
+
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    padding: 11px 12px;
+    gap: 9px;
+  }
+`;
+
+const DevelopmentAreaIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 32px;
+  height: 32px;
+
+  color: var(--color-primary);
+
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+`;
+
+const DevelopmentAreaContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  flex: 1;
+  min-width: 0;
+`;
+
+const DevelopmentAreaTitle = styled.span`
+  color: var(--color-text-secondary);
+
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.5;
+`;
+
+const DevelopmentAreaValue = styled.span`
+  color: var(--color-text-primary);
+
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
+`;
+
+/* =========================================
    TECHNOLOGIES
 ========================================= */
 
@@ -446,6 +521,8 @@ function ProjectCard({
   title,
   date,
   description,
+  developmentArea,
+  developmentAreaLabel,
   techStack,
   toLink,
   value1,
@@ -472,6 +549,10 @@ function ProjectCard({
     typeof toHref === "string" &&
     toHref.trim().length > 0 &&
     toHref.trim() !== "#";
+
+  const hasDevelopmentArea =
+    typeof developmentArea === "string" &&
+    developmentArea.trim().length > 0;
 
   const number = String(index + 1).padStart(2, "0");
 
@@ -528,6 +609,26 @@ function ProjectCard({
               <Description content={description} />
             </HeaderContent>
           </CardHeader>
+
+          {/* DEVELOPMENT AREA */}
+
+          {hasDevelopmentArea && (
+            <DevelopmentArea>
+              <DevelopmentAreaIcon aria-hidden="true">
+                <FiLayers />
+              </DevelopmentAreaIcon>
+
+              <DevelopmentAreaContent>
+                <DevelopmentAreaTitle>
+                  {developmentAreaLabel}
+                </DevelopmentAreaTitle>
+
+                <DevelopmentAreaValue>
+                  {developmentArea}
+                </DevelopmentAreaValue>
+              </DevelopmentAreaContent>
+            </DevelopmentArea>
+          )}
 
           {/* TECHNOLOGY STACK */}
 

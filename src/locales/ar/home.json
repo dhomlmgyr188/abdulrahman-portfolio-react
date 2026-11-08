@@ -84,10 +84,16 @@
     },
     "items": [
       {
-        "id": "React-To-Do-List"
+        "id": "Portfolio_v3"
       },
       {
-        "id": "Portfolio_v1"
+        "id": "freelancer-hub"
+      },
+      {
+        "id": "rest-api-wordpress"
+      },
+      {
+        "id": "Ecommerce_Admin_Dashboard"
       }
     ]
   },

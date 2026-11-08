@@ -1,9 +1,9 @@
 {
   "pageTitle": "My Projects",
-  "pageDesc": "A collection of projects I have developed, showcasing my technical skills and experience in designing and building websites and web interfaces.",
+  "pageDesc": "A collection of projects I have worked on, showcasing my technical skills and experience in designing and developing websites and web interfaces.",
   "section": {
     "title": "My Projects",
-    "description": "Explore my web development projects, including their objectives, key features, technologies, and my contributions to their development."
+    "description": "Explore my web development projects and learn about each project’s goals, features, technologies, and my role in its development."
   },
   "details": {
     "gallery": "Project Gallery",
@@ -12,172 +12,149 @@
     "developedBy": "Developed By",
     "developmentArea": "Development Area",
     "date": "Completion Date",
-    "overview": "Project Description",
-    "features": "Key Features",
+    "overview": "Project Overview",
+    "features": "Project Features",
     "responsibilities": "My Responsibilities",
-    "technologies": "Technologies Used",
+    "technologies": "Technologies and Tools Used",
     "liveDemo": "Live Demo",
     "sourceCode": "Source Code",
     "backToProjects": "Back to Projects",
     "notFound": "Project Not Found",
-    "notFoundDescription": "We couldn't find the requested project.",
+    "notFoundDescription": "The requested project could not be found.",
     "enlargeImage": "Enlarge Image",
     "closeImage": "Close Image",
     "previousImage": "Previous Image",
     "nextImage": "Next Image",
     "noImages": "No project images are currently available",
-    "plannedFeature": "Planned for Future Development"
+    "plannedFeature": "Planned Feature"
   },
   "items": [
     {
-      "id": "React-To-Do-List",
-      "title": "React Notes Management App",
-      "projectType": "Web Application",
+      "id": "Portfolio_v3",
+      "title": "My Personal Portfolio – Version 3",
+      "projectType": "Multi-page Personal Website – Independent Project",
       "developedBy": [
         "Abdulrahman Al-Mughyir"
       ],
-      "developmentArea": "Front-End Development",
-      "date": "2026/08/30",
-      "shortDescription": "An interactive application for creating, editing, deleting, and locally saving notes.",
-      "overview": "A notes management web application built with React and LocalStorage. Users can create, view, edit, and delete notes through an interactive interface, with data stored directly in the browser without requiring an external server. Developed as part of the JavaScript Application Development course at Hsoub Academy.",
+      "developmentArea": "Front-End Development with React",
+      "date": "",
+      "shortDescription": "A multi-page personal portfolio built with React to showcase my professional background, skills, and projects, featuring Arabic and English support, light and dark themes, and an advanced contact form.",
+      "overview": "The third and current version of my personal portfolio, created to present my professional identity and showcase my skills and projects to recruiters and potential clients. The website uses React to build reusable components and enables navigation between pages without full page reloads. It supports Arabic and English, as well as light and dark themes. It includes pages for my professional profile, projects, project details, and contact information, along with a contact form that supports file attachments, Cloudflare Turnstile security verification, and Supabase integration. I planned the website structure and requirements and developed the project with the assistance of AI tools to improve the code, design, and user experience, while maintaining a consistent visual identity and responsiveness across devices.",
       "features": [
-        "Create new notes",
-        "View saved notes",
-        "Edit existing notes",
-        "Delete notes",
-        "Store data locally using LocalStorage",
-        "Update the interface interactively with React"
+        "A multi-page website presenting my professional background, skills, projects, and project details.",
+        "A homepage featuring an introduction, services, featured projects, and calls to action.",
+        "Arabic and English language support with RTL and LTR layouts.",
+        "Light and dark theme switching with consistent colors and styling.",
+        "Responsive design for phones, tablets, and desktop computers.",
+        "Seamless navigation using React Router without full page reloads.",
+        "Dedicated project detail pages displaying descriptions, features, technologies, and links.",
+        "A contact form with input validation, file attachments, Supabase integration, and Cloudflare Turnstile verification."
       ],
+      "responsibilitiesIntro": "I planned the portfolio website, defined its goals, page structure, components, and content, and used ChatGPT to assist with code generation, interface development, and improvements. I focused on reviewing the content, final results, user experience, and visual consistency.",
       "responsibilities": [
-        "Developing the user interface using React (sample wording)",
-        "Implementing note creation, editing, and deletion (sample wording)",
-        "Connecting notes to browser local storage (sample wording)"
+        "Defined the website concept, objectives, and target audience of recruiters and potential clients.",
+        "Planned the website structure, pages, sections, design requirements, and functionality.",
+        "Organized professional content and project information using JSON.",
+        "Guided the development of React interfaces and components with ChatGPT assistance.",
+        "Specified multilingual support, light and dark themes, and responsive design requirements.",
+        "Defined requirements for the contact form, attachments, security verification, and external service integrations.",
+        "Reviewed the displayed content and interfaces and guided improvements for a consistent user experience.",
+        "Managed project files using Git and GitHub and deployed the website through GitHub Pages."
       ],
       "tech_stack": [
-        "React",
-        "React Hooks",
+        "HTML5",
+        "CSS3",
         "JavaScript",
-        "CRUD",
-        "LocalStorage"
+        "React",
+        "React Router",
+        "Styled Components",
+        "i18next",
+        "JSON",
+        "React Icons",
+        "Supabase",
+        "Supabase Edge Functions",
+        "Cloudflare Turnstile",
+        "npm",
+        "Git",
+        "GitHub",
+        "GitHub Pages"
       ],
       "project_img": [
-        "to_do_list1",
-        "to_do_list2",
-        "to_do_list3",
-        "to_do_list4"
+        "portfolio_v3_1",
+        "portfolio_v3_2",
+        "portfolio_v3_3",
+        "portfolio_v3_4",
+        "portfolio_v3_5",
+        "portfolio_v3_6",
+        "portfolio_v3_7",
+        "portfolio_v3_8"
       ],
-      "demo": "https://dhomlmgyr188.github.io/React-To-Do-List/",
-      "github": "https://github.com/dhomlmgyr188/React-To-Do-List"
-    },
-    {
-      "id": "Portfolio_v1",
-      "title": "Personal Portfolio - Previous Version",
-      "date": "2026/05/24",
-      "shortDescription": "A responsive, multi-page personal portfolio showcasing professional information, projects, and services.",
-      "overview": "A multi-page personal portfolio website designed to showcase professional information, skills, projects, and services, with an emphasis on intuitive navigation, organized content, and a consistent user experience across different devices.",
-      "features": [
-        "Responsive design across different screen sizes",
-        "Multiple pages for organized content",
-        "Professional information and project showcase",
-        "Clear navigation between website sections",
-        "Interactive functionality using JavaScript"
-      ],
-      "tech_stack": [
-        "HTML",
-        "CSS",
-        "Vanilla JavaScript"
-      ],
-      "project_img": [
-        "anaalmughyir1"
-      ],
-      "demo": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/frontend/",
-      "github": ""
+      "demo": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-react/",
+      "github": "https://github.com/dhomlmgyr188/abdulrahman-portfolio-react"
     },
     {
       "id": "freelancer-hub",
-      "title": "Freelancers Hub",
-      "projectType": "Academic Graduation Project — Freelancing Platform",
+      "title": "Freelancer Hub",
+      "projectType": "Academic Graduation Project – Freelance Marketplace",
       "developedBy": [
         "Abdulrahman Al-Mughyir",
         "Hatem Al-Juhani",
         "Hisham Al-Harbi",
-        "Emad Al-Juhani",
+        "Imad Al-Juhani",
         "Mohammed Jablawi",
         "Omar Al-Balawi"
       ],
-      "developmentArea": "Full-Stack Web Development (Front-End, Back-End, and Databases)",
+      "developmentArea": "Full-Stack Web Development",
       "date": "2026/01/19",
-      "shortDescription": "A graduation project connecting freelancers with project owners, featuring account and project management, search functionality, an administrative dashboard, and transaction records.",
-      "overview": "Freelancers Hub is an academic graduation project developed as part of the Intermediate Diploma in Full-Stack Web Development at the Applied College, Taibah University. The project aims to establish an online platform connecting freelancers with project owners, facilitating project publishing, opportunity discovery, and the management of user and project information through an organized digital environment.\n\nThe platform supports three account types: freelancer, project owner, and administrator. Project owners can create and manage projects, search for freelancers by name or skill, and review their professional profiles. Freelancers can maintain profiles featuring their skills, experience, hourly rates, and portfolio work, as well as browse, search, and filter available projects.\n\nThe platform includes transaction records and their associated statuses. Freelancers and project owners can view only their own transaction records, while administrators can manage recorded transaction statuses. These records do not represent actual payment processing, as no real payment gateway was integrated.\n\nThe administrative dashboard provides statistics covering users, freelancers, project owners, projects, and transactions. Administrators can manage users, projects, categories, and skills, as well as review and approve or reject project publication requests.\n\nThe project also includes interfaces and database structures related to project proposals. However, proposal submission and management were not completed as operational features and remain part of the planned future development.",
+      "shortDescription": "A freelance marketplace connecting freelancers with project owners, offering account, project, and professional profile management, along with an administrative dashboard and role-based permissions.",
+      "overview": "A team graduation project completed as part of the Full-Stack Web Development diploma at the Applied College, Taibah University. The platform aims to connect freelancers with project owners. It supports three account types—freelancer, project owner, and administrator—with different permissions for managing profiles, projects, searching, and filtering. An administrative dashboard provides statistics and tools to manage users, projects, categories, and skills, review project publication requests, and view transaction records. The project was developed using HTML, CSS, JavaScript, PHP, and MySQL. Some features are planned for future completion, particularly the bidding system.",
       "features": [
         {
-          "title": "Account and Permission Management",
+          "title": "Accounts and Profiles",
           "items": [
-            "Register freelancer and project owner accounts and authenticate users according to their account types.",
-            "Manage personal information and user profiles based on role-specific permissions."
+            "Register and sign in with different permissions for freelancers, project owners, and administrators.",
+            "Manage freelancer professional profiles and display skills, experience, and portfolio samples."
           ]
         },
         {
-          "title": "Professional Profiles",
+          "title": "Project Management and Search",
           "items": [
-            "Create freelancer profiles featuring specializations, skills, experience, hourly rates, and portfolio work.",
-            "Browse freelancer profiles and search for freelancers by name or skill."
+            "Create, view, edit, and delete projects from a project owner account.",
+            "Search and filter projects, and search for freelancers by name or skill."
           ]
         },
         {
-          "title": "Project Management",
+          "title": "Administrator Dashboard",
           "items": [
-            "Create projects with titles, descriptions, and budgets.",
-            "View, edit, and delete projects owned by the project owner.",
-            "Browse available projects using search and filtering features."
-          ]
-        },
-        {
-          "title": "Transaction Records",
-          "items": [
-            "Allow freelancers and project owners to view their own transaction records with read-only access.",
-            "Enable administrators to manage recorded transaction statuses: pending, completed, failed, and refunded."
-          ],
-          "note": "This functionality concerns transaction records and their statuses within the system. No real payment gateway, fund transfer, or financial refund processing was implemented."
-        },
-        {
-          "title": "Administrative Dashboard",
-          "items": [
-            "Display statistics for users, freelancers, project owners, projects, and transactions.",
+            "View user, project, and transaction statistics.",
             "Manage users, projects, categories, and skills.",
             "Review project publication requests and approve or reject them."
           ]
         },
         {
-          "title": "User Experience",
+          "title": "Transaction Records",
           "items": [
-            "Provide search, filtering, and sorting capabilities to help users find relevant content.",
-            "Display clear success, error, and empty-state messages.",
-            "Organize navigation and content according to user account types."
-          ]
+            "View transaction records and statuses according to user permissions."
+          ],
+          "note": "Records within the system only; no actual financial payments are processed."
         },
         {
-          "title": "Project Proposal System — Future Development",
+          "title": "Bidding System – Future Development",
           "status": "planned",
           "items": [
-            "Allow freelancers to submit proposals containing an amount, estimated duration, and message.",
-            "Track proposal statuses such as pending, accepted, rejected, and withdrawn."
+            "Submit bids on projects and manage their statuses."
           ],
-          "note": "Related interfaces and database structures are available, but proposal submission and management were not completed as operational features."
+          "note": "Related interfaces and database structures exist, but the operational features have not been completed."
         }
       ],
-      "responsibilitiesIntro": "I played a pivotal role in developing Freelancers Hub as part of a six-member team, taking on extensive technical and implementation responsibilities. My contributions covered requirements analysis, system design, front-end and back-end development, database development, component integration, testing, debugging, and user experience improvements. I also collaborated closely with team members, supported their development tasks, and contributed substantially to integrating and completing the project.",
+      "responsibilitiesIntro": "I worked with a six-member team on project analysis and development, focusing on front-end interfaces while contributing to back-end functionality, database work, component integration, and testing.",
       "responsibilities": [
-        "Made substantial contributions to analyzing the project concept, defining functional requirements, and identifying user roles and permissions.",
-        "Participated in planning the platform architecture, page structure, and user workflows.",
-        "Developed extensive front-end components and interfaces using HTML, CSS, and JavaScript.",
-        "Implemented back-end functionality using PHP to process requests and manage application data.",
-        "Contributed to designing the MySQL database, its tables, and relationships.",
-        "Implemented and integrated Create, Read, Update, and Delete (CRUD) operations.",
-        "Connected user interfaces with application logic and database operations, ensuring consistent data flow.",
-        "Developed and improved functionality related to user management, projects, search, and the administrative dashboard.",
-        "Tested pages and features, identified and resolved programming issues, and improved the user experience.",
-        "Coordinated with team members, assisted with technical challenges, integrated contributions, and reviewed implementation results."
+        "Researched competing platforms, analyzed requirements, and prepared and formatted project documentation.",
+        "Developed substantial portions of the front-end interfaces using HTML, CSS, and JavaScript.",
+        "Contributed to PHP functionality and its integration with the MySQL database.",
+        "Participated in database design, CRUD operations, and user session management.",
+        "Connected front-end interfaces to back-end functionality and verified data flow.",
+        "Tested system features, fixed issues, and collaborated with teammates to integrate their work."
       ],
       "tech_stack": [
         "HTML5",
@@ -185,10 +162,14 @@
         "JavaScript",
         "PHP",
         "MySQL",
+        "AJAX",
+        "PHP Sessions",
+        "Swiper.js",
+        "Animate.css",
+        "Font Awesome",
         "Apache",
         "XAMPP",
-        "phpMyAdmin",
-        "Visual Studio Code"
+        "phpMyAdmin"
       ],
       "project_img": [
         "freelancer_hub2",
@@ -208,6 +189,390 @@
       ],
       "demo": "",
       "github": "https://github.com/dhomlmgyr188/freelancer-hub"
+    },
+    {
+      "id": "rest-api-wordpress",
+      "title": "WordPress Management Dashboard with REST API",
+      "projectType": "Academic Project – Content Management Systems",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir",
+        "Hisham Al-Sharif",
+        "Waleed Al-Omari",
+        "Hisham Al-Harbi",
+        "Saleh Salem"
+      ],
+      "developmentArea": "Web Development and API Integration",
+      "date": "2026/01/19",
+      "shortDescription": "A dashboard for managing WordPress users and posts through the REST API, supporting viewing, creating, editing, and deleting records, with authentication using application passwords.",
+      "overview": "A team academic project for the Content Management Systems course at Taibah University. The project involved building an external dashboard to manage WordPress users and posts through the REST API. The dashboard connects to a WordPress site using credentials and an application password, performs CRUD operations, manages user roles and post statuses, and displays success and error messages. Functionality was developed using JavaScript and the Fetch API, while interfaces were styled with HTML and Tailwind CSS. The team also prepared academic documentation and a presentation and received full marks.",
+      "features": [
+        "Connect to a WordPress site and validate credentials using Application Passwords.",
+        "A dashboard with separate sections for managing users and posts.",
+        "View, create, edit, and delete users, with role management and filtering.",
+        "View, create, edit, and delete posts, with filtering by publication status.",
+        "Perform CRUD operations through the WordPress REST API using the Fetch API.",
+        "Check connection status, display success and error messages, and redirect when connection details are missing."
+      ],
+      "responsibilitiesIntro": "I worked in a five-member team and took a major role in programming the functionality and integrating the WordPress REST API. I also prepared and formatted the academic documentation and presentation in collaboration with the team.",
+      "responsibilities": [
+        "Developed the functional code connecting the dashboard to the WordPress REST API using JavaScript and the Fetch API.",
+        "Implemented CRUD operations for users and posts.",
+        "Programmed authentication using Application Passwords and handled API responses and errors.",
+        "Helped integrate the functionality with interfaces designed by a teammate using Tailwind CSS.",
+        "Prepared and formatted the project documentation in Word and the presentation in PowerPoint.",
+        "Tested project functionality and resolved issues in collaboration with the team."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Tailwind CSS",
+        "WordPress",
+        "WordPress REST API",
+        "Fetch API",
+        "JSON",
+        "HTTP Basic Authentication",
+        "Application Passwords"
+      ],
+      "project_img": [
+        "rest_api_wordpress1",
+        "rest_api_wordpress5",
+        "rest_api_wordpress2",
+        "rest_api_wordpress4",
+        "rest_api_wordpress3",
+        "rest_api_wordpress6"
+      ],
+      "demo": "",
+      "github": "https://github.com/dhomlmgyr188/rest-api-wordpress-project"
+    },
+    {
+      "id": "Ecommerce_Admin_Dashboard",
+      "title": "E-Commerce Admin Dashboard",
+      "projectType": "Training Project – Hsoub Academy",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir"
+      ],
+      "developmentArea": "Front-End Development",
+      "date": "2026/03/31",
+      "shortDescription": "A multi-page e-commerce administration dashboard featuring sales statistics and product and user management interfaces, developed as part of a Hsoub Academy training project.",
+      "overview": "A training project focused on building the front-end interface of an e-commerce admin dashboard, which I implemented through hands-on practice alongside a Hsoub Academy instructor. The project includes product and user listing pages, forms for adding new items, and a main dashboard with sales statistics and charts built with Chart.js. The interfaces use reusable Handlebars components, Sass styles organized according to BEM and ITCSS, and Vite for development and builds, with responsive layouts for different devices.",
+      "features": [
+        "A main dashboard displaying store statistics and sales indicators with interactive charts.",
+        "Pages for products and users, with forms for adding new records.",
+        "Organized navigation between dashboard pages and sections.",
+        "Responsive design for phones, tablets, and desktop computers.",
+        "Reusable interface components built with Handlebars.",
+        "Sass styles organized using BEM and ITCSS methodologies."
+      ],
+      "responsibilitiesIntro": "I implemented the project’s front-end through hands-on practice with a Hsoub Academy instructor, from building pages and components to preparing and deploying the project.",
+      "responsibilities": [
+        "Built dashboard pages, product and user interfaces, and add-item forms.",
+        "Developed charts and interactive elements using Chart.js and JavaScript.",
+        "Split interfaces into reusable components with Handlebars.",
+        "Created responsive styles with Sass and applied BEM and ITCSS methodologies.",
+        "Configured the development environment using Vite and managed packages with npm.",
+        "Managed source code using Git and GitHub and deployed the project to GitHub Pages."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Sass (SCSS)",
+        "Handlebars",
+        "Chart.js",
+        "BEM",
+        "ITCSS",
+        "Normalize.css",
+        "PostCSS",
+        "Vite",
+        "npm",
+        "Git",
+        "GitHub",
+        "GitHub Pages"
+      ],
+      "project_img": [
+        "control_panel4",
+        "control_panel1",
+        "control_panel5",
+        "control_panel2",
+        "control_panel6",
+        "control_panel7",
+        "control_panel3"
+      ],
+      "demo": "https://dhomlmgyr188.github.io/control-panel-vite-project/",
+      "github": "https://github.com/dhomlmgyr188/control-panel-vite-project/"
+    },
+    {
+      "id": "Ecommerce_Frontend",
+      "title": "E-Commerce Storefront",
+      "projectType": "Training Project – Hsoub Academy",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir"
+      ],
+      "developmentArea": "Front-End Development",
+      "date": "2026/03/31",
+      "shortDescription": "A responsive, interactive multi-page e-commerce storefront developed during a Hsoub Academy training project using Bootstrap, Sass, JavaScript, and Webpack.",
+      "overview": "A front-end training project for a multi-page e-commerce store, completed through hands-on practice with a Hsoub Academy instructor. The goal was to create organized, responsive storefront interfaces with interactive elements that make navigation and use easier. The pages were developed using HTML, CSS, and JavaScript, with Bootstrap for layouts and components, Sass for organizing and customizing styles, and Webpack for managing, bundling, and optimizing project files.",
+      "features": [
+        "A multi-page e-commerce website with organized, easy-to-navigate interfaces.",
+        "Responsive design for phones, tablets, and desktop computers.",
+        "Interactive layouts and components built with Bootstrap and JavaScript.",
+        "Custom, organized styling with Sass (SCSS).",
+        "Font Awesome icons integrated into the interfaces.",
+        "Project files bundled and optimized with Webpack.",
+        "Support for right-to-left (RTL) styling."
+      ],
+      "responsibilitiesIntro": "I implemented the project’s front-end through hands-on practice with a Hsoub Academy instructor, from building and styling pages to testing and preparing the project for deployment.",
+      "responsibilities": [
+        "Built storefront pages using HTML5, CSS3, and JavaScript.",
+        "Developed responsive interfaces using Bootstrap and its grid system.",
+        "Organized and customized styles using Sass (SCSS).",
+        "Implemented interactive elements and improved the user experience with JavaScript.",
+        "Configured Webpack to process, bundle, and optimize HTML, CSS, and SCSS files.",
+        "Tested pages and responsive layouts and resolved interface issues during development."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Bootstrap",
+        "Sass (SCSS)",
+        "Font Awesome",
+        "Webpack",
+        "RTL CSS",
+        "npm",
+        "GitHub",
+        "GitHub Pages"
+      ],
+      "project_img": [
+        "online_store5",
+        "online_store1",
+        "online_store2",
+        "online_store6",
+        "online_store3",
+        "online_store8",
+        "online_store4",
+        "online_store7"
+      ],
+      "demo": "https://dhomlmgyr188.github.io/online-store-project/",
+      "github": "https://github.com/dhomlmgyr188/online-store-project/"
+    },
+    {
+      "id": "almni-school",
+      "title": "Almni Elementary School Website",
+      "projectType": "Final Project – Hsoub Academy",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir"
+      ],
+      "developmentArea": "Front-End Development",
+      "date": "2026/03/31",
+      "shortDescription": "A multi-page website for an elementary school, independently developed from scratch as the final project for Hsoub Academy’s Front-End Development certificate, which I successfully passed.",
+      "overview": "This project aimed to build a complete informational website for Almni Elementary School, featuring school information, activities, students, and high achievers, as well as individual student detail pages and login and registration forms. I independently developed the project from scratch using front-end technologies, with a focus on responsive design, file organization, and user experience. I successfully passed the final project and earned Hsoub Academy’s Front-End Development certificate.",
+      "features": [
+        "A homepage featuring the school, its activities, and students through interactive image sliders.",
+        "Two dedicated pages for high-achieving students, including personal information, grades, and advice.",
+        "Login and account registration pages with input forms.",
+        "A contact section with contact details and location information.",
+        "Responsive design supporting various screen sizes and right-to-left (RTL) layouts."
+      ],
+      "responsibilitiesIntro": "I independently developed the entire project from scratch, from building pages and designing interfaces to preparing and deploying the website.",
+      "responsibilities": [
+        "Built and structured website pages using HTML and JavaScript.",
+        "Designed and styled interfaces using CSS, SCSS, and Bootstrap.",
+        "Implemented interactive components, user forms, and image sliders.",
+        "Configured Webpack to process, bundle, and optimize build outputs.",
+        "Managed project versions using Git and GitHub and deployed the website to GitHub Pages."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "SCSS",
+        "JavaScript",
+        "Bootstrap",
+        "Webpack",
+        "PostCSS",
+        "Autoprefixer",
+        "RTL CSS",
+        "Git",
+        "GitHub",
+        "GitHub Pages"
+      ],
+      "project_img": [
+        "almni_school1",
+        "almni_school3",
+        "almni_school2"
+      ],
+      "demo": "https://dhomlmgyr188.github.io/almni-school-project/",
+      "github": "https://github.com/dhomlmgyr188/almni-school-project/"
+    },
+    {
+      "id": "React_Notes_App",
+      "title": "Notes App with React",
+      "projectType": "Interactive Web Application – Training Project",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir"
+      ],
+      "developmentArea": "Web Application Development with React and JavaScript",
+      "date": "2026/08/30",
+      "shortDescription": "A React notes management app that lets users create, view, edit, and delete notes, storing data locally with Local Storage without requiring a database.",
+      "overview": "A training project completed as part of the React.js Fundamentals section of Hsoub Academy’s JavaScript Application Development course, through hands-on practice with the instructor from project setup to completion. The app allows users to create, view, edit, and delete notes, and stores their data on the user’s device with Local Storage so it persists after refreshing the page, without an external database. The project helped me understand React fundamentals, components, hooks, and state management, and provided knowledge I later applied when developing my React portfolio.",
+      "features": [
+        "Create new notes with a title and text content.",
+        "Display a list of notes and select a note to view its contents.",
+        "Edit note titles and contents and save changes.",
+        "Delete notes from the list.",
+        "Store notes locally with Local Storage without an external database.",
+        "Restore saved notes after reloading the page.",
+        "Validate note titles and contents before saving or updating.",
+        "Display alerts when required fields are incomplete.",
+        "Organize the application interface into separate React components."
+      ],
+      "responsibilitiesIntro": "I implemented the project through hands-on practice with a Hsoub Academy instructor as part of the React.js Fundamentals section, building the app step by step to gain experience with interactive React applications and data management.",
+      "responsibilities": [
+        "Set up the project and followed its development stages through hands-on practice with the instructor using React.",
+        "Practiced dividing the interface into independent, reusable components using Components and Props.",
+        "Applied React hooks such as useState for managing notes and input state, and useEffect for component lifecycle-related operations.",
+        "Practiced handling events and input fields with JavaScript and React.",
+        "Implemented note creation, viewing, editing, and deletion.",
+        "Used Local Storage to save and restore data after page reloads.",
+        "Implemented input validation and alerts for errors.",
+        "Worked with CSS styling and Font Awesome icons in the application interface.",
+        "Used Git for version control and tracking changes, and GitHub for hosting the source repository and managing updates.",
+        "Prepared the project for deployment using gh-pages and hosted it on GitHub Pages."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "React",
+        "React Hooks",
+        "React Components",
+        "Local Storage",
+        "Font Awesome",
+        "Create React App",
+        "npm",
+        "Git",
+        "GitHub",
+        "GitHub Pages",
+        "gh-pages"
+      ],
+      "project_img": [
+        "to_do_list1",
+        "to_do_list2",
+        "to_do_list3",
+        "to_do_list4"
+      ],
+      "demo": "https://dhomlmgyr188.github.io/React-To-Do-List/",
+      "github": "https://github.com/dhomlmgyr188/React-To-Do-List"
+    },
+    {
+      "id": "Portfolio_v2",
+      "title": "My Personal Portfolio – Version 2",
+      "projectType": "Multi-page Personal Website",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir"
+      ],
+      "developmentArea": "Front-End Development",
+      "date": "2026/05/24",
+      "shortDescription": "A responsive, multi-page personal website showcasing professional information, projects, and services.",
+      "overview": "A multi-page personal website designed to present professional information, skills, projects, and services, with an emphasis on intuitive navigation, well-organized content, and user experience across different devices.",
+      "features": [
+        "Responsive design across different screen sizes.",
+        "Multiple pages for organizing content.",
+        "Presentation of professional information and projects.",
+        "Clear navigation between website sections.",
+        "Interactive functionality implemented with JavaScript."
+      ],
+      "responsibilitiesIntro": "I planned the personal website, defined its goals, page structure, components, and content, and used ChatGPT to assist with code generation, interface development, and improvements. I focused on reviewing content accuracy, evaluating the final design and user experience, and maintaining a consistent visual identity.",
+      "responsibilities": [
+        "Defined website objectives and target audience, and planned the pages, sections, components, and content structure.",
+        "Guided React development and reusable component architecture, using ChatGPT to assist with code generation and interface improvements.",
+        "Specified navigation requirements using React Router and bilingual Arabic-English support using i18next.",
+        "Defined light and dark themes and responsive design requirements, including consistent colors, fonts, buttons, and global styles.",
+        "Organized professional information and project details using JSON, and reviewed the content for accuracy and clarity.",
+        "Specified contact form and file attachment requirements, and guided integration with Supabase and Cloudflare Turnstile for security verification.",
+        "Evaluated the final appearance and user experience, and guided improvements to content presentation, navigation, and interface consistency.",
+        "Managed project files with Git and GitHub and deployed the website to GitHub Pages using gh-pages."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "AOS",
+        "Font Awesome",
+        "Fetch API",
+        "JSON",
+        "BEM",
+        "Vite",
+        "npm",
+        "Git",
+        "GitHub",
+        "GitHub Pages",
+        "gh-pages",
+        "Render"
+      ],
+      "project_img": [
+        "portfolio_v2_2",
+        "portfolio_v2_4",
+        "portfolio_v2_3",
+        "portfolio_v2_5",
+        "portfolio_v2_1"
+      ],
+      "demo": "https://dhomlmgyr188.github.io/abdulrahman-portfolio-static/",
+      "github": "https://github.com/dhomlmgyr188/abdulrahman-portfolio-static/"
+    },
+    {
+      "id": "Portfolio_v1",
+      "title": "My Personal Portfolio – Version 1",
+      "projectType": "Independent Personal Website",
+      "developedBy": [
+        "Abdulrahman Al-Mughyir"
+      ],
+      "developmentArea": "Front-End Development",
+      "date": "2026/04/15",
+      "shortDescription": "The first version of my personal portfolio, independently developed from scratch to showcase my professional information, skills, and projects in a responsive single-page layout.",
+      "overview": "An independent personal project I developed from scratch to present my professional information, skills, and projects and apply my front-end development skills in practice. The website uses a single-page design with smooth navigation between sections, responsive Bootstrap layouts, and JavaScript interactions. Handlebars was used to create reusable components, Sass to organize styles according to BEM and ITCSS, and Vite for development and builds.",
+      "features": [
+        "A personal webpage presenting professional information, skills, and projects.",
+        "Responsive design for phones, tablets, and desktop computers.",
+        "Smooth navigation between page sections and interactive elements using JavaScript and Bootstrap.",
+        "A contact form integrated with Formspree to receive messages.",
+        "Reusable components built with Handlebars.",
+        "Styles organized with Sass and BEM and ITCSS methodologies."
+      ],
+      "responsibilitiesIntro": "I independently developed the entire website from scratch, from interface design and component development to adding interactions, testing, and deployment.",
+      "responsibilities": [
+        "Built and structured website sections using HTML5 and JavaScript.",
+        "Developed responsive interfaces and interactive components with Bootstrap.",
+        "Created reusable shared components using Handlebars.",
+        "Organized styles using Sass and applied BEM and ITCSS methodologies.",
+        "Integrated the contact form with Formspree to receive messages.",
+        "Configured the project with Vite, managed source code using Git and GitHub, and deployed the website to Vercel."
+      ],
+      "tech_stack": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Bootstrap",
+        "Sass (SCSS)",
+        "Handlebars",
+        "BEM",
+        "ITCSS",
+        "Font Awesome",
+        "Formspree",
+        "Vite",
+        "npm",
+        "Git",
+        "GitHub",
+        "Vercel"
+      ],
+      "project_img": [
+        "portfolio_v1_1",
+        "portfolio_v1_3",
+        "portfolio_v1_2"
+      ],
+      "demo": "https://abdulrahman-portfolio-dusky.vercel.app/",
+      "github": "https://github.com/dhomlmgyr188/abdulrahman-portfolio/"
     }
   ]
 }

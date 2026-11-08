@@ -104,10 +104,6 @@ function ProjectGrid({ source = "auto" }) {
 
   /* =========================================
      DETERMINE PROJECT SOURCE
-
-     home     => Featured projects only
-     projects => All projects
-     auto     => Detect current page
   ========================================= */
 
   const pathname = location.pathname.replace(/\/+$/, "");
@@ -124,10 +120,7 @@ function ProjectGrid({ source = "auto" }) {
         : "home";
 
   /* =========================================
-     ALL PROJECTS
-
-     projects.json is the single source
-     for project information.
+     ALL PROJECTS FROM TRANSLATION
   ========================================= */
 
   const translatedProjects = t("items", {
@@ -144,10 +137,6 @@ function ProjectGrid({ source = "auto" }) {
 
   /* =========================================
      FEATURED PROJECT IDS
-
-     home.json determines only:
-     - Which projects are featured
-     - Their display order
   ========================================= */
 
   const featuredProjectsData = t(
@@ -168,10 +157,7 @@ function ProjectGrid({ source = "auto" }) {
             return item;
           }
 
-          if (
-            item &&
-            typeof item === "object"
-          ) {
+          if (item && typeof item === "object") {
             return item.id;
           }
 
@@ -186,8 +172,6 @@ function ProjectGrid({ source = "auto" }) {
 
   /* =========================================
      PROJECT LOOKUP
-
-     Match by stable project ID.
   ========================================= */
 
   const projectsById = new Map(
@@ -206,12 +190,6 @@ function ProjectGrid({ source = "auto" }) {
 
   /* =========================================
      SELECT PROJECTS
-
-     Home:
-       Featured IDs mapped to projects.json
-
-     Projects:
-       All projects from projects.json
   ========================================= */
 
   const projects =
@@ -222,7 +200,7 @@ function ProjectGrid({ source = "auto" }) {
           .filter(Boolean);
 
   /* =========================================
-     TRANSLATED BUTTON LABELS
+     TRANSLATED LABELS
   ========================================= */
 
   const detailsLabel = t("buttons.view_project", {
@@ -238,6 +216,16 @@ function ProjectGrid({ source = "auto" }) {
       ? "معاينة المشروع"
       : "Live Preview",
   });
+
+  const developmentAreaLabel = t(
+    "details.developmentArea",
+    {
+      ns: "projects",
+      defaultValue: isArabic
+        ? "مجال المشروع"
+        : "Development Area",
+    }
+  );
 
   /* =========================================
      EMPTY STATE
@@ -262,28 +250,19 @@ function ProjectGrid({ source = "auto" }) {
       {projects.map((project, index) => {
         const projectId = project.id;
 
-        /* =====================================
-           PROJECT DETAILS LINK
-        ===================================== */
-
         const detailsLink = projectId
           ? `/projects/${encodeURIComponent(projectId)}`
           : "/projects";
-
-        /* =====================================
-           PROJECT DESCRIPTION
-
-           Always from projects.json
-        ===================================== */
 
         const description =
           project.shortDescription ||
           project.desc ||
           "";
 
-        /* =====================================
-           TECHNOLOGIES
-        ===================================== */
+        const developmentArea =
+          typeof project.developmentArea === "string"
+            ? project.developmentArea.trim()
+            : "";
 
         const technologies = Array.isArray(
           project.tech_stack
@@ -291,22 +270,12 @@ function ProjectGrid({ source = "auto" }) {
           ? project.tech_stack
           : [];
 
-        /* =====================================
-           PROJECT IMAGES
-        ===================================== */
-
         const images = resolveProjectImages(
           project.project_img
         );
 
         const primaryImage =
           images.length > 0 ? images[0] : null;
-
-        /* =====================================
-           LIVE DEMO
-
-           No demo URL = no preview button
-        ===================================== */
 
         const demoUrl =
           typeof project.demo === "string" &&
@@ -317,16 +286,8 @@ function ProjectGrid({ source = "auto" }) {
               ? project.link.trim()
               : undefined;
 
-        /* =====================================
-           UNIQUE PROJECT KEY
-        ===================================== */
-
         const projectKey =
           projectId || `project-${index}`;
-
-        /* =====================================
-           PROJECT CARD
-        ===================================== */
 
         return (
           <ProjectCard
@@ -335,6 +296,8 @@ function ProjectGrid({ source = "auto" }) {
             title={project.title}
             date={project.date}
             description={description}
+            developmentArea={developmentArea}
+            developmentAreaLabel={developmentAreaLabel}
             techStack={technologies}
             toLink={detailsLink}
             toHref={demoUrl}

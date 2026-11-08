@@ -2,92 +2,92 @@
    ABDULRAHMAN PORTFOLIO
    DESIGN SYSTEM — MODERN PROFESSIONAL
 
-   LIGHT THEME : OCEAN BLUE
+   LIGHT THEME : ROYAL BLUE / VIOLET / WARM GOLD
    DARK THEME  : ORCA BLACK & WHITE
 
    Existing variable names are preserved for compatibility.
 ========================================================= */
 
 /* =========================================================
-   01 — LIGHT THEME / OCEAN
+   01 — LIGHT THEME / BALANCED STUDIO
 ========================================================= */
 
 :root {
 
     /* BRAND COLORS */
 
-    --color-primary: #174667;
-    --color-primary-light: #397b98;
-    --color-primary-dark: #10354e;
+    --color-primary: #3157A4;
+    --color-primary-light: #5376BF;
+    --color-primary-dark: #244481;
 
-    --color-secondary: #287c98;
-    --color-secondary-light: #74b3c6;
-    --color-secondary-dark: #1c6078;
+    --color-secondary: #7056A8;
+    --color-secondary-light: #A48DD2;
+    --color-secondary-dark: #563E88;
 
-    --color-tertiary: #81b8c9;
-    --color-tertiary-light: #dceff4;
-    --color-tertiary-dark: #43849a;
+    --color-tertiary: #D4A54C;
+    --color-tertiary-light: #FBF1DC;
+    --color-tertiary-dark: #AA7B27;
 
-    --color-on-primary: #ffffff;
-    --color-on-secondary: #ffffff;
-    --color-on-tertiary: #102c3c;
+    --color-on-primary: #FFFFFF;
+    --color-on-secondary: #FFFFFF;
+    --color-on-tertiary: #302818;
 
     /* STATUS COLORS */
 
-    --color-danger: #b54848;
-    --color-danger-soft: #fae8e8;
+    --color-danger: #B83F52;
+    --color-danger-soft: #FCEDEF;
 
-    --color-success: #267451;
-    --color-success-soft: #e8f5ed;
+    --color-success: #21815A;
+    --color-success-soft: #E7F5ED;
 
-    --color-warning: #936318;
-    --color-warning-soft: #fff5dd;
+    --color-warning: #986B19;
+    --color-warning-soft: #FFF4DB;
 
     /* BASE COLORS */
 
-    --color-white: #ffffff;
-    --color-black: #102c3c;
-    --color-gray: #77848d;
+    --color-white: #FFFFFF;
+    --color-black: #242C3B;
+    --color-gray: #798398;
 
-    --color-yellow: #81b8c9;
-    --color-blue: #287c98;
+    --color-yellow: #D4A54C;
+    --color-blue: #7056A8;
 
     /* TEXT COLORS */
 
-    --color-text: #263845;
-    --color-text-primary: #263845;
-    --color-text-secondary: #506675;
-    --color-text-light: #617785;
+    --color-text: #242C3B;
+    --color-text-primary: #242C3B;
+    --color-text-secondary: #566174;
+    --color-text-light: #69758B;
 
-    --color-heading: #173c55;
-    --color-heading-secondary: #287c98;
+    --color-heading: #293F72;
+    --color-heading-secondary: #7056A8;
 
-    --color-link: #176b85;
-    --color-link-hover: #10354e;
+    --color-link: #3157A4;
+    --color-link-hover: #244481;
 
     /* BACKGROUND COLORS */
 
-    --color-background: #f2f8fc;
-    --color-background-secondary: #ffffff;
-    --color-background-tertiary: #e5f1f7;
+    --color-background: #F7F8FC;
+    --color-background-secondary: #FFFFFF;
+    --color-background-tertiary: #EEF1F8;
 
-    --color-background-breadcrumb: #e1eef5;
+    --color-background-breadcrumb: #EAEFFA;
 
-    --color-background-rgba: rgba(9, 44, 69, 0.76);
+    --color-background-rgba: rgba(36, 44, 59, 0.82);
 
     /* SURFACES */
 
-    --color-surface: #ffffff;
-    --color-surface-hover: #edf6fa;
+    --color-surface: #FFFFFF;
+    --color-surface-hover: #F0F3FB;
 
-    --color-surface-secondary: #edf5f9;
-    --color-surface-tertiary: #dcecf4;
+    --color-surface-secondary: #F4F5FA;
+    --color-surface-tertiary: #EBE7F5;
 
-    --color-section-background: #ffffff;
-    --color-section-background-alt: #e5f1f7;
+    --color-section-background: #FFFFFF;
+    --color-section-background-alt: #EEF1F8;
 
-    --color-card-background: #ffffff;
-    --color-card-background-hover: #f0f8fc;
+    --color-card-background: #FFFFFF;
+    --color-card-background-hover: #F7F8FD;
 
     /* Shared component aliases */
 
@@ -97,74 +97,74 @@
 
     /* BORDERS */
 
-    --color-border: #c5dce7;
-    --color-border-light: #dceaf1;
-    --color-border-strong: #a3c4d5;
+    --color-border: #DFE4EF;
+    --color-border-light: #E9ECF3;
+    --color-border-strong: #A6B7D8;
 
-    --color-border-focus: #287c98;
+    --color-border-focus: #7056A8;
 
-    --color-divider: #c5dce7;
+    --color-divider: #DFE4EF;
 
     /* SOFT ACCENTS */
 
-    --color-primary-soft: #e0eff7;
-    --color-secondary-soft: #e7f3f9;
-    --color-tertiary-soft: #edf7fb;
+    --color-primary-soft: #E8EEFB;
+    --color-secondary-soft: #F1EAFB;
+    --color-tertiary-soft: #FBF1DC;
 
     /* PATTERN BACKGROUND */
 
-    --pattern-background-color: #f2f8fc;
+    --pattern-background-color: #F7F8FC;
 
     --pattern-background-image:
         radial-gradient(ellipse at 12% 15%,
-            rgba(116, 179, 198, 0.11) 0%,
+            rgba(83, 118, 191, 0.07) 0%,
             transparent 42%),
         radial-gradient(ellipse at 88% 85%,
-            rgba(129, 184, 201, 0.09) 0%,
+            rgba(112, 86, 168, 0.06) 0%,
             transparent 40%),
         linear-gradient(135deg,
-            #ffffff 0%,
-            #f2f8fc 60%,
-            #eaf4f9 100%);
+            #FFFFFF 0%,
+            #F7F8FC 60%,
+            #F1F3FA 100%);
 
     --pattern-background-size: cover;
     --pattern-background-position: center;
 
     /* TECHNOLOGY COLORS */
 
-    --color-react: #287c98;
-    --color-js: #43849a;
-    --color-html: #1c6078;
-    --color-css: #74b3c6;
+    --color-react: #397CB6;
+    --color-js: #A77C26;
+    --color-html: #B56846;
+    --color-css: #6B6EB8;
 
-    --color-git: #586873;
-    --color-sql: #176b85;
-    --color-rest_api: #74828b;
-    --color-ms365: #174667;
+    --color-git: #64728A;
+    --color-sql: #3157A4;
+    --color-rest_api: #7D879A;
+    --color-ms365: #3157A4;
 
     /* Technology shadows */
 
-    --color-shadow-react: #287c9866;
-    --color-shadow-js: #43849a66;
-    --color-shadow-html: #1c607866;
-    --color-shadow-css: #74b3c666;
+    --color-shadow-react: #397CB666;
+    --color-shadow-js: #A77C2666;
+    --color-shadow-html: #B5684666;
+    --color-shadow-css: #6B6EB866;
 
-    --color-shadow-git: #58687366;
-    --color-shadow-sql: #176b8566;
-    --color-shadow-rest_api: #74828b66;
-    --color-shadow-ms365: #17466766;
+    --color-shadow-git: #64728A66;
+    --color-shadow-sql: #3157A466;
+    --color-shadow-rest_api: #7D879A66;
+    --color-shadow-ms365: #3157A466;
 
     /* SOCIAL COLORS */
 
-    --color-linkedin: #174667;
-    --color-github: #263845;
-    --color-whatsapp: #287c98;
-    --color-email: #176b85;
+    --color-linkedin: #2867A6;
+    --color-github: #242C3B;
+    --color-whatsapp: #21815A;
+    --color-email: #3157A4;
 
-    --color-instgram: #74b3c6;
+    --color-instgram: #A48DD2;
     --color-instagram: var(--color-instgram);
 
-    --color-snapchat: #43849a;
+    --color-snapchat: #AA7B27;
 
     /* TYPOGRAPHY */
 
@@ -235,22 +235,22 @@
     /* SHADOWS */
 
     --shadow-sm:
-        0 2px 8px rgba(18, 59, 89, 0.09);
+        0 2px 8px rgba(36, 44, 59, 0.08);
 
     --shadow-md:
-        0 5px 16px rgba(18, 59, 89, 0.11),
-        0 12px 28px rgba(18, 59, 89, 0.05);
+        0 5px 16px rgba(36, 44, 59, 0.10),
+        0 12px 28px rgba(36, 44, 59, 0.05);
 
     --shadow-lg:
-        0 12px 32px rgba(18, 59, 89, 0.16);
+        0 12px 32px rgba(36, 44, 59, 0.14);
 
     --shadow-card:
-        0 3px 12px rgba(18, 59, 89, 0.09),
-        0 12px 30px rgba(18, 59, 89, 0.05);
+        0 3px 12px rgba(36, 44, 59, 0.08),
+        0 12px 30px rgba(36, 44, 59, 0.05);
 
     --shadow-card-hover:
-        0 6px 20px rgba(18, 59, 89, 0.14),
-        0 16px 36px rgba(18, 59, 89, 0.07);
+        0 6px 20px rgba(36, 44, 59, 0.12),
+        0 16px 36px rgba(36, 44, 59, 0.06);
 
     /* COMPONENT TOKENS — BUTTONS */
 
@@ -286,13 +286,13 @@
 
     /* Tertiary */
 
-    --button-tertiary-bg: var(--color-tertiary);
-    --button-tertiary-text: var(--color-on-tertiary);
-    --button-tertiary-border: var(--color-tertiary);
+    --button-tertiary-bg: #F1EAFB;
+    --button-tertiary-text: #563E88;
+    --button-tertiary-border: #D9CDED;
 
-    --button-tertiary-hover-bg: var(--color-tertiary-dark);
-    --button-tertiary-hover-text: #ffffff;
-    --button-tertiary-hover-border: var(--color-tertiary-dark);
+    --button-tertiary-hover-bg: #E5D9F5;
+    --button-tertiary-hover-text: #493376;
+    --button-tertiary-hover-border: #C7B5E6;
 
     /* Ghost */
 
@@ -313,9 +313,9 @@
 
     --input-height: 48px;
 
-    --color-input-background: #ffffff;
-    --color-input-text: #263845;
-    --color-input-placeholder: #74828b;
+    --color-input-background: #FFFFFF;
+    --color-input-text: #242C3B;
+    --color-input-placeholder: #7D879A;
 
     /* INTERACTIONS */
 
@@ -326,10 +326,10 @@
 
     /* OVERLAY AND SCROLLBAR */
 
-    --color-overlay: rgba(9, 44, 69, 0.76);
+    --color-overlay: rgba(36, 44, 59, 0.82);
 
-    --color-scrollbar-track: #eaf3f8;
-    --color-scrollbar-thumb: #a3c4d5;
+    --color-scrollbar-track: #F0F2F7;
+    --color-scrollbar-thumb: #A6B7D8;
 
     color-scheme: light;
 }

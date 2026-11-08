@@ -1222,20 +1222,6 @@ const ProjectDetails = () => {
         )}
 
         {/* =================================
-            PROJECT TITLE
-        ================================= */}
-
-        <HeaderContent>
-          <Title>{project.title}</Title>
-
-          {project.shortDescription && (
-            <Description>
-              {project.shortDescription}
-            </Description>
-          )}
-        </HeaderContent>
-
-        {/* =================================
             COMPLETION DATE
         ================================= */}
 
