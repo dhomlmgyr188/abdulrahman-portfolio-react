@@ -1,30 +1,30 @@
 {
   "files": {
     "main.css": "/abdulrahman-portfolio-react/static/css/main.ab734560.css",
-    "main.js": "/abdulrahman-portfolio-react/static/js/main.a2a3be81.js",
+    "main.js": "/abdulrahman-portfolio-react/static/js/main.afe0c9f8.js",
     "static/media/الرئيسية1.png": "/abdulrahman-portfolio-react/static/media/الرئيسية1.e90abce1d156ce58025e.png",
-    "static/media/التواصل.png": "/abdulrahman-portfolio-react/static/media/التواصل.8a84f34258d7989f5e7a.png",
+    "static/media/التواصل.png": "/abdulrahman-portfolio-react/static/media/التواصل.dafbf27042522a74f1e3.png",
     "static/media/الرئيسية .png": "/abdulrahman-portfolio-react/static/media/الرئيسية .2045d44bc2482f1147a3.png",
     "static/media/البحث المتقدم.png": "/abdulrahman-portfolio-react/static/media/البحث المتقدم.7bc75fbd13699e009b57.png",
     "static/media/الرئيسية.png": "/abdulrahman-portfolio-react/static/media/الرئيسية.e2f390ead0b946401503.png",
     "static/media/وصف المنتج.png": "/abdulrahman-portfolio-react/static/media/وصف المنتج.40d1a9d6a6660dd7783b.png",
     "static/media/me.png": "/abdulrahman-portfolio-react/static/media/me.93fc188400bffe390923.png",
-    "static/media/الرئيسية انجليزي.png": "/abdulrahman-portfolio-react/static/media/الرئيسية انجليزي.5012a7e48f7eada6ea02.png",
-    "static/media/الرئيسية داكن.png": "/abdulrahman-portfolio-react/static/media/الرئيسية داكن.5d384ab4d704a8f2ab0f.png",
+    "static/media/الرئيسية انجليزي.png": "/abdulrahman-portfolio-react/static/media/الرئيسية انجليزي.42ad710abab7017af4e7.png",
+    "static/media/الرئيسية داكن.png": "/abdulrahman-portfolio-react/static/media/الرئيسية داكن.82cbd3edd98b473d4bf3.png",
     "static/media/عربة الشراء.png": "/abdulrahman-portfolio-react/static/media/عربة الشراء.941d3c02df8545fc963b.png",
     "static/media/تفاصيل المشروع.png": "/abdulrahman-portfolio-react/static/media/تفاصيل المشروع.a2428451186c62da5370.png",
-    "static/media/مشاريعي.png": "/abdulrahman-portfolio-react/static/media/مشاريعي.4593164757c77013a62e.png",
+    "static/media/مشاريعي.png": "/abdulrahman-portfolio-react/static/media/مشاريعي.4dc2eb3595b060789e99.png",
     "static/media/معرض الاعمال.png": "/abdulrahman-portfolio-react/static/media/معرض الاعمال.e3d9e705900c15a4e17f.png",
+    "static/media/الرئيسية جوال.png": "/abdulrahman-portfolio-react/static/media/الرئيسية جوال.8787f7dd658dee689db8.png",
     "static/media/saudia-sans-bold.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-bold.aeaeb29bd75393fdabfc.otf",
     "static/media/saudia-sans-regular.otf": "/abdulrahman-portfolio-react/static/media/saudia-sans-regular.9af8db836ec4b5272370.otf",
     "static/media/عروضي .png": "/abdulrahman-portfolio-react/static/media/عروضي .4e221dbbf056caa57f31.png",
-    "static/media/الرئيسية جوال.png": "/abdulrahman-portfolio-react/static/media/الرئيسية جوال.8787f7dd658dee689db8.png",
+    "static/media/عني.png": "/abdulrahman-portfolio-react/static/media/عني.3330694149af33eb8e25.png",
     "static/media/الرئيسية لوحة تحكم.png": "/abdulrahman-portfolio-react/static/media/الرئيسية لوحة تحكم.a89437fb49163b6ac6fe.png",
     "static/media/Barlow-Bold.ttf": "/abdulrahman-portfolio-react/static/media/Barlow-Bold.0cb1ab864072bf9e0991.ttf",
     "static/media/الدفع.png": "/abdulrahman-portfolio-react/static/media/الدفع.90740e87795e59f65a1e.png",
     "static/media/Barlow-Medium.ttf": "/abdulrahman-portfolio-react/static/media/Barlow-Medium.d4afdc134fc10b739bab.ttf",
     "static/media/العمليات الموافقة على الحال - الادمن.png": "/abdulrahman-portfolio-react/static/media/العمليات الموافقة على الحال - الادمن.c8d4aa4526a361f07c27.png",
-    "static/media/عني.png": "/abdulrahman-portfolio-react/static/media/عني.54eac42c287c00622fd9.png",
     "static/media/لوحة التحكم - المدير.png": "/abdulrahman-portfolio-react/static/media/لوحة التحكم - المدير.bef8ad766d3572e3d1fe.png",
     "static/media/وصف المنتج جوال.png": "/abdulrahman-portfolio-react/static/media/وصف المنتج جوال.b4b11ad024b42432cff1.png",
     "static/media/العمليات - العميل.png": "/abdulrahman-portfolio-react/static/media/العمليات - العميل.c63edef8bcf808d1eea3.png",
@@ -62,10 +62,10 @@
     "static/media/تسجيل جديد - الجوال.png": "/abdulrahman-portfolio-react/static/media/تسجيل جديد - الجوال.0e1d8ff45c619efc494a.png",
     "index.html": "/abdulrahman-portfolio-react/index.html",
     "main.ab734560.css.map": "/abdulrahman-portfolio-react/static/css/main.ab734560.css.map",
-    "main.a2a3be81.js.map": "/abdulrahman-portfolio-react/static/js/main.a2a3be81.js.map"
+    "main.afe0c9f8.js.map": "/abdulrahman-portfolio-react/static/js/main.afe0c9f8.js.map"
   },
   "entrypoints": [
     "static/css/main.ab734560.css",
-    "static/js/main.a2a3be81.js"
+    "static/js/main.afe0c9f8.js"
   ]
 }
