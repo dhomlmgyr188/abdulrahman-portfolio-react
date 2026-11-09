@@ -1,19 +1,18 @@
 
 import styled from "styled-components";
 
-import {
-  FaReact,
-  FaJs,
-  FaHtml5,
-  FaCss3Alt,
-  FaGitAlt,
-  FaMicrosoft,
-} from "react-icons/fa";
 
 import {
-  SiMysql,
-  SiPostman,
-} from "react-icons/si";
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaPhp,
+  FaDatabase,
+  FaGitAlt,
+} from "react-icons/fa";
+import { TbApi } from "react-icons/tb";
+
 
 import {
   FiCode,
@@ -55,23 +54,14 @@ import {
 ========================================================= */
 
 const iconMap = {
-  React: FaReact,
-
-  JavaScript: FaJs,
-
   HTML: FaHtml5,
-
   CSS: FaCss3Alt,
-
-  Git: FaGitAlt,
-
-  SQL: SiMysql,
-
-  MySQL: SiMysql,
-
-  "REST API": SiPostman,
-
-  "Microsoft 365": FaMicrosoft,
+  JavaScript: FaJs,
+  React: FaReact,
+  PHP: FaPhp,
+  MySQL: FaDatabase,
+  REST: TbApi,
+  VC: FaGitAlt,
 };
 
 

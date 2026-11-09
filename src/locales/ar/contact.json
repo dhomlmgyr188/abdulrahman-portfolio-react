@@ -1,18 +1,16 @@
 
 {
-  "page": {
-    "title": "تواصل معي",
-    "description": "للاستفسارات والفرص الوظيفية والمشاريع والتعاون."
-  },
   "form": {
-    "title": "إرسال رسالة",
+    "title": "نموذج التواصل",
     "description": "يسعدني استقبال رسالتك.",
     "firstName": "الاسم الأول",
     "lastName": "اسم العائلة",
     "firstNamePlaceholder": "الاسم الأول",
     "lastNamePlaceholder": "اسم العائلة",
     "email": "البريد الإلكتروني",
-    "emailNote": "أدخل بريدًا إلكترونيًا صحيحًا للرد عليك.",
+    "emailPlaceholder": "example@email.com",
+    "phone": "رقم الجوال",
+    "phonePlaceholder": "+966541234567",
     "topic": "موضوع الرسالة",
     "selectTopic": "اختر الموضوع",
     "customTopic": "موضوع آخر",
@@ -20,29 +18,63 @@
     "message": "الرسالة",
     "messagePlaceholder": "اكتب رسالتك هنا...",
     "messageNote": "10 أحرف على الأقل.",
+    "attachments": "المرفقات",
+    "uploadTitle": "إرفاق ملفات مع الرسالة",
+    "uploadDescription": "حتى 3 ملفات، 5 MB لكل ملف و15 MB إجمالًا.",
+    "chooseFiles": "اختيار الملفات",
+    "removeFile": "حذف الملف",
+    "filesCount": "{{count}} من {{max}} ملفات",
+    "securityTitle": "التحقق الأمني",
+    "securitySuccess": "تم التحقق بنجاح.",
+    "securityFailed": "تعذر إكمال التحقق أو انتهت صلاحيته.",
+    "retryVerification": "إعادة التحقق",
     "submit": "إرسال الرسالة",
-    "sending": "جارٍ الإرسال...",
-    "privacyNote": "تُعالج بيانات الرسالة ومرفقاتها عبر خدمات الإرسال المستخدمة. تجنب مشاركة المعلومات الحساسة."
+    "sending": "جارٍ إرسال الرسالة...",
+    "honeypot": "اترك هذا الحقل فارغًا"
   },
   "topics": {
     "general": "تواصل عام",
     "question": "استفسار",
     "suggestion": "اقتراح",
-    "feedback": "ملاحظة",
+    "feedback": "ملاحظات",
     "collaboration": "تعاون أو شراكة",
     "employment": "فرصة وظيفية",
     "project": "مشروع أو خدمة",
     "other": "أخرى"
   },
+  "topicOptions": [
+    "general",
+    "question",
+    "suggestion",
+    "feedback",
+    "collaboration",
+    "employment",
+    "project",
+    "other"
+  ],
   "status": {
-    "success": "تم إرسال رسالتك بنجاح. شكرًا لتواصلك!",
-    "error": "تعذر إرسال الرسالة. حاول مجددًا أو تواصل عبر البريد الإلكتروني.",
-    "invalid": "يرجى مراجعة الحقول المطلوبة.",
-    "configError": "خدمة الإرسال غير متاحة حاليًا. يرجى التواصل عبر البريد الإلكتروني."
+    "successTitle": "تم إرسال رسالتك بنجاح!",
+    "successDescription": "شكرًا لتواصلك. سأراجع رسالتك وأرد عليك في أقرب وقت ممكن، عادةً خلال 24 ساعة.",
+    "successWhatsapp": "قد أتواصل معك عبر واتساب على الرقم الذي أرفقته.",
+    "successEmail": "سيكون الرد عبر بريدك الإلكتروني.",
+    "invalidTitle": "يرجى مراجعة البيانات",
+    "invalidDescription": "صحح الحقول المحددة باللون الأحمر ثم حاول الإرسال.",
+    "errorTitle": "تعذر إرسال الرسالة",
+    "error": "تعذر إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+    "unexpected": "حدث خطأ غير متوقع.",
+    "botcheck": "تعذر التحقق من الطلب.",
+    "turnstileRequired": "يرجى الانتظار حتى يكتمل التحقق الأمني، ثم حاول الإرسال مجددًا.",
+    "rateLimit": "تم تجاوز الحد المسموح من الرسائل. يرجى المحاولة لاحقًا.",
+    "requestTooLarge": "حجم الطلب كبير جدًا. حاول إرسال ملفات أصغر.",
+    "securityError": "فشل التحقق الأمني أو انتهت صلاحيته. يرجى إعادة المحاولة.",
+    "serviceUnavailable": "خدمة الإرسال غير متاحة مؤقتًا. يرجى المحاولة لاحقًا.",
+    "maxFiles": "يمكنك إرفاق {{max}} ملفات كحد أقصى.",
+    "invalidFileSize": "حجم الملف \"{{name}}\" غير مسموح. الحد الأقصى {{max}} MB لكل ملف.",
+    "invalidFileType": "نوع الملف \"{{name}}\" غير مدعوم.",
+    "totalSize": "إجمالي حجم المرفقات يجب ألا يتجاوز {{max}} MB."
   },
   "info": {
-    "title": "معلومات التواصل",
-    "description": "وسائل التواصل المباشر."
+    "title": "معلومات التواصل"
   },
   "methods": {
     "email": "البريد الإلكتروني",
@@ -51,12 +83,74 @@
     "phone": "اتصال هاتفي"
   },
   "availability": {
-    "title": "مدة الاستجابة",
-    "heading": "راسلني في أي وقت",
-    "description": "أحرص على الرد خلال 24 ساعة متى أمكن."
+    "title": "وقت الاستجابة المتوقع",
+    "description": "عادةً ما أرد على الرسائل خلال 24 ساعة، وقد يختلف وقت الاستجابة حسب الظروف."
   },
   "social": {
-    "title": "حساباتي الاجتماعية",
-    "description": "تواصل معي عبر منصات التواصل."
-  }
+    "title": "التواصل الاجتماعي"
+  },
+  "contactData": {
+    "email": "dhomlmgyr@gmail.com",
+    "phone": "966541590819",
+    "whatsapp": "https://wa.me/966541590819",
+    "linkedin": "https://linkedin.com/in/dhomlmgyr",
+    "github": "https://github.com/dhomlmgyr188",
+    "instagram": "https://www.instagram.com/dhunr1",
+    "snapchat": "https://www.snapchat.com/t/0jbJpmvk"
+  },
+  "contactMethods": [
+    {
+      "id": "email",
+      "icon": "mail",
+      "titleKey": "methods.email",
+      "valueKey": "contactData.email",
+      "linkType": "mailto"
+    },
+    {
+      "id": "whatsapp",
+      "icon": "whatsapp",
+      "titleKey": "methods.whatsapp",
+      "valueKey": "methods.whatsappValue",
+      "linkType": "whatsapp"
+    },
+    {
+      "id": "phone",
+      "icon": "phone",
+      "titleKey": "methods.phone",
+      "valueKey": "contactData.phone",
+      "linkType": "tel"
+    }
+  ],
+  "socialMedia": [
+    {
+      "id": "linkedin",
+      "title": "LinkedIn",
+      "icon": "linkedin"
+    },
+    {
+      "id": "github",
+      "title": "GitHub",
+      "icon": "github"
+    },
+    {
+      "id": "whatsapp",
+      "title": "WhatsApp",
+      "icon": "whatsapp"
+    },
+    {
+      "id": "email",
+      "title": "Email",
+      "icon": "mail"
+    },
+    {
+      "id": "instagram",
+      "title": "Instagram",
+      "icon": "instagram"
+    },
+    {
+      "id": "snapchat",
+      "title": "Snapchat",
+      "icon": "snapchat"
+    }
+  ]
 }

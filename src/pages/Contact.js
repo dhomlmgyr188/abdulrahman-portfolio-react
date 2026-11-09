@@ -71,17 +71,17 @@ const ACCEPTED_EXTENSIONS = [
   ...new Set(Object.values(ALLOWED_MIME_TYPES).flat()),
 ];
 
-const CONTACT = {
-  email: "dhomlmgyr@gmail.com",
-  phone: "966541590819",
-  whatsapp: "https://wa.me/966541590819",
-  linkedin: "https://linkedin.com/in/dhomlmgyr",
-  github: "https://github.com/dhomlmgyr188",
-  instagram: "https://www.instagram.com/dhomlmgyr",
-  snapchat: "https://www.snapchat.com/t/0jbJpmvk",
+const ICONS = {
+  mail: FiMail,
+  phone: FiPhone,
+  whatsapp: FaWhatsapp,
+  linkedin: FiLinkedin,
+  github: FiGithub,
+  instagram: FiInstagram,
+  snapchat: FaSnapchatGhost,
 };
 
-const TOPICS = [
+const DEFAULT_TOPICS = [
   "general",
   "question",
   "suggestion",
@@ -154,7 +154,9 @@ const readDraft = () => {
       lastName: String(parsed.lastName || "").slice(0, 80),
       email: String(parsed.email || "").slice(0, 254),
       phone: String(parsed.phone || "").slice(0, 25),
-      topic: TOPICS.includes(parsed.topic) ? parsed.topic : "",
+      topic: DEFAULT_TOPICS.includes(parsed.topic)
+        ? parsed.topic
+        : "",
       customTopic: String(parsed.customTopic || "").slice(0, 120),
       message: String(parsed.message || "").slice(0, 5000),
       botcheck: "",
@@ -202,13 +204,7 @@ const clearDraft = () => {
   }
 };
 
-/* =====================================================
-   FORM VALIDATION
-
-   Centralized validation for all fields.
-===================================================== */
-
-const validateForm = (form) => {
+const validateForm = (form, topics = DEFAULT_TOPICS) => {
   const errors = {};
 
   const firstName = form.firstName.trim();
@@ -234,7 +230,7 @@ const validateForm = (form) => {
     errors.phone = true;
   }
 
-  if (!TOPICS.includes(form.topic)) {
+  if (!topics.includes(form.topic)) {
     errors.topic = true;
   }
 
@@ -267,7 +263,7 @@ const spin = keyframes`
 `;
 
 /* =====================================================
-   CONTACT PAGE
+   PAGE LAYOUT
 ===================================================== */
 
 const ContactPage = styled.main`
@@ -280,15 +276,6 @@ const ContactPage = styled.main`
   --contact-accent: var(--color-primary);
   --contact-soft: var(--color-primary-soft);
   --contact-focus: var(--color-border-focus);
-
-  /*
-   * Reusable validation tokens.
-   * They reference existing theme variables.
-   *
-   * These can later be moved to variables.css
-   * without changing the field components.
-   */
-
   --contact-error-border: var(--color-danger);
   --contact-error-focus: var(--color-danger);
 
@@ -376,7 +363,7 @@ const Panel = styled.div`
 `;
 
 const PanelTitle = styled.h2`
-  margin: 0 0 18px;
+  margin: 0 0 24px;
 
   font-size: clamp(21px, 2.5vw, 27px);
   font-weight: 700;
@@ -423,17 +410,6 @@ const Required = styled.span`
   margin-inline-start: 3px;
 `;
 
-/* =====================================================
-   SHARED FIELD STYLES
-
-   One error style for:
-   - Input
-   - Select
-   - Textarea
-
-   The error state has priority over focus.
-===================================================== */
-
 const FieldStyle = css`
   width: 100%;
   min-width: 0;
@@ -465,19 +441,14 @@ const FieldStyle = css`
 
   &:focus {
     border-color: var(--contact-focus);
-
-    box-shadow: 0 0 0 3px
+    outline: none;
+    box-shadow: 0 0 0 2px
       color-mix(
         in srgb,
         var(--contact-focus) 15%,
         transparent
       );
   }
-
-  /*
-   * Validation error:
-   * red border only, no red background.
-   */
 
   &[aria-invalid="true"] {
     border-color: var(--contact-error-border);
@@ -1042,7 +1013,71 @@ const Contact = () => {
 
   const isArabic = i18n.language?.startsWith("ar");
 
-  const localText = (ar, en) => (isArabic ? ar : en);
+  /* =====================================================
+     JSON DATA
+  ===================================================== */
+
+  const contactData = t("contactData", {
+    returnObjects: true,
+  });
+
+  const topicOptionsData = t("topicOptions", {
+    returnObjects: true,
+  });
+
+  const contactMethodsData = t("contactMethods", {
+    returnObjects: true,
+  });
+
+  const socialMediaData = t("socialMedia", {
+    returnObjects: true,
+  });
+
+  const topicOptions = Array.isArray(topicOptionsData)
+    ? topicOptionsData
+    : DEFAULT_TOPICS;
+
+  const contactMethodsConfig = Array.isArray(contactMethodsData)
+    ? contactMethodsData
+    : [];
+
+  const socialMediaConfig = Array.isArray(socialMediaData)
+    ? socialMediaData
+    : [];
+
+  const getContactUrl = (id) => {
+    if (id === "email") {
+      return `mailto:${contactData.email}`;
+    }
+
+    if (id === "phone") {
+      return `tel:+${contactData.phone}`;
+    }
+
+    return contactData[id] || "#";
+  };
+
+  const contactMethods = contactMethodsConfig.map((item) => ({
+    id: item.id,
+    icon: ICONS[item.icon] || FiMail,
+    title: t(item.titleKey),
+    value:
+      item.id === "phone"
+        ? `+${contactData.phone}`
+        : t(item.valueKey),
+    href: getContactUrl(item.id),
+  }));
+
+  const socialMedia = socialMediaConfig.map((item) => ({
+    id: item.id,
+    title: item.title,
+    icon: ICONS[item.icon] || FiMail,
+    href: getContactUrl(item.id),
+  }));
+
+  /* =====================================================
+     STATE
+  ===================================================== */
 
   const [form, setForm] = useState(readDraft);
   const [files, setFiles] = useState([]);
@@ -1054,15 +1089,8 @@ const Contact = () => {
   const [customError, setCustomError] = useState("");
   const [sentVia, setSentVia] = useState("email");
 
-  /*
-   * Validation starts only after the first
-   * submission attempt.
-   *
-   * After that, each field is revalidated
-   * automatically as its value changes.
-   */
-
-  const [validationEnabled, setValidationEnabled] = useState(false);
+  const [validationEnabled, setValidationEnabled] =
+    useState(false);
 
   const submittingRef = useRef(false);
   const fileInputRef = useRef(null);
@@ -1071,7 +1099,9 @@ const Contact = () => {
 
   const busy = status === "loading";
 
-  const errors = validationEnabled ? validateForm(form) : {};
+  const errors = validationEnabled
+    ? validateForm(form, topicOptions)
+    : {};
 
   const isInvalid = (name) => Boolean(errors[name]);
 
@@ -1144,10 +1174,9 @@ const Contact = () => {
 
     if (nextFiles.length > MAX_FILES) {
       setError(
-        localText(
-          "يمكنك إرفاق 3 ملفات كحد أقصى.",
-          "You can attach up to 3 files."
-        )
+        t("status.maxFiles", {
+          max: MAX_FILES,
+        })
       );
       return;
     }
@@ -1155,10 +1184,10 @@ const Contact = () => {
     for (const file of selected) {
       if (file.size === 0 || file.size > MAX_FILE_SIZE) {
         setError(
-          localText(
-            `حجم الملف "${file.name}" غير مسموح. الحد الأقصى 5 MB لكل ملف.`,
-            `Invalid size for "${file.name}". Maximum 5 MB per file.`
-          )
+          t("status.invalidFileSize", {
+            name: file.name,
+            max: MAX_FILE_SIZE / (1024 * 1024),
+          })
         );
         return;
       }
@@ -1170,10 +1199,9 @@ const Contact = () => {
         !ALLOWED_MIME_TYPES[file.type]?.includes(extension)
       ) {
         setError(
-          localText(
-            `نوع الملف "${file.name}" غير مدعوم.`,
-            `Unsupported file type: "${file.name}".`
-          )
+          t("status.invalidFileType", {
+            name: file.name,
+          })
         );
         return;
       }
@@ -1186,10 +1214,9 @@ const Contact = () => {
 
     if (totalSize > MAX_TOTAL_SIZE) {
       setError(
-        localText(
-          "إجمالي حجم المرفقات يجب ألا يتجاوز 15 MB.",
-          "Total attachment size must not exceed 15 MB."
-        )
+        t("status.totalSize", {
+          max: MAX_TOTAL_SIZE / (1024 * 1024),
+        })
       );
       return;
     }
@@ -1226,18 +1253,13 @@ const Contact = () => {
 
     setValidationEnabled(true);
 
-    const nextErrors = validateForm(form);
+    const nextErrors = validateForm(form, topicOptions);
 
     if (Object.keys(nextErrors).length > 0) {
       setStatus("invalid");
       setCustomError("");
 
       const firstInvalidField = Object.keys(nextErrors)[0];
-
-      /*
-       * Focus the first invalid field so the user
-       * can correct it immediately.
-       */
 
       requestAnimationFrame(() => {
         document.getElementById(firstInvalidField)?.focus();
@@ -1258,22 +1280,12 @@ const Contact = () => {
         : t(`topics.${form.topic}`);
 
     if (form.botcheck) {
-      setError(
-        localText(
-          "تعذر التحقق من الطلب.",
-          "Unable to validate the request."
-        )
-      );
+      setError(t("status.botcheck"));
       return;
     }
 
     if (!turnstileToken) {
-      setError(
-        localText(
-          "يرجى الانتظار حتى يكتمل التحقق الأمني، ثم حاول الإرسال مجددًا.",
-          "Please wait for security verification to complete, then try again."
-        )
-      );
+      setError(t("status.turnstileRequired"));
 
       if (
         turnstileState === "error" ||
@@ -1296,10 +1308,12 @@ const Contact = () => {
       payload.append("lastName", lastName);
       payload.append("email", email);
       payload.append("phone", phone);
+
       payload.append(
         "preferredContact",
         phone ? "whatsapp" : "email"
       );
+
       payload.append("topic", selectedTopic);
       payload.append("message", message);
       payload.append("botcheck", form.botcheck);
@@ -1321,47 +1335,22 @@ const Contact = () => {
 
       if (!response.ok || result?.success !== true) {
         if (response.status === 429) {
-          throw new Error(
-            localText(
-              "تم تجاوز الحد المسموح من الرسائل. يرجى المحاولة لاحقًا.",
-              "Too many messages. Please try again later."
-            )
-          );
+          throw new Error(t("status.rateLimit"));
         }
 
         if (response.status === 413) {
-          throw new Error(
-            localText(
-              "حجم الطلب كبير جدًا. حاول إرسال ملفات أصغر.",
-              "The request is too large. Try smaller files."
-            )
-          );
+          throw new Error(t("status.requestTooLarge"));
         }
 
         if (response.status === 403) {
-          throw new Error(
-            localText(
-              "فشل التحقق الأمني أو انتهت صلاحيته. يرجى إعادة المحاولة.",
-              "Security verification failed or expired. Please retry."
-            )
-          );
+          throw new Error(t("status.securityError"));
         }
 
         if (response.status === 503) {
-          throw new Error(
-            localText(
-              "خدمة الإرسال غير متاحة مؤقتًا. يرجى المحاولة لاحقًا.",
-              "The submission service is temporarily unavailable. Please try later."
-            )
-          );
+          throw new Error(t("status.serviceUnavailable"));
         }
 
-        throw new Error(
-          localText(
-            "تعذر إرسال الرسالة. يرجى المحاولة مرة أخرى.",
-            "Unable to send your message. Please try again."
-          )
-        );
+        throw new Error(t("status.error"));
       }
 
       setSentVia(phone ? "whatsapp" : "email");
@@ -1382,85 +1371,12 @@ const Contact = () => {
     } catch (error) {
       console.error("Contact form error:", error);
 
-      setError(
-        error.message ||
-          localText(
-            "حدث خطأ غير متوقع.",
-            "An unexpected error occurred."
-          )
-      );
+      setError(error.message || t("status.unexpected"));
     } finally {
       submittingRef.current = false;
       resetTurnstile();
     }
   };
-
-  /* =====================================================
-     CONTACT METHODS
-  ===================================================== */
-
-  const contactMethods = [
-    {
-      id: "email",
-      icon: FiMail,
-      title: t("methods.email"),
-      value: CONTACT.email,
-      href: `mailto:${CONTACT.email}`,
-    },
-    {
-      id: "whatsapp",
-      icon: FaWhatsapp,
-      title: t("methods.whatsapp"),
-      value: t("methods.whatsappValue"),
-      href: CONTACT.whatsapp,
-    },
-    {
-      id: "phone",
-      icon: FiPhone,
-      title: t("methods.phone"),
-      value: `+${CONTACT.phone}`,
-      href: `tel:+${CONTACT.phone}`,
-    },
-  ];
-
-  const socialMedia = [
-    {
-      id: "linkedin",
-      title: "LinkedIn",
-      icon: FiLinkedin,
-      href: CONTACT.linkedin,
-    },
-    {
-      id: "github",
-      title: "GitHub",
-      icon: FiGithub,
-      href: CONTACT.github,
-    },
-    {
-      id: "whatsapp",
-      title: "WhatsApp",
-      icon: FaWhatsapp,
-      href: CONTACT.whatsapp,
-    },
-    {
-      id: "email",
-      title: "Email",
-      icon: FiMail,
-      href: `mailto:${CONTACT.email}`,
-    },
-    {
-      id: "instagram",
-      title: "Instagram",
-      icon: FiInstagram,
-      href: CONTACT.instagram,
-    },
-    {
-      id: "snapchat",
-      title: "Snapchat",
-      icon: FaSnapchatGhost,
-      href: CONTACT.snapchat,
-    },
-  ];
 
   /* =====================================================
      RENDER
@@ -1482,14 +1398,9 @@ const Contact = () => {
             {/* CONTACT FORM */}
 
             <Panel>
-              <PanelTitle>
-                {t("form.title")}
-              </PanelTitle>
+              <PanelTitle>{t("form.title")}</PanelTitle>
 
-              <Form
-                onSubmit={handleSubmit}
-                noValidate
-              >
+              <Form onSubmit={handleSubmit} noValidate>
                 {/* NAME */}
 
                 <FormRow>
@@ -1553,25 +1464,19 @@ const Contact = () => {
                     maxLength={254}
                     value={form.email}
                     onChange={updateField}
-                    placeholder="example@email.com"
+                    placeholder={t("form.emailPlaceholder")}
                     disabled={busy}
                     required
                     aria-invalid={isInvalid("email")}
                   />
 
-                  <FormNote>
-                    {localText(
-                      "يرجى إدخال بريد إلكتروني صحيح للرد على رسالتك.",
-                      "Enter a valid email address so I can reply."
-                    )}
-                  </FormNote>
                 </FormGroup>
 
                 {/* PHONE */}
 
                 <FormGroup>
                   <Label htmlFor="phone">
-                    {localText("رقم الجوال", "Mobile Number")}
+                    {t("form.phone")}
                   </Label>
 
                   <Input
@@ -1584,18 +1489,11 @@ const Contact = () => {
                     maxLength={25}
                     value={form.phone}
                     onChange={updateField}
-                    placeholder="+966541234567"
+                    placeholder={t("form.phonePlaceholder")}
                     disabled={busy}
                     aria-invalid={isInvalid("phone")}
-                    aria-describedby="phoneHint"
                   />
 
-                  <FormNote id="phoneHint">
-                    {localText(
-                      "اختياري. استخدم مفتاح الدولة إذا أردت الرد عبر واتساب.",
-                      "Optional. Include your country code for WhatsApp replies."
-                    )}
-                  </FormNote>
                 </FormGroup>
 
                 {/* TOPIC */}
@@ -1620,11 +1518,8 @@ const Contact = () => {
                         {t("form.selectTopic")}
                       </option>
 
-                      {TOPICS.map((topic) => (
-                        <option
-                          key={topic}
-                          value={topic}
-                        >
+                      {topicOptions.map((topic) => (
+                        <option key={topic} value={topic}>
                           {t(`topics.${topic}`)}
                         </option>
                       ))}
@@ -1693,7 +1588,7 @@ const Contact = () => {
 
                 <HiddenField aria-hidden="true">
                   <label htmlFor="botcheck">
-                    Leave this field empty
+                    {t("form.honeypot")}
                   </label>
 
                   <input
@@ -1711,24 +1606,18 @@ const Contact = () => {
 
                 <FormGroup>
                   <Label htmlFor="contactFiles">
-                    {localText("المرفقات", "Attachments")}
+                    {t("form.attachments")}
                   </Label>
 
                   <UploadArea>
                     <UploadIcon aria-hidden="true" />
 
                     <UploadTitle>
-                      {localText(
-                        "إرفاق ملفات مع الرسالة",
-                        "Attach files to your message"
-                      )}
+                      {t("form.uploadTitle")}
                     </UploadTitle>
 
                     <UploadDescription>
-                      {localText(
-                        "حتى 3 ملفات، 5 MB لكل ملف و15 MB إجمالًا.",
-                        "Up to 3 files, 5 MB each and 15 MB total."
-                      )}
+                      {t("form.uploadDescription")}
                     </UploadDescription>
 
                     <input
@@ -1749,7 +1638,7 @@ const Contact = () => {
                     >
                       <FiPaperclip />
 
-                      {localText("اختيار الملفات", "Choose Files")}
+                      {t("form.chooseFiles")}
                     </UploadButton>
                   </UploadArea>
 
@@ -1775,10 +1664,7 @@ const Contact = () => {
                             type="button"
                             onClick={() => removeFile(index)}
                             disabled={busy}
-                            aria-label={localText(
-                              "حذف الملف",
-                              "Remove file"
-                            )}
+                            aria-label={t("form.removeFile")}
                           >
                             <FiX />
                           </RemoveFileButton>
@@ -1789,10 +1675,10 @@ const Contact = () => {
 
                   <FileSummary>
                     <span>
-                      {localText(
-                        `${files.length} من ${MAX_FILES} ملفات`,
-                        `${files.length} of ${MAX_FILES} files`
-                      )}
+                      {t("form.filesCount", {
+                        count: files.length,
+                        max: MAX_FILES,
+                      })}
                     </span>
 
                     <span dir="ltr">
@@ -1800,22 +1686,13 @@ const Contact = () => {
                     </span>
                   </FileSummary>
 
-                  <FormNote>
-                    {localText(
-                      "تُحفظ بيانات النموذج مؤقتًا، لكن يجب إعادة اختيار المرفقات بعد تحديث الصفحة.",
-                      "Form details are saved temporarily. Attachments must be reselected after refreshing."
-                    )}
-                  </FormNote>
                 </FormGroup>
 
                 {/* TURNSTILE */}
 
                 <TurnstileContainer>
                   <Label>
-                    {localText(
-                      "التحقق الأمني",
-                      "Security Verification"
-                    )}
+                    {t("form.securityTitle")}
                     <Required>*</Required>
                   </Label>
 
@@ -1848,9 +1725,7 @@ const Contact = () => {
 
                   {turnstileState === "success" && (
                     <FormNote
-                      style={{
-                        color: "#16a34a",
-                      }}
+                      style={{ color: "#16a34a" }}
                     >
                       <FiCheckCircle
                         style={{
@@ -1860,36 +1735,27 @@ const Contact = () => {
                         }}
                       />
 
-                      {localText(
-                        "تم التحقق بنجاح.",
-                        "Verification completed successfully."
-                      )}
+                      {t("form.securitySuccess")}
                     </FormNote>
                   )}
 
                   {(turnstileState === "error" ||
                     turnstileState === "expired") && (
-                    <>
-                      <FormNote>
-                        {localText(
-                          "تعذر إكمال التحقق أو انتهت صلاحيته.",
-                          "Verification failed or expired."
-                        )}
-                      </FormNote>
+                      <>
+                        <FormNote>
+                          {t("form.securityFailed")}
+                        </FormNote>
 
-                      <RetryButton
-                        type="button"
-                        onClick={resetTurnstile}
-                      >
-                        <FiRefreshCw />
+                        <RetryButton
+                          type="button"
+                          onClick={resetTurnstile}
+                        >
+                          <FiRefreshCw />
 
-                        {localText(
-                          "إعادة التحقق",
-                          "Retry Verification"
-                        )}
-                      </RetryButton>
-                    </>
-                  )}
+                          {t("form.retryVerification")}
+                        </RetryButton>
+                      </>
+                    )}
                 </TurnstileContainer>
 
                 {/* SUCCESS */}
@@ -1904,29 +1770,17 @@ const Contact = () => {
 
                     <div>
                       <strong>
-                        {localText(
-                          "تم إرسال رسالتك بنجاح!",
-                          "Your message was sent successfully!"
-                        )}
+                        {t("status.successTitle")}
                       </strong>
 
                       <p>
-                        {localText(
-                          "شكرًا لتواصلك. سأراجع رسالتك وأرد عليك في أقرب وقت ممكن، عادةً خلال 24 ساعة.",
-                          "Thank you for reaching out. I'll review your message and respond as soon as possible, usually within 24 hours."
-                        )}
+                        {t("status.successDescription")}
                       </p>
 
                       <p style={{ marginTop: 8 }}>
                         {sentVia === "whatsapp"
-                          ? localText(
-                              "قد أتواصل معك عبر واتساب على الرقم الذي أرفقته.",
-                              "I may contact you via WhatsApp at the number provided."
-                            )
-                          : localText(
-                              "سيكون الرد عبر بريدك الإلكتروني.",
-                              "I'll reply via email."
-                            )}
+                          ? t("status.successWhatsapp")
+                          : t("status.successEmail")}
                       </p>
                     </div>
                   </StatusMessage>
@@ -1940,17 +1794,11 @@ const Contact = () => {
 
                     <div>
                       <strong>
-                        {localText(
-                          "يرجى مراجعة البيانات",
-                          "Please review your details"
-                        )}
+                        {t("status.invalidTitle")}
                       </strong>
 
                       <p>
-                        {localText(
-                          "صحح الحقول المحددة باللون الأحمر ثم حاول الإرسال.",
-                          "Correct the fields outlined in red, then try again."
-                        )}
+                        {t("status.invalidDescription")}
                       </p>
                     </div>
                   </StatusMessage>
@@ -1964,10 +1812,7 @@ const Contact = () => {
 
                     <div>
                       <strong>
-                        {localText(
-                          "تعذر إرسال الرسالة",
-                          "Message not sent"
-                        )}
+                        {t("status.errorTitle")}
                       </strong>
 
                       <p>{customError}</p>
@@ -1984,20 +1829,12 @@ const Contact = () => {
                   {busy ? (
                     <>
                       <LoadingIcon />
-
-                      {localText(
-                        "جارٍ إرسال الرسالة...",
-                        "Sending Message..."
-                      )}
+                      {t("form.sending")}
                     </>
                   ) : (
                     <>
                       <FiSend />
-
-                      {localText(
-                        "إرسال الرسالة",
-                        "Send Message"
-                      )}
+                      {t("form.submit")}
                     </>
                   )}
                 </SubmitButton>
@@ -2011,10 +1848,7 @@ const Contact = () => {
 
               <Panel>
                 <PanelTitle>
-                  {localText(
-                    "معلومات التواصل",
-                    "Contact Information"
-                  )}
+                  {t("info.title")}
                 </PanelTitle>
 
                 {contactMethods.map((method) => {
@@ -2040,8 +1874,13 @@ const Contact = () => {
                       </ContactIcon>
 
                       <ContactItemText>
-                        <strong>{method.title}</strong>
-                        <small>{method.value}</small>
+                        <strong>
+                          {method.title}
+                        </strong>
+
+                        <small>
+                          {method.value}
+                        </small>
                       </ContactItemText>
 
                       <ExternalIcon />
@@ -2058,17 +1897,11 @@ const Contact = () => {
 
                   <div>
                     <strong>
-                      {localText(
-                        "وقت الاستجابة المتوقع",
-                        "Expected Response Time"
-                      )}
+                      {t("availability.title")}
                     </strong>
 
                     <p>
-                      {localText(
-                        "عادةً ما أرد على الرسائل خلال 24 ساعة، وقد يختلف وقت الاستجابة حسب الظروف.",
-                        "I usually respond within 24 hours, although response times may vary."
-                      )}
+                      {t("availability.description")}
                     </p>
                   </div>
                 </ResponseTime>
@@ -2078,10 +1911,7 @@ const Contact = () => {
 
               <Panel>
                 <PanelTitle>
-                  {localText(
-                    "التواصل الاجتماعي",
-                    "Social Profiles"
-                  )}
+                  {t("social.title")}
                 </PanelTitle>
 
                 <SocialLinks>

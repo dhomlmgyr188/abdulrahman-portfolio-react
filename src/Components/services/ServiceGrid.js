@@ -6,64 +6,38 @@ import {
   FaCode,
   FaDesktop,
   FaCogs,
+  FaGlobe,
+  FaHeadset,
+  FaDatabase,
+  FaPalette,
+  FaBriefcase,
+  FaLaptopCode,
 } from "react-icons/fa";
 
 import ServicesCard from "./ServiceCard";
 
-/* =========================================================
-   ABDULRAHMAN PORTFOLIO
-   COMPONENTS — SERVICE GRID
-
-   Design System:
-   - Modern Professional
-   - Ocean / Orca
-
-   Preserved:
-   - Three services from home.json
-   - Original icon names
-   - Original icon components
-   - Service titles
-   - Service descriptions
-   - Arabic / English
-   - Light / Dark theme
-   - Responsive layout
-
-   Export:
-   - ServicesGrid (default)
-========================================================= */
-
-
-/* =========================================================
-   01 — ICON MAP
-
-   These identifiers are used in
-   home:services.items.
-
-   Do not change them without updating
-   the corresponding translation files.
-========================================================= */
+/* =========================================
+   SERVICE ICONS
+========================================= */
 
 const icons = {
+  landing: FaDesktop,
+  business: FaBriefcase,
+  custom: FaLaptopCode,
+  management: FaGlobe,
+  support: FaHeadset,
+  data: FaDatabase,
+  design: FaPalette,
+
+  // Legacy icon identifiers
   web: FaCode,
-
   technology: FaDesktop,
-
   applications: FaCogs,
 };
 
-
-/* =========================================================
-   02 — RESPONSIVE SERVICES GRID
-
-   Desktop:
-   3 columns
-
-   Tablet:
-   2 columns
-
-   Mobile:
-   1 column
-========================================================= */
+/* =========================================
+   RESPONSIVE SERVICES GRID
+========================================= */
 
 const ServicesList = styled.div`
   display: grid;
@@ -73,62 +47,65 @@ const ServicesList = styled.div`
 
   align-items: stretch;
 
-  gap: clamp(
-    16px,
-    2vw,
-    24px
-  );
+  gap: clamp(16px, 2vw, 24px);
 
   width: 100%;
   min-width: 0;
 
   box-sizing: border-box;
 
-  /* -------------------------------------------------------
-     CARD CONTAINERS
-  ------------------------------------------------------- */
-
   > * {
     min-width: 0;
     height: 100%;
   }
 
-  /* -------------------------------------------------------
-     TABLET
-  ------------------------------------------------------- */
+  /* Center the seventh card on desktop */
+
+  > :last-child:nth-child(7) {
+    grid-column: 2;
+  }
+
+  /* Tablet: two columns */
 
   @media (max-width: 900px) {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
+
+    > :last-child:nth-child(7) {
+      grid-column: 1 / -1;
+
+      width: calc((100% - clamp(16px, 2vw, 24px)) / 2);
+      justify-self: center;
+    }
   }
 
-  /* -------------------------------------------------------
-     MOBILE
-  ------------------------------------------------------- */
+  /* Mobile: one column */
 
   @media (max-width: 600px) {
     grid-template-columns:
       minmax(0, 1fr);
 
     gap: 16px;
+
+    > :last-child:nth-child(7) {
+      grid-column: 1;
+
+      width: 100%;
+      justify-self: stretch;
+    }
   }
 `;
 
-
-/* =========================================================
-   03 — EMPTY STATE
-
-   Displayed only when no valid
-   service items are available.
-========================================================= */
+/* =========================================
+   EMPTY STATE
+========================================= */
 
 const EmptyState = styled.p`
   margin: 0;
 
   padding: 32px 20px;
 
-  border:
-    1px solid var(--color-border);
+  border: 1px solid var(--color-border);
 
   border-radius:
     var(--radius-card, 14px);
@@ -145,37 +122,16 @@ const EmptyState = styled.p`
   text-align: center;
 `;
 
-
-/* =========================================================
-   04 — SERVICES GRID COMPONENT
-========================================================= */
+/* =========================================
+   SERVICE GRID COMPONENT
+========================================= */
 
 function ServicesGrid() {
+  const { t } = useTranslation();
 
-  /* -------------------------------------------------------
-     TRANSLATION
-  ------------------------------------------------------- */
-
-  const { t, i18n } = useTranslation();
-
-  /* -------------------------------------------------------
-     LANGUAGE
-  ------------------------------------------------------- */
-
-  const language =
-    i18n.resolvedLanguage ||
-    i18n.language ||
-    "ar";
-
-  const isArabic =
-    language.toLowerCase().startsWith("ar");
-
-  /* -------------------------------------------------------
+  /* -----------------------------------------
      TRANSLATED SERVICES
-
-     Source:
-     home:services.items
-  ------------------------------------------------------- */
+  ----------------------------------------- */
 
   const translatedServices = t(
     "home:services.items",
@@ -185,65 +141,43 @@ function ServicesGrid() {
     }
   );
 
-  /* -------------------------------------------------------
-     NORMALIZE SERVICES DATA
-  ------------------------------------------------------- */
-
   const services =
     Array.isArray(translatedServices)
       ? translatedServices
       : [];
 
-  /* =====================================================
-     05 — EMPTY STATE
-  ===================================================== */
+  const emptyMessage = t(
+    "home:services.empty",
+    {
+      defaultValue: "",
+    }
+  );
+
+  /* -----------------------------------------
+     EMPTY STATE
+  ----------------------------------------- */
 
   if (services.length === 0) {
-
     return (
       <EmptyState role="status">
-
-        {isArabic
-          ? "لا توجد خدمات متاحة للعرض حاليًا."
-          : "No services available at the moment."}
-
+        {emptyMessage}
       </EmptyState>
     );
   }
 
-  /* =====================================================
-     06 — RENDER SERVICES
-  ===================================================== */
+  /* -----------------------------------------
+     RENDER
+  ----------------------------------------- */
 
   return (
     <ServicesList>
-
       {services.map((service, index) => {
-
-        /* -----------------------------------------------
-           RESOLVE ICON
-
-           The original icon mapping is
-           preserved.
-
-           FaCode is used as a fallback
-           if an icon identifier is missing.
-        ----------------------------------------------- */
-
         const Icon =
           icons[service.icon] || FaCode;
-
-        /* -----------------------------------------------
-           STABLE KEY
-        ----------------------------------------------- */
 
         const serviceKey =
           service.id ??
           `${service.icon || "service"}-${index}`;
-
-        /* -----------------------------------------------
-           RENDER SERVICE CARD
-        ----------------------------------------------- */
 
         return (
           <ServicesCard
@@ -253,16 +187,9 @@ function ServicesGrid() {
             description={service.description}
           />
         );
-
       })}
-
     </ServicesList>
   );
 }
-
-
-/* =========================================================
-   07 — EXPORT
-========================================================= */
 
 export default ServicesGrid;

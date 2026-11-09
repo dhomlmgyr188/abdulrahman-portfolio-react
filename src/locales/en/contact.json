@@ -1,28 +1,36 @@
 
 {
-  "page": {
-    "title": "Get in Touch",
-    "description": "For inquiries, job opportunities, projects, and collaborations."
-  },
   "form": {
-    "title": "Send a Message",
-    "description": "I'd be happy to hear from you.",
+    "title": "Contact Form",
+    "description": "I'd be happy to receive your message.",
     "firstName": "First Name",
     "lastName": "Last Name",
     "firstNamePlaceholder": "First name",
     "lastNamePlaceholder": "Last name",
     "email": "Email Address",
-    "emailNote": "Enter a valid email address so I can reply.",
-    "topic": "Subject",
+    "emailPlaceholder": "example@email.com",
+    "phone": "Mobile Number",
+    "phonePlaceholder": "+966541234567",
+    "topic": "Message Subject",
     "selectTopic": "Select a subject",
     "customTopic": "Other Subject",
-    "customTopicPlaceholder": "Enter your subject",
+    "customTopicPlaceholder": "Enter your message subject",
     "message": "Message",
     "messagePlaceholder": "Write your message here...",
     "messageNote": "At least 10 characters.",
+    "attachments": "Attachments",
+    "uploadTitle": "Attach files to your message",
+    "uploadDescription": "Up to 3 files, 5 MB each and 15 MB total.",
+    "chooseFiles": "Choose Files",
+    "removeFile": "Remove file",
+    "filesCount": "{{count}} of {{max}} files",
+    "securityTitle": "Security Verification",
+    "securitySuccess": "Verification completed successfully.",
+    "securityFailed": "Verification failed or expired.",
+    "retryVerification": "Retry Verification",
     "submit": "Send Message",
-    "sending": "Sending...",
-    "privacyNote": "Messages and attachments are processed through the services used to deliver them. Avoid sharing sensitive information."
+    "sending": "Sending Message...",
+    "honeypot": "Leave this field empty"
   },
   "topics": {
     "general": "General Contact",
@@ -34,29 +42,115 @@
     "project": "Project or Service",
     "other": "Other"
   },
+  "topicOptions": [
+    "general",
+    "question",
+    "suggestion",
+    "feedback",
+    "collaboration",
+    "employment",
+    "project",
+    "other"
+  ],
   "status": {
-    "success": "Your message was sent successfully. Thanks for reaching out!",
-    "error": "Unable to send your message. Please try again or contact me by email.",
-    "invalid": "Please check the required fields.",
-    "configError": "Messaging is currently unavailable. Please contact me by email."
+    "successTitle": "Your message was sent successfully!",
+    "successDescription": "Thank you for reaching out. I'll review your message and respond as soon as possible, usually within 24 hours.",
+    "successWhatsapp": "I may contact you via WhatsApp at the number provided.",
+    "successEmail": "I'll reply via email.",
+    "invalidTitle": "Please review your details",
+    "invalidDescription": "Correct the fields outlined in red, then try again.",
+    "errorTitle": "Message not sent",
+    "error": "Unable to send your message. Please try again.",
+    "unexpected": "An unexpected error occurred.",
+    "botcheck": "Unable to validate the request.",
+    "turnstileRequired": "Please wait for security verification to complete, then try again.",
+    "rateLimit": "Too many messages. Please try again later.",
+    "requestTooLarge": "The request is too large. Try smaller files.",
+    "securityError": "Security verification failed or expired. Please retry.",
+    "serviceUnavailable": "The submission service is temporarily unavailable. Please try later.",
+    "maxFiles": "You can attach up to {{max}} files.",
+    "invalidFileSize": "Invalid size for \"{{name}}\". Maximum {{max}} MB per file.",
+    "invalidFileType": "Unsupported file type: \"{{name}}\".",
+    "totalSize": "Total attachment size must not exceed {{max}} MB."
   },
   "info": {
-    "title": "Contact Information",
-    "description": "Direct contact options."
+    "title": "Contact Information"
   },
   "methods": {
-    "email": "Email",
+    "email": "Email Address",
     "whatsapp": "WhatsApp",
-    "whatsappValue": "Chat on WhatsApp",
+    "whatsappValue": "Contact via WhatsApp",
     "phone": "Phone Call"
   },
   "availability": {
-    "title": "Response Time",
-    "heading": "Message Me Anytime",
-    "description": "I aim to respond within 24 hours whenever possible."
+    "title": "Expected Response Time",
+    "description": "I usually respond within 24 hours, although response times may vary."
   },
   "social": {
-    "title": "Social Media",
-    "description": "Connect with me on social media."
-  }
+    "title": "Social Profiles"
+  },
+  "contactData": {
+    "email": "dhomlmgyr@gmail.com",
+    "phone": "966541590819",
+    "whatsapp": "https://wa.me/966541590819",
+    "linkedin": "https://linkedin.com/in/dhomlmgyr",
+    "github": "https://github.com/dhomlmgyr188",
+    "instagram": "https://www.instagram.com/dhunr1",
+    "snapchat": "https://www.snapchat.com/t/0jbJpmvk"
+  },
+  "contactMethods": [
+    {
+      "id": "email",
+      "icon": "mail",
+      "titleKey": "methods.email",
+      "valueKey": "contactData.email",
+      "linkType": "mailto"
+    },
+    {
+      "id": "whatsapp",
+      "icon": "whatsapp",
+      "titleKey": "methods.whatsapp",
+      "valueKey": "methods.whatsappValue",
+      "linkType": "whatsapp"
+    },
+    {
+      "id": "phone",
+      "icon": "phone",
+      "titleKey": "methods.phone",
+      "valueKey": "contactData.phone",
+      "linkType": "tel"
+    }
+  ],
+  "socialMedia": [
+    {
+      "id": "linkedin",
+      "title": "LinkedIn",
+      "icon": "linkedin"
+    },
+    {
+      "id": "github",
+      "title": "GitHub",
+      "icon": "github"
+    },
+    {
+      "id": "whatsapp",
+      "title": "WhatsApp",
+      "icon": "whatsapp"
+    },
+    {
+      "id": "email",
+      "title": "Email",
+      "icon": "mail"
+    },
+    {
+      "id": "instagram",
+      "title": "Instagram",
+      "icon": "instagram"
+    },
+    {
+      "id": "snapchat",
+      "title": "Snapchat",
+      "icon": "snapchat"
+    }
+  ]
 }

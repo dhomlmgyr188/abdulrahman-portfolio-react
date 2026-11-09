@@ -1059,7 +1059,7 @@ function Hero() {
 
             <Statistic className="top">
 
-              <AnimatedNumber value={5} />
+              <AnimatedNumber value={9} />
 
               <span>
                 {t(
@@ -1075,7 +1075,7 @@ function Hero() {
 
             <Statistic className="left">
 
-              <AnimatedNumber value={2} />
+              <AnimatedNumber value={3} />
 
               <span>
                 {t(
@@ -1091,7 +1091,7 @@ function Hero() {
 
             <Statistic className="right">
 
-              <AnimatedNumber value={10} />
+              <AnimatedNumber value={20} />
 
               <span>
                 {t(

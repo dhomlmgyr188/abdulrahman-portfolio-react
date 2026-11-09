@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from "react";
 
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -28,23 +28,33 @@ import Container from "../Components/layout/PageContainer";
 import BreadCrumb from "../Components/ui/Breadcrumb";
 import Button from "../Components/ui/Button/Button";
 import { ImgModal } from "../Components/ui/Modal";
-
 import { PageHeader } from "../Components/ui/T";
 
 /* =====================================================
    HELPERS
 ===================================================== */
 
-const asArray = (value) => (Array.isArray(value) ? value : []);
+const asArray = (value) =>
+  Array.isArray(value) ? value : [];
 
 const asText = (value, isArabic) => {
-  if (typeof value === "string" || typeof value === "number") {
+  if (
+    typeof value === "string" ||
+    typeof value === "number"
+  ) {
     return String(value);
   }
 
-  if (value && typeof value === "object" && !Array.isArray(value)) {
+  if (
+    value &&
+    typeof value === "object" &&
+    !Array.isArray(value)
+  ) {
     return String(
-      (isArabic ? value.ar : value.en) || value.ar || value.en || "",
+      (isArabic ? value.ar : value.en) ||
+      value.ar ||
+      value.en ||
+      ""
     );
   }
 
@@ -52,18 +62,28 @@ const asText = (value, isArabic) => {
 };
 
 const firstValue = (...values) =>
-  values.find((value) => value !== undefined && value !== null && value !== "");
+  values.find(
+    (value) =>
+      value !== undefined &&
+      value !== null &&
+      value !== ""
+  );
 
 const normalizeDigits = (value) =>
   String(value ?? "")
-    .replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
-    .replace(/[۰-۹]/g, (digit) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)));
+    .replace(/[٠-٩]/g, (digit) =>
+      String("٠١٢٣٤٥٦٧٨٩".indexOf(digit))
+    )
+    .replace(/[۰-۹]/g, (digit) =>
+      String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit))
+    );
 
-const pad = (value) => String(value).padStart(2, "0");
+const pad = (value) =>
+  String(value).padStart(2, "0");
 
 const isPresent = (value) =>
   /present|current|ongoing|now|حتى الآن|حاليا|حالياً/i.test(
-    String(value || ""),
+    String(value || "")
   );
 
 /* =====================================================
@@ -71,7 +91,9 @@ const isPresent = (value) =>
 ===================================================== */
 
 const parseDate = (value) => {
-  if (!value || isPresent(value)) return null;
+  if (!value || isPresent(value)) {
+    return null;
+  }
 
   const text = normalizeDigits(value).trim();
 
@@ -80,21 +102,27 @@ const parseDate = (value) => {
   let day = 1;
   let precision = "day";
 
-  let match = text.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
+  let match = text.match(
+    /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/
+  );
 
   if (match) {
     year = Number(match[1]);
     month = Number(match[2]);
     day = Number(match[3]);
   } else {
-    match = text.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
+    match = text.match(
+      /^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/
+    );
 
     if (match) {
       day = Number(match[1]);
       month = Number(match[2]);
       year = Number(match[3]);
     } else {
-      match = text.match(/^(\d{4})[-/.](\d{1,2})$/);
+      match = text.match(
+        /^(\d{4})[-/.](\d{1,2})$/
+      );
 
       if (match) {
         year = Number(match[1]);
@@ -103,7 +131,9 @@ const parseDate = (value) => {
       } else {
         match = text.match(/^(\d{4})$/);
 
-        if (!match) return null;
+        if (!match) {
+          return null;
+        }
 
         year = Number(match[1]);
         precision = "year";
@@ -111,7 +141,9 @@ const parseDate = (value) => {
     }
   }
 
-  const date = new Date(Date.UTC(year, month - 1, day));
+  const date = new Date(
+    Date.UTC(year, month - 1, day)
+  );
 
   if (
     year < 1900 ||
@@ -133,7 +165,9 @@ const parseDate = (value) => {
 };
 
 const formatDate = (parsed) => {
-  if (!parsed) return "";
+  if (!parsed) {
+    return "";
+  }
 
   if (parsed.precision === "year") {
     return String(parsed.year);
@@ -143,13 +177,21 @@ const formatDate = (parsed) => {
     return `${pad(parsed.month)}/${parsed.year}`;
   }
 
-  return `${pad(parsed.day)}/${pad(parsed.month)}/${parsed.year}`;
+  return `${pad(parsed.day)}/${pad(
+    parsed.month
+  )}/${parsed.year}`;
 };
 
 const extractDates = (item = {}) => {
-  const startValue = firstValue(item.startDate, item.start);
+  const startValue = firstValue(
+    item.startDate,
+    item.start
+  );
 
-  const endValue = firstValue(item.endDate, item.end);
+  const endValue = firstValue(
+    item.endDate,
+    item.end
+  );
 
   const current =
     item.current === true ||
@@ -166,10 +208,12 @@ const extractDates = (item = {}) => {
     };
   }
 
-  const raw = normalizeDigits(firstValue(item.date, item.period, ""));
+  const raw = normalizeDigits(
+    firstValue(item.date, item.period, "")
+  );
 
   const matches = raw.match(
-    /\d{4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{1,2}[-/.]\d{1,2}[-/.]\d{4}|\d{4}[-/.]\d{1,2}/g,
+    /\d{4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{1,2}[-/.]\d{1,2}[-/.]\d{4}|\d{4}[-/.]\d{1,2}/g
   );
 
   if (matches?.length >= 2) {
@@ -186,33 +230,13 @@ const extractDates = (item = {}) => {
     end: null,
     current,
     single: parseDate(
-      firstValue(item.issuedDate, item.completionDate, item.date),
+      firstValue(
+        item.issuedDate,
+        item.completionDate,
+        item.date
+      )
     ),
   };
-};
-
-const getDateLabel = (item, isArabic) => {
-  const dates = extractDates(item);
-
-  const start = formatDate(dates.start);
-  const end = formatDate(dates.end);
-
-  if (start && dates.current) {
-    return `${start} – ${isArabic ? "حتى الآن" : "Present"}`;
-  }
-
-  if (start && end) {
-    return `${start} – ${end}`;
-  }
-
-  if (start) return start;
-  if (end) return end;
-
-  if (dates.single) {
-    return formatDate(dates.single);
-  }
-
-  return String(firstValue(item?.date, item?.period, ""));
 };
 
 const getSortTime = (item) => {
@@ -223,160 +247,30 @@ const getSortTime = (item) => {
   }
 
   const parsed =
-    parseDate(item?.sortDate) || dates.end || dates.single || dates.start;
+    parseDate(item?.sortDate) ||
+    dates.end ||
+    dates.single ||
+    dates.start;
 
-  return parsed ? parsed.date.getTime() : -Infinity;
+  return parsed
+    ? parsed.date.getTime()
+    : -Infinity;
 };
 
 const sortNewest = (items) =>
-  [...asArray(items)].sort((a, b) => getSortTime(b) - getSortTime(a));
-
-/* =====================================================
-   EXPERIENCE HELPERS
-===================================================== */
-
-const DAY_MS = 86400000;
-
-const calculateExperience = (items) => {
-  const today = new Date();
-
-  const todayUTC = Date.UTC(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate(),
+  [...asArray(items)].sort(
+    (a, b) => getSortTime(b) - getSortTime(a)
   );
-
-  const periods = asArray(items)
-    .map((item) => {
-      const dates = extractDates(item);
-
-      if (!dates.start) return null;
-
-      const start = dates.start.date.getTime();
-
-      const end = dates.current ? todayUTC : dates.end?.date.getTime();
-
-      if (!Number.isFinite(end) || start > end) {
-        return null;
-      }
-
-      return {
-        start,
-        end: Math.min(end, todayUTC),
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => a.start - b.start);
-
-  const merged = [];
-
-  periods.forEach((period) => {
-    const previous = merged[merged.length - 1];
-
-    if (previous && period.start <= previous.end + DAY_MS) {
-      previous.end = Math.max(previous.end, period.end);
-    } else {
-      merged.push({ ...period });
-    }
-  });
-
-  const totalDays = merged.reduce(
-    (sum, period) => sum + Math.floor((period.end - period.start) / DAY_MS) + 1,
-    0,
-  );
-
-  const totalMonths = Math.floor(totalDays / (365.2425 / 12));
-
-  return {
-    years: Math.floor(totalMonths / 12),
-    months: totalMonths % 12,
-    totalDays,
-  };
-};
-
-const formatExperience = (experience, isArabic) => {
-  const { years, months, totalDays } = experience;
-
-  if (!totalDays) {
-    return isArabic ? "غير محدد" : "Not specified";
-  }
-
-  const parts = [];
-
-  if (years) {
-    parts.push(
-      isArabic
-        ? years === 1
-          ? "سنة"
-          : years === 2
-            ? "سنتان"
-            : `${years} سنوات`
-        : `${years} ${years === 1 ? "year" : "years"}`,
-    );
-  }
-
-  if (months) {
-    parts.push(
-      isArabic
-        ? months === 1
-          ? "شهر"
-          : months === 2
-            ? "شهران"
-            : `${months} أشهر`
-        : `${months} ${months === 1 ? "month" : "months"}`,
-    );
-  }
-
-  if (!parts.length) {
-    return isArabic ? "أقل من شهر" : "Less than one month";
-  }
-
-  return parts.join(isArabic ? " و" : " and ");
-};
-
-const getEmploymentType = (item, isArabic) => {
-  const labels = {
-    "full-time": ["دوام كامل", "Full-time"],
-    "part-time": ["دوام جزئي", "Part-time"],
-    seasonal: ["عمل موسمي", "Seasonal"],
-    contract: ["عمل بعقد", "Contract"],
-    internship: ["تدريب", "Internship"],
-  };
-
-  const key = String(item?.employmentType || "").toLowerCase();
-
-  if (labels[key]) {
-    return labels[key][isArabic ? 0 : 1];
-  }
-
-  return asText(item?.employmentType, isArabic);
-};
 
 /* =====================================================
    DOCUMENT HELPERS
 ===================================================== */
 
-const DOCUMENT_TYPES = {
-  diploma: ["وثيقة الدبلوم", "Diploma Document"],
-  graduation: ["وثيقة التخرج", "Graduation Document"],
-  completion: ["شهادة إتمام الدورة", "Completion Certificate"],
-  attendance: ["شهادة حضور", "Attendance Certificate"],
-  appreciation: ["شهادة شكر وتقدير", "Appreciation Certificate"],
-  participation: ["شهادة مشاركة", "Participation Certificate"],
-  experience: ["شهادة خبرة", "Experience Certificate"],
-  volunteering: ["سجل الساعات التطوعية", "Volunteer Hours Record"],
-  certificate: ["الشهادة", "Certificate"],
-  document: ["الوثيقة", "Document"],
-};
-
-const documentLabel = (type, isArabic) => {
-  const labels = DOCUMENT_TYPES[type] || DOCUMENT_TYPES.document;
-
-  return labels[isArabic ? 0 : 1];
-};
-
 const documentUrl = (path) => {
-  if (typeof path !== "string" || !path.trim()) {
+  if (
+    typeof path !== "string" ||
+    !path.trim()
+  ) {
     return "";
   }
 
@@ -386,28 +280,35 @@ const documentUrl = (path) => {
     return clean;
   }
 
-  if (clean.startsWith("//") || /^[a-z][a-z\d+.-]*:/i.test(clean)) {
+  if (
+    clean.startsWith("//") ||
+    /^[a-z][a-z\d+.-]*:/i.test(clean)
+  ) {
     return "";
   }
 
-  const base = String(process.env.PUBLIC_URL || "").replace(/\/+$/, "");
+  const base = String(
+    process.env.PUBLIC_URL || ""
+  ).replace(/\/+$/, "");
 
   const relative = clean.replace(/^\/+/, "");
 
   let basePath = "";
 
   try {
-    basePath = new URL(base || "/", window.location.origin).pathname.replace(
-      /^\/+|\/+$/g,
-      "",
-    );
+    basePath = new URL(
+      base || "/",
+      window.location.origin
+    )
+      .pathname.replace(/^\/+|\/+$/g, "");
   } catch {
     basePath = base.replace(/^\/+|\/+$/g, "");
   }
 
   if (
     basePath &&
-    (relative === basePath || relative.startsWith(`${basePath}/`))
+    (relative === basePath ||
+      relative.startsWith(`${basePath}/`))
   ) {
     return `/${relative}`;
   }
@@ -423,9 +324,14 @@ const getFileExtension = (path) =>
     ?.toUpperCase() || "";
 
 const isImageDocument = (path) =>
-  ["PNG", "JPG", "JPEG", "WEBP", "GIF", "AVIF"].includes(
-    getFileExtension(path),
-  );
+  [
+    "PNG",
+    "JPG",
+    "JPEG",
+    "WEBP",
+    "GIF",
+    "AVIF",
+  ].includes(getFileExtension(path));
 
 /* =====================================================
    SKILL HELPERS
@@ -437,43 +343,68 @@ const getSkillName = (skill, isArabic) => {
   }
 
   return asText(
-    firstValue(skill?.name, skill?.title, skill?.skill, skill?.label),
-    isArabic,
+    firstValue(
+      skill?.name,
+      skill?.title,
+      skill?.skill,
+      skill?.label
+    ),
+    isArabic
   );
 };
 
-const getSkillSources = (skill, isArabic) => {
-  if (!skill || typeof skill !== "object") {
+const getSkillSources = (
+  skill,
+  isArabic
+) => {
+  if (
+    !skill ||
+    typeof skill !== "object"
+  ) {
     return [];
   }
 
-  const raw = firstValue(skill.sources, skill.source, skill.learnedFrom);
+  const raw = firstValue(
+    skill.sources,
+    skill.source,
+    skill.learnedFrom
+  );
 
-  const values = Array.isArray(raw) ? raw : raw ? [raw] : [];
+  const values = Array.isArray(raw)
+    ? raw
+    : raw
+      ? [raw]
+      : [];
 
   return [
     ...new Set(
-      values.map((value) => asText(value, isArabic).trim()).filter(Boolean),
+      values
+        .map((value) =>
+          asText(value, isArabic).trim()
+        )
+        .filter(Boolean)
     ),
   ];
 };
 
-const getSkillLevel = (skill, isArabic) => {
-  const level = firstValue(skill?.level, skill?.proficiency);
+const getSkillLevel = (
+  skill,
+  isArabic,
+  labels = {}
+) => {
+  const level = firstValue(
+    skill?.level,
+    skill?.proficiency
+  );
 
-  if (!level) return "";
+  if (!level) {
+    return "";
+  }
 
-  const labels = {
-    advanced: ["متقدم", "Advanced"],
-    intermediate: ["متوسط", "Intermediate"],
-    basic: ["أساسي", "Basic"],
-    beginner: ["مبتدئ", "Beginner"],
-    good: ["جيد", "Good"],
-  };
-
-  const selected = labels[String(level).toLowerCase()];
-
-  return selected ? selected[isArabic ? 0 : 1] : asText(level, isArabic);
+  return (
+    labels[String(level).toLowerCase()] ||
+    asText(level, isArabic)
+  );
 };
 
 /* =====================================================
@@ -481,21 +412,29 @@ const getSkillLevel = (skill, isArabic) => {
 ===================================================== */
 
 const Main = styled.main`
-  --about-bg: var(--color-background, #f4f7fb);
+  --about-bg:
+    var(--color-background, #f4f7fb);
 
-  --about-card: var(--color-card-background, #ffffff);
+  --about-card:
+    var(--color-card-background, #ffffff);
 
-  --about-section: var(--color-background-secondary, #edf3f9);
+  --about-section:
+    var(--color-background-secondary, #edf3f9);
 
-  --about-border: var(--color-border, #d5e0eb);
+  --about-border:
+    var(--color-border, #d5e0eb);
 
-  --about-border-strong: var(--color-border-strong, #bfcfdf);
+  --about-border-strong:
+    var(--color-border-strong, #bfcfdf);
 
-  --about-text: var(--color-text-primary, #172435);
+  --about-text:
+    var(--color-text-primary, #172435);
 
-  --about-muted: var(--color-text-secondary, #475569);
+  --about-muted:
+    var(--color-text-secondary, #475569);
 
-  --about-primary: var(--color-primary, #287c98);
+  --about-primary:
+    var(--color-primary, #287c98);
 
   width: 100%;
   min-width: 0;
@@ -520,13 +459,16 @@ const MainContent = styled(Container)`
 
   gap: clamp(48px, 7vw, 80px);
 
-  padding-block: clamp(40px, 6vw, 70px) clamp(70px, 9vw, 110px);
+  padding-block:
+    clamp(40px, 6vw, 70px)
+    clamp(70px, 9vw, 110px);
 `;
 
 const Section = styled.section`
   min-width: 0;
 
-  scroll-margin-top: calc(var(--header-height, 70px) + 20px);
+  scroll-margin-top:
+    calc(var(--header-height, 70px) + 20px);
 
   &.alternate {
     padding: clamp(18px, 3vw, 34px);
@@ -568,7 +510,9 @@ const SectionHeading = styled.div`
 
     color: var(--about-text);
 
-    font-size: clamp(1.45rem, 3vw, 2rem);
+    font-size:
+      clamp(1.45rem, 3vw, 2rem);
+
     line-height: 1.5;
   }
 
@@ -605,16 +549,17 @@ const Card = styled.article`
   border-radius: var(--radius-card, 13px);
 
   background: var(--about-card);
-
   box-shadow: var(--shadow-sm, none);
 
   transition:
-    border-color var(--transition-fast, 0.2s),
-    box-shadow var(--transition-fast, 0.2s);
+    border-color 0.2s,
+    box-shadow 0.2s;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      border-color: var(--about-border-strong);
+      border-color:
+        var(--about-border-strong);
+
       box-shadow: var(--shadow-md, none);
     }
   }
@@ -627,7 +572,7 @@ const CardList = styled.div`
 `;
 
 /* =====================================================
-   INTRODUCTION
+   INTRODUCTION STYLES
 ===================================================== */
 
 const IntroGrid = styled.div`
@@ -651,7 +596,9 @@ const IntroText = styled.div`
 
     color: var(--about-text);
 
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-size:
+      clamp(1.5rem, 3vw, 2.2rem);
+
     line-height: 1.5;
   }
 
@@ -689,7 +636,8 @@ const ProfileCard = styled(Card)`
 const ProfileRow = styled.div`
   padding-block: 12px;
 
-  border-bottom: 1px solid var(--about-border);
+  border-bottom:
+    1px solid var(--about-border);
 
   &:last-child {
     border: 0;
@@ -717,7 +665,7 @@ const ProfileRow = styled.div`
 `;
 
 /* =====================================================
-   ENTRIES
+   ENTRY STYLES
 ===================================================== */
 
 const EntryCard = styled(Card)`
@@ -848,7 +796,8 @@ const DocumentActions = styled.div`
   margin-top: 3px;
   padding-top: 14px;
 
-  border-top: 1px solid var(--about-border);
+  border-top:
+    1px solid var(--about-border);
 
   @media (max-width: 500px) {
     & > * {
@@ -874,69 +823,10 @@ const FormatBadge = styled.span`
 `;
 
 /* =====================================================
-   EXPERIENCE
+   EXPERIENCE STYLES
 ===================================================== */
 
-const ExperienceSummary = styled(Card)`
-  display: flex;
-  align-items: center;
-  gap: 18px;
 
-  margin-bottom: 26px;
-
-  border-color: var(--about-primary);
-
-  .icon {
-    display: grid;
-    place-items: center;
-
-    flex-shrink: 0;
-
-    width: 54px;
-    height: 54px;
-
-    border-radius: 12px;
-
-    background: var(--about-section);
-    color: var(--about-primary);
-
-    font-size: 1.5rem;
-  }
-
-  .content {
-    min-width: 0;
-  }
-
-  .label,
-  .note {
-    display: block;
-
-    color: var(--about-muted);
-
-    font-size: 0.84rem;
-    line-height: 1.8;
-  }
-
-  .value {
-    display: block;
-    margin-block: 5px;
-
-    color: var(--about-primary);
-
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-    font-weight: 800;
-  }
-
-  @media (max-width: 500px) {
-    align-items: flex-start;
-    gap: 12px;
-
-    .icon {
-      width: 44px;
-      height: 44px;
-    }
-  }
-`;
 
 const Timeline = styled.div`
   position: relative;
@@ -1005,7 +895,7 @@ const TimelineItem = styled.div`
 `;
 
 /* =====================================================
-   SKILLS
+   SKILLS STYLES
 ===================================================== */
 
 const SkillsList = styled.div`
@@ -1088,6 +978,7 @@ const SkillAccordionButton = styled.button`
 
   .chevron {
     flex-shrink: 0;
+
     color: var(--about-primary);
 
     transition: transform 0.2s ease;
@@ -1101,16 +992,20 @@ const SkillAccordionButton = styled.button`
 const SkillContent = styled.div`
   display: grid;
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
 
   gap: 12px;
   padding: 18px;
 
-  border-top: 1px solid var(--about-border);
+  border-top:
+    1px solid var(--about-border);
+
   background: var(--about-section);
 
   @media (max-width: 1000px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
   @media (max-width: 650px) {
@@ -1160,7 +1055,9 @@ const SkillCard = styled.div`
     gap: 7px;
 
     padding-top: 10px;
-    border-top: 1px solid var(--about-border);
+
+    border-top:
+      1px solid var(--about-border);
 
     color: var(--about-muted);
 
@@ -1187,22 +1084,24 @@ const SkillSources = styled.ul`
 `;
 
 /* =====================================================
-   VOLUNTEERING
+   VOLUNTEERING STYLES
 ===================================================== */
 
 const VolunteerSummary = styled(Card)`
-  margin-bottom: 18px;
-  border-color: var(--about-primary);
+  margin-bottom: 20px;
+
 
   .heading {
     display: flex;
     align-items: center;
     gap: 12px;
 
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
 
   .heading svg {
+    flex-shrink: 0;
+
     color: var(--about-primary);
     font-size: 1.4rem;
   }
@@ -1212,36 +1111,65 @@ const VolunteerSummary = styled(Card)`
 
     color: var(--about-text);
     font-size: 1.08rem;
+    line-height: 1.7;
   }
 
   .value {
     display: block;
-    margin-bottom: 12px;
+
+    margin-bottom: 20px;
 
     color: var(--about-primary);
 
     font-size: 1.55rem;
     font-weight: 800;
+    line-height: 1.6;
   }
 
   .meta {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
 
-    margin-bottom: 12px;
+    gap: 14px;
+
+    margin-bottom: 22px;
+  }
+
+  ${DocumentActions} {
+    margin-top: 0;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--about-border);
+  }
+
+  @media (max-width: 600px) {
+    .heading {
+      align-items: flex-start;
+    }
+
+    .meta {
+      flex-direction: column;
+      align-items: flex-start;
+
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    ${DocumentActions} {
+      padding-top: 18px;
+    }
   }
 `;
 
 /* =====================================================
-   CAREER GOAL
+   CAREER GOAL STYLES
 ===================================================== */
 
 const GoalCard = styled(Card)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: 26px;
 
   padding: clamp(22px, 4vw, 36px);
@@ -1253,7 +1181,8 @@ const GoalCard = styled(Card)`
 
     color: var(--about-text);
 
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-size:
+      clamp(1.4rem, 3vw, 1.9rem);
   }
 
   p {
@@ -1283,10 +1212,15 @@ const GoalCard = styled(Card)`
 `;
 
 /* =====================================================
-   REUSABLE PAGE COMPONENTS
+   REUSABLE COMPONENTS
 ===================================================== */
 
-const SectionTitle = ({ number, icon: Icon, title, description }) => (
+const SectionTitle = ({
+  number,
+  icon: Icon,
+  title,
+  description,
+}) => (
   <SectionHeading>
     <span className="number">
       <Icon aria-hidden="true" />
@@ -1299,22 +1233,38 @@ const SectionTitle = ({ number, icon: Icon, title, description }) => (
   </SectionHeading>
 );
 
-const DateDisplay = ({ item, isArabic }) => {
+/* =====================================================
+   DATE DISPLAY
+===================================================== */
+
+const DateDisplay = ({
+  item,
+  labels = {},
+}) => {
   const dates = extractDates(item);
 
   const start = formatDate(dates.start);
   const end = formatDate(dates.end);
+  const single = formatDate(dates.single);
 
-  if (!start && !end && !dates.single) {
-    const fallback = getDateLabel(item, isArabic);
+  if (!start && !end && !single) {
+    const fallback = firstValue(
+      item?.date,
+      item?.period
+    );
 
-    if (!fallback) return null;
+    if (!fallback) {
+      return null;
+    }
 
     return (
       <DateTag>
         <FiCalendar aria-hidden="true" />
 
-        <span className="date-text" dir="auto">
+        <span
+          className="date-text"
+          dir="auto"
+        >
           {fallback}
         </span>
       </DateTag>
@@ -1325,39 +1275,85 @@ const DateDisplay = ({ item, isArabic }) => {
     <DateTag>
       <FiCalendar aria-hidden="true" />
 
-      <span className="date-text" dir="ltr">
-        {start || end || formatDate(dates.single)}
+      <span
+        className="date-text"
+        dir="ltr"
+      >
+        {start || end || single}
       </span>
 
-      {start && (end || dates.current) && (
-        <>
-          <span aria-hidden="true">–</span>
-
-          {dates.current ? (
-            <PresentTag>
-              <FiCheckCircle aria-hidden="true" />
-
-              {isArabic ? "حتى الآن" : "Present"}
-            </PresentTag>
-          ) : (
-            <span className="date-text" dir="ltr">
-              {end}
+      {start &&
+        (end || dates.current) && (
+          <>
+            <span aria-hidden="true">
+              –
             </span>
-          )}
-        </>
-      )}
+
+            {dates.current ? (
+              <PresentTag>
+                <FiCheckCircle
+                  aria-hidden="true"
+                />
+
+                {labels.present}
+              </PresentTag>
+            ) : (
+              <span
+                className="date-text"
+                dir="ltr"
+              >
+                {end}
+              </span>
+            )}
+          </>
+        )}
     </DateTag>
   );
 };
 
-const DocumentButton = ({ item, title, fallbackType, isArabic, onPreview }) => {
-  if (!item?.document) return null;
+/* =====================================================
+   DOCUMENT BUTTON
+===================================================== */
 
-  const type = item.documentType || fallbackType || "document";
+const DocumentButton = ({
+  item,
+  title,
+  labels = {},
+  onPreview,
+}) => {
+  if (!item?.document) {
+    return null;
+  }
 
-  const format = getFileExtension(item.document) || (isArabic ? "ملف" : "File");
+  const type =
+    item.documentType || "document";
 
-  const supported = isImageDocument(item.document);
+  const documentTypes =
+    labels.documentTypes || {};
+
+  const documentName =
+    documentTypes[type] ||
+    documentTypes.document ||
+    "";
+
+  const format =
+    getFileExtension(item.document);
+
+  const supported = isImageDocument(
+    item.document
+  );
+
+  const handleDocument = () => {
+    if (!supported) {
+      return;
+    }
+
+    onPreview({
+      path: item.document,
+      title,
+      documentType: type,
+    });
+  };
 
   return (
     <DocumentActions>
@@ -1367,110 +1363,166 @@ const DocumentButton = ({ item, title, fallbackType, isArabic, onPreview }) => {
         disabled={!supported}
         title={
           !supported
-            ? isArabic
-              ? "هذا النوع من الملفات يحتاج دعمًا في المودال المشترك"
-              : "This file type requires support in the shared modal"
+            ? labels.unsupportedDocument
             : undefined
         }
-        onClick={() =>
-          onPreview({
-            path: item.document,
-            title,
-            documentType: type,
-          })
-        }
+        onClick={handleDocument}
       >
         <FiEye aria-hidden="true" />
 
-        {isArabic ? "عرض " : "View "}
-        {documentLabel(type, isArabic)}
+        {labels.viewDocument}{" "}
+        {documentName}
 
-        <FormatBadge dir="ltr">{format}</FormatBadge>
+        {format && (
+          <FormatBadge dir="ltr">
+            {format}
+          </FormatBadge>
+        )}
       </Button>
     </DocumentActions>
   );
 };
+
+/* =====================================================
+   CONTENT ENTRY
+===================================================== */
 
 const ContentEntry = ({
   item,
   title,
   subtitle,
   description,
+  field,
   grade,
   gradeLabel,
+  honors,
+  honorsLabel,
   employmentType,
   hours,
-  fallbackDocumentType,
+  labels = {},
   isArabic,
   onPreview,
-}) => (
-  <EntryCard>
-    <EntryHeader>
-      <EntryInfo>
-        <h3>{asText(title, isArabic)}</h3>
+}) => {
+  const displayedTitle = asText(
+    title,
+    isArabic
+  );
 
-        {subtitle && (
-          <span className="subtitle">{asText(subtitle, isArabic)}</span>
-        )}
-      </EntryInfo>
+  const displayedSubtitle = asText(
+    subtitle,
+    isArabic
+  );
 
-      <DateDisplay item={item} isArabic={isArabic} />
-    </EntryHeader>
+  const displayedDescription = asText(
+    description,
+    isArabic
+  );
 
-    {employmentType && (
-      <MetaRow>
-        <Tag>
-          <FiBriefcase aria-hidden="true" />
-          {employmentType}
-        </Tag>
-      </MetaRow>
-    )}
+  const displayedField = asText(
+    field,
+    isArabic
+  );
 
-    {description && <Description>{asText(description, isArabic)}</Description>}
+  return (
+    <EntryCard>
+      <EntryHeader>
+        <EntryInfo>
+          <h3>{displayedTitle}</h3>
 
-    {(grade || hours) && (
-      <MetaRow>
-        {grade && (
+          {displayedSubtitle && (
+            <span className="subtitle">
+              {displayedSubtitle}
+            </span>
+          )}
+        </EntryInfo>
+
+        <DateDisplay
+          item={item}
+          labels={labels}
+        />
+      </EntryHeader>
+
+      {employmentType && (
+        <MetaRow>
           <Tag>
-            <FiAward aria-hidden="true" />
-
-            {gradeLabel}
-
-            <span className="grade-value">{grade}</span>
+            <FiBriefcase aria-hidden="true" />
+            {employmentType}
           </Tag>
-        )}
+        </MetaRow>
+      )}
 
-        {hours && (
+      {displayedField && (
+        <Description>
+          {displayedField}
+        </Description>
+      )}
+
+      {displayedDescription && (
+        <Description>
+          {displayedDescription}
+        </Description>
+      )}
+
+      {(honors || grade || hours) && (
+        <MetaRow>
+          {honors && (
+            <Tag>
+              <FiAward aria-hidden="true" />
+
+              <span>
+                {honorsLabel}:{" "}
+                {asText(honors, isArabic)}
+              </span>
+            </Tag>
+          )}
+
+          {grade && (
+            <Tag>
+              <FiAward aria-hidden="true" />
+
+              <span>{gradeLabel}:</span>
+
+              <span className="grade-value">
+                {grade}
+              </span>
+            </Tag>
+          )}
+
+          {hours && (
+            <Tag>
+              <FiClock aria-hidden="true" />
+
+              {asText(hours, isArabic)}
+            </Tag>
+          )}
+        </MetaRow>
+      )}
+
+      {item?.note && (
+        <MetaRow>
           <Tag>
-            <FiClock aria-hidden="true" />
-            {asText(hours, isArabic)}
+            <FiInfo aria-hidden="true" />
+
+            {asText(
+              item.note,
+              isArabic
+            )}
           </Tag>
-        )}
-      </MetaRow>
-    )}
+        </MetaRow>
+      )}
 
-    {item?.note && (
-      <MetaRow>
-        <Tag>
-          <FiInfo aria-hidden="true" />
-
-          {asText(item.note, isArabic)}
-        </Tag>
-      </MetaRow>
-    )}
-
-    <DocumentButton
-      item={item}
-      title={asText(title, isArabic)}
-      fallbackType={fallbackDocumentType}
-      isArabic={isArabic}
-      onPreview={onPreview}
-    />
-  </EntryCard>
-);
+      <DocumentButton
+        item={item}
+        title={displayedTitle}
+        labels={labels}
+        onPreview={onPreview}
+      />
+    </EntryCard>
+  );
+};
 
 /* =====================================================
-   MAIN COMPONENT
+   SKILL GROUP ICONS
 ===================================================== */
 
 const skillGroupIcons = [
@@ -1483,73 +1535,144 @@ const skillGroupIcons = [
   FiMonitor,
 ];
 
+/* =====================================================
+   MAIN ABOUT COMPONENT
+===================================================== */
+
 const About = () => {
   const { t, i18n } = useTranslation("about");
 
-  const isArabic = (i18n.resolvedLanguage || i18n.language || "ar")
+  const isArabic = (
+    i18n.resolvedLanguage ||
+    i18n.language ||
+    "ar"
+  )
     .toLowerCase()
     .startsWith("ar");
 
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] =
+    useState(null);
 
-  const [openSkillIndex, setOpenSkillIndex] = useState(null);
+  const [
+    openSkillIndex,
+    setOpenSkillIndex,
+  ] = useState(null);
 
   const closePreview = useCallback(() => {
     setPreview(null);
   }, []);
+
+  /* -----------------------------------------------
+     TRANSLATION DATA
+  ------------------------------------------------ */
 
   const translated = t("content", {
     returnObjects: true,
   });
 
   const content =
-    translated && typeof translated === "object" && !Array.isArray(translated)
+    translated &&
+      typeof translated === "object" &&
+      !Array.isArray(translated)
       ? translated
       : {};
 
-  const education = sortNewest(content.education?.items);
+  const labels = t("ui", {
+    returnObjects: true,
+    defaultValue: {},
+  });
 
-  const experience = sortNewest(content.experience?.items);
+  const ui =
+    labels &&
+      typeof labels === "object" &&
+      !Array.isArray(labels)
+      ? labels
+      : {};
 
-  const certificates = sortNewest(content.certificates?.items);
+  /* -----------------------------------------------
+     SORTED DATA
+  ------------------------------------------------ */
 
-  const volunteering = sortNewest(content.volunteering?.items);
-
-  const aiSkillGroup = {
-    title: t("aiSkills.title"),
-
-    items: ["chatgpt", "gemini", "claude", "deepseek"].map((key) => ({
-      name: t(`aiSkills.tools.${key}.name`),
-
-      sources: [t(`aiSkills.tools.${key}.usage`)],
-    })),
-  };
-
-  const skillGroups = [...asArray(content.skills?.groups), aiSkillGroup];
-
-  const volunteerSummary = content.volunteering?.summary || {};
-
-  const experienceSignature = JSON.stringify(content.experience?.items || []);
-
-  const totalExperience = useMemo(
-    () => calculateExperience(experience),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [experienceSignature],
+  const education = sortNewest(
+    content.education?.items
   );
 
-  const renderEntries = (items, getProps) =>
+  const experience = sortNewest(
+    content.experience?.items
+  );
+
+  const certificates = sortNewest(
+    content.certificates?.items
+  );
+
+  const volunteering = sortNewest(
+    content.volunteering?.items
+  );
+
+  /* -----------------------------------------------
+     SKILLS FROM JSON ONLY
+  ------------------------------------------------ */
+
+  const skillGroups = asArray(
+    content.skills?.groups
+  );
+
+  /* -----------------------------------------------
+     VOLUNTEERING
+  ------------------------------------------------ */
+
+  const volunteerSummary =
+    content.volunteering?.summary || {};
+
+  /* -----------------------------------------------
+     EXPERIENCE CALCULATION
+  ------------------------------------------------ */
+
+
+  /* -----------------------------------------------
+     RENDER ENTRIES
+  ------------------------------------------------ */
+
+  const renderEntries = (
+    items,
+    getProps
+  ) =>
     items.map((item, index) => (
       <ContentEntry
         key={`${index}-${getSortTime(item)}`}
         item={item}
+        labels={ui}
         isArabic={isArabic}
         onPreview={setPreview}
         {...getProps(item)}
       />
     ));
 
+  /* -----------------------------------------------
+     EMPLOYMENT TYPE
+  ------------------------------------------------ */
+
+  const getEmploymentType = (item) => {
+    const type = String(
+      item?.employmentType || ""
+    ).toLowerCase();
+
+    return (
+      ui.employmentTypes?.[type] ||
+      asText(
+        item?.employmentType,
+        isArabic
+      )
+    );
+  };
+
+  /* =================================================
+     PAGE RENDER
+  ================================================= */
+
   return (
     <Main dir={isArabic ? "rtl" : "ltr"}>
+
       {/* PAGE HEADER */}
 
       <PageHeader>
@@ -1557,351 +1680,520 @@ const About = () => {
       </PageHeader>
 
       <MainContent>
-        {/* INTRODUCTION */}
+
+        {/* ==========================================
+            INTRODUCTION
+        =========================================== */}
 
         <Section id="about-intro">
           <IntroGrid>
+
             <IntroText>
               <h2>
-                {content.intro?.title || (isArabic ? "نبذة عني" : "About Me")}
+                {content.intro?.title}
               </h2>
 
-              {content.intro?.paragraph1 && <p>{content.intro.paragraph1}</p>}
+              {content.intro?.paragraph1 && (
+                <p>
+                  {content.intro.paragraph1}
+                </p>
+              )}
 
-              {content.intro?.paragraph2 && <p>{content.intro.paragraph2}</p>}
+              {content.intro?.paragraph2 && (
+                <p>
+                  {content.intro.paragraph2}
+                </p>
+              )}
             </IntroText>
 
             <ProfileCard>
               <h3>
                 <FiUser aria-hidden="true" />
 
-                {content.infoTitle ||
-                  (isArabic ? "معلومات سريعة" : "Quick Information")}
+                {content.infoTitle}
               </h3>
 
-              {asArray(content.profile).map((item, index) => (
-                <ProfileRow key={index}>
-                  <span>{asText(item.label, isArabic)}</span>
+              {asArray(content.profile).map(
+                (item, index) => (
+                  <ProfileRow key={index}>
+                    <span>
+                      {asText(
+                        item.label,
+                        isArabic
+                      )}
+                    </span>
 
-                  <strong>{asText(item.value, isArabic)}</strong>
-                </ProfileRow>
-              ))}
+                    <strong>
+                      {asText(
+                        item.value,
+                        isArabic
+                      )}
+                    </strong>
+                  </ProfileRow>
+                )
+              )}
             </ProfileCard>
+
           </IntroGrid>
         </Section>
 
-        {/* EDUCATION */}
+        {/* ==========================================
+            EDUCATION
+        =========================================== */}
 
-        <Section id="about-education" className="alternate">
+        <Section
+          id="about-education"
+          className="alternate"
+        >
           <SectionTitle
             number="01"
             icon={FiBookOpen}
-            title={
-              content.education?.title ||
-              (isArabic ? "رحلتي التعليمية" : "Education")
+            title={content.education?.title}
+            description={
+              content.education?.description
             }
-            description={content.education?.description}
           />
 
           <CardList>
-            {renderEntries(education, (item) => ({
-              title: item.degree,
-              subtitle: item.school,
-              description: item.field,
-              grade: item.grade,
-              gradeLabel:
-                content.education?.gradeLabel ||
-                (isArabic ? "المعدل التراكمي" : "GPA"),
-              fallbackDocumentType: "graduation",
-            }))}
+            {renderEntries(
+              education,
+              (item) => ({
+                title: item.degree,
+                subtitle: item.school,
+
+                field: item.field,
+
+                honors: item.honors,
+
+                honorsLabel:
+                  content.education?.honorsLabel,
+
+                grade: item.grade,
+
+                gradeLabel:
+                  item.gradeLabel ||
+                  (
+                    item.documentType ===
+                      "diploma"
+                      ? content.education
+                        ?.gradeLabel
+                      : content.education
+                        ?.percentageLabel
+                  ),
+              })
+            )}
           </CardList>
         </Section>
 
-        {/* EXPERIENCE */}
+        {/* ==========================================
+            EXPERIENCE
+        =========================================== */}
 
         <Section id="about-experience">
           <SectionTitle
             number="02"
             icon={FiBriefcase}
             title={
-              content.experience?.title ||
-              (isArabic ? "خبراتي المهنية" : "Professional Experience")
+              content.experience?.title
             }
-            description={content.experience?.description}
+            description={
+              content.experience?.description
+            }
           />
 
-          <ExperienceSummary>
-            <div className="icon">
-              <FiClock aria-hidden="true" />
-            </div>
-
-            <div className="content">
-              <span className="label">
-                {isArabic
-                  ? "إجمالي سنوات الخبرة المهنية"
-                  : "Total Professional Experience"}
-              </span>
-
-              <strong className="value">
-                {formatExperience(totalExperience, isArabic)}
-              </strong>
-
-              <span className="note">
-                {isArabic
-                  ? "يُحسب الإجمالي من فترات العمل الفعلية دون تكرار الفترات المتداخلة، ويُحدَّث تلقائيًا للوظائف المستمرة."
-                  : "Calculated from actual employment periods without double-counting overlapping dates. Ongoing roles update automatically."}
-              </span>
-            </div>
-          </ExperienceSummary>
-
           <Timeline>
-            {experience.map((item, index) => {
-              const dates = extractDates(item);
+            {experience.map(
+              (item, index) => {
+                const dates =
+                  extractDates(item);
 
-              return (
-                <TimelineItem
-                  key={`${index}-${getSortTime(item)}`}
-                  data-current={dates.current ? "true" : "false"}
-                >
-                  <ContentEntry
-                    item={item}
-                    title={item.role}
-                    subtitle={item.company}
-                    description={item.description}
-                    employmentType={getEmploymentType(item, isArabic)}
-                    fallbackDocumentType="experience"
-                    isArabic={isArabic}
-                    onPreview={setPreview}
-                  />
-                </TimelineItem>
-              );
-            })}
+                return (
+                  <TimelineItem
+                    key={`${index}-${getSortTime(
+                      item
+                    )}`}
+                    data-current={
+                      dates.current
+                        ? "true"
+                        : "false"
+                    }
+                  >
+                    <ContentEntry
+                      item={item}
+                      title={item.role}
+                      subtitle={item.company}
+                      description={
+                        item.description
+                      }
+                      employmentType={
+                        getEmploymentType(
+                          item
+                        )
+                      }
+                      labels={ui}
+                      isArabic={isArabic}
+                      onPreview={
+                        setPreview
+                      }
+                    />
+                  </TimelineItem>
+                );
+              }
+            )}
           </Timeline>
         </Section>
 
-        {/* CERTIFICATES */}
+        {/* ==========================================
+            CERTIFICATES
+        =========================================== */}
 
-        <Section id="about-certificates" className="alternate">
+        <Section
+          id="about-certificates"
+          className="alternate"
+        >
           <SectionTitle
             number="03"
             icon={FiAward}
             title={
-              content.certificates?.title ||
-              (isArabic
-                ? "الشهادات والدورات التدريبية"
-                : "Certificates and Courses")
+              content.certificates?.title
             }
-            description={content.certificates?.description}
+            description={
+              content.certificates?.description
+            }
           />
 
           <CardList>
-            {renderEntries(certificates, (item) => ({
-              title: item.name,
-              subtitle: item.provider,
-              description: item.description,
-              hours: item.hours,
-              fallbackDocumentType: "certificate",
-            }))}
+            {renderEntries(
+              certificates,
+              (item) => ({
+                title: item.name,
+                subtitle: item.provider,
+                description:
+                  item.description,
+                hours: item.hours,
+              })
+            )}
           </CardList>
         </Section>
 
-        {/* SKILLS */}
+        {/* ==========================================
+            SKILLS
+        =========================================== */}
 
         <Section id="about-skills">
           <SectionTitle
             number="04"
             icon={FiCode}
-            title={
-              content.skills?.title || (isArabic ? "مهاراتي" : "My Skills")
+            title={content.skills?.title}
+            description={
+              content.skills?.description
             }
-            description={content.skills?.description}
           />
 
           <SkillsList>
-            {skillGroups.map((group, index) => {
-              const isOpen = openSkillIndex === index;
+            {skillGroups.map(
+              (group, index) => {
+                const isOpen =
+                  openSkillIndex === index;
 
-              const Icon = skillGroupIcons[index % skillGroupIcons.length];
+                const Icon =
+                  skillGroupIcons[
+                  index %
+                  skillGroupIcons.length
+                  ];
 
-              const items = asArray(group.items);
+                const items = asArray(
+                  group.items
+                );
 
-              return (
-                <SkillAccordion
-                  key={index}
-                  data-open={isOpen ? "true" : "false"}
-                >
-                  <SkillAccordionButton
-                    type="button"
-                    aria-expanded={isOpen}
-                    aria-controls={`about-skill-group-${index}`}
-                    onClick={() => setOpenSkillIndex(isOpen ? null : index)}
+                return (
+                  <SkillAccordion
+                    key={index}
+                    data-open={
+                      isOpen
+                        ? "true"
+                        : "false"
+                    }
                   >
-                    <span className="group-icon">
-                      <Icon aria-hidden="true" />
-                    </span>
+                    <SkillAccordionButton
+                      type="button"
+                      aria-expanded={
+                        isOpen
+                      }
+                      aria-controls={`about-skill-group-${index}`}
+                      onClick={() =>
+                        setOpenSkillIndex(
+                          isOpen
+                            ? null
+                            : index
+                        )
+                      }
+                    >
+                      <span className="group-icon">
+                        <Icon
+                          aria-hidden="true"
+                        />
+                      </span>
 
-                    <span className="group-name">
-                      <strong>{asText(group.title, isArabic)}</strong>
+                      <span className="group-name">
+                        <strong>
+                          {asText(
+                            group.title,
+                            isArabic
+                          )}
+                        </strong>
 
-                      <small>
-                        {items.length}{" "}
-                        {isArabic
-                          ? "مهارة"
-                          : items.length === 1
-                            ? "skill"
-                            : "skills"}
-                      </small>
-                    </span>
+                        <small>
+                          {items.length}{" "}
+                          {items.length === 1
+                            ? ui.skillSingular
+                            : ui.skillPlural}
+                        </small>
+                      </span>
 
-                    <FiChevronDown className="chevron" aria-hidden="true" />
-                  </SkillAccordionButton>
+                      <FiChevronDown
+                        className="chevron"
+                        aria-hidden="true"
+                      />
+                    </SkillAccordionButton>
 
-                  {isOpen && (
-                    <SkillContent id={`about-skill-group-${index}`}>
-                      {items.map((skill, skillIndex) => {
-                        const name = getSkillName(skill, isArabic);
+                    {isOpen && (
+                      <SkillContent
+                        id={`about-skill-group-${index}`}
+                      >
+                        {items.map(
+                          (
+                            skill,
+                            skillIndex
+                          ) => {
+                            const name =
+                              getSkillName(
+                                skill,
+                                isArabic
+                              );
 
-                        const level = getSkillLevel(skill, isArabic);
+                            const level =
+                              getSkillLevel(
+                                skill,
+                                isArabic,
+                                ui.skillLevels
+                              );
 
-                        const sources = getSkillSources(skill, isArabic);
+                            const sources =
+                              getSkillSources(
+                                skill,
+                                isArabic
+                              );
 
-                        return (
-                          <SkillCard key={`${name}-${skillIndex}`}>
-                            <div className="skill-header">
-                              <strong className="skill-name">{name}</strong>
+                            return (
+                              <SkillCard
+                                key={`${name}-${skillIndex}`}
+                              >
+                                <div className="skill-header">
+                                  <strong className="skill-name">
+                                    {name}
+                                  </strong>
 
-                              {level && (
-                                <span className="skill-level">{level}</span>
-                              )}
-                            </div>
+                                  {level && (
+                                    <span className="skill-level">
+                                      {level}
+                                    </span>
+                                  )}
+                                </div>
 
-                            {sources.length > 0 && (
-                              <>
-                                <span className="source-label">
-                                  <FiBookOpen aria-hidden="true" />
+                                {sources.length >
+                                  0 && (
+                                    <>
+                                      <span className="source-label">
+                                        <FiBookOpen
+                                          aria-hidden="true"
+                                        />
 
-                                  {isArabic
-                                    ? "مصادر اكتساب المهارة"
-                                    : "Skill Sources"}
-                                </span>
+                                        {
+                                          ui.skillSourcesLabel
+                                        }
+                                      </span>
 
-                                <SkillSources>
-                                  {sources.map((source, sourceIndex) => (
-                                    <li key={`${source}-${sourceIndex}`}>
-                                      {source}
-                                    </li>
-                                  ))}
-                                </SkillSources>
-                              </>
-                            )}
-                          </SkillCard>
-                        );
-                      })}
-                    </SkillContent>
-                  )}
-                </SkillAccordion>
-              );
-            })}
+                                      <SkillSources>
+                                        {sources.map(
+                                          (
+                                            source,
+                                            sourceIndex
+                                          ) => (
+                                            <li
+                                              key={`${source}-${sourceIndex}`}
+                                            >
+                                              {
+                                                source
+                                              }
+                                            </li>
+                                          )
+                                        )}
+                                      </SkillSources>
+                                    </>
+                                  )}
+                              </SkillCard>
+                            );
+                          }
+                        )}
+                      </SkillContent>
+                    )}
+                  </SkillAccordion>
+                );
+              }
+            )}
           </SkillsList>
         </Section>
 
-        {/* VOLUNTEERING */}
+        {/* ==========================================
+            VOLUNTEERING
+        =========================================== */}
 
-        <Section id="about-volunteering" className="alternate">
+        <Section
+          id="about-volunteering"
+          className="alternate"
+        >
           <SectionTitle
             number="05"
             icon={FiHeart}
             title={
-              content.volunteering?.title ||
-              (isArabic ? "المشاركات التطوعية" : "Volunteer Activities")
+              content.volunteering?.title
             }
-            description={content.volunteering?.description}
+            description={
+              content.volunteering?.description
+            }
           />
 
-          {Object.keys(volunteerSummary).length > 0 && (
-            <VolunteerSummary>
-              <div className="heading">
-                <FiHeart aria-hidden="true" />
+          {Object.keys(
+            volunteerSummary
+          ).length > 0 && (
+              <VolunteerSummary>
+                <div className="heading">
 
-                <h3>
-                  {volunteerSummary.label ||
-                    (isArabic ? "السجل التطوعي" : "Volunteer Record")}
-                </h3>
-              </div>
 
-              {volunteerSummary.value && (
-                <strong className="value">{volunteerSummary.value}</strong>
-              )}
+                  <h3>
+                    {volunteerSummary.label}
+                  </h3>
+                </div>
 
-              <div className="meta">
-                {volunteerSummary.opportunities && (
-                  <Tag>
-                    <FiUsers aria-hidden="true" />
-                    {volunteerSummary.opportunities}{" "}
-                    {isArabic ? "فرصة تطوعية" : "Volunteer Opportunities"}
-                  </Tag>
+                {volunteerSummary.value && (
+                  <strong className="value">
+                    {volunteerSummary.value}
+                  </strong>
                 )}
 
-                <DateDisplay item={volunteerSummary} isArabic={isArabic} />
-              </div>
+                <div className="meta">
+                  {volunteerSummary.opportunities && (
+                    <Tag>
+                      <FiUsers
+                        aria-hidden="true"
+                      />
 
-              {volunteerSummary.description && (
-                <Description>{volunteerSummary.description}</Description>
-              )}
+                      {
+                        volunteerSummary.opportunities
+                      }{" "}
+                      {
+                        ui.volunteerOpportunitiesLabel
+                      }
+                    </Tag>
+                  )}
 
-              <DocumentButton
-                item={volunteerSummary}
-                title={
-                  volunteerSummary.label ||
-                  (isArabic ? "السجل التطوعي" : "Volunteer Record")
-                }
-                fallbackType="volunteering"
-                isArabic={isArabic}
-                onPreview={setPreview}
-              />
-            </VolunteerSummary>
-          )}
+                  <DateDisplay
+                    item={volunteerSummary}
+                    labels={ui}
+                  />
+                </div>
+
+                {volunteerSummary.description && (
+                  <Description>
+                    {
+                      volunteerSummary.description
+                    }
+                  </Description>
+                )}
+
+                <DocumentButton
+                  item={volunteerSummary}
+                  title={
+                    volunteerSummary.label
+                  }
+                  labels={ui}
+                  onPreview={
+                    setPreview
+                  }
+                />
+              </VolunteerSummary>
+            )}
 
           <CardList>
-            {renderEntries(volunteering, (item) => ({
-              title: item.name,
-              subtitle: item.provider,
-              description: item.description,
-              fallbackDocumentType: "participation",
-            }))}
+            {renderEntries(
+              volunteering,
+              (item) => ({
+                title: item.name,
+                subtitle: item.provider,
+                description:
+                  item.description,
+              })
+            )}
           </CardList>
         </Section>
 
-        {/* CAREER GOAL */}
+        {/* ==========================================
+            CAREER GOAL
+        =========================================== */}
 
         <Section id="about-goal">
           <GoalCard>
             <div>
               <h2>
-                {content.goal?.title ||
-                  (isArabic ? "تطلعاتي المهنية" : "Career Aspirations")}
+                {content.goal?.title}
               </h2>
 
-              {content.goal?.description && <p>{content.goal.description}</p>}
+              {content.goal?.description && (
+                <p>
+                  {
+                    content.goal
+                      .description
+                  }
+                </p>
+              )}
             </div>
 
-            <Button as={Link} to="/contact" $variant="primary">
-              {isArabic ? "تواصل معي" : "Contact Me"}
+            <Button
+              as={Link}
+              to="/contact"
+              $variant="primary"
+            >
+              {ui.contactButton}
 
-              <FiArrowUpRight aria-hidden="true" />
+              <FiArrowUpRight
+                aria-hidden="true"
+              />
             </Button>
           </GoalCard>
         </Section>
+
       </MainContent>
 
-      {/* SHARED IMAGE MODAL */}
+      {/* ==========================================
+          DOCUMENT PREVIEW MODAL
+      =========================================== */}
 
       <ImgModal
         isOpen={Boolean(preview)}
-        ImgSource={preview ? documentUrl(preview.path) : ""}
-        ImgAlt={preview?.title || ""}
+        ImgSource={
+          preview
+            ? documentUrl(
+              preview.path
+            )
+            : ""
+        }
+        ImgAlt={
+          preview?.title || ""
+        }
         onClose={closePreview}
       />
+
     </Main>
   );
 };

@@ -266,6 +266,11 @@ const ModalMain = styled.div`
 
   box-sizing: border-box;
 
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+
   img {
     display: block;
 
@@ -482,12 +487,20 @@ export const ImgModal = ({
 
         {/* MODAL IMAGE */}
 
+
         <ModalMain>
           {ImgSource && (
             <img
               src={ImgSource}
               alt={ImgAlt}
               decoding="async"
+              draggable={false}
+              onContextMenu={(event) => {
+                event.preventDefault();
+              }}
+              onDragStart={(event) => {
+                event.preventDefault();
+              }}
             />
           )}
         </ModalMain>

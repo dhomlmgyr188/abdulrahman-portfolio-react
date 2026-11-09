@@ -1,29 +1,21 @@
+
 {
   "hero": {
-    "availability_status": "Open to Job Opportunities & Freelance Projects",
+    "availability_status": "Currently employed and open to better career opportunities and freelance projects.",
     "name": "Abdulrahman Al-Mughyir",
     "job_titles": [
+      "Full-Stack Web Developer",
+      "Front-End Developer",
+      "Website Developer",
+      "Website Administrator",
       "Software Support Technician",
       "IT Support Technician",
       "Database Support Technician",
       "Computer Systems Technician",
-      "Data Entry Clerk",
-      "Full-Stack Web Developer",
-      "Website Administrator",
-      "Website Developer",
-      "Receptionist",
-      "Cashier"
+      "Data Entry Clerk"
     ],
-    "introduction": "Full-Stack Web Development diploma graduate from Taibah University, skilled in web development, IT support, data management, and office administration. Experienced in customer service and digital systems, with a focus on accuracy, efficiency, and continuous growth.",
+    "introduction": "A graduate of the Full-Stack Web Development Diploma program at Taibah University, with technical and administrative skills in website development, technical support, data management, and digital systems. I aim to apply my skills to professional opportunities and projects that contribute to improving business efficiency.",
     "tech_stack": [
-      {
-        "text": "React",
-        "icon": "React"
-      },
-      {
-        "text": "JavaScript",
-        "icon": "JavaScript"
-      },
       {
         "text": "HTML5",
         "icon": "HTML"
@@ -33,61 +25,101 @@
         "icon": "CSS"
       },
       {
-        "text": "Git",
-        "icon": "Git"
+        "text": "JavaScript",
+        "icon": "JavaScript"
       },
       {
-        "text": "SQL",
-        "icon": "SQL"
+        "text": "React.js",
+        "icon": "React"
       },
       {
-        "text": "Microsoft 365",
-        "icon": "Microsoft 365"
+        "text": "PHP",
+        "icon": "PHP"
+      },
+      {
+        "text": "MySQL",
+        "icon": "MySQL"
+      },
+      {
+        "text": "REST API",
+        "icon": "REST"
+      },
+      {
+        "text": "Git & GitHub",
+        "icon": "VC"
       }
     ],
-    "profileAlt": "Abdulrahman Al-Mughyir - Web Development and IT Support",
     "statistic": {
       "projects": "Completed Projects",
-      "technologies": "Technologies & Tools",
+      "technologies": "Technologies & Tools Used",
       "years": "Years in Web Development"
-    }
+    },
+    "profileAlt": "Abdulrahman Al-Mughyir - Web Development, Technical Support, and Data Management in Madinah"
   },
   "services": {
-    "title": "My Skills & Services",
-    "description": "Technical and administrative skills supporting digital solutions and efficient workflows.",
+    "index": "SERVICES",
+    "label": "What I Offer",
+    "title": "My Services",
+    "description": "I provide technical and digital services, including website development and management, technical support, and data administration, tailored to the needs of individuals and businesses.",
+    "gridLabel": "Explore Services",
+    "empty": "No services are currently available.",
     "items": [
       {
         "id": "1",
-        "icon": "web",
-        "title": "Web Development & Management",
-        "description": "Building responsive websites with HTML, CSS, JavaScript, and React, with a focus on usability and content management."
+        "icon": "landing",
+        "title": "Landing & Introductory Page Package",
+        "description": "Designing and developing a responsive introductory page for a product, service, or startup, aligned with its visual identity and featuring contact options and basic search engine optimization (SEO)."
       },
       {
         "id": "2",
-        "icon": "technology",
-        "title": "IT Support",
-        "description": "Assisting users with computers and software, troubleshooting basic issues, and supporting digital systems."
+        "icon": "business",
+        "title": "Business Website Package",
+        "description": "Developing professional websites for companies and businesses with two to five pages, responsive design, advanced contact forms, external service integrations, and search engine optimization for individual pages."
       },
       {
         "id": "3",
-        "icon": "applications",
+        "icon": "custom",
+        "title": "Custom Web Development Package",
+        "description": "Developing tailored web solutions based on project requirements, including interactive interfaces, dashboards, and databases, with options for WordPress and e-commerce platforms."
+      },
+      {
+        "id": "4",
+        "icon": "management",
+        "title": "Website Management",
+        "description": "Managing website content, updating pages and information, organizing digital data, monitoring website performance, and resolving basic operational issues."
+      },
+      {
+        "id": "5",
+        "icon": "support",
+        "title": "Technical & Systems Support",
+        "description": "Supporting users of computers, software, and digital systems, diagnosing basic technical issues, tracking incidents, and providing appropriate guidance and solutions."
+      },
+      {
+        "id": "6",
+        "icon": "data",
         "title": "Data & Office Administration",
-        "description": "Managing data, files, and records, and preparing documents, spreadsheets, and reports using Microsoft 365."
+        "description": "Entering and reviewing data, organizing files and records, and preparing documents, spreadsheets, and reports using Microsoft 365 applications with accuracy and confidentiality."
       }
     ]
   },
   "featuredProjects": {
     "header": {
       "title": "Featured Projects",
-      "desc": "Selected projects showcasing my web development skills.",
-      "view_projects": "View All Projects"
+      "desc": "A variety of website development projects built using modern web technologies.",
+      "view_projects": "All Projects"
     },
     "items": [
       {
-        "id": "React-To-Do-List"
+        "id": "Portfolio_v3"
       },
       {
-        "id": "Portfolio_v1"
+        "id": "freelancer-hub"
+      },
+      {
+        "id": "rest-api-wordpress"
+      },
+      {
+        "id": "Ecommerce_Admin_Dashboard"
       }
     ]
   },
@@ -96,26 +128,26 @@
       "title": "Quick Links"
     },
     "socialMedia": {
-      "title": "Social Media"
+      "title": "My Social Accounts"
     },
     "contactInfo": {
-      "title": "Contact Information",
+      "title": "Contact Me",
       "location": {
         "value": "Madinah, Saudi Arabia"
       },
       "email": {
-        "title": "Email",
+        "title": "Email Address",
         "value": "dhomlmgyr@gmail.com"
       },
       "tel": {
-        "title": "Phone",
+        "title": "Mobile Number",
         "value": "+966541590819"
       }
     },
     "copyright": "Abdulrahman Al-Mughyir. All rights reserved."
   },
   "callToAction": {
-    "title": "Let's Connect",
-    "paragraph": "Open to career opportunities, freelance projects, and collaborations."
+    "title": "Have a Job Opportunity or a Project?",
+    "paragraph": "I'd be happy to connect regarding career opportunities and technical or administrative projects."
   }
 }

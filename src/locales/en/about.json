@@ -1,18 +1,43 @@
-
 {
-  "pageTitle": "About Me",
-  "pageDesc": "My education, experience, skills, and achievements.",
+  "ui": {
+    "present": "Present",
+    "employmentTypes": {
+      "full-time": "Full-time",
+      "part-time": "Part-time",
+      "seasonal": "Seasonal",
+      "contract": "Contract",
+      "internship": "Internship"
+    },
+    "viewDocument": "View",
+    "unsupportedDocument": "Preview is not supported for this file type",
+    "documentTypes": {
+      "diploma": "Diploma Document",
+      "graduation": "Graduation Document",
+      "completion": "Completion Certificate",
+      "attendance": "Attendance Certificate",
+      "appreciation": "Appreciation Certificate",
+      "participation": "Participation Certificate",
+      "experience": "Experience Certificate",
+      "volunteering": "Volunteer Hours Record",
+      "certificate": "Certificate",
+      "document": "Document"
+    },
+    "skillSingular": "skill",
+    "skillPlural": "skills",
+    "volunteerOpportunitiesLabel": "Volunteer Opportunities",
+    "contactButton": "Contact Me"
+  },
   "content": {
     "intro": {
       "title": "About Me",
-      "paragraph1": "I'm Abdulrahman Nasser Al-Mughyir, a Full-Stack Web Development diploma graduate from Taibah University, with skills in web development, digital systems, and data management.",
-      "paragraph2": "My experience spans hotel reception, sales, and administrative operations. I enjoy learning, solving problems, and building practical digital solutions."
+      "paragraph1": "I am Abdulrahman Nasser Al-Mughyir, a graduate of the Full-Stack Web Development Diploma program at Taibah University. I have technical knowledge and skills in website development, computer applications, digital systems, data management, report and document preparation, and efficient daily task organization.",
+      "paragraph2": "I have practical experience in hotel reception, sales, and administrative work across diverse work environments. I seek stable career opportunities that align with my skills, support my professional growth, and allow me to contribute to business efficiency. I also provide freelance website development and digital solutions, with a continuous interest in learning, skill development, and problem-solving."
     },
     "infoTitle": "Quick Information",
     "profile": [
       {
         "label": "Location",
-        "value": "Medina, Saudi Arabia"
+        "value": "Madinah, Saudi Arabia"
       },
       {
         "label": "Qualification",
@@ -28,27 +53,30 @@
       },
       {
         "label": "Professional Status",
-        "value": "Open to jobs and freelance projects"
+        "value": "Currently employed and open to new career opportunities and freelance projects"
       }
     ],
     "education": {
       "title": "Education",
-      "description": "Academic qualifications and achievements.",
       "gradeLabel": "GPA",
+      "honorsLabel": "Grade",
+      "percentageLabel": "Percentage",
       "items": [
         {
           "degree": "Intermediate Diploma in Full-Stack Web Development",
-          "school": "Applied College, Taibah University — Medina",
-          "field": "Specialization: Full-Stack Web Development | Grade: Good",
+          "school": "Applied College, Taibah University — Madinah",
+          "field": "Major: Full-Stack Web Development",
+          "honors": "Good",
           "date": "2026-01-11",
           "grade": "3.60 / 5",
           "documentType": "diploma",
           "document": "/documents/education/diploma.png"
         },
         {
-          "degree": "General Secondary Education Certificate",
-          "school": "Abi Sufyan bin Harb Secondary School — Medina",
-          "field": "Track: Natural Sciences | Grade: Very Good",
+          "degree": "General Secondary School Certificate",
+          "school": "Abi Sufyan bin Harb Secondary School — Madinah",
+          "field": "Track: Natural Sciences",
+          "honors": "Very Good (High)",
           "date": "2022-07-30",
           "grade": "85.39 / 100",
           "documentType": "graduation",
@@ -57,8 +85,7 @@
       ]
     },
     "experience": {
-      "title": "Professional Experience",
-      "description": "My work experience across different industries.",
+      "title": "Work Experience",
       "items": [
         {
           "role": "Hotel Receptionist",
@@ -66,18 +93,18 @@
           "employmentType": "full-time",
           "startDate": "2025-07-12",
           "endDate": "Present",
-          "description": "Managing guest check-ins, check-outs, and reservations at a 160-room hotel, alongside records, Excel schedules, documents, and service coordination."
+          "description": "Managing guest reservations, check-ins, and check-outs at a 160-room hotel, preparing schedules and documents, archiving records, and coordinating between departments."
         },
         {
-          "role": "Telecommunications SIM Sales Representative",
-          "company": "Sahabat Al-Madinah Telecommunications Establishment — Zain Project",
+          "role": "Telecommunications Sales Representative",
+          "company": "Sahabat Al-Madinah Telecommunications Establishment (Zain Telecommunications)",
           "employmentType": "seasonal",
           "startDate": "2025-04-16",
           "endDate": "2025-05-16",
-          "description": "Selling and activating SIM cards, verifying customer information, and recording payments. Achieved the monthly sales target in 24 days."
+          "description": "Selling and activating SIM cards, verifying customer information, and recording payments. Achieved the monthly sales target within 24 days."
         },
         {
-          "role": "Food and Beverage Cashier",
+          "role": "Food and Beverage Sorter (Cashier)",
           "company": "Al-Tahlia Fast Food Restaurant",
           "employmentType": "full-time",
           "startDate": "2024-01-27",
@@ -87,12 +114,12 @@
           "document": "/documents/experience/altahlia-cashier.png"
         },
         {
-          "role": "Cashier",
+          "role": "Cash Register Clerk (Cashier)",
           "company": "Frawlaty Juices",
           "employmentType": "full-time",
           "startDate": "2022-05-16",
           "endDate": "2022-08-01",
-          "description": "Handling customer orders, invoices, payments, delivery applications, and daily revenue reconciliation.",
+          "description": "Handling customer orders, issuing invoices, collecting payments, managing delivery applications, and reconciling daily revenue.",
           "documentType": "experience",
           "document": "/documents/experience/frawlaty-cashier.png"
         }
@@ -100,7 +127,6 @@
     },
     "certificates": {
       "title": "Certificates & Courses",
-      "description": "Training and professional development.",
       "items": [
         {
           "name": "Fundamentals of Human Resource Management",
@@ -172,58 +198,30 @@
     },
     "skills": {
       "title": "Skills",
-      "description": "Technical, administrative, and professional skills.",
       "groups": [
         {
           "title": "Frontend Development",
           "items": [
             {
-              "name": "HTML5",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "User Interface Development"
-              ]
+              "name": "HTML5"
             },
             {
-              "name": "CSS3",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "User Interface Development"
-              ]
+              "name": "CSS3"
             },
             {
-              "name": "JavaScript",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "User Interface Development"
-              ]
+              "name": "JavaScript"
             },
             {
-              "name": "React.js",
-              "sources": [
-                "User Interface Development",
-                "Personal Projects"
-              ]
+              "name": "React.js"
             },
             {
-              "name": "Sass",
-              "sources": [
-                "User Interface Development",
-                "Personal Projects"
-              ]
+              "name": "Sass"
             },
             {
-              "name": "Bootstrap",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "User Interface Development"
-              ]
+              "name": "Bootstrap"
             },
             {
-              "name": "Tailwind CSS",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
+              "name": "Tailwind CSS"
             }
           ]
         },
@@ -231,100 +229,47 @@
           "title": "Backend & Databases",
           "items": [
             {
-              "name": "PHP",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
+              "name": "PHP"
             },
             {
-              "name": "MySQL",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
+              "name": "MySQL"
             },
             {
-              "name": "XAMPP",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
+              "name": "XAMPP"
             },
             {
-              "name": "REST API",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
+              "name": "REST API"
             }
           ]
         },
         {
-          "title": "Development Tools",
+          "title": "Development Tools & Platforms",
           "items": [
             {
-              "name": "Git",
-              "sources": [
-                "User Interface Development",
-                "Personal Projects"
-              ]
+              "name": "Git"
             },
             {
-              "name": "GitHub",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "User Interface Development",
-                "Personal Projects"
-              ]
+              "name": "GitHub"
             },
             {
-              "name": "WordPress",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
+              "name": "WordPress"
             },
             {
-              "name": "CMS",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
+              "name": "CMS"
             }
           ]
         },
         {
-          "title": "Design & Digital Tools",
+          "title": "Design",
           "items": [
             {
-              "name": "Figma",
-              "sources": [
-                "Personal Projects"
-              ]
+              "name": "Figma"
             },
             {
-              "name": "Adobe Photoshop",
-              "sources": [
-                "Personal Projects"
-              ]
+              "name": "Adobe Photoshop"
             },
             {
-              "name": "Canva",
-              "sources": [
-                "Personal Projects"
-              ]
-            },
-            {
-              "name": "Content Management Systems",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development"
-              ]
-            },
-            {
-              "name": "Digital Platforms",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "Personal Projects",
-                "Hotel Receptionist",
-                "Telecommunications SIM Sales Representative",
-                "Food and Beverage Cashier",
-                "Cashier"
-              ]
+              "name": "Canva"
             }
           ]
         },
@@ -332,53 +277,25 @@
           "title": "Office & Administration",
           "items": [
             {
-              "name": "Microsoft Word",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "Personal Projects",
-                "Hotel Receptionist"
-              ]
+              "name": "Microsoft Word"
             },
             {
-              "name": "Microsoft Excel",
-              "sources": [
-                "Hotel Receptionist"
-              ]
+              "name": "Microsoft Excel"
             },
             {
-              "name": "Microsoft PowerPoint",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "Personal Projects"
-              ]
+              "name": "Microsoft PowerPoint"
             },
             {
-              "name": "Data Entry",
-              "sources": [
-                "Hotel Receptionist",
-                "Telecommunications SIM Sales Representative"
-              ]
+              "name": "Data Entry"
             },
             {
-              "name": "Report Preparation",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "Personal Projects",
-                "Hotel Receptionist"
-              ]
+              "name": "Report Preparation"
             },
             {
-              "name": "Document Organization and Archiving",
-              "sources": [
-                "Hotel Receptionist"
-              ]
+              "name": "Document Organization and Archiving"
             },
             {
-              "name": "Point-of-Sale Systems",
-              "sources": [
-                "Food and Beverage Cashier",
-                "Cashier"
-              ]
+              "name": "Point-of-Sale Systems"
             }
           ]
         },
@@ -386,100 +303,42 @@
           "title": "AI Tools",
           "items": [
             {
-              "name": "ChatGPT",
-              "sources": [
-                "Personal Projects"
-              ]
+              "name": "ChatGPT"
             },
             {
-              "name": "Google Gemini",
-              "sources": [
-                "Personal Projects"
-              ]
+              "name": "Google Gemini"
             },
             {
-              "name": "Claude",
-              "sources": [
-                "Personal Projects"
-              ]
+              "name": "Claude"
             },
             {
-              "name": "DeepSeek",
-              "sources": [
-                "Personal Projects"
-              ]
+              "name": "DeepSeek"
             }
           ]
         },
         {
-          "title": "Professional Skills",
+          "title": "Professional & Personal Skills",
           "items": [
             {
-              "name": "Time Management",
-              "sources": [
-                "Hotel Receptionist",
-                "Telecommunications SIM Sales Representative",
-                "Food and Beverage Cashier",
-                "Cashier"
-              ]
+              "name": "Time Management"
             },
             {
-              "name": "Effective Communication",
-              "sources": [
-                "Soft Skills and Effective Communication",
-                "Dialogue Competitions at Medina Education Department",
-                "Hotel Receptionist",
-                "Telecommunications SIM Sales Representative",
-                "Food and Beverage Cashier",
-                "Cashier"
-              ]
+              "name": "Effective Communication"
             },
             {
-              "name": "Teamwork",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "Hotel Receptionist",
-                "Telecommunications SIM Sales Representative",
-                "Food and Beverage Cashier",
-                "Cashier",
-                "Technical Aoun Initiative at the Prophet's Mosque",
-                "Peace Messengers Scouting and Technology Excellence Camp 2023"
-              ]
+              "name": "Teamwork"
             },
             {
-              "name": "Problem-Solving",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "Hotel Receptionist",
-                "Peace Messengers Scouting and Technology Excellence Camp 2023"
-              ]
+              "name": "Problem-Solving"
             },
             {
-              "name": "Accuracy and Attention to Detail",
-              "sources": [
-                "Intermediate Diploma in Full-Stack Web Development",
-                "Hotel Receptionist",
-                "Telecommunications SIM Sales Representative",
-                "Food and Beverage Cashier",
-                "Cashier"
-              ]
+              "name": "Accuracy and Attention to Detail"
             },
             {
-              "name": "Adaptability Under Work Pressure",
-              "sources": [
-                "Psychological Resilience",
-                "Hotel Receptionist",
-                "Telecommunications SIM Sales Representative",
-                "Food and Beverage Cashier",
-                "Cashier"
-              ]
+              "name": "Adaptability Under Work Pressure"
             },
             {
-              "name": "Responsibility",
-              "sources": [
-                "Hotel Receptionist",
-                "Peace Messengers Scouting and Technology Excellence Camp 2023"
-              ]
+              "name": "Responsibility"
             }
           ]
         }
@@ -487,7 +346,6 @@
     },
     "volunteering": {
       "title": "Volunteering",
-      "description": "Volunteer work and community participation.",
       "summary": {
         "label": "Documented Volunteer Hours",
         "value": "189 hours",
@@ -495,76 +353,42 @@
         "opportunities": 14,
         "startDate": "2022-12-17",
         "endDate": "2023-06-05",
-        "description": "189 documented hours across 14 volunteer opportunities.",
         "documentType": "volunteering",
         "document": "/documents/volunteering/volunteering-189-hours.png"
       },
       "items": [
         {
           "name": "Peace Messengers Scouting and Technology Excellence Camp 2023",
-          "provider": "Technical College in Medina — Najran",
+          "provider": "Technical College in Madinah — Najran",
           "startDate": "2023-05-14",
           "endDate": "2023-05-18",
-          "description": "Participated in scouting and technology activities.",
           "documentType": "participation",
           "document": "/documents/volunteering/rusul-alsalam-camp.png"
         },
         {
           "name": "Technical Aoun Initiative at the Prophet's Mosque",
-          "provider": "General Directorate of Technical and Vocational Training — Medina Region",
+          "provider": "General Directorate of Technical and Vocational Training — Madinah Region",
           "startDate": "2023-03-26",
           "endDate": "2023-04-06",
-          "description": "Supported visitors through a technical volunteer initiative.",
           "documentType": "appreciation",
           "document": "/documents/volunteering/technical-aoun.png"
         },
         {
-          "name": "Dialogue Competitions at Medina Education Department",
-          "provider": "King Abdulaziz Center for National Dialogue — Medina Education Department",
+          "name": "Dialogue Competitions at Madinah Education Department",
+          "provider": "King Abdulaziz Center for National Dialogue — Madinah Education Department",
           "startDate": "2021-10-24",
           "endDate": "2021-11-04",
-          "description": "Participated in dialogue activities and competitions.",
           "documentType": "appreciation",
           "document": "/documents/volunteering/dialogue-competition.png"
         }
       ]
     },
     "goal": {
-      "title": "Career Goals",
-      "description": "Seeking a long-term opportunity in web development, IT support, or administrative operations where I can contribute, learn, and grow."
+      "title": "Career Aspirations",
+      "description": "I seek a stable career opportunity in web development, IT support, or administrative work where I can contribute my experience and continue developing my skills."
     }
   },
-  "title": "About Me",
-  "description": "My education, experience, skills, and achievements.",
   "breadcrumb": {
-    "title": "About Me",
-    "description": "My education, experience, skills, and achievements."
-  },
-  "documentPreview": {
-    "loading": "Loading document...",
-    "error": "Unable to load the document.",
-    "unavailable": "Document unavailable.",
-    "unsupported": "Preview not supported for this file."
-  },
-  "aiSkills": {
-    "title": "AI Tools",
-    "tools": {
-      "chatgpt": {
-        "name": "ChatGPT",
-        "usage": "Programming, research, and writing."
-      },
-      "gemini": {
-        "name": "Google Gemini",
-        "usage": "Research and idea generation."
-      },
-      "claude": {
-        "name": "Claude",
-        "usage": "Writing, analysis, and programming."
-      },
-      "deepseek": {
-        "name": "DeepSeek",
-        "usage": "Programming and debugging."
-      }
-    }
+    "title": "About Me"
   }
 }
