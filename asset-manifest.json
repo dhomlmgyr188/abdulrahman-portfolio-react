@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/abdulrahman-portfolio-react/static/css/main.ab734560.css",
-    "main.js": "/abdulrahman-portfolio-react/static/js/main.4ec3eaf4.js",
+    "main.css": "/abdulrahman-portfolio-react/static/css/main.945d5052.css",
+    "main.js": "/abdulrahman-portfolio-react/static/js/main.bdf49cc5.js",
     "static/media/الرئيسية1.png": "/abdulrahman-portfolio-react/static/media/الرئيسية1.e90abce1d156ce58025e.png",
     "static/media/التواصل.png": "/abdulrahman-portfolio-react/static/media/التواصل.dafbf27042522a74f1e3.png",
     "static/media/الرئيسية .png": "/abdulrahman-portfolio-react/static/media/الرئيسية .2045d44bc2482f1147a3.png",
@@ -60,12 +60,10 @@
     "static/media/نشر مقالة جديدة.png": "/abdulrahman-portfolio-react/static/media/نشر مقالة جديدة.7c7eb9d6d4944b78bc0a.png",
     "static/media/اضافة ملاحظة.png": "/abdulrahman-portfolio-react/static/media/اضافة ملاحظة.072beaaa17420a55f0af.png",
     "static/media/تسجيل جديد - الجوال.png": "/abdulrahman-portfolio-react/static/media/تسجيل جديد - الجوال.0e1d8ff45c619efc494a.png",
-    "index.html": "/abdulrahman-portfolio-react/index.html",
-    "main.ab734560.css.map": "/abdulrahman-portfolio-react/static/css/main.ab734560.css.map",
-    "main.4ec3eaf4.js.map": "/abdulrahman-portfolio-react/static/js/main.4ec3eaf4.js.map"
+    "index.html": "/abdulrahman-portfolio-react/index.html"
   },
   "entrypoints": [
-    "static/css/main.ab734560.css",
-    "static/js/main.4ec3eaf4.js"
+    "static/css/main.945d5052.css",
+    "static/js/main.bdf49cc5.js"
   ]
 }
